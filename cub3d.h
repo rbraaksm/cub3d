@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/22 15:54:22 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/23 16:19:43 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 # include <math.h>
 # include <stdio.h>
 
-typedef struct	s_data
+typedef struct		s_data
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-}				t_data;
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+}					t_data;
 
 typedef struct		s_struct
 {
@@ -52,6 +52,12 @@ typedef struct		s_struct
 	char			*str;
 	char			**map;
 }					t_flags;
+
+typedef struct  	s_vars
+{
+    void        	*mlx;
+    void        	*win;
+}               	t_vars;
 
 int					make_string(char **argv, t_flags *data);
 int					fill_mapindex(t_flags *data);

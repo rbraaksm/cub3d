@@ -6,7 +6,7 @@
 #    By: rbraaksm <rbraaksm@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/22 14:09:57 by rbraaksm       #+#    #+#                 #
-#    Updated: 2020/01/22 15:52:30 by rbraaksm      ########   odam.nl          #
+#    Updated: 2020/01/23 15:29:57 by rbraaksm      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS =	ft_main.c \
 		ft_fill_grid.c \
 		ft_check_grid.c \
 		ft_window.c \
+		print.c \
 
 LIB = $(SRCS:%.c=%.o)
 
