@@ -6,7 +6,7 @@
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/04 13:50:06 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/23 15:29:19 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/27 14:00:16 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	print(t_flags *data)
 	int		i;
 
 	i = 0;
-	// printf("[R0]    %s\n", data->r[0]);
-	// printf("[R1]    %s\n", data->r[1]);
+	printf("[R0]    %s\n", data->r[0]);
+	printf("[R1]    %s\n", data->r[1]);
 	printf("[RESX]  %d\n", data->resx);
-	printf("[RESY]  %d\n", data->resy);
+	// printf("[RESY]  %d\n", data->resy);
 	// // printf("[NO]  %s\n", data->no);
 	// // printf("[SO]  %s\n", data->so);
 	// // printf("[WE]  %s\n", data->we);

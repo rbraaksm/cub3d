@@ -6,14 +6,63 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/23 16:26:35 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/27 13:10:19 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minilibx/mlx.h"
 #include "cub3d.h"
 
-int             ft_close(int keycode, t_vars *vars)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+void	make_grid(t_data *img, t_flags *data, t_color *color, t_map *map)
+{
+	float	x;
+	float	y;
+	float	hor;
+	float	ver;
+	int		h;
+	int		v;
+
+	ver = (float)(data->resx) / ((float)(map->column / 2) + 1);
+	hor = ((float)data->resy) / (float)map->row;
+	v = ver;
+	h = hor;
+	// printf("[ver] %f\n", ver);
+	// printf("[ver int] %d\n", v);
+	// printf("[hor] %f\n", hor);
+	// printf("[hor int] %d\n", h);
+	y = 0;
+	while (y < data->resy)
+	{
+		x = 0;
+		while (x < data->resx)
+		{
+			my_mlx_pixel_put(img, x, y, color->floor);
+			x++;
+		}
+		y += h;
+	}
+	x = 0;
+	while (x < data->resx)
+	{
+		y = 0;
+		while (y < data->resy)
+		{
+			my_mlx_pixel_put(img, x, y, color->floor);
+			y++;
+		}
+		x += v;
+	}
+}
+
+int		ft_close(int keycode, t_vars *vars)
 {
 	if (keycode == 53)
     	mlx_destroy_window(vars->mlx, vars->win);
@@ -36,15 +85,8 @@ int		mouse(int x, int y, t_vars *vars)
 	}
 		return (1);
 }
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
-void	window(t_flags *data)
+void	window(t_flags *data, t_color *color, t_map *map)
 {
 	t_data	img;
 	t_vars	vars;
@@ -64,7 +106,28 @@ void	window(t_flags *data)
 		&img.endian);
 	
 	/* mouse */
-	mlx_hook(vars.win, 6, 1L<<6, mouse, &vars);
+	// mlx_hook(vars.win, 6, 1L<<6, mouse, &vars);
+
+	/* make grid */
+	make_grid(&img, data, color, map);
+	// float	x;
+	// float	y;
+	// float	hor;
+	// float	ver;
+
+	// ver = (float)data->resx / ((float)map->column / 2) + 1;
+	// hor = (float)data->resy / (float)map->row;
+	// y = hor;
+	// x = 0;
+	// while (x < data->resx)
+	// {
+	// 	my_mlx_pixel_put(&img, x, y, color->floor);
+	// 	x++;
+	// }
+
+
+
+
 
 
 	// /* Vierkant */

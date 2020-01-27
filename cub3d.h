@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/23 16:19:43 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/27 10:26:39 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ typedef struct		s_data
 	int				endian;
 }					t_data;
 
+typedef struct		s_color
+{
+	unsigned long	floor;
+	int				fred;
+	int				fgreen;
+	int				fblue;
+	unsigned long	ceiling;
+	int				cred;
+	int				cgreen;
+	int				cblue;
+}					t_color;
+
 typedef struct		s_struct
 {
 	char			**r;
@@ -40,18 +52,16 @@ typedef struct		s_struct
 	char			*ea;
 	char			*s;
 	char			**f;
-	unsigned long	floor;
-	int				fred;
-	int				fgreen;
-	int				fblue;
 	char			**c;
-	unsigned long	ceiling;
-	int				cred;
-	int				cgreen;
-	int				cblue;
 	char			*str;
-	char			**map;
 }					t_flags;
+
+typedef struct		s_map
+{
+	char			**map;
+	int				row;
+	int				column;
+}					t_map;
 
 typedef struct  	s_vars
 {
@@ -61,9 +71,9 @@ typedef struct  	s_vars
 
 int					make_string(char **argv, t_flags *data);
 int					fill_mapindex(t_flags *data);
-int					ft_result_colors(t_flags *data);
-int					fill_grid(t_flags *data);
-int					check_grid(t_flags *data, int row);
+int					ft_result_colors(t_flags *data, t_color *color);
+int					fill_grid(t_flags *data, t_map *map);
+int					check_grid(t_map *map);
 
 /* check index */
 char				*ft_strdup(const char *s1);
@@ -73,7 +83,9 @@ int					ft_atoi(const char *str);
 
 /* window */
 
-void				window(t_flags *data);
+void				window(t_flags *data, t_color *color, t_map *map);
 void				print(t_flags *data);
 
+
+int					mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 #endif
