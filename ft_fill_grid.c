@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/27 15:11:34 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/27 15:13:48 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int		find_end(char *str, int start)
 {
 	while (str[start] != '\0')
 	{
-		if (str[start] == '\n' && str[start + 1] == '\n')
+		if (str[start] == '\n' && (str[start + 1] == '\n' !! str[start + 1] == '\0')
 			return (start);
 		start++;
 	}
