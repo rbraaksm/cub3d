@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/27 13:10:19 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/28 12:11:32 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,47 +19,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
-}
-
-void	make_grid(t_data *img, t_flags *data, t_color *color, t_map *map)
-{
-	float	x;
-	float	y;
-	float	hor;
-	float	ver;
-	int		h;
-	int		v;
-
-	ver = (float)(data->resx) / ((float)(map->column / 2) + 1);
-	hor = ((float)data->resy) / (float)map->row;
-	v = ver;
-	h = hor;
-	// printf("[ver] %f\n", ver);
-	// printf("[ver int] %d\n", v);
-	// printf("[hor] %f\n", hor);
-	// printf("[hor int] %d\n", h);
-	y = 0;
-	while (y < data->resy)
-	{
-		x = 0;
-		while (x < data->resx)
-		{
-			my_mlx_pixel_put(img, x, y, color->floor);
-			x++;
-		}
-		y += h;
-	}
-	x = 0;
-	while (x < data->resx)
-	{
-		y = 0;
-		while (y < data->resy)
-		{
-			my_mlx_pixel_put(img, x, y, color->floor);
-			y++;
-		}
-		x += v;
-	}
 }
 
 int		ft_close(int keycode, t_vars *vars)
@@ -90,109 +49,128 @@ void	window(t_flags *data, t_color *color, t_map *map)
 {
 	t_data	img;
 	t_vars	vars;
-	// int		x;
-	// int		y;
-	// int		a;
-	// int		b;
-	
-		/*close window */
+
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, data->resx, data->resy, "CUB3D");
+	
+		/*close window */
 	mlx_hook(vars.win, 2, 1L<<0, ft_close, &vars);
 
-	
-	img.img = mlx_new_image(vars.mlx, data->resx, data->resy);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-		&img.endian);
-	
 	/* mouse */
 	// mlx_hook(vars.win, 6, 1L<<6, mouse, &vars);
 
-	/* make grid */
-	make_grid(&img, data, color, map);
-	// float	x;
-	// float	y;
-	// float	hor;
-	// float	ver;
-
-	// ver = (float)data->resx / ((float)map->column / 2) + 1;
-	// hor = (float)data->resy / (float)map->row;
-	// y = hor;
-	// x = 0;
-	// while (x < data->resx)
-	// {
-	// 	my_mlx_pixel_put(&img, x, y, color->floor);
-	// 	x++;
-	// }
-
-
-
-
-
-
-	// /* Vierkant */
-	// y = 50;
-	// while (y < 150)
-	// {
-	// 	x = 50;
-	// 	while (x < 150)
-	// 	{
-	// 		my_mlx_pixel_put(&img, x, y, data->floor);
-	// 		x++;
-	// 	}
-	// 	data->floor += 1;
-	// 	y++;
-	// }
+	int		x;
+	double	posx = map->posx; // x start position
+	double	posy = map->posy; // y start position
+	double	dirx = -1; // initial direction vector
+	double	diry = 0; // initial direction vector
+	double	planex = 0; //the 2d raycaster version of camera plane
+	double	planey = 0.66; //the 2d raycaster version of camera plane
 	
-	// /* 90 gr Driehoek */
-	// y = 50;
-	// x = 600;
-	// a = x;
-	// while (y < 200)
-	// {
-	// 	while (x < 600)
-	// 	{
-	// 		my_mlx_pixel_put(&img, x, y, data->ceiling);
-	// 		x++;
-	// 	}
-	// 	a -= 1;
-	// 	x = a;
-	// 	y++;
-	// 	data->ceiling -= 100;
-	// }
+	while (1)
+	{
+		img.img = mlx_new_image(vars.mlx, data->resx, data->resy);
+		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+			&img.endian);
+		x = 0;
+		while (x < data->resx)
+		{
+			// calculate ray position and direction
+			double	camerax = 2 * x / (double)data->resx - 1; // x-coordinate in camera space
+			double	raydirx= dirx + planex * camerax;
+			double	raydiry = diry + planey * camerax;
 
-	// /* 45 gr Diehoek */
-	// int line;
+			// Which bos of te map we're in
+			int		mapx = map->posx;
+			int		mapy = map->posy;
 
-	// y = 250;
-	// x = 650;
-	// a = x - 1;
-	// line = x;
-	// b = y;
-	// while (y < 400)
-	// {
-	// 	while (x <= line)
-	// 	{
-	// 		my_mlx_pixel_put(&img, x, y, data->ceiling);
-	// 		x++;
-	// 	}
-	// 	line += 1;
-	// 	x = a;
-	// 	a -= 1;
-	// 	y++;
-		// data->ceiling -= 1;
-	// }
-	
-	// /* schuine lijn */
-	// x = 50;
-	// y = 250;
-	// while (x < 150 && y < 500)
-	// {
-	// 	my_mlx_pixel_put(&img, x, y, data->ceiling);
-	// 	x++;
-	// 	y++;
-	// }
+			// Length of ray from current position to next x or y-side
+     		double	sidedistx = 0;
+			double	sidedisty = 0;
+
+			//length of ray from one x or y-side to next x or y-side
+			double deltadistx = std::abs(1 / raydirx);
+			double deltadisty = std::abs(1 / raydiry);
+			double perpwalldist;
+
+			//what direction to step in x or y-direction (either +1 or -1)
+			int stepx;
+			int stepy;
+
+			int hit = 0; //was there a wall hit?
+			int side; //was a NS or a EW wall hit?
+
+			//calculate step and initial sideDist
+			if (raydirx < 0)
+			{
+				stepx = -1;
+				sidedistx = (posx - mapx) * deltadistx;
+			}
+			else
+			{
+				stepx = 1;
+				sidedistx = (mapx + 1.0 - posx) * deltadistx;
+			}
+			if (raydiry < 0)
+			{
+				stepy = -1;
+				sidedisty = (posy - mapy) * deltadisty;
+			}
+			else
+			{
+				stepy = 1;
+				sidedisty = (mapy + 1.0 - posy) * deltadisty;
+			}
+			//perform DDA
+			while (hit == 0)
+			{
+				//jump to next map square, OR in x-direction, OR in y-direction
+				if (sidedistx < sidedisty)
+				{
+				sidedistx += deltadistx;
+				mapx += stepx;
+				side = 0;
+				}
+				else
+				{
+				sidedisty += deltadisty;
+				mapy += stepy;
+				side = 1;
+				}
+				//Check if ray has hit a wall
+				if (map->map[mapx][mapy] > 0) hit = 1;
+			}
+			//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
+			if (side == 0) perpwalldist = (mapx - posx + (1 - stepx) / 2) / raydirx;
+			else           perpwalldist = (mapy - posy + (1 - stepy) / 2) / raydiry;
+
+			 //Calculate height of line to draw on screen
+			int lineheight = (int)(data->resy / perpwalldist);
+
+			//calculate lowest and highest pixel to fill in current stripe
+			int drawstart = - lineheight / 2 + data->resy / 2;
+			if(drawstart < 0) drawstart = 0;
+			int drawend = lineheight / 2 + data->resy / 2;
+			if(drawend >= data->resy) drawend = data->resy - 1;
+
+			//choose wall color
+			// switch(map->map[mapx][mapy])
+			// {
+			// 	case 1:  0x00ff0000;  break; //red
+			// 	case 2:  0x0000ff00;  break; //green
+			// 	case 3:  0x000000ff;  break; //blue
+			// 	case 4:  0x00a0a0a0;  break; //white
+			// 	default: 0x000b0b0b; break; //yellow
+			// }
+
+			// //give x and y sides different brightness
+			// if (side == 1) {color = color / 2;}
+
+			// //draw the pixels of the stripe as a vertical line
+			// verline(x, drawstart, drawend, color);
+      }
+	}
+	color->floor = 0;
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_loop(vars.mlx);
-
 }

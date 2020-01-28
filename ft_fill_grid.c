@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/27 15:13:48 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/28 09:36:22 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	find_row(char *strmap, t_map *map)
 {
 	int		i;
 
-	map->row = 0;
+	map->row = 1;
 	i = 0;
 	while (strmap[i] != '\0')
 	{
@@ -51,24 +51,29 @@ void	find_row(char *strmap, t_map *map)
 
 }
 
-int		find_column(char *strmap, int *mapi)
+void	find_column(t_map *map, char *strmap)
 {
-	int		column;
+	int		tmp;
 	int		i;
 
-	column = 0;
-	i = *mapi;
+	i = 0;
+	tmp = 0;
+	map->column = 0;
 	while (strmap[i] != '\0')
 	{
 		if (strmap[i] == '\n')
 		{
-			*mapi = i + 1;
-			return (column);
+			if (tmp < map->column)
+			{
+				tmp = map->column;
+			}
+			map->column = 0;
+			i++;
 		}
 		i++;
-		column++;
+		map->column++;
 	}
-	return (column);
+	map->column = tmp;
 }
 
 int		make_map(t_map *map, char *strmap)
@@ -82,6 +87,7 @@ int		make_map(t_map *map, char *strmap)
 	irow = 0;
 	index = 0;
 	find_row(strmap, map);
+	find_column(map, strmap);
 	map->map = (char **)malloc(sizeof(char*) * (map->row + 1));
 	if (map->row < 2)
 		return (0);
@@ -121,11 +127,11 @@ int		find_end(char *str, int start)
 {
 	while (str[start] != '\0')
 	{
-		if (str[start] == '\n' && (str[start + 1] == '\n' !! str[start + 1] == '\0')
+		if (str[start] == '\n' && (str[start + 1] == '\n' || str[start + 1] == '\0'))
 			return (start);
 		start++;
 	}
-	return (0);
+	return (start);
 }
 
 int		fill_grid(t_flags *data, t_map *map)

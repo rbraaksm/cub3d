@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/27 09:32:02 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/27 14:59:22 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ int		ft_strchr(char c)
 	return (0);
 }
 
-int		first_last(char *str, int column)
+int		first(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (i < column)
+	while (str[i] != '\0')
 	{
-		if (str[i] == '1' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
-			i += 2;
+		if (str[i] == '1' || str[i] == ' ')
+			i++;
 		else
 			return (0);
 	}
@@ -61,7 +61,7 @@ int		find_location(char *str, int *location)
 	return (1);
 }
 
-int		middle(char *str, int column, int *location)
+int		middle(char *str, int *location)
 {
 	int		i;
 	int		checkrow;
@@ -70,7 +70,7 @@ int		middle(char *str, int column, int *location)
 	checkrow = 0;
 	if (find_location(str, location) == 0)
 		return (0);
-	if (str[0] != '1' || str[column - 1] != '1')
+	if (str[0] != '1' || str[ - 1] != '1')
 		return (0);
 	while (str[i] != '\0')
 	{
@@ -91,26 +91,21 @@ int		middle(char *str, int column, int *location)
 int		check_grid(t_map *map)
 {
 	int		i;
-	int		column;
 	int		location;
 
-	i = 0;
 	location = 0;
-	column = 0;
-	while (map->map[i][column] != '\0')
-		column++;
-	if (first_last(map->map[i], column) == 0)
+	if (first(map->map[0]) == 0)
 		return (0);
-	i++;
-	while (i < (map->row - 1))
-	{
-		if (middle(map->map[i], column, &location) == 0)
-			return (0);
-		i++;
-	}
-	if (location == 0)
-		return (0);
-	if (first_last(map->map[i], column) == 0)
-		return (0);
+	i = 1;
+	// while (i < (map->row - 1))
+	// {
+	// 	if (middle(map->map[i], &location) == 0)
+	// 		return (0);
+	// 	i++;
+	// }
+	// if (location == 0)
+	// 	return (0);
+	// if (first_last(map->map[i], column) == 0)
+	// 	return (0);
 	return (1);
 }

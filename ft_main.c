@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/27 13:10:05 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/28 09:19:56 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ int		main(int argc, char **argv)
 		return (0);
 	if (check_map(argv, &data, &color, &map) == 0)
 		return (write(1, "INVALID MAP\n", 11));
-	// window(&data, &color, &map);
+	window(&data, &color, &map);
 	return (0);
 }

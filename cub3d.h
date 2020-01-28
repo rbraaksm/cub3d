@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/27 10:26:39 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/28 08:08:46 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct		s_map
 	char			**map;
 	int				row;
 	int				column;
+	int				posx;
+	int				posy;
 }					t_map;
 
 typedef struct  	s_vars

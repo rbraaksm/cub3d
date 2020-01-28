@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/27 14:59:22 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/28 08:37:09 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,49 +28,60 @@ int		ft_strchr(char c)
 	return (0);
 }
 
-int		first(char *str)
+int		first_last(char *str, int column)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (i < column)
 	{
-		if (str[i] == '1' || str[i] == ' ')
-			i++;
+		if (str[i] == '1' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
+			i += 2;
 		else
 			return (0);
 	}
 	return (1);
 }
 
-int		find_location(char *str, int *location)
+int		find_location(t_map *map)
 {
-	while (*str)
+	int		x;
+	int		y;
+	int		location;
+
+	y = 0;
+	location = 0;
+	while (y < map->row)
 	{
-		if ((*str == 'S' || *str == 'E' ||
-		*str == 'W' || *str == 'N') && *location == 0)
+		x = 0;
+		while (map->map[y][x] != '\0')
 		{
-			*location = 1;
-			str++;
+			if ((map->map[y][x] == 'S' || map->map[y][x] == 'E' ||
+			map->map[y][x] == 'W' || map->map[y][x] == 'N') && location == 0)
+			{
+				location = 1;
+				map->posx = x;
+				map->posy = y;
+				x++;
+			}
+			if ((map->map[y][x] == 'S' || map->map[y][x] == 'E' ||
+			map->map[y][x] == 'W' || map->map[y][x] == 'N') && location == 1)
+				return (0);
+			x++;
 		}
-		if ((*str == 'S' || *str == 'E' ||
-		*str == 'W' || *str == 'N') && *location == 1)
-			return (0);
-		str++;
+		y++;
 	}
-	return (1);
+	return (location);
 }
 
-int		middle(char *str, int *location)
+int		middle(char *str, int column)
 {
 	int		i;
 	int		checkrow;
 
 	i = 1;
 	checkrow = 0;
-	if (find_location(str, location) == 0)
-		return (0);
-	if (str[0] != '1' || str[ - 1] != '1')
+	if (str[0] != '1' || str[column - 1] != '1')
 		return (0);
 	while (str[i] != '\0')
 	{
@@ -91,21 +102,24 @@ int		middle(char *str, int *location)
 int		check_grid(t_map *map)
 {
 	int		i;
-	int		location;
+	int		column;
 
-	location = 0;
-	if (first(map->map[0]) == 0)
+	i = 0;
+	column = 0;
+	while (map->map[i][column] != '\0')
+		column++;
+	if (first_last(map->map[i], column) == 0)
 		return (0);
-	i = 1;
-	// while (i < (map->row - 1))
-	// {
-	// 	if (middle(map->map[i], &location) == 0)
-	// 		return (0);
-	// 	i++;
-	// }
-	// if (location == 0)
-	// 	return (0);
-	// if (first_last(map->map[i], column) == 0)
-	// 	return (0);
+	i++;
+	if (find_location(map) == 0)
+		return (0);
+	while (i < (map->row - 1))
+	{
+		if (middle(map->map[i], column) == 0)
+			return (0);
+		i++;
+	}
+	if (first_last(map->map[i], column) == 0)
+		return (0);
 	return (1);
 }
