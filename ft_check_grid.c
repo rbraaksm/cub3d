@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/28 08:37:09 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/29 14:39:35 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ int		ft_strchr(char c)
 	return (0);
 }
 
-int		first_last(char *str, int column)
+int		first_last(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (i < column)
+	while (str[i] != '\0')
 	{
-		if (str[i] == '1' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
-			i += 2;
+		if (str[i] == '1')
+			i++;
 		else
 			return (0);
 	}
@@ -74,27 +74,18 @@ int		find_location(t_map *map)
 	return (location);
 }
 
-int		middle(char *str, int column)
+int		middle(t_map *map, char *str)
 {
 	int		i;
-	int		checkrow;
 
-	i = 1;
-	checkrow = 0;
-	if (str[0] != '1' || str[column - 1] != '1')
+	if (str[0] != '1' || str[map->column - 1] != '1')
 		return (0);
-	while (str[i] != '\0')
-	{
-		if (str[i] != ' ')
-			return (0);
-		i += 2;
-	}
 	i = 0;
 	while (str[i] != '\0')
 	{
 		if (ft_strchr(str[i]) == 0)
 			return (0);
-		i += 2;
+		i++;
 	}
 	return (1);
 }
@@ -102,24 +93,20 @@ int		middle(char *str, int column)
 int		check_grid(t_map *map)
 {
 	int		i;
-	int		column;
 
 	i = 0;
-	column = 0;
-	while (map->map[i][column] != '\0')
-		column++;
-	if (first_last(map->map[i], column) == 0)
+	if (first_last(map->map[i]) == 0)
 		return (0);
 	i++;
 	if (find_location(map) == 0)
 		return (0);
 	while (i < (map->row - 1))
 	{
-		if (middle(map->map[i], column) == 0)
+		if (middle(map, map->map[i]) == 0)
 			return (0);
 		i++;
 	}
-	if (first_last(map->map[i], column) == 0)
+	if (first_last(map->map[i]) == 0)
 		return (0);
 	return (1);
 }

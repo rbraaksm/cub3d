@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/28 08:08:46 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/29 17:58:55 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,6 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
-
-typedef struct		s_data
-{
-	void			*img;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-}					t_data;
 
 typedef struct		s_color
 {
@@ -69,6 +60,15 @@ typedef struct  	s_vars
 {
     void        	*mlx;
     void        	*win;
+	void			*img;
+	void			*mapimg;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	t_map			*map;				
+	t_flags			*data;
+	t_color			*color;
 }               	t_vars;
 
 int					make_string(char **argv, t_flags *data);
@@ -86,7 +86,7 @@ int					ft_atoi(const char *str);
 /* window */
 
 void				window(t_flags *data, t_color *color, t_map *map);
-void				print(t_flags *data);
+void				print(t_map *map);
 
 
 int					mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);

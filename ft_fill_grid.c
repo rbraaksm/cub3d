@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/28 09:36:22 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/29 14:35:36 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,14 @@ void	make_strmap(t_map *map, char *strmap)
 		index = 0;
 		while (strmap[statici] != '\n' && strmap[statici] != '\0')
 		{
-			map->map[i][index] = strmap[statici];
-			index++;
-			statici++;
+			if (strmap[statici] == ' ')
+				statici++;
+			else
+			{
+				map->map[i][index] = strmap[statici];
+				index++;
+				statici++;
+			}
 		}
 		map->map[i][index] = '\0';
 		statici++;
@@ -71,7 +76,8 @@ void	find_column(t_map *map, char *strmap)
 			i++;
 		}
 		i++;
-		map->column++;
+		if (strmap[i] != ' ')
+			map->column++;
 	}
 	map->column = tmp;
 }
@@ -97,7 +103,8 @@ int		make_map(t_map *map, char *strmap)
 		while (strmap[i] != '\n' && strmap[i] != '\0')
 		{
 			i++;
-			mapi++;
+			if (strmap[i] != ' ')
+				mapi++;
 		}
 		i++;
 		map->map[irow] = malloc(sizeof(char *) * (mapi + 1));
