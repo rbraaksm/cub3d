@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/29 17:58:55 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/01/30 14:46:45 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,16 @@ typedef struct  	s_vars
 {
     void        	*mlx;
     void        	*win;
-	void			*img;
 	void			*mapimg;
 	char			*addr;
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
+	unsigned int	player;
+	int				play_x;
+	int				play_y;
+	int				hor;
+	int				ver;
 	t_map			*map;				
 	t_flags			*data;
 	t_color			*color;
@@ -86,6 +90,9 @@ int					ft_atoi(const char *str);
 /* window */
 
 void				window(t_flags *data, t_color *color, t_map *map);
+void				ft_make_2d(t_vars *vars);
+void				player(t_vars *vars, unsigned int color);
+// void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				print(t_map *map);
 
 
