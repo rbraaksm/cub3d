@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 14:13:44 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/30 14:46:29 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/03 17:34:12 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	player(t_vars *vars, unsigned int color)
+void	player(t_vars *vars, char c, int move, unsigned int color)
 {
 	int	ys;
 	int	ye;
@@ -29,6 +29,10 @@ void	player(t_vars *vars, unsigned int color)
 	int	xe;
 
 	vars->player = color;
+	if (c == 'x')
+		vars->play_x += move;
+	if (c == 'y')
+		vars->play_y += move;
 	ys = vars->play_y - (vars->hor /2) + 3;
 	if (ys < 0)
 		ys = 0;
@@ -57,7 +61,7 @@ void	player(t_vars *vars, unsigned int color)
 			xs = 0;
 		while (xs < xe)
 		{
-			my_mlx_pixel_put(vars, xs, ys, vars->player);
+			my_mlx_pixel_put(vars, vars->play_x, vars->play_y, vars->player);
 			xs++;
 		}
 		ys++;
@@ -112,6 +116,6 @@ void	make_grid(t_vars *vars)
 void	ft_make_2d(t_vars *vars)
 {
 	make_grid(vars);
-	player(vars, 0xffff00);
+	player(vars, ' ', 0, 0x00BFFF);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
 }

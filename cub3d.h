@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/30 14:46:45 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/03 16:49:15 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct  	s_vars
 	int				play_y;
 	int				hor;
 	int				ver;
+	float			angle;
+	float			pi;
 	t_map			*map;				
 	t_flags			*data;
 	t_color			*color;
@@ -91,8 +93,11 @@ int					ft_atoi(const char *str);
 
 void				window(t_flags *data, t_color *color, t_map *map);
 void				ft_make_2d(t_vars *vars);
-void				player(t_vars *vars, unsigned int color);
-// void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
+void				player(t_vars *vars, char c, int move, unsigned int color);
+void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
+void				ft_findwall(t_vars *vars);
+void				ft_view(t_vars *vars, int rot);
+
 void				print(t_map *map);
 
 
