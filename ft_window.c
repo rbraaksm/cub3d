@@ -6,15 +6,52 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/03 17:34:16 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/04 12:30:56 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minilibx/mlx.h"
 #include "cub3d.h"
 
+static void	make_grid(t_vars *vars)
+{
+	int		x;
+	int		y;
+	int		r;
+	int		c;
+
+	r = 0;
+	c = 0;
+	y = vars->hor;
+	while (r < vars->map->row)
+	{
+		x = 0;
+		while (x < vars->data->resx)
+		{
+			my_mlx_pixel_put(vars, x, y, 0xff0000);
+			x++;
+		}
+		y += vars->hor;
+		r++;
+	}
+	x = vars->ver;
+	while (c < vars->map->column)
+	{
+		y = 0;
+		while (y < vars->data->resy)
+		{
+			my_mlx_pixel_put(vars, x, y, 0xff0000);
+			y++;
+		}
+		x += vars->ver;
+		c++;
+	}
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
+}
+
 int		keycode(int keycode, t_vars *vars)
 {
+	printf("[keycode] %d\n", keycode);
 	if (keycode == 53)
     	mlx_destroy_window(vars->mlx, vars->win);
 	if (keycode == 126)
@@ -41,11 +78,20 @@ int		keycode(int keycode, t_vars *vars)
 		player(vars, 'y', 5, 0x00BFFF);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
 	}
-	if (keycode == 2)
+	if (keycode == 0)
 	{
-		ft_view(vars, 10);
+		ft_view(vars, 0, 0x000000);
+		ft_view(vars, 0.1, 0xffff00);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
 	}
+	if (keycode == 2)
+	{
+		ft_view(vars, 0, 0x000000);
+		ft_view(vars, -0.1, 0xffff00);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
+	}
+	if (keycode == 6)
+		make_grid(vars);
 	return (keycode);
 }
 
@@ -59,7 +105,7 @@ void	get_info(t_vars *vars)
 void	window(t_flags *data, t_color *color, t_map *map)
 {
 	t_vars	vars;
-
+	vars.angle = 3.1415926535;
 	vars.map = map;
 	vars.data = data;
 	vars.color = color;

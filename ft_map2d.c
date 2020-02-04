@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 14:13:44 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/03 17:34:12 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/04 11:38:06 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	player(t_vars *vars, char c, int move, unsigned int color)
 	int	xs;
 	int	xe;
 
+	ft_view(vars, 0, 0x000000);
 	vars->player = color;
 	if (c == 'x')
 		vars->play_x += move;
@@ -66,6 +67,7 @@ void	player(t_vars *vars, char c, int move, unsigned int color)
 		}
 		ys++;
 	}
+	ft_view(vars, 0, 0xffff00);
 }
 
 void	printblock(t_vars *vars, int row, int column)
@@ -117,5 +119,6 @@ void	ft_make_2d(t_vars *vars)
 {
 	make_grid(vars);
 	player(vars, ' ', 0, 0x00BFFF);
+	ft_view(vars, 0, 0xffff00);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
 }
