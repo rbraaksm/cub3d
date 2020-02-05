@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/04 11:33:37 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/05 10:53:20 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ typedef struct  	s_vars
 	unsigned int	player;
 	int				play_x;
 	int				play_y;
-	int				hor;
-	int				ver;
+	double			hor;
+	double			ver;
 	float			angle;
 	float			pi;
 	t_map			*map;				

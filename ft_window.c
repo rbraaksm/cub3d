@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/04 12:30:56 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/05 14:29:47 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,43 +51,43 @@ static void	make_grid(t_vars *vars)
 
 int		keycode(int keycode, t_vars *vars)
 {
-	printf("[keycode] %d\n", keycode);
+	// printf("[keycode] %d\n", keycode);
 	if (keycode == 53)
     	mlx_destroy_window(vars->mlx, vars->win);
 	if (keycode == 126)
 	{
 		player(vars, ' ', 0, 0x000000);
-		player(vars, 'y', -5, 0x00BFFF);
+		player(vars, 'y', -6, 0x00BFFF);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
 	}
 	if (keycode == 123)
 	{
 		player(vars, ' ', 0, 0x000000);
-		player(vars, 'x', -5, 0x00BFFF);
+		player(vars, 'x', -6, 0x00BFFF);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
 	}
 	if (keycode == 124)
 	{
 		player(vars, ' ', 0, 0x000000);
-		player(vars, 'x', 5, 0x00BFFF);
+		player(vars, 'x', 6, 0x00BFFF);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
 	}
 	if (keycode == 125)
 	{
 		player(vars, ' ', 0, 0x000000);
-		player(vars, 'y', 5, 0x00BFFF);
+		player(vars, 'y', 6, 0x00BFFF);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
 	}
 	if (keycode == 0)
 	{
 		ft_view(vars, 0, 0x000000);
-		ft_view(vars, 0.1, 0xffff00);
+		ft_view(vars, 0.1, 0xffffff);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
 	}
 	if (keycode == 2)
 	{
 		ft_view(vars, 0, 0x000000);
-		ft_view(vars, -0.1, 0xffff00);
+		ft_view(vars, -0.1, 0xffffff);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
 	}
 	if (keycode == 6)
@@ -105,7 +105,7 @@ void	get_info(t_vars *vars)
 void	window(t_flags *data, t_color *color, t_map *map)
 {
 	t_vars	vars;
-	vars.angle = 3.1415926535;
+	vars.angle = M_PI;
 	vars.map = map;
 	vars.data = data;
 	vars.color = color;
