@@ -6,12 +6,27 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/05 14:07:53 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/06 16:46:56 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minilibx/mlx.h"
 #include "cub3d.h"
+
+int	my_mlx_pixel_putwall(t_vars *vars, int x, int y, int color)
+{
+	char	*dst;
+
+	if (vars->map->map[y / (int)vars->hor][x / (int)vars->ver] == '1' ||
+		vars->map->map[y / (int)vars->hor][x / (int)vars->ver] == '2')
+		return (0);
+	else
+	{
+		dst = vars->addr + (y * vars->line_length + x * (vars->bits_per_pixel / 8));
+		*(unsigned int*)dst = color;
+		return (1);
+	}
+}
 
 void	ft_find_intersection(t_vars *vars)
 {
@@ -28,6 +43,8 @@ void	ft_find_intersection(t_vars *vars)
 	// dx = (vars->map->posx * vars->ver) + (vars->play_x / vars->ver);
 
 	// printf("[hoek] %f\n", hoek);
+	// printf("[play_x] %d\n", vars->play_x);
+	// printf("[play_y] %d\n", vars->play_y);
 	// printf("[x] %f\n", x);
 	// printf("[y] %f\n", y);
 	// printf("[angle] %f\n", vars->angle);
@@ -42,28 +59,33 @@ void	ft_find_intersection(t_vars *vars)
 
 }
 
-void	ft_view(t_vars *vars, double rot, unsigned int color)
+void	ft_view(t_vars *vars, double rot, unsigned int color, char c)
 {
 	double	x;
 	double	y;
-	double	x1;
-	double	y1;
+	double	tmp;
+	int		i;
 
+	i = 0;
+	if (c == 'c')
+		ft_view(vars, 0, 0x000000, ' ');
 	vars->angle += rot;
+	tmp = vars->angle;
 	x = vars->play_x;
 	y = vars->play_y;
-	x1 = sin(vars->angle);
-	y1 = cos(vars->angle);
-
-	while (x > 0 && x < vars->data->resx && y > 0 && y < vars->data->resy)
+	vars->angle -= 0.20;
+	while (vars->angle >= (tmp - 0.21) && vars->angle <= (tmp + 0.21))
 	{
-		my_mlx_pixel_put(vars, x, y, color);
-		x += x1;
-		y += y1;
-
+		while (my_mlx_pixel_putwall(vars, x, y, color) == 1)
+		{
+			x += sin(vars->angle);
+			y += cos(vars->angle);
+		}
+		x = vars->play_x;
+		y = vars->play_y;
+		vars->angle += 0.001;
+		i++;
 	}
-	// printf("[Play x] %d\n", vars->play_x);
-	// printf("[Play y] %d\n", vars->play_y);
-
-	ft_find_intersection(vars);
+	vars->angle = tmp;
+	// ft_find_intersection(vars);
 }

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/05 10:53:20 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/06 16:43:52 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ int					ft_atoi(const char *str);
 
 void				window(t_flags *data, t_color *color, t_map *map);
 void				ft_make_2d(t_vars *vars);
-void				player(t_vars *vars, char c, int move, unsigned int color);
+void				player(t_vars *vars, double move, unsigned int color, char c);
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
-void				ft_view(t_vars *vars, double rot, unsigned int color);
+void				ft_view(t_vars *vars, double rot, unsigned int color, char c);
 
 void				print(t_map *map);
 
