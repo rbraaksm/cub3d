@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/06 16:47:43 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/07 18:34:29 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,18 @@ int		keycode(int keycode, t_vars *vars)
 	// printf("[keycode] %d\n", keycode);
 	if (keycode == 53)
     	mlx_destroy_window(vars->mlx, vars->win);
-	if (keycode == 126)
-		player(vars, 5, 0x00BFFF, 'c');
-	if (keycode == 125)
-		player(vars, -5, 0x00BFFF, 'c');
+	if (keycode == 0)
+		a_player(vars, 5.0, 0x00BFFF, 'c');
+	if (keycode == 1)
+		s_player(vars, 5.0, 0x00BFFF, 'c');
+	if (keycode == 2)
+		d_player(vars, 5.0, 0x00BFFF, 'c');
+	if (keycode == 13)
+		w_player(vars, 5.0, 0x00BFFF, 'c');
+	// if (keycode == 126)
+	// 	player(vars, 5, 0x00BFFF, 'c');
+	// if (keycode == 125)
+		// player(vars, -5, 0x00BFFF, 'c');
 	if (keycode == 123)
 		ft_view(vars, 0.1, 0xFFE4E1, 'c');
 	if (keycode == 124)
@@ -72,11 +80,6 @@ void	get_info(t_vars *vars)
 {
 	vars->ver = vars->data->resx / vars->map->column;
 	vars->hor = vars->data->resy / vars->map->row;
-
-	if (vars->ver > vars->hor)
-		vars->ver = vars->hor;
-	else
-		vars->hor = vars->ver;
 }
 
 void	window(t_flags *data, t_color *color, t_map *map)

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/06 16:46:56 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/07 15:35:24 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,33 @@ void	ft_view(t_vars *vars, double rot, unsigned int color, char c)
 	double	tmp;
 	int		i;
 
-	i = 0;
+	// printf("[play_x] %d\n", vars->play_x);
+	// printf("[play_y] %d\n", vars->play_y);
+	// printf("[angle]  %f\n", vars->angle);
+	if (vars->angle < 0)
+		vars->angle += (2 * M_PI);
+	if (vars->angle > (2 * M_PI))
+		vars->angle -= (2 * M_PI);
 	if (c == 'c')
 		ft_view(vars, 0, 0x000000, ' ');
 	vars->angle += rot;
 	tmp = vars->angle;
 	x = vars->play_x;
 	y = vars->play_y;
-	vars->angle -= 0.20;
-	while (vars->angle >= (tmp - 0.21) && vars->angle <= (tmp + 0.21))
-	{
-		while (my_mlx_pixel_putwall(vars, x, y, color) == 1)
+	// vars->angle -= 0.25;
+	// while (vars->angle >= (tmp - 0.26) && vars->angle <= (tmp + 0.26))
+	// {
+		i = 0;
+		while (my_mlx_pixel_putwall(vars, x, y, color) == 1 && i < 60)
 		{
 			x += sin(vars->angle);
 			y += cos(vars->angle);
+			i++;
 		}
-		x = vars->play_x;
-		y = vars->play_y;
-		vars->angle += 0.001;
-		i++;
-	}
+	// 	x = vars->play_x;
+	// 	y = vars->play_y;
+	// 	vars->angle += 0.001;
+	// }
 	vars->angle = tmp;
 	// ft_find_intersection(vars);
 }
