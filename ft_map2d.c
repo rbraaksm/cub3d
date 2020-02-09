@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 14:13:44 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/07 15:54:40 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/08 11:24:16 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	printblock(t_vars *vars, int row, int column)
 {
 	int				x;
 	int				y;
-	
+
 	y = row * vars->hor;
 	while (y < ((row * vars->hor) + vars->hor))
 	{
@@ -69,6 +69,6 @@ void	make_grid(t_vars *vars)
 void	ft_make_2d(t_vars *vars)
 {
 	make_grid(vars);
-	player(vars, 0, 0x00BFFF, ' ');
+	w_player(vars, 0, 0x00BFFF, ' ');
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
 }
