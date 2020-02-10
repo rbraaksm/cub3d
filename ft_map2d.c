@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 14:13:44 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/08 11:24:16 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/10 14:38:39 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	printblock(t_vars *vars, int row, int column)
 	int				x;
 	int				y;
 
-	y = row * vars->hor;
-	while (y < ((row * vars->hor) + vars->hor))
+	y = row * vars->tile_h;
+	while (y < ((row * vars->tile_h) + vars->tile_h))
 	{
-		x = column * vars->ver;
-		while (x < ((column * vars->ver) + vars->ver))
+		x = column * vars->tile_w;
+		while (x < ((column * vars->tile_w) + vars->tile_w))
 		{
 			if (vars->map->map[row][column] == '1')
 				my_mlx_pixel_put(vars, x, y, 0x8A2BE2);
@@ -57,8 +57,8 @@ void	make_grid(t_vars *vars)
 				printblock(vars, r, c);
 			if (vars->map->map[r][c] == 'S')
 			{
-				vars->play_y = r * vars->hor + (vars->hor / 2);
-				vars->play_x = c * vars->ver + (vars->ver / 2);
+				vars->play_y = r * vars->tile_h + (vars->tile_h / 2);
+				vars->play_x = c * vars->tile_w + (vars->tile_w / 2);
 			}
 			c++;
 		}
@@ -69,6 +69,6 @@ void	make_grid(t_vars *vars)
 void	ft_make_2d(t_vars *vars)
 {
 	make_grid(vars);
-	w_player(vars, 0, 0x00BFFF, ' ');
+	updown_player(vars, 0, 0x00BFFF, ' ');
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
 }

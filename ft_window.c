@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/08 11:40:14 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/10 14:52:37 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	make_grid(t_vars *vars)
 
 	r = 0;
 	c = 0;
-	y = vars->hor;
+	y = vars->tile_h;
 	while (r < vars->map->row)
 	{
 		x = 0;
@@ -31,10 +31,10 @@ static void	make_grid(t_vars *vars)
 			my_mlx_pixel_put(vars, x, y, 0x8A2BE2);
 			x++;
 		}
-		y += vars->hor;
+		y += vars->tile_h;
 		r++;
 	}
-	x = vars->ver;
+	x = vars->tile_w;
 	while (c < vars->map->column)
 	{
 		y = 0;
@@ -43,7 +43,7 @@ static void	make_grid(t_vars *vars)
 			my_mlx_pixel_put(vars, x, y, 0x8A2BE2);
 			y++;
 		}
-		x += vars->ver;
+		x += vars->tile_w;
 		c++;
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
@@ -56,13 +56,13 @@ int		keycode(int keycode, t_vars *vars)
 	if (keycode == 53)
     	mlx_destroy_window(vars->mlx, vars->win);
 	if (keycode == 0)
-		a_player(vars, 5.0, 0x00BFFF, 'c');
+		leftright_player(vars, 5.0, 0x00BFFF, 'c');
 	if (keycode == 1)
-		s_player(vars, 5.0, 0x00BFFF, 'c');
+		updown_player(vars, 5.0, 0x00BFFF, 'c');
 	if (keycode == 2)
-		d_player(vars, 5.0, 0x00BFFF, 'c');
+		leftright_player(vars, -5.0, 0x00BFFF, 'c');
 	if (keycode == 13)
-		w_player(vars, 5.0, 0x00BFFF, 'c');
+		updown_player(vars, -5.0, 0x00BFFF, 'c');
 	if (keycode == 123)
 		ft_view(vars, 0.1, 0xFFE4E1, 'c');
 	if (keycode == 124)
@@ -73,8 +73,8 @@ int		keycode(int keycode, t_vars *vars)
 
 void	get_info(t_vars *vars)
 {
-	vars->ver = vars->data->resx / vars->map->column;
-	vars->hor = vars->data->resy / vars->map->row;
+	vars->tile_w = vars->data->resx / vars->map->column;
+	vars->tile_h = vars->data->resy / vars->map->row;
 }
 
 void	window(t_flags *data, t_color *color, t_map *map)

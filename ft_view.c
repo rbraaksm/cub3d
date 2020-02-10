@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/08 12:27:53 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/10 15:16:56 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int		my_mlx_pixel_putwall(t_vars *vars, int x, int y, int color)
 {
 	char	*dst;
 
-	if (vars->map->map[y / (int)vars->hor][x / (int)vars->ver] == '1' ||
-		vars->map->map[y / (int)vars->hor][x / (int)vars->ver] == '2')
+	if (vars->map->map[y / (int)vars->tile_h][x / (int)vars->tile_w] == '1' ||
+		vars->map->map[y / (int)vars->tile_h][x / (int)vars->tile_w] == '2')
 		return (0);
 	else
 	{
@@ -30,31 +30,23 @@ int		my_mlx_pixel_putwall(t_vars *vars, int x, int y, int color)
 
 void	ft_find_intersection(t_vars *vars)
 {
-	double	hoek = vars->angle * 180 / M_PI;
-	if (hoek < 0)
-		hoek += 360;
-	if (hoek > 360)
-		hoek -= 360;
-	// double	dx;
-	// double	y;
+	// printf("[angle]  %f\n", vars->angle);
+	double x = 0.0;
+	double y = 0.0;
+	// double disty = 0.0;
 
-	// y = ((int)vars->play_y / (int)vars->hor) * vars->hor;
-	// x = vars->play_x + sin(vars->angle * 180);
-	// dx = (vars->map->posx * vars->ver) + (vars->play_x / vars->ver);
 
-	// printf("[hoek] %f\n", hoek);
-	// printf("[play_x] %d\n", vars->play_x);
-	// printf("[play_y] %d\n", vars->play_y);
-	// printf("[x] %f\n", x);
-	// printf("[y] %f\n", y);
-	// printf("[angle] %f\n", vars->angle);
-	// printf("[tan] %f\n", tan(vars->angle));
-	// printf("[sin] %f\n", sin(vars->angle));
-	// printf("[cos] %f\n", cos(vars->angle));
-	// printf("[posx] %d\n", vars->map->posx);
-	// printf("[ix] %f\n", ix);
-	// printf("[iy] %f\n", iy);
-	// my_mlx_pixel_put(vars, x, y, 0xffff00);
+	if (vars->angle < (1.5 * M_PI) && vars->angle > (0.5 * M_PI))
+	{
+		x = (int)vars->play_x % (int)vars->tile_w;
+		y = fabs(x / tan(vars->angle));
+		my_mlx_pixel_put(vars, vars->play_x + x, vars->play_y - y, 0xff0000);
+		printf("[x]      %f\n", x);
+		printf("[play_y] %f\n", vars->play_y);
+		printf("[y]      %f\n", y);
+	}
+
+	
 
 
 }
@@ -74,9 +66,9 @@ void	ft_view(t_vars *vars, double rot, unsigned int color, char c)
 		ft_view(vars, 0, 0x000000, ' ');
 	vars->angle += rot;
 	tmp = vars->angle;
-	vars->angle -= 0.25;
-	while (vars->angle > (tmp - 0.26) && vars->angle < (tmp + 0.26))
-	{
+	// vars->angle -= 0.25;
+	// while (vars->angle > (tmp - 0.26) && vars->angle < (tmp + 0.26))
+	// {
 		i = 0;
 		x = vars->play_x;
 		y = vars->play_y;
@@ -84,10 +76,10 @@ void	ft_view(t_vars *vars, double rot, unsigned int color, char c)
 		{
 			x += sin(vars->angle);
 			y += cos(vars->angle);
-			i++;
+			// i++;
 		}
-		vars->angle += 0.001;
-	}
-	vars->angle = tmp;
-	// ft_find_intersection(vars);
+	// 	vars->angle += 0.001;
+	// }
+	// vars->angle = tmp;
+	ft_find_intersection(vars);
 }

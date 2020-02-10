@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/07 18:32:05 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/10 14:37:31 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,13 @@ typedef struct  	s_vars
 	unsigned int	player;
 	double			play_x;
 	double			play_y;
-	double			hor;
-	double			ver;
-	float			angle;
-	float			pi;
+	double			tile_h;
+	double			tile_w;
+	double			angle;
+	double			distx;
+	double			deltax;
+	double			disty;
+	double			deltay;
 	t_map			*map;				
 	t_flags			*data;
 	t_color			*color;
@@ -93,11 +96,8 @@ int					ft_atoi(const char *str);
 
 void				window(t_flags *data, t_color *color, t_map *map);
 void				ft_make_2d(t_vars *vars);
-void				player(t_vars *vars, double move, unsigned int color, char c);
-void				a_player(t_vars *vars, double move, unsigned int color, char c);
-void				s_player(t_vars *vars, double move, unsigned int color, char c);
-void				d_player(t_vars *vars, double move, unsigned int color, char c);
-void				w_player(t_vars *vars, double move, unsigned int color, char c);
+void				leftright_player(t_vars *vars, double move, unsigned int color, char c);
+void				updown_player(t_vars *vars, double move, unsigned int color, char c);
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
 void				ft_view(t_vars *vars, double rot, unsigned int color, char c);
