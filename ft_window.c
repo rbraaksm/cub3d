@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/10 14:52:37 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/11 11:19:28 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ int		keycode(int keycode, t_vars *vars)
 	if (keycode == 53)
     	mlx_destroy_window(vars->mlx, vars->win);
 	if (keycode == 0)
-		leftright_player(vars, 5.0, 0x00BFFF, 'c');
+		player(vars, 5.0, 'h', 0x00BFFF, 'c');
 	if (keycode == 1)
-		updown_player(vars, 5.0, 0x00BFFF, 'c');
+		player(vars, 5.0, 'v', 0x00BFFF, 'c');
 	if (keycode == 2)
-		leftright_player(vars, -5.0, 0x00BFFF, 'c');
+		player(vars, -5.0, 'h', 0x00BFFF, 'c');
 	if (keycode == 13)
-		updown_player(vars, -5.0, 0x00BFFF, 'c');
+		player(vars, -5.0, 'v', 0x00BFFF, 'c');
 	if (keycode == 123)
 		ft_view(vars, 0.1, 0xFFE4E1, 'c');
 	if (keycode == 124)

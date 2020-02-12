@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/10 15:16:56 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/11 12:08:24 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,55 @@ int		my_mlx_pixel_putwall(t_vars *vars, int x, int y, int color)
 void	ft_find_intersection(t_vars *vars)
 {
 	// printf("[angle]  %f\n", vars->angle);
-	double x = 0.0;
-	double y = 0.0;
-	// double disty = 0.0;
+	double	stepx = 0.0;
+	double	interx = 0.0;
+	double	stepy = 0.0;
+	double	intery = 0.0;
 
-
-	if (vars->angle < (1.5 * M_PI) && vars->angle > (0.5 * M_PI))
+	if (vars->angle > (0.5 * M_PI) && vars->angle < (1.5 * M_PI))
 	{
-		x = (int)vars->play_x % (int)vars->tile_w;
-		y = fabs(x / tan(vars->angle));
-		my_mlx_pixel_put(vars, vars->play_x + x, vars->play_y - y, 0xff0000);
-		printf("[x]      %f\n", x);
-		printf("[play_y] %f\n", vars->play_y);
-		printf("[y]      %f\n", y);
+		vars->dely = (int)vars->play_y % (int)vars->tile_h;
+		stepx = vars->dely * tan(vars->angle);
+		interx = vars->play_x - stepx;
+		vars->dely = vars->play_y - vars->dely;
+		my_mlx_pixel_put(vars, interx, vars->dely, 0xff0000);
+		stepx += vars->tile_h * tan(vars->angle);
+		interx = vars->play_x - stepx;
+		my_mlx_pixel_put(vars, interx, vars->dely - vars->tile_h, 0xff0000);
 	}
-
-	
-
-
+	else
+	{
+		vars->dely = vars->tile_h - ((int)vars->play_y % (int)vars->tile_h);
+		stepx = vars->dely * tan(vars->angle);
+		interx = vars->play_x + stepx;
+		vars->dely = vars->play_y + vars->dely;
+		my_mlx_pixel_put(vars, interx, vars->dely, 0xff0000);
+		stepx += vars->tile_h * tan(vars->angle);
+		interx = vars->play_x + stepx;
+		my_mlx_pixel_put(vars, interx, vars->dely + vars->tile_h, 0xff0000);
+	}
+	if (vars->angle > M_PI && vars->angle < (2 * M_PI))
+	{
+		vars->delx = (int)vars->play_x % (int)vars->tile_w;
+		stepy = vars->delx / tan(vars->angle);
+		intery = vars->play_y - stepy;
+		vars->delx = vars->play_x - vars->delx;
+		my_mlx_pixel_put(vars, vars->delx, intery, 0xff0000);
+		// stepy += vars->tile_w / tan(vars->angle);
+		// intery = vars->play_y - stepy;
+		// my_mlx_pixel_put(vars, vars->delx - vars->tile_w, intery, 0xff0000);
+	}
+	// else
+	// {
+	// 	vars->delx = vars->tile_w - ((int)vars->play_x % (int)vars->tile_w);
+	// 	stepy = vars->delx / tan(vars->angle);
+	// 	intery = vars->play_y + stepy;
+	// 	vars->delx = vars->play_x + vars->delx;
+	// 	my_mlx_pixel_put(vars, vars->delx, intery, 0xff0000);
+	// 	stepy += vars->tile_w / tan(vars->angle);
+	// 	intery = vars->play_y + stepy;
+	// 	my_mlx_pixel_put(vars, vars->delx + vars->tile_w, intery, 0xff0000);
+	// }
 }
 
 void	ft_view(t_vars *vars, double rot, unsigned int color, char c)
