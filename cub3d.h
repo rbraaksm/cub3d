@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/11 11:24:32 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/17 12:32:09 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ typedef struct		s_map
 	int				posy;
 }					t_map;
 
-typedef struct  	s_vars
+typedef struct		s_vars
 {
-    void        	*mlx;
-    void        	*win;
+    void			*mlx;
+    void			*win;
 	void			*mapimg;
 	char			*addr;
 	int				bits_per_pixel;
@@ -70,15 +70,18 @@ typedef struct  	s_vars
 	double			play_y;
 	double			tile_h;
 	double			tile_w;
+	double			rayx;
+	double			rayy;
 	double			angle;
-	double			delx;
+	double			sidex;
 	double			deltax;
-	double			dely;
+	double			sidey;
 	double			deltay;
+	double			walldist;
 	t_map			*map;
 	t_flags			*data;
 	t_color			*color;
-}               	t_vars;
+}					t_vars;
 
 int					make_string(char **argv, t_flags *data);
 int					fill_mapindex(t_flags *data);
@@ -96,13 +99,15 @@ int					ft_atoi(const char *str);
 
 void				window(t_flags *data, t_color *color, t_map *map);
 void				ft_make_2d(t_vars *vars);
-void				player(t_vars *vars, double move, char d, unsigned int color, char c);
+void				player(t_vars *vars, double move, char d,
+					unsigned int color);
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
-void				ft_view(t_vars *vars, double rot, unsigned int color, char c);
+void				ft_view(t_vars *vars, double rot,
+					unsigned int color, char c);
 
 void				print(t_map *map);
 
-
-int					mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
+int					mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y,
+					int color);
 #endif

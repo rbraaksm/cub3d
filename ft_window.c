@@ -6,97 +6,98 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/11 11:19:28 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/17 14:30:35 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minilibx/mlx.h"
 #include "cub3d.h"
 
-static void	make_grid(t_vars *vars)
+static void	make_grid(t_vars *v)
 {
 	int		x;
 	int		y;
-	int		r;
-	int		c;
+	int		z;
 
-	r = 0;
-	c = 0;
-	y = vars->tile_h;
-	while (r < vars->map->row)
+	z = 0;
+	y = v->tile_h;
+	while (z < v->map->row)
 	{
 		x = 0;
-		while (x < vars->data->resx)
+		while (x < v->data->resx)
 		{
-			my_mlx_pixel_put(vars, x, y, 0x8A2BE2);
+			my_mlx_pixel_put(v, x, y, 0x8A2BE2);
 			x++;
 		}
-		y += vars->tile_h;
-		r++;
+		y += v->tile_h;
+		z++;
 	}
-	x = vars->tile_w;
-	while (c < vars->map->column)
+	x = v->tile_w;
+	z = 0;
+	while (z < v->map->column)
 	{
 		y = 0;
-		while (y < vars->data->resy)
+		while (y < v->data->resy)
 		{
-			my_mlx_pixel_put(vars, x, y, 0x8A2BE2);
+			my_mlx_pixel_put(v, x, y, 0x8A2BE2);
 			y++;
 		}
-		x += vars->tile_w;
-		c++;
+		x += v->tile_w;
+		z++;
 	}
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
+	mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
 }
 
-int		keycode(int keycode, t_vars *vars)
+int		keycode(int keycode, t_vars *v)
 {
 	// printf("[keycode] %d\n", keycode);
-	make_grid(vars);
+	make_grid(v);
 	if (keycode == 53)
-    	mlx_destroy_window(vars->mlx, vars->win);
+		mlx_destroy_window(v->mlx, v->win);
 	if (keycode == 0)
-		player(vars, 5.0, 'h', 0x00BFFF, 'c');
+		player(v, 5.0, 'h', 0x00BFFF);
 	if (keycode == 1)
-		player(vars, 5.0, 'v', 0x00BFFF, 'c');
+		player(v, 5.0, 'v', 0x00BFFF);
 	if (keycode == 2)
-		player(vars, -5.0, 'h', 0x00BFFF, 'c');
+		player(v, -5.0, 'h', 0x00BFFF);
 	if (keycode == 13)
-		player(vars, -5.0, 'v', 0x00BFFF, 'c');
+		player(v, -5.0, 'v', 0x00BFFF);
 	if (keycode == 123)
-		ft_view(vars, 0.1, 0xFFE4E1, 'c');
+		ft_view(v, 0.1, 0xFFE4E1, 'c');
 	if (keycode == 124)
-		ft_view(vars, -0.1, 0xFFE4E1, 'c');
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->mapimg, 0, 0);
+		ft_view(v, -0.1, 0xFFE4E1, 'c');
+	mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
 	return (keycode);
 }
 
-void	get_info(t_vars *vars)
+void	get_info(t_vars *v)
 {
-	vars->tile_w = vars->data->resx / vars->map->column;
-	vars->tile_h = vars->data->resy / vars->map->row;
+	v->angle = M_PI;
+	v->tile_w = v->data->resx / v->map->column;
+	v->tile_h = v->data->resy / v->map->row;
 }
 
 void	window(t_flags *data, t_color *color, t_map *map)
 {
-	t_vars	vars;
-	vars.angle = M_PI;
-	vars.map = map;
-	vars.data = data;
-	vars.color = color;
-	get_info(&vars);
+	t_vars	v;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, data->resx, data->resy, "CUB3D");
+	v.map = map;
+	v.data = data;
+	v.color = color;
+	get_info(&v);
+	v.mlx = mlx_init();
+	v.win = mlx_new_window(v.mlx, data->resx, data->resy, "CUB3D");
 
 		/* KEYCODE*/
-	mlx_hook(vars.win, 2, 1L<<0, keycode, &vars);
+	mlx_hook(v.win, 2, 1L<<0, keycode, &v);
 
-	vars.mapimg = mlx_new_image(vars.mlx, data->resx, data->resy);
-	vars.addr = mlx_get_data_addr(vars.mapimg, &vars.bits_per_pixel, &vars.line_length, &vars.endian);
+	v.mapimg = mlx_new_image(v.mlx, data->resx, data->resy);
+	v.addr = mlx_get_data_addr(v.mapimg, &v.bits_per_pixel, &v.line_length, &v.endian);
 
 	/* make 2D map */
-	ft_make_2d(&vars);
+	ft_make_2d(&v);
 
-	mlx_loop(vars.mlx);
+	/* find side/delta */
+	// ft_find_sidedelta(&v);
+	mlx_loop(v.mlx);
 }
