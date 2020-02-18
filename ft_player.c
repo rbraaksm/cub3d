@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 15:47:58 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/17 14:44:26 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/18 15:10:49 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	raydir(t_vars *v, char d)
 {
 	if (d == 'h')
 	{
-		v->rayx = sin(v->angle);
-		v->rayy = cos(v->angle);
+		v->rayx = cos(v->angle);
+		v->rayy = sin(v->angle);
 	}
 	else
 	{
@@ -32,17 +32,9 @@ void	player(t_vars *v, double move, char d, unsigned int color)
 	int		x;
 	int		y;
 
-	if (d == 'h')
-	{
-		x = move * cos(v->angle);
-		y = move * sin(v->angle);
-	}
-	else
-	{
-		x = -(move * sin(v->angle));
-		y = move * cos(v->angle);
-	}
 	raydir(v, d);
+	x = move * v->rayx;
+	y = move * v->rayy;
 	v->map->posy = (int)((v->play_y - y) / v->tile_h);
 	v->map->posx = (int)((v->play_x + x) / v->tile_w);
 	if (v->map->map[v->map->posy][v->map->posx] != '1')

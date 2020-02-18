@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/17 12:32:09 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/18 14:56:31 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ typedef struct		s_vars
 	double			deltax;
 	double			sidey;
 	double			deltay;
+	int				stepx;
+	int				stepy;
+	int				mapx;
+	int				mapy;
 	double			walldist;
 	t_map			*map;
 	t_flags			*data;
@@ -105,8 +109,9 @@ void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
 void				ft_view(t_vars *vars, double rot,
 					unsigned int color, char c);
+void				ft_find_sidedelta(t_vars *v);
 
-void				print(t_map *map);
+void				print(t_vars *v);
 
 int					mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y,
 					int color);

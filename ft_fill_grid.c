@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/29 14:35:36 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/18 10:08:39 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	find_row(char *strmap, t_map *map)
 		if (strmap[i] == '\n')
 			map->row++;
 	}
-
 }
 
 void	find_column(t_map *map, char *strmap)
@@ -134,7 +133,8 @@ int		find_end(char *str, int start)
 {
 	while (str[start] != '\0')
 	{
-		if (str[start] == '\n' && (str[start + 1] == '\n' || str[start + 1] == '\0'))
+		if (str[start] == '\n' && (str[start + 1] == '\n'
+		|| str[start + 1] == '\0'))
 			return (start);
 		start++;
 	}

@@ -6,7 +6,7 @@
 #    By: rbraaksm <rbraaksm@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/22 14:09:57 by rbraaksm       #+#    #+#                 #
-#    Updated: 2020/02/07 15:48:32 by rbraaksm      ########   odam.nl          #
+#    Updated: 2020/02/18 14:41:17 by rbraaksm      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS =	ft_main.c \
 		ft_view.c \
 		ft_findwall.c \
 		ft_player.c \
+		ft_find_sidedelta.c \
 		print.c \
 
 LIB = $(SRCS:%.c=%.o)
