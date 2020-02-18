@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/18 15:15:48 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/18 16:48:55 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int		keycode(int keycode, t_vars *v)
 		ft_view(v, 0.1, 0xFFE4E1, 'c');
 	if (keycode == 124)
 		ft_view(v, -0.1, 0xFFE4E1, 'c');
-	// ft_find_sidedelta(v);
 	mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
 	return (keycode);
 }
@@ -76,6 +75,8 @@ void	get_info(t_vars *v)
 	v->angle = M_PI;
 	v->tile_w = v->data->resx / v->map->column;
 	v->tile_h = v->data->resy / v->map->row;
+	v->rayx = sin(v->angle);
+	v->rayy = cos(v->angle);
 }
 
 void	window(t_flags *data, t_color *color, t_map *map)

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/18 15:36:25 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/18 17:18:49 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,40 @@ int		my_mlx_pixel_putwall(t_vars *v, int x, int y, int color)
 	}
 }
 
-// static void	raydir(t_vars *v)
-// {
-// 		v->rayx = sin(v->angle);
-// 		v->rayy = cos(v->angle);
-// }
+static void	make_grid(t_vars *v)
+{
+	int		x;
+	int		y;
+	int		z;
+
+	z = 0;
+	y = v->tile_h;
+	while (z < v->map->row)
+	{
+		x = 0;
+		while (x < v->data->resx)
+		{
+			my_mlx_pixel_put(v, x, y, 0x8A2BE2);
+			x++;
+		}
+		y += v->tile_h;
+		z++;
+	}
+	x = v->tile_w;
+	z = 0;
+	while (z < v->map->column)
+	{
+		y = 0;
+		while (y < v->data->resy)
+		{
+			my_mlx_pixel_put(v, x, y, 0x8A2BE2);
+			y++;
+		}
+		x += v->tile_w;
+		z++;
+	}
+	mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
+}
 
 void	ft_view(t_vars *v, double rot, unsigned int color, char c)
 {
@@ -47,7 +76,7 @@ void	ft_view(t_vars *v, double rot, unsigned int color, char c)
 		v->angle -= (2 * M_PI);
 	if (c == 'c')
 		ft_view(v, 0, 0x000000, ' ');
-	// raydir(v);
+	make_grid(v);
 	v->angle += rot;
 	tmp = v->angle;
 	// v->angle -= 0.25;
@@ -60,9 +89,8 @@ void	ft_view(t_vars *v, double rot, unsigned int color, char c)
 			x += sin(v->angle);
 			y += cos(v->angle);
 		}
-		// v->angle += 0.05;
+	// 	v->angle += 0.001;
 	// }
 	// v->angle = tmp;
-	// ft_find_sidedelta(v);
 	ft_find_sidedelta(v);
 }

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 14:13:44 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/17 11:58:46 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/18 17:08:42 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	make_grid(t_vars *vars)
 		{
 			if (vars->map->map[r][c] == '1' || vars->map->map[r][c] == '2')
 				printblock(vars, r, c);
-			if (vars->map->map[r][c] == 'S')
+			if (vars->map->map[r][c] == 'N')
 			{
 				vars->play_y = r * vars->tile_h + (vars->tile_h / 2);
 				vars->play_x = c * vars->tile_w + (vars->tile_w / 2);

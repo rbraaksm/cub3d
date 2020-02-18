@@ -6,23 +6,28 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/18 15:39:53 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/18 17:18:23 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "./minilibx/mlx.h"
 
-void	ft_find_hit(t_vars *v)
+void	calc_distance(t_vars *v, int side)
 {
-	int		hit;
+	if (side == 0)
+		v->walldist = (v->mapx - v->map->posx + (1 - v->stepx) / 2) / v->rayx;
+	else
+		v->walldist = (v->mapy - v->map->posy + (1 - v->stepy) / 2) / v->rayy;
+	print(v);
+}
+
+void	find_hit(t_vars *v)
+{
 	int		side;
 
-	hit = 0;
 	v->mapx = v->map->posx;
 	v->mapy = v->map->posy;
-	printf("--------------------------------\n");
-	print(v);
 	while (1)
 	{
 		if (v->sidex < v->sidey)
@@ -42,18 +47,17 @@ void	ft_find_hit(t_vars *v)
 			v->sidey += v->deltay;
 		}
 	}
-	printf("\n");
-	if (side == 0)
-	{
-		// afstand is hier side_x;
-		printf("X_HIT\n");
-	}
-	else
-	{
-		printf("Y_HIT\n");
-	}
-	print(v);
-	printf("--------------------------------\n");
+	calc_distance(v, side);
+}
+
+void	calc_info(t_vars *v, double x, double y)
+{
+	v->rayx = sin(v->angle);
+	v->rayy = cos(v->angle);
+	v->sidex = fabs(x / v->rayx);
+	v->sidey = fabs(y / v->rayy);
+	v->deltax = fabs(v->tile_w / v->rayx);
+	v->deltay = fabs(v->tile_h / v->rayy);
 }
 
 void	ft_find_sidedelta(t_vars *v)
@@ -69,17 +73,14 @@ void	ft_find_sidedelta(t_vars *v)
 		x = (int)v->play_x % (int)v->tile_w;
 	else
 		x = v->tile_w - ((int)v->play_x % (int)v->tile_w);
-	v->sidex = fabs(x / sin(v->angle));
-	v->sidey = fabs(y / cos(v->angle));
-	v->deltax = fabs(v->tile_w / sin(v->angle));
-	v->deltay = fabs(v->tile_h / cos(v->angle));
+	calc_info(v, x, y);
 	if (v->rayx < 0)
-		v->stepx = 1;
-	else
 		v->stepx = -1;
+	else
+		v->stepx = 1;
 	if (v->rayy < 0)
 		v->stepy = -1;
 	else
 		v->stepy = 1;
-	ft_find_hit(v);
+	find_hit(v);
 }
