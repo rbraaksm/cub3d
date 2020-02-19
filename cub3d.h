@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/18 14:56:31 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/19 17:26:16 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,17 @@ typedef struct		s_map
 	int				posy;
 }					t_map;
 
+typedef struct 		s_game
+{
+	void			*mlx2;
+    void			*win2;
+	void			*mapimg2;
+	char			*addr2;
+	int				bits_per_pixel2;
+	int				line_length2;
+	int				endian2;
+}					t_game;
+
 typedef struct		s_vars
 {
     void			*mlx;
@@ -81,10 +92,16 @@ typedef struct		s_vars
 	int				stepy;
 	int				mapx;
 	int				mapy;
+	double			posx;
+	double			posy;
+	double			raydist;
+	double			opp;
+	double			adjust;
 	double			walldist;
 	t_map			*map;
 	t_flags			*data;
 	t_color			*color;
+	t_game			*game;
 }					t_vars;
 
 int					make_string(char **argv, t_flags *data);
@@ -109,6 +126,7 @@ void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
 void				ft_view(t_vars *vars, double rot,
 					unsigned int color, char c);
+// void				ft_cleanview(t_vars *v, double rot, unsigned int color);
 void				ft_find_sidedelta(t_vars *v);
 
 void				print(t_vars *v);
