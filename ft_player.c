@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 15:47:58 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/19 16:01:29 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/20 17:40:11 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	player(t_vars *v, double move, char d, unsigned int color)
 		x = -(move * sin(v->angle));
 		y = move * cos(v->angle);
 	}
-	if (v->map->map[(int)((v->play_y - y) / v->tile_h)][(int)((v->play_x + x) / v->tile_w)] != '1')
+	if (v->map->map[(int)((v->play_y - y) / v->tile_h)][(int)((v->play_x + x) / v->tile_w)] != '1' &&
+		v->map->map[(int)((v->play_y - y) / v->tile_h)][(int)((v->play_x + x) / v->tile_w)] != '2')
 	{
 		ft_view(v, 0, 0x000000, 'c');
 		v->play_x += x;

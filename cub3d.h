@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/19 17:26:16 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/20 16:58:43 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ typedef struct		s_vars
 	double			opp;
 	double			adjust;
 	double			walldist;
+	double			playdir;
+	double			tmpdir;
 	t_map			*map;
 	t_flags			*data;
 	t_color			*color;

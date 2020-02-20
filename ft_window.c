@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/19 17:31:47 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/20 17:52:57 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 int		keycode(int keycode, t_vars *v)
 {
+	// printf("----------------------------------------------------\n");
 	// printf("[keycode] %d\n", keycode);
 	// make_grid(v);
+	print(v);
 	if (keycode == 53)
 		mlx_destroy_window(v->mlx, v->win);
 	if (keycode == 0)

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/19 18:06:37 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/20 17:56:10 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ void	my_mlx_pixel_put2(t_vars *v, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = v->game->addr2 + (y * v->game->line_length2 + x * (v->game->bits_per_pixel2 / 8));
-	*(unsigned int*)dst = color;
+	if (x > 0 && x < v->data->resx && y > 0 && y < v->data->resy)
+	{
+		dst = v->game->addr2 + (y * v->game->line_length2 + x * (v->game->bits_per_pixel2 / 8));
+		*(unsigned int*)dst = color;
+	}
 }
 
 void	ft_clean(t_vars *v)
@@ -53,43 +56,65 @@ void	ft_clean(t_vars *v)
 		}
 		y++;
 	}
-	// mlx_put_image_to_window(v->game->mlx2, v->game->win2, v->game->mapimg2, 0, 0);
 }
 
+// static void	make_grid(t_vars *v)
+// {
+// 	int		x;
+// 	int		y;
+// 	int		z;
 
-static void	make_grid(t_vars *v)
+// 	z = 0;
+// 	y = v->tile_h;
+// 	while (z < v->map->row)
+// 	{
+// 		x = 0;
+// 		while (x < v->data->resx)
+// 		{
+// 			my_mlx_pixel_put(v, x, y, 0x8A2BE2);
+// 			x++;
+// 		}
+// 		y += v->tile_h;
+// 		z++;
+// 	}
+// 	x = v->tile_w;
+// 	z = 0;
+// 	while (z < v->map->column)
+// 	{
+// 		y = 0;
+// 		while (y < v->data->resy)
+// 		{
+// 			my_mlx_pixel_put(v, x, y, 0x8A2BE2);
+// 			y++;
+// 		}
+// 		x += v->tile_w;
+// 		z++;
+// 	}
+// 	mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
+// }
+
+void	roof(t_vars *v, int i, int count)
 {
-	int		x;
-	int		y;
-	int		z;
+	int		index;
 
-	z = 0;
-	y = v->tile_h;
-	while (z < v->map->row)
+	index = 0;
+	while (index < count)
 	{
-		x = 0;
-		while (x < v->data->resx)
-		{
-			my_mlx_pixel_put(v, x, y, 0x8A2BE2);
-			x++;
-		}
-		y += v->tile_h;
-		z++;
+		my_mlx_pixel_put2(v, i, index, 0xADD8E6);
+		index++;
 	}
-	x = v->tile_w;
-	z = 0;
-	while (z < v->map->column)
+}
+
+void	floore(t_vars *v, int i, int count)
+{
+	int		index;
+
+	index = v->data->resy;
+	while (index > count)
 	{
-		y = 0;
-		while (y < v->data->resy)
-		{
-			my_mlx_pixel_put(v, x, y, 0x8A2BE2);
-			y++;
-		}
-		x += v->tile_w;
-		z++;
+		my_mlx_pixel_put2(v, i, index, 0xff0000);
+		index--;
 	}
-	mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
 }
 
 void	ft_find_length(t_vars *v, int i)
@@ -102,6 +127,8 @@ void	ft_find_length(t_vars *v, int i)
 	length = ((1 / (double)v->walldist) * (double)v->data->resy) * 10;
 	middle = v->data->resy / 2;
 	count = (length / 2) + middle;
+	roof(v, i, count);
+	floore(v, i, count);
 	index = 0;
 	while (index < length)
 	{
@@ -111,16 +138,16 @@ void	ft_find_length(t_vars *v, int i)
 	}
 }
 
-void	raydistance(t_vars *v, double player_dir)
+void	raydistance(t_vars *v)
 {
 	if (v->raydist == 0)
 	{
-		v->adjust = 1 / tan(M_PI / 6);
+		v->adjust = 1 / atan(M_PI / 6);
 		v->raydist = (v->opp / (double)v->data->resx) * 2;
 		return ;
 	}
 	v->opp -= v->raydist;
-	v->angle = player_dir + tan(v->opp / v->adjust);
+	v->tmpdir = v->playdir + atan(v->opp / v->adjust);
 }
 
 void	ft_view(t_vars *v, double rot, unsigned int color, char c)
@@ -128,35 +155,34 @@ void	ft_view(t_vars *v, double rot, unsigned int color, char c)
 	int		i;
 	double	x;
 	double	y;
-	double	tmp;
 
 	i = 0;
-	// if (v->angle < 0)
-	// 	v->angle += (2 * M_PI);
-	// if (v->angle > (2 * M_PI))
-	// 	v->angle -= (2 * M_PI);
+	if (v->angle < 0)
+		v->angle += (2 * M_PI);
+	if (v->angle > (2 * M_PI))
+		v->angle -= (2 * M_PI);
 	if (c == 'c')
 		ft_view(v, 0, 0x000000, ' ');
-	make_grid(v);
+	// make_grid(v);
 	v->angle += rot;
-	tmp = v->angle;
-	v->angle -= (M_PI / 6);
+	v->playdir = v->angle;
+	v->tmpdir = v->angle;
 	ft_clean(v);
-	while (i < v->data->resx)
+	while (i <= v->data->resx)
 	{
-		x = v->play_x;
-		y = v->play_y;
+		x = (int)v->play_x;
+		y = (int)v->play_y;
 		while (my_mlx_pixel_putwall(v, x, y, color) == 1)
 		{
-			x += sin(v->angle);
-			y += cos(v->angle);
+			x += sin(v->tmpdir);
+			y += cos(v->tmpdir);
 		}
 		ft_find_sidedelta(v);
-		raydistance(v, tmp);
+		raydistance(v);
 		ft_find_length(v, i);
 		i++;
 	}
 	mlx_put_image_to_window(v->game->mlx2, v->game->win2, v->game->mapimg2, 0, 0);
-	v->angle = tmp;
+	v->angle = v->playdir;
 	v->opp = 1;
 }
