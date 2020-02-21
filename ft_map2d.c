@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 14:13:44 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/20 17:50:00 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/21 10:28:38 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,4 @@ void	ft_make_2d(t_vars *v)
 	make_grid(v);
 	player(v, 0, 'h', 0x00BFFF);
 	mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
-	print(v);
 }

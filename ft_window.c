@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/20 17:52:57 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/21 12:25:30 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		keycode(int keycode, t_vars *v)
 	// printf("----------------------------------------------------\n");
 	// printf("[keycode] %d\n", keycode);
 	// make_grid(v);
-	print(v);
 	if (keycode == 53)
 		mlx_destroy_window(v->mlx, v->win);
 	if (keycode == 0)
@@ -39,7 +38,7 @@ int		keycode(int keycode, t_vars *v)
 
 void	get_info(t_vars *v)
 {
-	v->angle = M_PI;
+	v->angle = 0;
 	v->tile_w = v->data->resx / v->map->column;
 	v->tile_h = v->data->resy / v->map->row;
 	v->raydist = 0;
