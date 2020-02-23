@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/21 12:25:30 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/23 14:19:17 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 int		keycode(int keycode, t_vars *v)
 {
-	// printf("----------------------------------------------------\n");
 	// printf("[keycode] %d\n", keycode);
-	// make_grid(v);
 	if (keycode == 53)
 		mlx_destroy_window(v->mlx, v->win);
 	if (keycode == 0)
@@ -29,23 +27,22 @@ int		keycode(int keycode, t_vars *v)
 	if (keycode == 13)
 		player(v, -5.0, 'v', 0x00BFFF);
 	if (keycode == 123)
-		ft_view(v, 0.1, 0xFFE4E1, 'c');
+		ft_view(v, 0.1, 0xFFE4E1);
 	if (keycode == 124)
-		ft_view(v, -0.1, 0xFFE4E1, 'c');
+		ft_view(v, -0.1, 0xFFE4E1);
 	mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
 	return (keycode);
 }
 
 void	get_info(t_vars *v)
 {
-	v->angle = 0;
+	v->playdir = 0;
 	v->tile_w = v->data->resx / v->map->column;
 	v->tile_h = v->data->resy / v->map->row;
 	v->raydist = 0;
 	v->opp = 1;
 	v->walldist = 0;
-	v->rayx = sin(v->angle);
-	v->rayy = cos(v->angle);
+	v->test = v->color.ceiling;
 }
 
 void	window(t_flags *data, t_color *color, t_map *map)
@@ -54,7 +51,7 @@ void	window(t_flags *data, t_color *color, t_map *map)
 
 	v.map = map;
 	v.data = data;
-	v.color = color;
+	v.color = *color;
 	get_info(&v);
 	v.mlx = mlx_init();
 	v.game->mlx2 = mlx_init();

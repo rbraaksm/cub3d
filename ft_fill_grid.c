@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/18 10:08:39 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/23 18:41:40 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	find_column(t_map *map, char *strmap)
 	map->column = tmp;
 }
 
-int		make_map(t_map *map, char *strmap)
+int		make_map(t_flags *data, t_map *map, char *strmap)
 {
 	int		i;
 	int		irow;
@@ -110,7 +110,7 @@ int		make_map(t_map *map, char *strmap)
 		irow++;
 	}
 	make_strmap(map, strmap);
-	if (check_grid(map) == 0)
+	if (check_grid(data, map) == 0)
 		return (0);
 	return (1);
 }
@@ -163,7 +163,7 @@ int		fill_grid(t_flags *data, t_map *map)
 		index++;
 	}
 	strmap[index] = '\0';
-	if (make_map(map, strmap) == 0)
+	if (make_map(data, map, strmap) == 0)
 		return (0);
 	return (1);
 }

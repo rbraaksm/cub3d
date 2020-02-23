@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/21 13:50:22 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/23 15:00:17 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,36 +95,42 @@ static void	make_grid(t_vars *v)
 
 void	roof(t_vars *v, int i, int count)
 {
-	int		index;
+	int				index;
+	unsigned int	color;
 
 	index = 0;
+	color = v->color.ceiling;
 	while (index < count)
 	{
-		my_mlx_pixel_put2(v, i, index, 0xADD8E6);
+		my_mlx_pixel_put2(v, i, index, color);
 		index++;
+		// color--;
 	}
 }
 
 void	floore(t_vars *v, int i, int count)
 {
 	int		index;
+	unsigned int	color;
 
 	index = v->data->resy;
+	color = v->color.floor;
 	while (index > count)
 	{
-		my_mlx_pixel_put2(v, i, index, 0xff0000);
+		my_mlx_pixel_put2(v, i, index, color);
 		index--;
+		// color--;
 	}
 }
 
 void	ft_find_length(t_vars *v, int i)
 {
 	int		index;
-	double	length;
-	double	middle;
-	double	count;
+	float	length;
+	float	middle;
+	float	count;
 
-	length = ((1 / (double)v->walldist) * (double)v->data->resy) * 10;
+	length = ((1 / (float)v->walldist) * (float)v->data->resy) * 10;
 	middle = v->data->resy / 2;
 	count = (length / 2) + middle;
 	roof(v, i, count);
@@ -143,54 +149,68 @@ void	raydistance(t_vars *v)
 	if (v->raydist == 0)
 	{
 		v->adjust = 1 / atan(M_PI / 6);
-		v->raydist = (v->opp / (double)v->data->resx) * 2;
+		v->raydist = (v->opp / (float)v->data->resx) * 2;
 		return ;
 	}
 	v->opp -= v->raydist;
-	// v->angle = v->playdir + atan(v->opp / v->adjust);
+	v->playdir = v->angle + atan(v->opp / v->adjust);
 }
 
-void	ft_view(t_vars *v, double rot, unsigned int color, char c)
+void	ft_cleanview(t_vars *v)
 {
 	int		i;
-	double	x;
-	double	y;
+	float	x;
+	float	y;
 
 	i = 0;
-	// if (v->angle < 0)
-	// 	v->angle += (2 * M_PI);
-	// if (v->angle > (2 * M_PI))
-	// 	v->angle -= (2 * M_PI);
-	if (c == 'c')
-		ft_view(v, 0, 0x000000, ' ');
-	make_grid(v);
-	v->angle += rot;
-	v->playdir = v->angle;
-	v->angle -= 0.25;
-	ft_clean(v);
-	printf("----------[START]------------\n");
-	// while (i <= v->data->resx)
-	while (v->angle > (v->playdir - 0.26) && v->angle < (v->playdir + 0.26))
+	v->angle = v->playdir;
+	while (i <= v->data->resx)
 	{
-	// 		if (v->angle < 0)
-	// 	v->angle += (2 * M_PI);
-	// if (v->angle > (2 * M_PI))
-	// 	v->angle -= (2 * M_PI);
+		x = (int)v->play_x;
+		y = (int)v->play_y;
+		while (my_mlx_pixel_putwall(v, x, y, 0x000000) == 1)
+		{
+			x += sin(v->playdir);
+			y += cos(v->playdir);
+		}
+		raydistance(v);
+		i++;
+	}
+	v->playdir = v->angle;
+	v->opp = 1;
+}
+
+void	ft_view(t_vars *v, float rot, unsigned int color)
+{
+	int		i;
+	float	x;
+	float	y;
+
+	i = 0;
+	if (v->playdir < 0)
+		v->playdir += (2 * M_PI);
+	if (v->playdir > (2 * M_PI))
+		v->playdir -= (2 * M_PI);
+	ft_cleanview(v);
+	make_grid(v);
+	v->playdir += rot;
+	v->angle = v->playdir;
+	ft_clean(v);
+	while (i <= v->data->resx)
+	{
 		x = (int)v->play_x;
 		y = (int)v->play_y;
 		while (my_mlx_pixel_putwall(v, x, y, color) == 1)
 		{
-			x += sin(v->angle);
-			y += cos(v->angle);
+			x += sin(v->playdir);
+			y += cos(v->playdir);
 		}
 		ft_find_sidedelta(v);
 		raydistance(v);
 		ft_find_length(v, i);
 		i++;
-		v->angle += 0.09;
 	}
-	printf("----------[END]------------\n");
 	mlx_put_image_to_window(v->game->mlx2, v->game->win2, v->game->mapimg2, 0, 0);
-	v->angle = v->playdir;
+	v->playdir = v->angle;
 	v->opp = 1;
 }

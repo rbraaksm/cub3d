@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/21 13:07:32 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/23 18:43:55 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct		s_struct
 	char			**f;
 	char			**c;
 	char			*str;
+	char			*error;
 }					t_flags;
 
 typedef struct		s_map
@@ -76,33 +77,28 @@ typedef struct		s_vars
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
-	unsigned int	player;
-	double			play_x;
-	double			play_y;
-	double			tile_h;
-	double			tile_w;
-	double			rayx;
-	double			rayy;
-	double			angle;
-	double			sidex;
-	double			deltax;
-	double			sidey;
-	double			deltay;
+	float			play_x;
+	float			play_y;
+	float			tile_h;
+	float			tile_w;
+	float			rayx;
+	float			rayy;
+	float			angle;
+	float			sidex;
+	float			deltax;
+	float			sidey;
+	float			deltay;
 	int				stepx;
 	int				stepy;
-	int				mapx;
-	int				mapy;
-	double			posx;
-	double			posy;
-	double			raydist;
-	double			opp;
-	double			adjust;
-	double			walldist;
-	double			playdir;
-	double			tmpdir;
+	float			raydist;
+	float			opp;
+	float			adjust;
+	float			walldist;
+	float			playdir;
+	unsigned long	test;
 	t_map			*map;
 	t_flags			*data;
-	t_color			*color;
+	t_color			color;
 	t_game			*game;
 }					t_vars;
 
@@ -110,7 +106,7 @@ int					make_string(char **argv, t_flags *data);
 int					fill_mapindex(t_flags *data);
 int					ft_result_colors(t_flags *data, t_color *color);
 int					fill_grid(t_flags *data, t_map *map);
-int					check_grid(t_map *map);
+int					check_grid(t_flags *data, t_map *map);
 
 /* check index */
 char				*ft_strdup(const char *s1);
@@ -122,13 +118,11 @@ int					ft_atoi(const char *str);
 
 void				window(t_flags *data, t_color *color, t_map *map);
 void				ft_make_2d(t_vars *vars);
-void				player(t_vars *vars, double move, char d,
+void				player(t_vars *vars, float move, char d,
 					unsigned int color);
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
-void				ft_view(t_vars *vars, double rot,
-					unsigned int color, char c);
-// void				ft_cleanview(t_vars *v, double rot, unsigned int color);
+void				ft_view(t_vars *vars, float rot, unsigned int color);
 void				ft_find_sidedelta(t_vars *v);
 
 void				print(t_vars *v);

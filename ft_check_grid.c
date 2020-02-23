@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/19 15:43:55 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/23 18:44:55 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_strchr(char c)
 	return (0);
 }
 
-int		first_last(char *str)
+int		first_last(t_flags *data, char *str)
 {
 	int	i;
 
@@ -38,7 +38,10 @@ int		first_last(char *str)
 		if (str[i] == '1')
 			i++;
 		else
+		{
+			data->error = "FIRST/LAST LINE ISN'T CORRECT";
 			return (0);
+		}
 	}
 	return (1);
 }
@@ -90,12 +93,12 @@ int		middle(t_map *map, char *str)
 	return (1);
 }
 
-int		check_grid(t_map *map)
+int		check_grid(t_flags *data, t_map *map)
 {
 	int		i;
 
 	i = 0;
-	if (first_last(map->map[i]) == 0)
+	if (first_last(data, map->map[i]) == 0)
 		return (0);
 	i++;
 	if (find_location(map) == 0)
@@ -106,7 +109,7 @@ int		check_grid(t_map *map)
 			return (0);
 		i++;
 	}
-	if (first_last(map->map[i]) == 0)
+	if (first_last(data, map->map[i]) == 0)
 		return (0);
 	return (1);
 }
