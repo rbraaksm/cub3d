@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/23 18:43:55 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/24 12:11:07 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,18 @@ typedef struct 		s_game
 {
 	void			*mlx2;
     void			*win2;
+    void			*win3;
 	void			*mapimg2;
 	char			*addr2;
 	int				bits_per_pixel2;
 	int				line_length2;
 	int				endian2;
+	void			*mlx3;
+	void			*mapimg3;
+	char			*addr3;
+	int				bits_per_pixel3;
+	int				line_length3;
+	int				endian3;
 }					t_game;
 
 typedef struct		s_vars

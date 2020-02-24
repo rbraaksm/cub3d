@@ -6,7 +6,7 @@
 #    By: rbraaksm <rbraaksm@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/22 14:09:57 by rbraaksm       #+#    #+#                 #
-#    Updated: 2020/02/23 16:43:37 by rbraaksm      ########   odam.nl          #
+#    Updated: 2020/02/24 12:08:39 by rbraaksm      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ SRCS =	ft_main.c \
 		ft_window.c \
 		ft_map2d.c \
 		ft_view.c \
-		ft_findwall.c \
 		ft_player.c \
 		ft_find_sidedelta.c \
 		print.c \

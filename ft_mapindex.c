@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/23 18:08:20 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/24 13:48:33 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,24 @@ char	*ft_strdupchr(const char *s1, char c)
 	char	*newstr;
 	int		x;
 	int		i;
+	int		i2;
 
 	i = 0;
+	i2 = 0;
 	x = 0;
-	while (s1[i] != c)
+	while (s1[i2] == ' ')
+		i2++;
+	while (s1[i + i2] != c)
 		i++;
 	newstr = malloc(sizeof(char *) * (i + 1));
 	if (!newstr)
 		return (NULL);
 	while (x < i)
 	{
-		newstr[x] = s1[x];
+		newstr[x] = s1[x + i2];
 		x++;
 	}
-	newstr[x] = '\0';
+	newstr[x + i2] = '\0';
 	return (newstr);
 }
 

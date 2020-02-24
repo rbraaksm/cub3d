@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/23 15:00:17 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/24 14:08:33 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ static void	make_grid(t_vars *v)
 		x += v->tile_w;
 		z++;
 	}
-	mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
 }
 
 void	roof(t_vars *v, int i, int count)
@@ -104,13 +103,12 @@ void	roof(t_vars *v, int i, int count)
 	{
 		my_mlx_pixel_put2(v, i, index, color);
 		index++;
-		// color--;
 	}
 }
 
 void	floore(t_vars *v, int i, int count)
 {
-	int		index;
+	int				index;
 	unsigned int	color;
 
 	index = v->data->resy;
@@ -119,7 +117,6 @@ void	floore(t_vars *v, int i, int count)
 	{
 		my_mlx_pixel_put2(v, i, index, color);
 		index--;
-		// color--;
 	}
 }
 
@@ -210,7 +207,7 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 		ft_find_length(v, i);
 		i++;
 	}
-	mlx_put_image_to_window(v->game->mlx2, v->game->win2, v->game->mapimg2, 0, 0);
 	v->playdir = v->angle;
 	v->opp = 1;
+	mlx_put_image_to_window(v->game->mlx2, v->game->win2, v->game->mapimg2, 0, 0);
 }
