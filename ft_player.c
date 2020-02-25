@@ -6,19 +6,19 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 15:47:58 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/24 14:08:41 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/25 08:26:51 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "./minilibx/mlx.h"
 
-void	player(t_vars *v, float move, char d, unsigned int color)
+void	player(t_vars *v, float move, unsigned int color)
 {
 	float		x;
 	float		y;
 
-	if (d == 'h')
+	if (v->move_l == 1|| v->move_r == 1)
 	{
 		x = move * cos(v->playdir);
 		y = move * sin(v->playdir);

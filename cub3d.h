@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/24 12:11:07 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/25 13:46:33 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,45 @@ typedef struct		s_map
 	int				posy;
 }					t_map;
 
-typedef struct 		s_game
+typedef struct		s_game
 {
-	void			*mlx2;
-    void			*win2;
-    void			*win3;
-	void			*mapimg2;
-	char			*addr2;
-	int				bits_per_pixel2;
-	int				line_length2;
-	int				endian2;
-	void			*mlx3;
-	void			*mapimg3;
-	char			*addr3;
-	int				bits_per_pixel3;
-	int				line_length3;
-	int				endian3;
+	void			*mlx;
+	void			*win;
+	void			*img1;
+	void			*img2;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	int				active_img;
+	void			*new_img;
 }					t_game;
+
+typedef struct		s_tex
+{
+	void			*mlx;
+	void			*win;
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	int				width;
+	int				height;
+}					t_tex;
+
+typedef struct		s_textures
+{
+	t_tex			*n_tex;
+	t_tex			*e_tex;
+	t_tex			*s_tex;
+	t_tex			*w_tex;
+}					t_texture;
 
 typedef struct		s_vars
 {
-    void			*mlx;
-    void			*win;
+	void			*mlx;
+	void			*win;
 	void			*mapimg;
 	char			*addr;
 	int				bits_per_pixel;
@@ -101,12 +118,19 @@ typedef struct		s_vars
 	float			opp;
 	float			adjust;
 	float			walldist;
+	int				side_hit; /* N = 0, E = 1, S = 2, W = 3 */
 	float			playdir;
-	unsigned long	test;
+	int				move_f;
+	int				move_b;
+	int				move_l;
+	int				move_r;
+	int				rotate_l;
+	int				rotate_r;
+	t_texture		*textures;
 	t_map			*map;
-	t_flags			*data;
+	t_flags			*d;
 	t_color			color;
-	t_game			*game;
+	t_game			*g;
 }					t_vars;
 
 int					make_string(char **argv, t_flags *data);
@@ -125,12 +149,13 @@ int					ft_atoi(const char *str);
 
 void				window(t_flags *data, t_color *color, t_map *map);
 void				ft_make_2d(t_vars *vars);
-void				player(t_vars *vars, float move, char d,
-					unsigned int color);
+void				player(t_vars *vars, float move, unsigned int color);
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
 void				ft_view(t_vars *vars, float rot, unsigned int color);
 void				ft_find_sidedelta(t_vars *v);
+
+t_tex				*texture_info(t_vars *v, char *path);
 
 void				print(t_vars *v);
 

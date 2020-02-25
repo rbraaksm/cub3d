@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:33:27 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/01/22 14:56:38 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/25 11:44:54 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,21 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (new);
 }
 
-int		make_string(char **argv, t_flags *data)
+int		make_string(char **argv, t_flags *d)
 {
 	char	buf[BUFFER_SIZE + 1];
 	int		fd;
 	int		ret;
 
-	data->str = "";
+	d->str = "";
 	ret = 1;
 	fd = open(argv[1], O_RDONLY);
 	while (ret > 0)
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
 		buf[ret] = '\0';
-		data->str = ft_strjoin((const char *)data->str, buf);
-		if (data->str == NULL)
+		d->str = ft_strjoin((const char *)d->str, buf);
+		if (d->str == NULL)
 			return (0);
 	}
 	return (1);

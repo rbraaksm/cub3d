@@ -6,15 +6,34 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/23 13:49:32 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/25 13:08:54 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "./minilibx/mlx.h"
 
+void	side_hit(t_vars *v, int side)
+{
+	if (side == 0)
+	{
+		if (v->rayx >= 0)
+			v->side_hit = 1;
+		else
+			v->side_hit = 3;
+	}
+	else
+	{
+		if (v->rayy > 0)
+			v->side_hit = 0;
+		else
+			v->side_hit = 2;
+	}
+}
+
 void	calc_distance(t_vars *v, int side)
 {
+	side_hit(v, side);
 	if (side == 0)
 		v->walldist = cos(v->angle - v->playdir) * v->sidex;
 	else
@@ -46,9 +65,7 @@ void	find_hit(t_vars *v)
 			side = 1;
 			if (v->map->map[mapy][mapx] == '1' ||
 			v->map->map[mapy][mapx] == '2')
-			{
 				break ;
-			}
 			v->sidey += v->deltay;
 		}
 	}

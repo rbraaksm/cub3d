@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/23 18:41:40 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/25 11:43:32 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	find_column(t_map *map, char *strmap)
 	map->column = tmp;
 }
 
-int		make_map(t_flags *data, t_map *map, char *strmap)
+int		make_map(t_flags *d, t_map *map, char *strmap)
 {
 	int		i;
 	int		irow;
@@ -110,19 +110,19 @@ int		make_map(t_flags *data, t_map *map, char *strmap)
 		irow++;
 	}
 	make_strmap(map, strmap);
-	if (check_grid(data, map) == 0)
+	if (check_grid(d, map) == 0)
 		return (0);
 	return (1);
 }
 
-int		find_start(t_flags *data)
+int		find_start(t_flags *d)
 {
 	int		index;
 
 	index = 0;
-	while (data->str[index] != '\0')
+	while (d->str[index] != '\0')
 	{
-		if (data->str[index] == '\n' && data->str[index + 1] == '1')
+		if (d->str[index] == '\n' && d->str[index + 1] == '1')
 			return (index + 1);
 		index++;
 	}
@@ -141,7 +141,7 @@ int		find_end(char *str, int start)
 	return (start);
 }
 
-int		fill_grid(t_flags *data, t_map *map)
+int		fill_grid(t_flags *d, t_map *map)
 {
 	char	*strmap;
 	int		index;
@@ -149,21 +149,21 @@ int		fill_grid(t_flags *data, t_map *map)
 	int		end;
 
 	index = 0;
-	start = find_start(data);
+	start = find_start(d);
 	if (start == 0)
 		return (0);
-	end = find_end(data->str, start);
+	end = find_end(d->str, start);
 	strmap = malloc(sizeof(char *) * ((end - start) + 1));
 	if (strmap == NULL)
 		return (0);
 	index = 0;
 	while (index < (end - start + 1))
 	{
-		strmap[index] = data->str[index + start];
+		strmap[index] = d->str[index + start];
 		index++;
 	}
 	strmap[index] = '\0';
-	if (make_map(data, map, strmap) == 0)
+	if (make_map(d, map, strmap) == 0)
 		return (0);
 	return (1);
 }

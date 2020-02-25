@@ -6,55 +6,77 @@
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 15:11:54 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/23 17:44:07 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/25 14:35:06 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		check_color(t_flags *data, t_color *color, char c)
+int		check_string(t_flags *d)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (i < 2)
+	{
+		count = 0;
+		while (d->f[i][count] != '\0')
+		{
+			if (d->f[i][count] >= '0' || d->f[i][count] <= '9')
+				return (1);
+			count++;
+		}
+		i++;
+	}
+	d->error = "FLOOR COLOR IS NOT CORRECT\n";
+	return (0);
+}
+
+int		check_color(t_flags *d, t_color *color, char c)
 {
 	if (c == 'c')
 	{
-		color->cred = ft_atoi(data->c[0]);
+		color->cred = ft_atoi(d->c[0]);
 		if (color->cred > 255 || color->cred < 0)
-			data->error = "CEILING RGB NOT CORRECT\n";
-		color->cgreen = ft_atoi(data->c[1]);
+			d->error = "CEILING RED NOT CORRECT\n";
+		color->cgreen = ft_atoi(d->c[1]);
 		if (color->cgreen > 255 || color->cgreen < 0)
-			data->error = "CEILING RGB NOT CORRECT\n";
-		color->cblue = ft_atoi(data->c[2]);
+			d->error = "CEILING GREEN NOT CORRECT\n";
+		color->cblue = ft_atoi(d->c[2]);
 		if (color->cblue > 255 || color->cblue < 0)
-			data->error = "CEILING RGB NOT CORRECT\n";
-		if (data->error != NULL)
+			d->error = "CEILING BLUE NOT CORRECT\n";
+		if (d->error != NULL)
 			return (0);
 	}
 	else
 	{
-		color->fred = ft_atoi(data->f[0]);
+		color->fred = ft_atoi(d->f[0]);
 		if (color->fred > 255 || color->fred < 0)
-			data->error = "FLOOR RGB NOT CORRECT\n";
-		color->fgreen = ft_atoi(data->f[1]);
+			d->error = "FLOOR RED NOT CORRECT\n";
+		color->fgreen = ft_atoi(d->f[1]);
 		if (color->fgreen > 255 || color->fgreen < 0)
-			data->error = "FLOOR RGB NOT CORRECT\n";
-		color->fblue = ft_atoi(data->f[2]);
+			d->error = "FLOOR GREEN NOT CORRECT\n";
+		color->fblue = ft_atoi(d->f[2]);
 		if (color->fblue > 255 || color->fblue < 0)
-			data->error = "FLOOR RGB NOT CORRECT\n";
-		if (data->error != NULL)
+			d->error = "FLOOR BLUE NOT CORRECT\n";
+		if (d->error != NULL)
 			return (0);
 	}
 	return (1);
 }
 
-int		ft_ceiling(t_flags *data, t_color *color)
+int		ft_ceiling(t_flags *d, t_color *color)
 {
 	char	*tmp;
 
 	color->ceiling = 0;
-	tmp = ft_strdup((char *)data->c);
-	free(data->c);
-	data->c = ft_split(tmp, ',');
+	tmp = ft_strdup((char *)d->c);
+	free(d->c);
+	d->c = ft_split(tmp, ',');
 	free(tmp);
-	if (check_color(data, color, 'c') == 0)
+	if (check_color(d, color, 'c') == 0)
 		return (0);
 	color->ceiling = color->ceiling + color->cblue % 16;
 	color->ceiling = color->ceiling + color->cblue / 16 * 16;
@@ -67,16 +89,18 @@ int		ft_ceiling(t_flags *data, t_color *color)
 	return (1);
 }
 
-int		ft_floor(t_flags *data, t_color *color)
+int		ft_floor(t_flags *d, t_color *color)
 {
 	char	*tmp;
 
 	color->floor = 0;
-	tmp = ft_strdup((char *)data->f);
-	free(data->f);
-	data->f = ft_split(tmp, ',');
+	tmp = ft_strdup((char *)d->f);
+	free(d->f);
+	d->f = ft_split(tmp, ',');
 	free(tmp);
-	if (check_color(data, color, 'f') == 0)
+	if (check_string(d) == 0)
+		return (0);
+	if (check_color(d, color, 'f') == 0)
 		return (0);
 	color->floor = color->floor + color->fblue % 16;
 	color->floor = color->floor + color->fblue / 16 * 16;
@@ -89,28 +113,34 @@ int		ft_floor(t_flags *data, t_color *color)
 	return (1);
 }
 
-int		ft_result(t_flags *data)
+int		ft_result(t_flags *d)
 {
 	char	*tmp;
 
-	tmp = ft_strdup((char *)data->r);
-	free(data->r);
-	data->r = ft_split(tmp, ' ');
+	tmp = ft_strdup((char *)d->r);
+	free(d->r);
+	d->r = ft_split(tmp, ' ');
 	free(tmp);
-	data->resx = ft_atoi(data->r[0]);
-	data->resy = ft_atoi(data->r[1]);
-	if (data->resx <= 0 || data->resy <= 0)
+	d->resx = ft_atoi(d->r[0]);
+	d->resy = ft_atoi(d->r[1]);
+	if (d->resx <= 0 || d->resy <= 0)
 		return (0);
+	if (d->resx < 200)
+		d->resx = 200;
+	if (d->resy < 200)
+		d->resy = 200;
 	return (1);
 }
 
-int		ft_result_colors(t_flags *data, t_color *color)
+int		ft_result_colors(t_flags *d, t_color *color)
 {
-	if (ft_result(data) == 0)
+	if (d->error != NULL)
 		return (0);
-	if (ft_floor(data, color) == 0)
+	if (ft_result(d) == 0)
 		return (0);
-	if (ft_ceiling(data, color) == 0)
+	if (ft_floor(d, color) == 0)
+		return (0);
+	if (ft_ceiling(d, color) == 0)
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/24 14:08:33 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/25 13:08:38 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,10 @@ void	my_mlx_pixel_put2(t_vars *v, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x > 0 && x < v->data->resx && y > 0 && y < v->data->resy)
+	if (x > 0 && x < v->d->resx && y > 0 && y < v->d->resy)
 	{
-		dst = v->game->addr2 + (y * v->game->line_length2 + x * (v->game->bits_per_pixel2 / 8));
+		dst = v->g->addr + (y * v->g->line_length + x * (v->g->bits_per_pixel / 8));
 		*(unsigned int*)dst = color;
-	}
-}
-
-void	ft_clean(t_vars *v)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < v->data->resy)
-	{
-		x = 0;
-		while (x < v->data->resx)
-		{
-			my_mlx_pixel_put2(v, x, y, 0x000000);
-			x++;
-		}
-		y++;
 	}
 }
 
@@ -69,7 +51,7 @@ static void	make_grid(t_vars *v)
 	while (z < v->map->row)
 	{
 		x = 0;
-		while (x < v->data->resx)
+		while (x < v->d->resx)
 		{
 			my_mlx_pixel_put(v, x, y, 0x8A2BE2);
 			x++;
@@ -82,7 +64,7 @@ static void	make_grid(t_vars *v)
 	while (z < v->map->column)
 	{
 		y = 0;
-		while (y < v->data->resy)
+		while (y < v->d->resy)
 		{
 			my_mlx_pixel_put(v, x, y, 0x8A2BE2);
 			y++;
@@ -111,7 +93,7 @@ void	floore(t_vars *v, int i, int count)
 	int				index;
 	unsigned int	color;
 
-	index = v->data->resy;
+	index = v->d->resy;
 	color = v->color.floor;
 	while (index > count)
 	{
@@ -127,8 +109,8 @@ void	ft_find_length(t_vars *v, int i)
 	float	middle;
 	float	count;
 
-	length = ((1 / (float)v->walldist) * (float)v->data->resy) * 10;
-	middle = v->data->resy / 2;
+	length = ((1 / (float)v->walldist) * (float)v->d->resy) * 10;
+	middle = v->d->resy / 2;
 	count = (length / 2) + middle;
 	roof(v, i, count);
 	floore(v, i, count);
@@ -146,7 +128,7 @@ void	raydistance(t_vars *v)
 	if (v->raydist == 0)
 	{
 		v->adjust = 1 / atan(M_PI / 6);
-		v->raydist = (v->opp / (float)v->data->resx) * 2;
+		v->raydist = (v->opp / (float)v->d->resx) * 2;
 		return ;
 	}
 	v->opp -= v->raydist;
@@ -161,7 +143,7 @@ void	ft_cleanview(t_vars *v)
 
 	i = 0;
 	v->angle = v->playdir;
-	while (i <= v->data->resx)
+	while (i <= v->d->resx)
 	{
 		x = (int)v->play_x;
 		y = (int)v->play_y;
@@ -192,8 +174,7 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 	make_grid(v);
 	v->playdir += rot;
 	v->angle = v->playdir;
-	ft_clean(v);
-	while (i <= v->data->resx)
+	while (i <= v->d->resx)
 	{
 		x = (int)v->play_x;
 		y = (int)v->play_y;
@@ -209,5 +190,16 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 	}
 	v->playdir = v->angle;
 	v->opp = 1;
-	mlx_put_image_to_window(v->game->mlx2, v->game->win2, v->game->mapimg2, 0, 0);
+	if (v->g->active_img == 1)
+	{
+		mlx_put_image_to_window(v->g->mlx, v->g->win, v->g->img1, 0, 0);
+		v->g->addr = mlx_get_data_addr(v->g->img2, &v->g->bits_per_pixel, &v->g->line_length, &v->g->endian);
+		v->g->active_img = 2;
+	}
+	else
+	{
+		mlx_put_image_to_window(v->g->mlx, v->g->win, v->g->img2, 0, 0);
+		v->g->addr = mlx_get_data_addr(v->g->img1, &v->g->bits_per_pixel, &v->g->line_length, &v->g->endian);
+		v->g->active_img = 1;
+	}
 }

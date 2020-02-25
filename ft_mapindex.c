@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/24 13:48:33 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/25 11:44:15 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,30 @@ char	*ft_strdupchr(const char *s1, char c)
 	return (newstr);
 }
 
-int		fill_mapindex(t_flags *data)
+int		fill_mapindex(t_flags *d)
 {
 	int		index;
 
 	index = 0;
-	// data->s = NULL;
-	while (data->str[index] != '\0')
+	// d->s = NULL;
+	while (d->str[index] != '\0')
 	{
-		if (data->str[index] == 'R')
-			data->r = (char **)ft_strdupchr(&(data->str)[index + 1], '\n');
-		if (data->str[index] == 'N' && data->str[index + 1] == 'O')
-			data->no = ft_strdupchr(&(data->str)[index + 2], '\n');
-		if (data->str[index] == 'S' && data->str[index + 1] == 'O')
-			data->so = ft_strdupchr(&(data->str)[index + 2], '\n');
-		if (data->str[index] == 'W' && data->str[index + 1] == 'E')
-			data->we = ft_strdupchr(&(data->str)[index + 2], '\n');
-		if (data->str[index] == 'E' && data->str[index + 1] == 'A')
-			data->ea = ft_strdupchr(&(data->str)[index + 2], '\n');
-		if (data->str[index] == 'S' && data->str[index + 1] != 'O' && !data->s)
-			data->s = ft_strdupchr(&(data->str)[index + 2], '\n');
-		if (data->str[index] == 'F')
-			data->f = (char **)ft_strdupchr(&(data->str)[index + 1], '\n');
-		if (data->str[index] == 'C')
-			data->c = (char **)ft_strdupchr(&(data->str)[index + 1], '\n');
+		if (d->str[index] == 'R')
+			d->r = (char **)ft_strdupchr(&(d->str)[index + 1], '\n');
+		if (d->str[index] == 'N' && d->str[index + 1] == 'O')
+			d->no = ft_strdupchr(&(d->str)[index + 2], '\n');
+		if (d->str[index] == 'S' && d->str[index + 1] == 'O')
+			d->so = ft_strdupchr(&(d->str)[index + 2], '\n');
+		if (d->str[index] == 'W' && d->str[index + 1] == 'E')
+			d->we = ft_strdupchr(&(d->str)[index + 2], '\n');
+		if (d->str[index] == 'E' && d->str[index + 1] == 'A')
+			d->ea = ft_strdupchr(&(d->str)[index + 2], '\n');
+		if (d->str[index] == 'S' && d->str[index + 1] != 'O' && !d->s)
+			d->s = ft_strdupchr(&(d->str)[index + 2], '\n');
+		if (d->str[index] == 'F')
+			d->f = (char **)ft_strdupchr(&(d->str)[index + 1], '\n');
+		if (d->str[index] == 'C')
+			d->c = (char **)ft_strdupchr(&(d->str)[index + 1], '\n');
 		index++;
 	}
 	return (1);
