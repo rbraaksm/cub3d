@@ -6,7 +6,7 @@
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 15:11:54 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/25 14:35:06 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/27 15:18:02 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int		ft_floor(t_flags *d, t_color *color)
 	free(d->f);
 	d->f = ft_split(tmp, ',');
 	free(tmp);
-	if (check_string(d) == 0)
-		return (0);
+	// if (check_string(d) == 0)
+	// 	return (0);
 	if (check_color(d, color, 'f') == 0)
 		return (0);
 	color->floor = color->floor + color->fblue % 16;
@@ -134,8 +134,8 @@ int		ft_result(t_flags *d)
 
 int		ft_result_colors(t_flags *d, t_color *color)
 {
-	if (d->error != NULL)
-		return (0);
+	// if (d->error != NULL)
+	// 	return (0);
 	if (ft_result(d) == 0)
 		return (0);
 	if (ft_floor(d, color) == 0)

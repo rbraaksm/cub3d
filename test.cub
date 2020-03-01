@@ -4,8 +4,8 @@ SO    ./duck.xpm
 WE ./duck.xpm
 EA ./duck.xpm
 S ./path_to_the_sprite_texture
-F    1,         90, 
-C  255,    58, 
+F    1,         90, 56
+C  255,    58, 45
 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 2 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1

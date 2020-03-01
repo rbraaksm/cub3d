@@ -6,12 +6,22 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/25 13:08:38 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/02/27 20:44:48 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minilibx/mlx.h"
 #include "cub3d.h"
+
+void            my_image_put(t_coor texture, t_coor world, t_tex *textures, t_vars *v)
+{
+    char    *dst;
+	char	*dst2;
+
+    dst = texture->addr + (y * texture->line_length + x * (texture->bits_per_pixel / 8));
+	dst2 = g->addr + (y * g->line_length + x * (g->bits_per_pixel / 8));
+	*(unsigned int *)dst2 = *(unsigned int *)dst;
+}
 
 int		my_mlx_pixel_putwall(t_vars *v, int x, int y, int color)
 {
@@ -102,25 +112,78 @@ void	floore(t_vars *v, int i, int count)
 	}
 }
 
+t_tex *get_texture(t_vars *v)
+{
+	t_tex *textures;
+
+	textures = 0;
+	if (v->side_hit == 0)
+		textures = v->textures->n_tex;
+	else if (v->side_hit == 1)
+		textures = v->textures->e_tex;
+	else if (v->side_hit == 2)
+		textures = v->textures->s_tex;
+	if (v->side_hit == 3)
+		textures = v->textures->w_tex;
+	return (textures);
+}
+
+float	get_start_perc(t_vars *v)
+{
+	int		x_cord;
+	int		y_cord;
+	int		left_side;
+	float	perc;
+
+	left_side = 0;
+	perc = 0.0;
+	x_cord = (int)v->play_x + (int)(v->final_raydist * v->rayx);
+	y_cord = (int)v->play_y + (int)(v->final_raydist * v->rayy);
+	if (v->side_hit == 0)
+	{
+		left_side = (int)x_cord % (int)v->tile_w;
+		perc = (float)1 / (float)v->tile_h;
+	}
+	perc = perc * (float)left_side;
+	return (perc);
+}
+
 void	ft_find_length(t_vars *v, int i)
 {
-	int		index;
+	i = 0;
+	t_tex	*textures;
+	t_coor	texture;
+	t_coor	world;
 	float	length;
-	float	middle;
-	float	count;
+	float	y;
 
+	textures = get_texture(v);
 	length = ((1 / (float)v->walldist) * (float)v->d->resy) * 10;
-	middle = v->d->resy / 2;
-	count = (length / 2) + middle;
-	roof(v, i, count);
-	floore(v, i, count);
-	index = 0;
-	while (index < length)
+	y = (float)texture->height / (float)length;
+	texture.x = (float)texture->width * get_start_perc(v);
+	texture.y = 0;
+	world.x = v->d->resx;
+	world.y = (v->d->resy / 2) + (length / 2);
+	printf("%d\n", texture->width);
+	while (length > 0)
 	{
-		my_mlx_pixel_put2(v, i, count, 0xF08080);
-		count--;
-		index++;
+		my_image_put(texture, world, textures, v);
+		textures.y += y;
+		world.y -= 1;
+		length--;
+
 	}
+	// i = 0;
+	// count = (length / 2) + middle;
+	// roof(v, i, ((length / 2)) + (v->d->resy / 2));
+	// floore(v, i, ((length / 2)) + (v->d->resy / 2));
+	// index = 0;
+	// while (index < length)
+	// {
+	// 	my_mlx_pixel_put2(v, i, count, 0xF08080);
+	// 	count--;
+	// 	index++;
+	// }
 }
 
 void	raydistance(t_vars *v)
