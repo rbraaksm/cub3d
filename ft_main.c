@@ -6,11 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm       #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2020/03/02 07:33:38 by rbraaksm      ########   odam.nl         */
-=======
-/*   Updated: 2020/02/27 14:38:18 by rbraaksm      ########   odam.nl         */
->>>>>>> 49070d30e2ce9f782333a9d771d9fe3eb900fecb
+/*   Updated: 2020/03/02 14:09:35 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

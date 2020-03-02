@@ -6,57 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2020/03/02 13:22:23 by rbraaksm      ########   odam.nl         */
-=======
-/*   Updated: 2020/02/27 20:44:48 by rbraaksm      ########   odam.nl         */
->>>>>>> 49070d30e2ce9f782333a9d771d9fe3eb900fecb
+/*   Updated: 2020/03/02 14:09:17 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minilibx/mlx.h"
 #include "cub3d.h"
 
-<<<<<<< HEAD
-=======
-void            my_image_put(t_coor texture, t_coor world, t_tex *textures, t_vars *v)
-{
-    char    *dst;
-	char	*dst2;
-
-    dst = texture->addr + (y * texture->line_length + x * (texture->bits_per_pixel / 8));
-	dst2 = g->addr + (y * g->line_length + x * (g->bits_per_pixel / 8));
-	*(unsigned int *)dst2 = *(unsigned int *)dst;
-}
-
-int		my_mlx_pixel_putwall(t_vars *v, int x, int y, int color)
-{
-	char	*dst;
-
-	if (v->map->map[y / (int)v->tile_h][x / (int)v->tile_w] == '1' ||
-		v->map->map[y / (int)v->tile_h][x / (int)v->tile_w] == '2')
-		return (0);
-	else
-	{
-		dst = v->addr + (y * v->line_length + x *
-		(v->bits_per_pixel / 8));
-		*(unsigned int*)dst = color;
-		return (1);
-	}
-}
-
-void	my_mlx_pixel_put2(t_vars *v, int x, int y, int color)
-{
-	char	*dst;
-
-	if (x > 0 && x < v->d->resx && y > 0 && y < v->d->resy)
-	{
-		dst = v->g->addr + (y * v->g->line_length + x * (v->g->bits_per_pixel / 8));
-		*(unsigned int*)dst = color;
-	}
-}
-
->>>>>>> 49070d30e2ce9f782333a9d771d9fe3eb900fecb
 static void	make_grid(t_vars *v)
 {
 	int		x;
@@ -91,111 +47,6 @@ static void	make_grid(t_vars *v)
 	}
 }
 
-<<<<<<< HEAD
-=======
-void	roof(t_vars *v, int i, int count)
-{
-	int				index;
-	unsigned int	color;
-
-	index = 0;
-	color = v->color.ceiling;
-	while (index < count)
-	{
-		my_mlx_pixel_put2(v, i, index, color);
-		index++;
-	}
-}
-
-void	floore(t_vars *v, int i, int count)
-{
-	int				index;
-	unsigned int	color;
-
-	index = v->d->resy;
-	color = v->color.floor;
-	while (index > count)
-	{
-		my_mlx_pixel_put2(v, i, index, color);
-		index--;
-	}
-}
-
-t_tex *get_texture(t_vars *v)
-{
-	t_tex *textures;
-
-	textures = 0;
-	if (v->side_hit == 0)
-		textures = v->textures->n_tex;
-	else if (v->side_hit == 1)
-		textures = v->textures->e_tex;
-	else if (v->side_hit == 2)
-		textures = v->textures->s_tex;
-	if (v->side_hit == 3)
-		textures = v->textures->w_tex;
-	return (textures);
-}
-
-float	get_start_perc(t_vars *v)
-{
-	int		x_cord;
-	int		y_cord;
-	int		left_side;
-	float	perc;
-
-	left_side = 0;
-	perc = 0.0;
-	x_cord = (int)v->play_x + (int)(v->final_raydist * v->rayx);
-	y_cord = (int)v->play_y + (int)(v->final_raydist * v->rayy);
-	if (v->side_hit == 0)
-	{
-		left_side = (int)x_cord % (int)v->tile_w;
-		perc = (float)1 / (float)v->tile_h;
-	}
-	perc = perc * (float)left_side;
-	return (perc);
-}
-
-void	ft_find_length(t_vars *v, int i)
-{
-	i = 0;
-	t_tex	*textures;
-	t_coor	texture;
-	t_coor	world;
-	float	length;
-	float	y;
-
-	textures = get_texture(v);
-	length = ((1 / (float)v->walldist) * (float)v->d->resy) * 10;
-	y = (float)texture->height / (float)length;
-	texture.x = (float)texture->width * get_start_perc(v);
-	texture.y = 0;
-	world.x = v->d->resx;
-	world.y = (v->d->resy / 2) + (length / 2);
-	printf("%d\n", texture->width);
-	while (length > 0)
-	{
-		my_image_put(texture, world, textures, v);
-		textures.y += y;
-		world.y -= 1;
-		length--;
-
-	}
-	// i = 0;
-	// count = (length / 2) + middle;
-	// roof(v, i, ((length / 2)) + (v->d->resy / 2));
-	// floore(v, i, ((length / 2)) + (v->d->resy / 2));
-	// index = 0;
-	// while (index < length)
-	// {
-	// 	my_mlx_pixel_put2(v, i, count, 0xF08080);
-	// 	count--;
-	// 	index++;
-	// }
-}
-
->>>>>>> 49070d30e2ce9f782333a9d771d9fe3eb900fecb
 void	raydistance(t_vars *v)
 {
 	if (v->raydist == 0)

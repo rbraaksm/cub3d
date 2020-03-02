@@ -4,13 +4,8 @@ SO    ./textures/wall_1.png
 WE ./textures/wall_4.png
 EA ./textures/eagle.png
 S ./path_to_the_sprite_texture
-<<<<<<< HEAD
 F    100,         90, 33
 C  67,    58, 56
-=======
-F    1,         90, 56
-C  255,    58, 45
->>>>>>> 49070d30e2ce9f782333a9d771d9fe3eb900fecb
 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 2 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1

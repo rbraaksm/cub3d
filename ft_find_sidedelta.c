@@ -6,11 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm       #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2020/03/02 10:08:06 by rbraaksm      ########   odam.nl         */
-=======
-/*   Updated: 2020/02/27 16:39:25 by rbraaksm      ########   odam.nl         */
->>>>>>> 49070d30e2ce9f782333a9d771d9fe3eb900fecb
+/*   Updated: 2020/03/02 14:07:53 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +21,15 @@ void	side_hit(t_vars *v, int side)
 			v->side_hit = 1;
 		else
 			v->side_hit = 3;
-<<<<<<< HEAD
 		v->finaldist = v->sidex;
-=======
-		v->final_raydist = v->sidex;
->>>>>>> 49070d30e2ce9f782333a9d771d9fe3eb900fecb
 	}
 	else
 	{
 		if (v->rayy > 0)
 			v->side_hit = 2;
-<<<<<<< HEAD
 		else
 			v->side_hit = 0;
 		v->finaldist = v->sidey;
-=======
-		v->final_raydist = v->sidey;
->>>>>>> 49070d30e2ce9f782333a9d771d9fe3eb900fecb
 	}
 }
 
