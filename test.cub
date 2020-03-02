@@ -1,11 +1,11 @@
 R 700     500
-NO ./duck.xpm
-SO    ./duck.xpm
-WE ./duck.xpm
-EA ./duck.xpm
+NO ./textures/bluestone.png
+SO    ./textures/wall_1.png
+WE ./textures/wall_4.png
+EA ./textures/eagle.png
 S ./path_to_the_sprite_texture
-F    1,         90, 
-C  255,    58, 
+F    100,         90, 33
+C  67,    58, 56
 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 2 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/25 13:08:54 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/02 10:08:06 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ void	side_hit(t_vars *v, int side)
 			v->side_hit = 1;
 		else
 			v->side_hit = 3;
+		v->finaldist = v->sidex;
 	}
 	else
 	{
 		if (v->rayy > 0)
-			v->side_hit = 0;
-		else
 			v->side_hit = 2;
+		else
+			v->side_hit = 0;
+		v->finaldist = v->sidey;
 	}
 }
 

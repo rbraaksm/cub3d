@@ -6,33 +6,11 @@
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 15:11:54 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/25 14:35:06 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/02 07:34:01 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int		check_string(t_flags *d)
-{
-	int		i;
-	int		count;
-
-	i = 0;
-	count = 0;
-	while (i < 2)
-	{
-		count = 0;
-		while (d->f[i][count] != '\0')
-		{
-			if (d->f[i][count] >= '0' || d->f[i][count] <= '9')
-				return (1);
-			count++;
-		}
-		i++;
-	}
-	d->error = "FLOOR COLOR IS NOT CORRECT\n";
-	return (0);
-}
 
 int		check_color(t_flags *d, t_color *color, char c)
 {
@@ -98,8 +76,6 @@ int		ft_floor(t_flags *d, t_color *color)
 	free(d->f);
 	d->f = ft_split(tmp, ',');
 	free(tmp);
-	if (check_string(d) == 0)
-		return (0);
 	if (check_color(d, color, 'f') == 0)
 		return (0);
 	color->floor = color->floor + color->fblue % 16;

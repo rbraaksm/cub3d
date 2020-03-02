@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/25 14:02:13 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/02 11:56:06 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 int		action(t_vars *v)
 {
 	if (v->move_l)
-		player(v, 0.9, 0x00BFFF);
+		player(v, 2, 0x00BFFF);
 	if (v->move_r)
-		player(v, -0.9, 0x00BFFF);
+		player(v, -2, 0x00BFFF);
 	if (v->move_f)
-		player(v, -0.9, 0x00BFFF);
+		player(v, -2, 0x00BFFF);
 	if (v->move_b)
-		player(v, 0.9, 0x00BFFF);
+		player(v, 2, 0x00BFFF);
 	if (v->rotate_l)
 		ft_view(v, 0.03, 0xFFE4E1);
 	if (v->rotate_r)
@@ -64,7 +64,10 @@ int		keypress(int keycode, t_vars *v)
 		v->rotate_l = 1;
 	if (keycode == 124)
 		v->rotate_r = 1;
-	mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
+	if (keycode == 49)
+	{
+		mlx_put_image_to_window(v->textures->n_tex->mlx, v->g->win, v->textures->n_tex->img, 0, 0);
+	}
 	return (0);
 }
 

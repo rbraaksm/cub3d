@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/25 13:46:33 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/02 10:09:30 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct		s_tex
 	int				endian;
 	int				width;
 	int				height;
+	float			x_tex;
+	float			y_tex;
 }					t_tex;
 
 typedef struct		s_textures
@@ -115,6 +117,7 @@ typedef struct		s_vars
 	int				stepx;
 	int				stepy;
 	float			raydist;
+	float			finaldist;
 	float			opp;
 	float			adjust;
 	float			walldist;
@@ -154,6 +157,7 @@ void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
 void				ft_view(t_vars *vars, float rot, unsigned int color);
 void				ft_find_sidedelta(t_vars *v);
+void				ft_find_length(t_vars *v, int i);
 
 t_tex				*texture_info(t_vars *v, char *path);
 
@@ -161,4 +165,6 @@ void				print(t_vars *v);
 
 int					mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y,
 					int color);
+void				my_mlx_pixel_put2(t_vars *v, int x, int y, int color);
+int					my_mlx_pixel_putwall(t_vars *v, int x, int y, int color);
 #endif
