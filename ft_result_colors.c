@@ -6,7 +6,11 @@
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 15:11:54 by rbraaksm       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/03/02 07:34:01 by rbraaksm      ########   odam.nl         */
+=======
+/*   Updated: 2020/02/27 15:18:02 by rbraaksm      ########   odam.nl         */
+>>>>>>> 49070d30e2ce9f782333a9d771d9fe3eb900fecb
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +80,11 @@ int		ft_floor(t_flags *d, t_color *color)
 	free(d->f);
 	d->f = ft_split(tmp, ',');
 	free(tmp);
+<<<<<<< HEAD
+=======
+	// if (check_string(d) == 0)
+	// 	return (0);
+>>>>>>> 49070d30e2ce9f782333a9d771d9fe3eb900fecb
 	if (check_color(d, color, 'f') == 0)
 		return (0);
 	color->floor = color->floor + color->fblue % 16;
@@ -110,8 +119,8 @@ int		ft_result(t_flags *d)
 
 int		ft_result_colors(t_flags *d, t_color *color)
 {
-	if (d->error != NULL)
-		return (0);
+	// if (d->error != NULL)
+	// 	return (0);
 	if (ft_result(d) == 0)
 		return (0);
 	if (ft_floor(d, color) == 0)

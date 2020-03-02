@@ -6,7 +6,11 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/03/02 10:09:30 by rbraaksm      ########   odam.nl         */
+=======
+/*   Updated: 2020/02/27 17:46:23 by rbraaksm      ########   odam.nl         */
+>>>>>>> 49070d30e2ce9f782333a9d771d9fe3eb900fecb
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +90,12 @@ typedef struct		s_tex
 	float			y_tex;
 }					t_tex;
 
+typedef struct		s_coor
+{
+	float				x;
+	float				y;
+}					t_coor;
+
 typedef struct		s_textures
 {
 	t_tex			*n_tex;
@@ -117,7 +127,11 @@ typedef struct		s_vars
 	int				stepx;
 	int				stepy;
 	float			raydist;
+<<<<<<< HEAD
 	float			finaldist;
+=======
+	float			final_raydist;
+>>>>>>> 49070d30e2ce9f782333a9d771d9fe3eb900fecb
 	float			opp;
 	float			adjust;
 	float			walldist;
