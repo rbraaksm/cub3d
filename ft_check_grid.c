@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/25 11:43:05 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/04 10:01:21 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int		find_location(t_map *map)
 				location = 1;
 				map->posx = x;
 				map->posy = y;
+				map->pos = map->map[y][x];
 				x++;
 			}
 			if ((map->map[y][x] == 'S' || map->map[y][x] == 'E' ||

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/02 14:07:53 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/05 11:39:50 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,29 @@ void	side_hit(t_vars *v, int side)
 {
 	if (side == 0)
 	{
-		if (v->rayx >= 0)
-			v->side_hit = 1;
+		if (v->ray->rayx >= 0)
+			v->ray->side_hit = 1;
 		else
-			v->side_hit = 3;
-		v->finaldist = v->sidex;
+			v->ray->side_hit = 3;
+		v->ray->finaldist = v->ray->sidex;
 	}
 	else
 	{
-		if (v->rayy > 0)
-			v->side_hit = 2;
+		if (v->ray->rayy > 0)
+			v->ray->side_hit = 2;
 		else
-			v->side_hit = 0;
-		v->finaldist = v->sidey;
+			v->ray->side_hit = 0;
+		v->ray->finaldist = v->ray->sidey;
 	}
 }
 
-void	calc_distance(t_vars *v, int side)
+void	calc_distance(t_vars *v, t_ray *ray, int side)
 {
 	side_hit(v, side);
 	if (side == 0)
-		v->walldist = cos(v->angle - v->playdir) * v->sidex;
+		ray->walldist = cos(ray->angle - ray->playdir) * ray->sidex;
 	else
-		v->walldist = cos(v->angle - v->playdir) * v->sidey;
+		ray->walldist = cos(ray->angle - ray->playdir) * ray->sidey;
 }
 
 void	find_hit(t_vars *v)
@@ -48,18 +48,18 @@ void	find_hit(t_vars *v)
 	int		mapx;
 	int		mapy;
 
-	mapx = v->map->posx;
-	mapy = v->map->posy;
+	mapx = v->player->x;
+	mapy = v->player->y;
 	while (1)
 	{
-		if (v->sidex < v->sidey)
+		if (v->ray->sidex < v->ray->sidey)
 		{
 			side = 0;
 			mapx += v->stepx;
 			if (v->map->map[mapy][mapx] == '1' ||
 			v->map->map[mapy][mapx] == '2')
 				break ;
-			v->sidex += v->deltax;
+			v->ray->sidex += v->ray->deltax;
 		}
 		else
 		{
@@ -68,20 +68,20 @@ void	find_hit(t_vars *v)
 			if (v->map->map[mapy][mapx] == '1' ||
 			v->map->map[mapy][mapx] == '2')
 				break ;
-			v->sidey += v->deltay;
+			v->ray->sidey += v->ray->deltay;
 		}
 	}
-	calc_distance(v, side);
+	calc_distance(v, v->ray, side);
 }
 
 void	calc_info(t_vars *v, float x, float y)
 {
-	v->rayx = sin(v->playdir);
-	v->rayy = cos(v->playdir);
-	v->sidex = fabs(x / v->rayx);
-	v->sidey = fabs(y / v->rayy);
-	v->deltax = fabs(v->tile_w / v->rayx);
-	v->deltay = fabs(v->tile_h / v->rayy);
+	v->ray->rayx = sin(v->ray->playdir);
+	v->ray->rayy = cos(v->ray->playdir);
+	v->ray->sidex = fabs(x / v->ray->rayx);
+	v->ray->sidey = fabs(y / v->ray->rayy);
+	v->ray->deltax = fabs(1 / v->ray->rayx);
+	v->ray->deltay = fabs(1/ v->ray->rayy);
 }
 
 void	ft_find_sidedelta(t_vars *v)
@@ -89,24 +89,24 @@ void	ft_find_sidedelta(t_vars *v)
 	float	x;
 	float	y;
 
-	if (v->playdir < 0)
-		v->playdir += (2 * M_PI);
-	if (v->playdir > (2 * M_PI))
-		v->playdir -= (2 * M_PI);
-	if (v->playdir > (0.5 * M_PI) && v->playdir < (1.5 * M_PI))
-		y = v->play_y - ((float)v->map->posy * v->tile_h);
+	if (v->ray->playdir < 0)
+		v->ray->playdir += (2 * M_PI);
+	if (v->ray->playdir > (2 * M_PI))
+		v->ray->playdir -= (2 * M_PI);
+	if (v->ray->playdir > (0.5 * M_PI) && v->ray->playdir < (1.5 * M_PI))
+		y = v->player->y - (int)v->player->y;
 	else
-		y = (v->tile_h * ((float)v->map->posy + 1)) - v->play_y;
-	if (v->playdir > M_PI && v->playdir < (M_PI * 2))
-		x = v->play_x - ((float)v->map->posx * v->tile_w);
+		y = 1 - (v->player->y - (int)v->player->y);
+	if (v->ray->playdir > M_PI && v->ray->playdir < (M_PI * 2))
+		x = v->player->x - (int)v->player->x;
 	else
-		x = (v->tile_w * ((float)v->map->posx + 1)) - v->play_x;
+		x = 1 - (v->player->x - (int)v->player->x);
 	calc_info(v, x, y);
-	if (v->rayx < 0)
+	if (v->ray->rayx < 0)
 		v->stepx = -1;
 	else
 		v->stepx = 1;
-	if (v->rayy < 0)
+	if (v->ray->rayy < 0)
 		v->stepy = -1;
 	else
 		v->stepy = 1;

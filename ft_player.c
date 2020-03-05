@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 15:47:58 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/25 08:26:51 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/05 11:36:59 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@ void	player(t_vars *v, float move, unsigned int color)
 	float		x;
 	float		y;
 
-	if (v->move_l == 1|| v->move_r == 1)
+	if (v->player->move_l == 1 || v->player->move_r == 1)
 	{
-		x = move * cos(v->playdir);
-		y = move * sin(v->playdir);
+		x = move * cos(v->ray->playdir);
+		y = move * sin(v->ray->playdir);
 	}
 	else
 	{
-		x = -(move * sin(v->playdir));
-		y = move * cos(v->playdir);
+		x = -(move * sin(v->ray->playdir));
+		y = move * cos(v->ray->playdir);
 	}
-	if (v->map->map[(int)((v->play_y - y) / v->tile_h)][(int)((v->play_x + x) / v->tile_w)] != '1' &&
-		v->map->map[(int)((v->play_y - y) / v->tile_h)][(int)((v->play_x + x) / v->tile_w)] != '2')
+	if (v->map->map[(int)(v->player->y - y)][(int)(v->player->x + x)] != '1' &&
+		v->map->map[(int)(v->player->y - y)][(int)(v->player->x + x)] != '2')
 	{
 		ft_view(v, 0, 0x000000);
-		v->play_x += x;
-		v->play_y -= y;
-		my_mlx_pixel_put(v, v->play_x, v->play_y, color);
-		v->map->posy = (v->play_y / (float)v->tile_h);
-		v->map->posx = (v->play_x / (float)v->tile_w);
+		v->player->x += x;
+		v->player->y -= y;
+		my_mlx_pixel_put(v, v->player->x * v->tile_w, v->player->y * v->tile_h, color);
+		v->map->posy = (int)v->player->y;
+		v->map->posx = (int)v->player->x;
 		ft_view(v, 0, 0xFFE4E1);
 	}
 }

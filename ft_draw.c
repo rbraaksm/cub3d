@@ -6,12 +6,24 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 08:46:24 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/02 10:44:14 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/02 14:13:21 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minilibx/mlx.h"
 #include "cub3d.h"
+
+void	my_image_put(t_vars *v, t_tex *tex, int x, int y)
+{
+	char	*dst;
+	char	*dst2;
+
+	if (x < 0 || y < 0 || x > v->d->resx - 1 || y > v->d->resy - 1)
+		return ;
+	dst = v->g->addr + (y * v->g->line_length + x * (v->g->bits_per_pixel / 8));
+	dst2 = tex->addr + ((int)tex->y_tex * tex->line_length + (int)tex->x_tex * (tex->bits_per_pixel / 8));
+	*(unsigned int*)dst = *(unsigned int*)dst2;
+}
 
 int		my_mlx_pixel_putwall(t_vars *v, int x, int y, int color)
 {

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/02 14:08:13 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/04 14:27:01 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct		s_map
 	int				column;
 	int				posx;
 	int				posy;
+	char			pos;
 }					t_map;
 
 typedef struct		s_game
@@ -86,12 +87,6 @@ typedef struct		s_tex
 	float			y_tex;
 }					t_tex;
 
-typedef struct		s_coor
-{
-	float				x;
-	float				y;
-}					t_coor;
-
 typedef struct		s_textures
 {
 	t_tex			*n_tex;
@@ -99,6 +94,38 @@ typedef struct		s_textures
 	t_tex			*s_tex;
 	t_tex			*w_tex;
 }					t_texture;
+
+typedef struct		s_player
+{
+	// float			play_x;
+	// float			play_y;
+	float			y;
+	float			x;
+	int				move_f;
+	int				move_b;
+	int				move_l;
+	int				move_r;
+	int				rotate_l;
+	int				rotate_r;
+}					t_player;
+
+typedef struct		s_ray
+{
+	float			rayx;
+	float			rayy;
+	float			angle;
+	float			sidex;
+	float			deltax;
+	float			sidey;
+	float			deltay;
+	float			raydist;
+	float			finaldist;
+	float			opp;
+	float			adjust;
+	float			walldist;
+	float			playdir;
+	int				side_hit;
+}					t_ray;
 
 typedef struct		s_vars
 {
@@ -109,32 +136,12 @@ typedef struct		s_vars
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
-	float			play_x;
-	float			play_y;
 	float			tile_h;
 	float			tile_w;
-	float			rayx;
-	float			rayy;
-	float			angle;
-	float			sidex;
-	float			deltax;
-	float			sidey;
-	float			deltay;
 	int				stepx;
 	int				stepy;
-	float			raydist;
-	float			finaldist;
-	float			opp;
-	float			adjust;
-	float			walldist;
-	int				side_hit; /* N = 0, E = 1, S = 2, W = 3 */
-	float			playdir;
-	int				move_f;
-	int				move_b;
-	int				move_l;
-	int				move_r;
-	int				rotate_l;
-	int				rotate_r;
+	t_ray			*ray;
+	t_player		*player;
 	t_texture		*textures;
 	t_map			*map;
 	t_flags			*d;
@@ -157,6 +164,7 @@ int					ft_atoi(const char *str);
 /* window */
 
 void				window(t_flags *data, t_color *color, t_map *map);
+void				struct_info(t_vars *v);
 void				ft_make_2d(t_vars *vars);
 void				player(t_vars *vars, float move, unsigned int color);
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
@@ -165,12 +173,11 @@ void				ft_view(t_vars *vars, float rot, unsigned int color);
 void				ft_find_sidedelta(t_vars *v);
 void				ft_find_length(t_vars *v, int i);
 
-t_tex				*texture_info(t_vars *v, char *path);
-
 void				print(t_vars *v);
 
 int					mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y,
 					int color);
 void				my_mlx_pixel_put2(t_vars *v, int x, int y, int color);
 int					my_mlx_pixel_putwall(t_vars *v, int x, int y, int color);
+void				my_image_put(t_vars *v, t_tex *tex, int x, int y);
 #endif

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/02 14:09:17 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/05 11:37:32 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ static void	make_grid(t_vars *v)
 
 void	raydistance(t_vars *v)
 {
-	if (v->raydist == 0)
+	if (v->ray->raydist == 0)
 	{
-		v->adjust = 1 / atan(M_PI / 6);
-		v->raydist = (v->opp / (float)v->d->resx) * 2;
+		v->ray->adjust = 1 / atan(M_PI / 6);
+		v->ray->raydist = (v->ray->opp / (float)v->d->resx) * 2;
 		return ;
 	}
-	v->opp -= v->raydist;
-	v->playdir = v->angle + atan(v->opp / v->adjust);
+	v->ray->opp -= v->ray->raydist;
+	v->ray->playdir = v->ray->angle + atan(v->ray->opp / v->ray->adjust);
 }
 
 void	ft_cleanview(t_vars *v)
@@ -66,21 +66,21 @@ void	ft_cleanview(t_vars *v)
 	float	y;
 
 	i = 0;
-	v->angle = v->playdir;
+	v->ray->angle = v->ray->playdir;
 	while (i <= v->d->resx)
 	{
-		x = (int)v->play_x;
-		y = (int)v->play_y;
+		x = v->player->x * v->tile_w;
+		y = v->player->y * v->tile_h;
 		while (my_mlx_pixel_putwall(v, x, y, 0x000000) == 1)
 		{
-			x += sin(v->playdir);
-			y += cos(v->playdir);
+			x += sin(v->ray->playdir);
+			y += cos(v->ray->playdir);
 		}
 		raydistance(v);
 		i++;
 	}
-	v->playdir = v->angle;
-	v->opp = 1;
+	v->ray->playdir = v->ray->angle;
+	v->ray->opp = 1;
 }
 
 void	ft_view(t_vars *v, float rot, unsigned int color)
@@ -90,30 +90,30 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 	float	y;
 
 	i = 0;
-	if (v->playdir < 0)
-		v->playdir += (2 * M_PI);
-	if (v->playdir > (2 * M_PI))
-		v->playdir -= (2 * M_PI);
+	if (v->ray->playdir < 0)
+		v->ray->playdir += (2 * M_PI);
+	if (v->ray->playdir > (2 * M_PI))
+		v->ray->playdir -= (2 * M_PI);
 	ft_cleanview(v);
 	make_grid(v);
-	v->playdir += rot;
-	v->angle = v->playdir;
+	v->ray->playdir += rot;
+	v->ray->angle = v->ray->playdir;
 	while (i <= v->d->resx)
 	{
-		x = (int)v->play_x;
-		y = (int)v->play_y;
+		x = v->player->x * v->tile_w;
+		y = v->player->y * v->tile_h;
 		while (my_mlx_pixel_putwall(v, x, y, color) == 1)
 		{
-			x += sin(v->playdir);
-			y += cos(v->playdir);
+			x += sin(v->ray->playdir);
+			y += cos(v->ray->playdir);
 		}
 		ft_find_sidedelta(v);
 		raydistance(v);
 		ft_find_length(v, i);
 		i++;
 	}
-	v->playdir = v->angle;
-	v->opp = 1;
+	v->ray->playdir = v->ray->angle;
+	v->ray->opp = 1;
 	if (v->g->active_img == 1)
 	{
 		mlx_put_image_to_window(v->g->mlx, v->g->win, v->g->img1, 0, 0);
