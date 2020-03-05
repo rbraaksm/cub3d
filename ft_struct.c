@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/04 09:29:23 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/04 14:07:27 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/05 13:36:53 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,6 @@ void	struct_info(t_vars *v)
 	v->player->rotate_l = 0;
 	v->g->active_img = 1;
 	v->ray->side_hit = 10;
+	v->player->x = v->map->posx + 0.5;
+	v->player->y = v->map->posy + 0.5;
 }

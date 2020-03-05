@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/05 11:39:50 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/05 14:04:26 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,24 @@ void	side_hit(t_vars *v, int side)
 
 void	calc_distance(t_vars *v, t_ray *ray, int side)
 {
-	side_hit(v, side);
 	if (side == 0)
+	{
 		ray->walldist = cos(ray->angle - ray->playdir) * ray->sidex;
+		if (v->ray->rayx >= 0)
+			v->ray->side_hit = 1;
+		else
+			v->ray->side_hit = 3;
+		v->ray->finaldist = v->ray->sidex;
+	}
 	else
+	{
 		ray->walldist = cos(ray->angle - ray->playdir) * ray->sidey;
+		if (v->ray->rayy > 0)
+			v->ray->side_hit = 2;
+		else
+			v->ray->side_hit = 0;
+		v->ray->finaldist = v->ray->sidey;
+	}
 }
 
 void	find_hit(t_vars *v)

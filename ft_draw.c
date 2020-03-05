@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 08:46:24 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/02 14:13:21 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/05 12:02:14 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		my_mlx_pixel_putwall(t_vars *v, int x, int y, int color)
 {
 	char	*dst;
 
-	if (v->map->map[y / (int)v->tile_h][x / (int)v->tile_w] == '1' ||
+	if (v->map->map[(y / (int)v->tile_h)][x / (int)v->tile_w] == '1' ||
 		v->map->map[y / (int)v->tile_h][x / (int)v->tile_w] == '2')
 		return (0);
 	else
