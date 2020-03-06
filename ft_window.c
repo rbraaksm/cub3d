@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/05 13:56:47 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/06 13:38:58 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 int		action(t_vars *v)
 {
 	if (v->player->move_l)
-		player(v, 0.05);
+		player(v, 0.08, 0x00BFFF);
 	if (v->player->move_r)
-		player(v, -0.05);
+		player(v, -0.08, 0x00BFFF);
 	if (v->player->move_f)
-		player(v, -0.05);
+		player(v, -0.08, 0x00BFFF);
 	if (v->player->move_b)
-		player(v, 0.05);
+		player(v, 0.08, 0x00BFFF);
 	if (v->player->rotate_l)
-		ft_view(v, 0.03);
+		ft_view(v, 0.01, 0xffffff);
 	if (v->player->rotate_r)
-		ft_view(v, -0.03);
+		ft_view(v, -0.01, 0xffffff);
 	return (0);
 }
 
@@ -51,7 +51,7 @@ int		keypress(int keycode, t_vars *v)
 {
 	// printf("[keycode] %d\n", keycode);
 	if (keycode == 53)
-		mlx_destroy_window(v->g->mlx, v->g->win);
+		mlx_destroy_window(v->mlx, v->win);
 	if (keycode == 0)
 		v->player->move_l = 1;
 	if (keycode == 1)
@@ -98,10 +98,14 @@ void	get_info(t_vars *v, t_flags *d, t_color *color, t_map *map)
 
 int		make_img(t_vars *v)
 {
+	v->win = mlx_new_window(v->mlx, v->d->resx, v->d->resy, "MAP");
 	v->g->win = mlx_new_window(v->g->mlx, v->d->resx, v->d->resy, "CUB3D");
+	v->mapimg = mlx_new_image(v->mlx, v->d->resx, v->d->resy);
+	v->addr = mlx_get_data_addr(v->mapimg, &v->bits_per_pixel, &v->line_length, &v->endian);
 	v->g->img1 = mlx_new_image(v->g->mlx, v->d->resx, v->d->resy);
 	v->g->img2 = mlx_new_image(v->g->mlx, v->d->resx, v->d->resy);
 	v->g->addr = mlx_get_data_addr(v->g->img1, &v->g->bits_per_pixel, &v->g->line_length, &v->g->endian);
+	ft_make_2d(v);
 	return (1);
 }
 
@@ -112,10 +116,13 @@ void	window(t_flags *d, t_color *color, t_map *map)
 
 	check = 0;
 	get_info(&v, d, color, map);
+	v.mlx = mlx_init();
 	v.g->mlx = mlx_init();
-	make_img(&v);
+	if (check == 0)
+		check = make_img(&v);
 	mlx_hook(v.g->win, 2, 1L << 0, keypress, &v);
 	mlx_hook(v.g->win, 3, 1L << 1, keyrelease, &v);
-	mlx_loop_hook(v.g->mlx, &action, &v);
+	mlx_loop_hook(v.mlx, &action, &v);
+	mlx_loop(v.mlx);
 	mlx_loop(v.g->mlx);
 }

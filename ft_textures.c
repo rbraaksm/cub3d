@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/05 14:02:32 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/06 11:53:37 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ float	get_perc(t_vars *v)
 	float	y_cord;
 	float	perc;
 
-	x_cord = v->player->x + (v->ray->finaldist * v->ray->rayx);
-	y_cord = v->player->y + (v->ray->finaldist * v->ray->rayy);
+	x_cord = v->player->x + v->ray->finaldist * v->ray->rayx;
+	y_cord = v->player->y + v->ray->finaldist * v->ray->rayy;
 	if (v->ray->side_hit == 0 || v->ray->side_hit == 2)
 		perc = x_cord - (int)x_cord;
 	else
@@ -77,14 +77,14 @@ void	ft_find_length(t_vars *v, int i)
 	float	y;
 
 	tex = find_texture(v);
-	length = ((1 / v->ray->walldist) * (float)v->d->resy);
+	length = ((1 / v->ray->walldist) * (v->d->resy - 1));
 	count = (length / 2) + (v->d->resy / 2);
 	tmpcount = count;
 	draw_roof(v, i, count);
 	tex->x_tex = (float)tex->width * get_perc(v);
 	tex->y_tex = tex->height;
 	y = (float)tex->height / (float)length;
-	while (length > 0)
+	while (length >= 0)
 	{
 		my_image_put(v, tex, i, count);
 		count--;

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 13:00:09 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/05 13:40:06 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/06 10:05:50 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static float	raydistance(t_vars *v, float angle)
 	return (angle);
 }
 
-void	ft_cleanview(t_vars *v, float angle)
+static void	ft_cleanview(t_vars *v, float angle)
 {
 	int		i;
 	float	x;

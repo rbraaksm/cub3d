@@ -6,14 +6,14 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 15:47:58 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/05 13:44:10 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/06 13:39:13 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "./minilibx/mlx.h"
 
-void	player(t_vars *v, float move)
+void	player(t_vars *v, float move, unsigned int color)
 {
 	float		x;
 	float		y;
@@ -31,9 +31,10 @@ void	player(t_vars *v, float move)
 	if (v->map->map[(int)(v->player->y - y)][(int)(v->player->x + x)] != '1' &&
 		v->map->map[(int)(v->player->y - y)][(int)(v->player->x + x)] != '2')
 	{
-		ft_view(v, 0);
+		ft_view(v, 0, 0x000000);
 		v->player->x += x;
 		v->player->y -= y;
-		ft_view(v, 0);
+		my_mlx_pixel_put(v, v->player->x * v->tile_w, v->player->y * v->tile_h, color);
+		ft_view(v, 0, 0xffffff);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/05 13:44:18 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/06 13:58:27 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct		s_textures
 	t_tex			*e_tex;
 	t_tex			*s_tex;
 	t_tex			*w_tex;
+	t_tex			*sprite;
 }					t_texture;
 
 typedef struct		s_player
@@ -123,6 +124,7 @@ typedef struct		s_ray
 	float			walldist;
 	float			playdir;
 	int				side_hit;
+	int				sprite;
 }					t_ray;
 
 typedef struct		s_vars
@@ -164,14 +166,13 @@ int					ft_atoi(const char *str);
 void				window(t_flags *data, t_color *color, t_map *map);
 void				struct_info(t_vars *v);
 void				ft_make_2d(t_vars *vars);
-void				player(t_vars *vars, float move);
+void				player(t_vars *vars, float move, unsigned int color);
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
-void				ft_view(t_vars *vars, float rot);
+void				ft_view(t_vars *vars, float rot, unsigned int color);
 void				ft_find_sidedelta(t_vars *v);
 void				ft_find_length(t_vars *v, int i);
 
-void				make2d(t_vars *v, float rot, unsigned int color);
 void				print(t_vars *v);
 
 int					mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y,

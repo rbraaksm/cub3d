@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 14:13:44 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/05 13:44:49 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/06 13:39:33 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	my_mlx_pixel_put(t_vars *v, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	printblock(t_vars *v, int row, int column)
+static void	printblock(t_vars *v, int row, int column)
 {
 	int				x;
 	int				y;
@@ -69,6 +69,6 @@ void	make_grid(t_vars *v)
 void	ft_make_2d(t_vars *v)
 {
 	make_grid(v);
-	player(v, 0);
+	player(v, 0, 0xffffff);
 	mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
 }

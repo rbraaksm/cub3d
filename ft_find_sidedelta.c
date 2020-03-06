@@ -6,32 +6,12 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/05 14:04:26 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/06 10:13:17 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "./minilibx/mlx.h"
-
-void	side_hit(t_vars *v, int side)
-{
-	if (side == 0)
-	{
-		if (v->ray->rayx >= 0)
-			v->ray->side_hit = 1;
-		else
-			v->ray->side_hit = 3;
-		v->ray->finaldist = v->ray->sidex;
-	}
-	else
-	{
-		if (v->ray->rayy > 0)
-			v->ray->side_hit = 2;
-		else
-			v->ray->side_hit = 0;
-		v->ray->finaldist = v->ray->sidey;
-	}
-}
 
 void	calc_distance(t_vars *v, t_ray *ray, int side)
 {
@@ -89,8 +69,6 @@ void	find_hit(t_vars *v)
 
 void	calc_info(t_vars *v, float x, float y)
 {
-	v->ray->rayx = sin(v->ray->playdir);
-	v->ray->rayy = cos(v->ray->playdir);
 	v->ray->sidex = fabs(x / v->ray->rayx);
 	v->ray->sidey = fabs(y / v->ray->rayy);
 	v->ray->deltax = fabs(1 / v->ray->rayx);
@@ -102,10 +80,6 @@ void	ft_find_sidedelta(t_vars *v)
 	float	x;
 	float	y;
 
-	if (v->ray->playdir < 0)
-		v->ray->playdir += (2 * M_PI);
-	if (v->ray->playdir > (2 * M_PI))
-		v->ray->playdir -= (2 * M_PI);
 	if (v->ray->playdir > (0.5 * M_PI) && v->ray->playdir < (1.5 * M_PI))
 		y = v->player->y - (int)v->player->y;
 	else

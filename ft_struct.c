@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/04 09:29:23 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/05 13:36:53 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/06 13:58:47 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	struct_info(t_vars *v)
 	v->textures->e_tex = texture_info(v, v->d->ea);
 	v->textures->s_tex = texture_info(v, v->d->so);
 	v->textures->w_tex = texture_info(v, v->d->we);
+	v->textures->sprite = texture_info(v, v->d->s);
 	if (v->map->pos == 'N')
 		v->ray->playdir = M_PI;
 	else if (v->map->pos == 'E')
@@ -59,6 +60,5 @@ void	struct_info(t_vars *v)
 	v->player->rotate_l = 0;
 	v->g->active_img = 1;
 	v->ray->side_hit = 10;
-	v->player->x = v->map->posx + 0.5;
-	v->player->y = v->map->posy + 0.5;
+	v->ray->sprite = 0;
 }
