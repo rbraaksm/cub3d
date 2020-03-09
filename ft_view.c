@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/06 13:56:12 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/09 12:51:16 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,15 +128,14 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 	int		i;
 	float	x;
 	float	y;
-	int		z;
 
-	z = 0;
 	i = 0;
 	ft_cleanview(v);
 	make_grid(v);
 	v->ray->playdir += rot;
 	v->ray->angle = v->ray->playdir;
 	make_grid2(v);
+	color = 0;
 	while (i < v->d->resx)
 	{
 		if (v->ray->playdir < 0)
@@ -147,19 +146,21 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 		y = v->player->y * v->tile_h;
 		v->ray->rayx = sin(v->ray->playdir);
 		v->ray->rayy = cos(v->ray->playdir);
-		while (my_mlx_pixel_putwall(v, x, y, color) == 1 && z < 1)
-		{
-			x += v->ray->rayx;
-			y += v->ray->rayy;
-		}
+		// while (my_mlx_pixel_putwall(v, x, y, color) == 1)
+		// {
+		// 	x += v->ray->rayx;
+		// 	y += v->ray->rayy;
+		// }
 		ft_find_sidedelta(v);
 		raydistance(v);
-		ft_find_length(v, i);
+		// if (v->ray->sprite == 0)
+			draw_wall(v, i);
+		// else
+		// 	draw_sprite(v, 1);
 		i++;
-		z++;
 	}
 	v->ray->playdir = v->ray->angle;
-	v->ray->opp = 1;
+	// v->ray->opp = 1;
 	// if (v->g->active_img == 1)
 	// {
 		mlx_put_image_to_window(v->g->mlx, v->g->win, v->g->img1, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/06 13:58:27 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/09 11:04:31 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct		s_ray
 	float			playdir;
 	int				side_hit;
 	int				sprite;
+	float			sprite_prec;
 }					t_ray;
 
 typedef struct		s_vars
@@ -171,7 +172,8 @@ void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
 void				ft_view(t_vars *vars, float rot, unsigned int color);
 void				ft_find_sidedelta(t_vars *v);
-void				ft_find_length(t_vars *v, int i);
+void				draw_wall(t_vars *v, int i);
+void				draw_sprite(t_vars *v, int i);
 
 void				print(t_vars *v);
 

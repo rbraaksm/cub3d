@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/25 11:44:15 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/09 13:11:06 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int		fill_mapindex(t_flags *d)
 	int		index;
 
 	index = 0;
-	// d->s = NULL;
 	while (d->str[index] != '\0')
 	{
 		if (d->str[index] == 'R')

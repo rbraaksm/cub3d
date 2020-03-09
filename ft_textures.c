@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/06 11:53:37 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/09 10:30:20 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_tex	*find_texture(t_vars *v)
 	return (textures);
 }
 
-void	ft_find_length(t_vars *v, int i)
+void	draw_wall(t_vars *v, int i)
 {
 	t_tex	*tex;
 	float	length;

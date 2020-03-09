@@ -6,7 +6,7 @@
 #    By: rbraaksm <rbraaksm@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/22 14:09:57 by rbraaksm       #+#    #+#                 #
-#    Updated: 2020/03/05 13:00:30 by rbraaksm      ########   odam.nl          #
+#    Updated: 2020/03/09 10:26:25 by rbraaksm      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS =	ft_main.c \
 		ft_player.c \
 		ft_find_sidedelta.c \
 		ft_textures.c \
+		ft_sprite.c \
 		ft_draw.c \
 		ft_struct.c \
 		ft_2d.c \
