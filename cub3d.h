@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/09 11:04:31 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/10 10:04:32 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,8 @@ typedef struct		s_vars
 	float			tile_w;
 	int				stepx;
 	int				stepy;
+	int				i;
+	int				z;
 	t_ray			*ray;
 	t_player		*player;
 	t_texture		*textures;
@@ -172,8 +174,8 @@ void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
 void				ft_view(t_vars *vars, float rot, unsigned int color);
 void				ft_find_sidedelta(t_vars *v);
-void				draw_wall(t_vars *v, int i);
-void				draw_sprite(t_vars *v, int i);
+void				draw_wall(t_vars *v);
+void				draw_sprite(t_vars *v);
 
 void				print(t_vars *v);
 

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/09 13:52:31 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/10 13:39:35 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 int		action(t_vars *v)
 {
 	if (v->player->move_l)
-		player(v, 0.08, 0x00BFFF);
+		player(v, 0.08, 0xffff00);
 	if (v->player->move_r)
-		player(v, -0.08, 0x00BFFF);
+		player(v, -0.08, 0xffff00);
 	if (v->player->move_f)
-		player(v, -0.08, 0x00BFFF);
+		player(v, -0.08, 0xffff00);
 	if (v->player->move_b)
-		player(v, 0.08, 0x00BFFF);
+		player(v, 0.08, 0xffff00);
 	if (v->player->rotate_l)
-		ft_view(v, 0.05, 0xffffff);
+		ft_view(v, 0.05, 0xffff00);
 	if (v->player->rotate_r)
-		ft_view(v, -0.05, 0xffffff);
+		ft_view(v, -0.05, 0xffff00);
 	return (0);
 }
 

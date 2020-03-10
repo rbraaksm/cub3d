@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/09 12:51:16 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/10 13:56:23 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,18 +125,18 @@ void	ft_cleanview(t_vars *v)
 
 void	ft_view(t_vars *v, float rot, unsigned int color)
 {
-	int		i;
 	float	x;
 	float	y;
 
-	i = 0;
+	v->i = 0;
+	v->z = 0;
 	ft_cleanview(v);
 	make_grid(v);
 	v->ray->playdir += rot;
 	v->ray->angle = v->ray->playdir;
 	make_grid2(v);
 	color = 0;
-	while (i < v->d->resx)
+	while (v->i < v->d->resx)
 	{
 		if (v->ray->playdir < 0)
 			v->ray->playdir += (2 * M_PI);
@@ -154,10 +154,10 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 		ft_find_sidedelta(v);
 		raydistance(v);
 		// if (v->ray->sprite == 0)
-			draw_wall(v, i);
+			draw_wall(v);
 		// else
 		// 	draw_sprite(v, 1);
-		i++;
+		v->i++;
 	}
 	v->ray->playdir = v->ray->angle;
 	// v->ray->opp = 1;
