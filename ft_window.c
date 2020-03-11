@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/10 13:39:35 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/11 16:57:25 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int		keypress(int keycode, t_vars *v)
 {
 	// printf("[keycode] %d\n", keycode);
 	if (keycode == 53)
+	{
+		mlx_destroy_window(v->g->mlx, v->g->win);
 		mlx_destroy_window(v->mlx, v->win);
+	}
 	if (keycode == 0)
 		v->player->move_l = 1;
 	if (keycode == 1)
@@ -73,9 +76,13 @@ void	get_info(t_vars *v, t_flags *d, t_color *color, t_map *map)
 	t_player	*player;
 	t_ray		*ray;
 	t_game		*g;
+	t_sprite	*s;
 
 	g = (t_game *)malloc(sizeof(t_game) * 1);
 	if (g == NULL)
+		return ;
+	s = (t_sprite *)malloc(sizeof(t_sprite) * 1);
+	if (s == NULL)
 		return ;
 	ray = (t_ray *)malloc(sizeof(t_ray) * 1);
 	if (ray == NULL)
@@ -86,6 +93,7 @@ void	get_info(t_vars *v, t_flags *d, t_color *color, t_map *map)
 	player = (t_player *)malloc(sizeof(t_player) * 1);
 	if (player == NULL)
 		return ;
+	v->s = s;
 	v->g = g;
 	v->map = map;
 	v->d = d;

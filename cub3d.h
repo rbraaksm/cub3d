@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/10 10:04:32 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/11 16:37:21 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,18 @@ typedef struct		s_ray
 	float			sprite_prec;
 }					t_ray;
 
+typedef struct		s_sprite
+{
+	float			middle_x;
+	float			middle_y;
+	float			x_hit;
+	float			y_hit;
+	float			angle;
+	float			x_angle;
+	float			y_angle;
+	float			schuin;
+}					t_sprite;
+
 typedef struct		s_vars
 {
 	void			*mlx;
@@ -143,6 +155,7 @@ typedef struct		s_vars
 	int				stepy;
 	int				i;
 	int				z;
+	t_sprite		*s;
 	t_ray			*ray;
 	t_player		*player;
 	t_texture		*textures;
