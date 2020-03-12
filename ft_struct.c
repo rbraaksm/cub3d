@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/04 09:29:23 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/06 13:58:47 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/12 13:52:37 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void	struct_info(t_vars *v)
 	v->player->rotate_l = 0;
 	v->g->active_img = 1;
 	v->ray->side_hit = 10;
+	v->ray->sprite_hit = 10;
 	v->ray->sprite = 0;
 }

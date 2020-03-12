@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/11 16:37:21 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/12 13:49:55 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct		s_ray
 	float			playdir;
 	int				side_hit;
 	int				sprite;
-	float			sprite_prec;
+	int				sprite_hit;
 }					t_ray;
 
 typedef struct		s_sprite
@@ -135,9 +135,19 @@ typedef struct		s_sprite
 	float			x_hit;
 	float			y_hit;
 	float			angle;
+	float			active_angle;
 	float			x_angle;
 	float			y_angle;
+	float			x_hit_angle;
+	float			y_hit_angle;
+	float			x_incr;
+	float			y_incr;
+	float			x_angle_incr;
+	float			y_angle_incr;
 	float			schuin;
+	float			start;
+	float			finaldist;
+	float			perc;
 }					t_sprite;
 
 typedef struct		s_vars
@@ -197,4 +207,5 @@ int					mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y,
 void				my_mlx_pixel_put2(t_vars *v, int x, int y, int color);
 int					my_mlx_pixel_putwall(t_vars *v, int x, int y, int color);
 void				my_image_put(t_vars *v, t_tex *tex, int x, int y);
+void				my_sprite_put(t_vars *v, t_tex *tex, int x, int y);
 #endif
