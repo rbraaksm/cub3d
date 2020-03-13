@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/13 13:23:06 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 14:22:01 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 17:55:54 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,51 @@
 
 /* MAP STRUCT */
 # define MAP map->map
+
+/* RAY STRUCT */
+# define PLAYDIR v->ray->playdir
+# define RAY_ANGLE v->ray->angle
+# define RAYX v->ray->rayx
+# define RAYY v->ray->rayy
+# define SIDEX v->ray->sidex
+# define SIDEY v->ray->sidey
+# define DELTAX v->ray->deltax
+# define DELTAY v->ray->deltay
+# define WALLDIST v->ray->walldist
+# define RAY_FINAL v->ray->finaldist
+# define SPRITE_HIT v->ray->sprite_hit
+# define HAS_SPRITE v->ray->sprite
+# define SIDE_HIT v->ray->side_hit
+
+/* PLAYER STRUCT */
+# define PLAYER_X v->player->x
+# define PLAYER_Y v->player->y
+# define MOVE_LEFT v->player->move_l
+# define MOVE_RIGHT v->player->move_r
+
+/* SPRITE STRUCT */
+# define MIDDLE_X v->s->middle_x
+# define MIDDLE_Y v->s->middle_y
+# define SPRITE_ANGLE v->s->angle
+# define SCHUIN v->s->schuin
+# define X_HIT v->s->x_hit
+# define Y_HIT v->s->y_hit
+# define X_ANGLE v->s->x_angle
+# define Y_ANGLE v->s->y_angle
+# define Y_INCR v->s->y_incr
+# define X_INCR v->s->x_incr
+# define X_HIT_ANGLE v->s->x_hit_angle
+# define Y_HIT_ANGLE v->s->y_hit_angle
+# define X_ANGLE_INCR v->s->x_angle_incr
+# define Y_ANGLE_INCR v->s->y_angle_incr
+# define SPRITE_FINAL v->s->finaldist
+# define PERC v->s->perc
+# define START v->s->start
+
+/* VARS STRUCT */
+# define STEP_X v->stepx
+# define STEP_Y v->stepy
+# define TILE_W v->tile_w
+# define TILE_H v->tile_h
+
 #endif

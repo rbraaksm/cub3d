@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 15:47:58 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 14:23:27 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 17:56:13 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,23 @@ void	player(t_vars *v, float move, unsigned int color)
 	float		x;
 	float		y;
 
-	if (v->player->move_l == 1 || v->player->move_r == 1)
+	if (MOVE_LEFT == 1 || MOVE_RIGHT == 1)
 	{
-		x = move * cos(v->ray->playdir);
-		y = move * sin(v->ray->playdir);
+		x = move * cos(PLAYDIR);
+		y = move * sin(PLAYDIR);
 	}
 	else
 	{
-		x = -(move * sin(v->ray->playdir));
-		y = move * cos(v->ray->playdir);
+		x = -(move * sin(PLAYDIR));
+		y = move * cos(PLAYDIR);
 	}
-	if (v->MAP[(int)(v->player->y - y)][(int)(v->player->x + x)] != '1' &&
-		v->MAP[(int)(v->player->y - y)][(int)(v->player->x + x)] != '2')
+	if (v->MAP[(int)(PLAYER_Y - y)][(int)(PLAYER_X + x)] != '1' &&
+		v->MAP[(int)(PLAYER_Y - y)][(int)(PLAYER_X + x)] != '2')
 	{
 		ft_view(v, 0, 0x000000);
-		v->player->x += x;
-		v->player->y -= y;
-		my_mlx_pixel_put(v, v->player->x * v->tile_w, v->player->y * v->tile_h, color);
+		PLAYER_X += x;
+		PLAYER_Y -= y;
+		my_mlx_pixel_put(v, PLAYER_X * TILE_W, PLAYER_Y * TILE_H, color);
 		ft_view(v, 0, 0x87CEFA);
 	}
 }

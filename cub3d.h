@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 13:27:20 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 17:15:53 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,10 @@ typedef struct		s_player
 
 typedef struct		s_ray
 {
+	float			playdir;
+	float			angle;
 	float			rayx;
 	float			rayy;
-	float			angle;
 	float			sidex;
 	float			deltax;
 	float			sidey;
@@ -123,7 +124,6 @@ typedef struct		s_ray
 	float			opp;
 	float			adjust;
 	float			walldist;
-	float			playdir;
 	int				side_hit;
 	int				sprite;
 	int				sprite_hit;

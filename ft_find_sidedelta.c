@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 16:20:36 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 17:51:56 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,125 +15,125 @@
 
 void	sprite_north(t_vars *v)
 {
-	if (v->s->x_angle_incr > 0)
+	if (X_ANGLE_INCR > 0)
 	{
-		while (v->s->x_hit > v->s->x_hit_angle)
+		while (X_HIT > X_HIT_ANGLE)
 		{
-			v->s->y_hit_angle -= 0.001;
-			v->s->y_hit -= 0.001;
-			v->s->x_hit -= v->s->x_angle_incr;
-			v->s->x_hit_angle -= v->s->x_incr;
+			Y_HIT_ANGLE -= 0.001;
+			Y_HIT -= 0.001;
+			X_HIT -= X_ANGLE_INCR;
+			X_HIT_ANGLE -= X_INCR;
 		}
 	}
 	else
 	{
-		while (v->s->x_hit < v->s->x_hit_angle)
+		while (X_HIT < X_HIT_ANGLE)
 		{
-			v->s->y_hit_angle -= 0.001;
-			v->s->y_hit -= 0.001;
-			v->s->x_hit -= v->s->x_angle_incr;
-			v->s->x_hit_angle -= v->s->x_incr;
+			Y_HIT_ANGLE -= 0.001;
+			Y_HIT -= 0.001;
+			X_HIT -= X_ANGLE_INCR;
+			X_HIT_ANGLE -= X_INCR;
 		}
 	}
-	v->s->start = v->s->middle_x - (fabs(v->s->x_angle) / 2);
-	v->s->active_angle = v->s->x_angle;
+	START = MIDDLE_X - (fabs(X_ANGLE) / 2);
+	v->s->active_angle = X_ANGLE;
 }
 
 void	sprite_east(t_vars *v)
 {
-	if (v->s->x_angle_incr < 0)
+	if (X_ANGLE_INCR < 0)
 	{
-		while (v->s->y_hit > v->s->y_hit_angle)
+		while (Y_HIT > Y_HIT_ANGLE)
 		{
-			v->s->x_hit_angle += 0.001;
-			v->s->x_hit += 0.001;
-			v->s->y_hit += v->s->y_angle_incr;
-			v->s->y_hit_angle += v->s->y_incr;
+			X_HIT_ANGLE += 0.001;
+			X_HIT += 0.001;
+			Y_HIT += Y_ANGLE_INCR;
+			Y_HIT_ANGLE += Y_INCR;
 		}
 	}
 	else
 	{
-		while (v->s->y_hit < v->s->y_hit_angle)
+		while (Y_HIT < Y_HIT_ANGLE)
 		{
-			v->s->x_hit_angle += 0.001;
-			v->s->x_hit += 0.001;
-			v->s->y_hit += v->s->y_angle_incr;
-			v->s->y_hit_angle += v->s->y_incr;
+			X_HIT_ANGLE += 0.001;
+			X_HIT += 0.001;
+			Y_HIT += Y_ANGLE_INCR;
+			Y_HIT_ANGLE += Y_INCR;
 		}
 	}
-	v->s->start = v->s->middle_y - (fabs(v->s->y_angle) / 2);
-	v->s->active_angle = v->s->y_angle;
+	START = MIDDLE_Y - (fabs(Y_ANGLE) / 2);
+	v->s->active_angle = Y_ANGLE;
 }
 
 void	sprite_south(t_vars *v)
 {
-	if (v->s->x_angle_incr > 0)
+	if (X_ANGLE_INCR > 0)
 	{
-		while (v->s->x_hit < v->s->x_hit_angle)
+		while (X_HIT < X_HIT_ANGLE)
 		{
-			v->s->y_hit_angle += 0.001;
-			v->s->y_hit += 0.001;
-			v->s->x_hit += v->s->x_angle_incr;
-			v->s->x_hit_angle += v->s->x_incr;
+			Y_HIT_ANGLE += 0.001;
+			Y_HIT += 0.001;
+			X_HIT += X_ANGLE_INCR;
+			X_HIT_ANGLE += X_INCR;
 		}
 	}
 	else
 	{
-		while (v->s->x_hit > v->s->x_hit_angle)
+		while (X_HIT > X_HIT_ANGLE)
 		{
-			v->s->y_hit_angle += 0.001;
-			v->s->y_hit += 0.001;
-			v->s->x_hit += v->s->x_angle_incr;
-			v->s->x_hit_angle += v->s->x_incr;
+			Y_HIT_ANGLE += 0.001;
+			Y_HIT += 0.001;
+			X_HIT += X_ANGLE_INCR;
+			X_HIT_ANGLE += X_INCR;
 		}
 	}
-	v->s->start = v->s->middle_x - (fabs(v->s->x_angle) / 2);
-	v->s->active_angle = v->s->x_angle;
+	START = MIDDLE_X - (fabs(X_ANGLE) / 2);
+	v->s->active_angle = X_ANGLE;
 }
 
 void	sprite_west(t_vars *v)
 {
-	if (v->s->x_angle_incr < 0)
+	if (X_ANGLE_INCR < 0)
 	{
-		while (v->s->y_hit < v->s->y_hit_angle)
+		while (Y_HIT < Y_HIT_ANGLE)
 		{
-			v->s->x_hit_angle -= 0.001;
-			v->s->x_hit -= 0.001;
-			v->s->y_hit -= v->s->y_angle_incr;
-			v->s->y_hit_angle -= v->s->y_incr;
+			X_HIT_ANGLE -= 0.001;
+			X_HIT -= 0.001;
+			Y_HIT -= Y_ANGLE_INCR;
+			Y_HIT_ANGLE -= Y_INCR;
 		}
 	}
 	else
 	{
-		while (v->s->y_hit > v->s->y_hit_angle)
+		while (Y_HIT > Y_HIT_ANGLE)
 		{
-			v->s->x_hit_angle -= 0.001;
-			v->s->x_hit -= 0.001;
-			v->s->y_hit -= v->s->y_angle_incr;
-			v->s->y_hit_angle -= v->s->y_incr;
+			X_HIT_ANGLE -= 0.001;
+			X_HIT -= 0.001;
+			Y_HIT -= Y_ANGLE_INCR;
+			Y_HIT_ANGLE -= Y_INCR;
 		}
 	}
-	v->s->start = v->s->middle_y - (fabs(v->s->y_angle) / 2);
-	v->s->active_angle = v->s->y_angle;
+	START = MIDDLE_Y - (fabs(Y_ANGLE) / 2);
+	v->s->active_angle = Y_ANGLE;
 }
 
 float	calc_angle(t_vars *v)
 {
-	if (v->ray->sidey < v->ray->sidex)
+	if (SIDEY < SIDEX)
 	{
-		if ((v->ray->playdir < M_PI && v->ray->playdir > (M_PI * 0.5)) ||
-			(v->ray->playdir < (M_PI * 2) && v->ray->playdir > (M_PI * 1.5)))
-			return (v->ray->playdir - (M_PI / 2));
+		if ((PLAYDIR < M_PI && PLAYDIR > (M_PI * 0.5)) ||
+			(PLAYDIR < (M_PI * 2) && PLAYDIR > (M_PI * 1.5)))
+			return (PLAYDIR - (M_PI / 2));
 		else
-			return (v->ray->playdir + (M_PI / 2));
+			return (PLAYDIR + (M_PI / 2));
 	}
 	else
 	{
-		if ((v->ray->playdir < M_PI && v->ray->playdir > (M_PI * 0.5)) ||
-			(v->ray->playdir < (M_PI * 2) && v->ray->playdir > (M_PI * 1.5)))
-			return (v->ray->playdir + (M_PI / 2));
+		if ((PLAYDIR < M_PI && PLAYDIR > (M_PI * 0.5)) ||
+			(PLAYDIR < (M_PI * 2) && PLAYDIR > (M_PI * 1.5)))
+			return (PLAYDIR + (M_PI / 2));
 		else
-			return (v->ray->playdir - (M_PI / 2));
+			return (PLAYDIR - (M_PI / 2));
 	}
 }
 
@@ -141,104 +141,104 @@ int		sprite_data(t_vars *v, int side, int mapy, int mapx)
 {
 	if (side == 0)
 	{
-		// v->ray->walldist = cos(v->ray->angle - v->ray->playdir) * v->ray->sidex;
-		if (v->ray->rayx >= 0)
-			v->ray->sprite_hit = 1;
+		WALLDIST = cos(RAY_ANGLE - PLAYDIR) * SIDEX;
+		if (RAYX >= 0)
+			SPRITE_HIT = 1;
 		else
-			v->ray->sprite_hit = 3;
-		v->ray->finaldist = v->ray->sidex;
+			SPRITE_HIT = 3;
+		RAY_FINAL = SIDEX;
 	}
 	else
 	{
-		// v->ray->walldist = cos(v->ray->angle - v->ray->playdir) * v->ray->sidey;
-		if (v->ray->rayy > 0)
-			v->ray->sprite_hit = 2;
+		WALLDIST = cos(RAY_ANGLE - PLAYDIR) * SIDEY;
+		if (RAYY > 0)
+			SPRITE_HIT = 2;
 		else
-			v->ray->sprite_hit = 0;
-		v->ray->finaldist = v->ray->sidey;
+			SPRITE_HIT = 0;
+		RAY_FINAL = SIDEY;
 	}
 
     /* middelpunt tile */
-	v->s->middle_x = (float)mapx + 0.5;
-	v->s->middle_y = (float)mapy + 0.5;
+	MIDDLE_X = (float)mapx + 0.5;
+	MIDDLE_Y = (float)mapy + 0.5;
 	// if (v->z < 1)
-	// 	my_mlx_pixel_put(v, v->s->middle_x * v->tile_w, v->s->middle_y * v->tile_h, 0xff0000);
+	// 	my_mlx_pixel_put(v, MIDDLE_X * TILE_W, MIDDLE_Y * TILE_H, 0xff0000);
 
 	/* X- Y-as hits */
-	v->s->x_hit = v->player->x + (v->ray->finaldist * v->ray->rayx);
-	v->s->y_hit = v->player->y + (v->ray->finaldist * v->ray->rayy);
+	X_HIT = PLAYER_X + (RAY_FINAL * RAYX);
+	Y_HIT = PLAYER_Y + (RAY_FINAL * RAYY);
 	// if (v->z < 1)
-	// 	my_mlx_pixel_put(v, v->s->x_hit * v->tile_w, v->s->y_hit * v->tile_h, 0xff0000);
+	// 	my_mlx_pixel_put(v, X_HIT * TILE_W, Y_HIT * TILE_H, 0xff0000);
 
 	/* Haakse lijn op playdir */
 	float	x;
 	float	y;
-	x = v->s->middle_x * v->tile_w;
-	y = v->s->middle_y * v->tile_h;
-	v->s->angle = calc_angle(v);
+	x = MIDDLE_X * TILE_W;
+	y = MIDDLE_Y * TILE_H;
+	SPRITE_ANGLE = calc_angle(v);
 	// while (my_mlx_pixel_putwall(v, x, y, 0x00ff00) == 1 && v->z < 1)
 	// {
-	// 	x += sin(v->s->angle);
-	// 	y += cos(v->s->angle);
+	// 	x += sin(SPRITE_ANGLE);
+	// 	y += cos(SPRITE_ANGLE);
 	// }
-	v->s->x_angle = sin(v->s->angle);
-	v->s->y_angle = cos(v->s->angle);
-	if (v->ray->sidey < v->ray->sidex)
+	X_ANGLE = sin(SPRITE_ANGLE);
+	Y_ANGLE = cos(SPRITE_ANGLE);
+	if (SIDEY < SIDEX)
 	{
-		v->s->schuin = 0.5 / cos(v->s->angle);
-		v->s->y_hit_angle = v->s->y_hit;
-		if (v->ray->playdir > (M_PI * 0.5) && v->ray->playdir < (M_PI * 1.5))
-			v->s->x_hit_angle = v->s->middle_x + (v->s->schuin * v->s->x_angle);
+		SCHUIN = 0.5 / cos(SPRITE_ANGLE);
+		Y_HIT_ANGLE = Y_HIT;
+		if (PLAYDIR > (M_PI * 0.5) && PLAYDIR < (M_PI * 1.5))
+			X_HIT_ANGLE = MIDDLE_X + (SCHUIN * X_ANGLE);
 		else
-			v->s->x_hit_angle = v->s->middle_x - (v->s->schuin * v->s->x_angle);
+			X_HIT_ANGLE = MIDDLE_X - (SCHUIN * X_ANGLE);
 	}
 	else
 	{
-		v->s->schuin = 0.5 / sin(v->s->angle);
-		v->s->x_hit_angle = v->s->x_hit;
-		if (v->ray->playdir < M_PI && v->ray->playdir > 0)
-			v->s->y_hit_angle = v->s->middle_y - (v->s->schuin * v->s->y_angle);
+		SCHUIN = 0.5 / sin(SPRITE_ANGLE);
+		X_HIT_ANGLE = X_HIT;
+		if (PLAYDIR < M_PI && PLAYDIR > 0)
+			Y_HIT_ANGLE = MIDDLE_Y - (SCHUIN * Y_ANGLE);
 		else
-			v->s->y_hit_angle = v->s->middle_y + (v->s->schuin * v->s->y_angle);
+			Y_HIT_ANGLE = MIDDLE_Y + (SCHUIN * Y_ANGLE);
 	}
-	// if (v->z < 1 && fabs(v->s->x_hit_angle * v->tile_w) > 0 && fabs(v->s->x_hit_angle * v->tile_w) < v->d->resx && fabs(v->s->y_hit_angle * v->tile_h) > 0 && fabs(v->s->y_hit_angle * v->tile_h) < v->d->resy)
-	// 	my_mlx_pixel_put(v, fabs(v->s->x_hit_angle * v->tile_w), fabs(v->s->y_hit_angle * v->tile_h), 0xff0000);
-	v->s->x_incr = (v->s->x_angle / v->s->y_angle) * 0.001;
-	v->s->x_angle_incr = (v->ray->rayx / v->ray->rayy) * 0.001;
-	v->s->y_incr = (v->s->y_angle / v->s->x_angle) * 0.001;
-	v->s->y_angle_incr = (v->ray->rayy / v->ray->rayx) * 0.001;
-	if (v->ray->sprite_hit == 0)
+	// if (v->z < 1 && fabs(X_HIT_ANGLE * TILE_W) > 0 && fabs(X_HIT_ANGLE * TILE_W) < v->d->resx && fabs(Y_HIT_ANGLE * TILE_H) > 0 && fabs(Y_HIT_ANGLE * TILE_H) < v->d->resy)
+	// 	my_mlx_pixel_put(v, fabs(X_HIT_ANGLE * TILE_W), fabs(Y_HIT_ANGLE * TILE_H), 0xff0000);
+	X_INCR = (X_ANGLE / Y_ANGLE) * 0.001;
+	X_ANGLE_INCR = (RAYX / RAYY) * 0.001;
+	Y_INCR = (Y_ANGLE / X_ANGLE) * 0.001;
+	Y_ANGLE_INCR = (RAYY / RAYX) * 0.001;
+	if (SPRITE_HIT == 0)
 		sprite_north(v);
-	else if (v->ray->sprite_hit == 1)
+	else if (SPRITE_HIT == 1)
 		sprite_east(v);
-	else if (v->ray->sprite_hit == 2)
+	else if (SPRITE_HIT == 2)
 		sprite_south(v);
-	else if (v->ray->sprite_hit == 3)
+	else if (SPRITE_HIT == 3)
 		sprite_west(v);
-	// my_mlx_pixel_put(v, fabs(v->s->x_hit * v->tile_w), fabs(v->s->y_hit * v->tile_h), 0xff0000);
-	if (v->s->x_hit < v->s->start || v->s->x_hit > (v->s->start + fabs(v->s->x_angle)))
+	// my_mlx_pixel_put(v, fabs(X_HIT * TILE_W), fabs(Y_HIT * TILE_H), 0xff0000);
+	if (X_HIT < START || X_HIT > (START + fabs(X_ANGLE)))
 	{
-		v->ray->sprite = 0;
-		v->s->finaldist = 0;
+		HAS_SPRITE = 0;
+		SPRITE_FINAL = 0;
 	}
-	if (v->s->y_hit < v->s->start || v->s->y_hit > (v->s->start + fabs(v->s->y_angle)))
+	if (Y_HIT < START || Y_HIT > (START + fabs(Y_ANGLE)))
 	{
-		v->ray->sprite = 0;
-		v->s->finaldist = 0;
+		HAS_SPRITE = 0;
+		SPRITE_FINAL = 0;
 	}
-	if (v->ray->sprite_hit == 0 || v->ray->sprite_hit == 2)
+	if (SPRITE_HIT == 0 || SPRITE_HIT == 2)
 	{
-		v->s->perc = (v->s->x_hit - v->s->start) / fabs(v->s->active_angle);
-		v->s->finaldist = fabs(sqrt(pow(v->s->middle_x - v->player->x, 2) + pow(v->s->middle_y - v->player->y, 2)));	
+		PERC = (X_HIT - START) / fabs(v->s->active_angle);
+		SPRITE_FINAL = fabs(sqrt(pow(MIDDLE_X - PLAYER_X, 2) + pow(MIDDLE_Y - PLAYER_Y, 2)));	
 	}
 	else
 	{
-		v->s->perc = 1 - ((v->s->y_hit - v->s->start) / fabs(v->s->active_angle));
-		v->s->finaldist = fabs(sqrt(pow(v->s->middle_y - v->player->y, 2) + pow(v->s->middle_x - v->player->x, 2)));	
+		PERC = 1 - ((Y_HIT - START) / fabs(v->s->active_angle));
+		SPRITE_FINAL = fabs(sqrt(pow(MIDDLE_Y - PLAYER_Y, 2) + pow(MIDDLE_X - PLAYER_X, 2)));	
 	}
-	if (v->s->perc > 1 || v->s->perc < 0)
+	if (PERC > 1 || PERC < 0)
 		return (0);
-	v->ray->sprite = 1;
+	HAS_SPRITE = 1;
 	return (1);
 }
 
@@ -246,35 +246,35 @@ int		wall_data(t_vars *v, int side)
 {
 	if (side == 0)
 	{
-		v->ray->walldist = cos(v->ray->angle - v->ray->playdir) * v->ray->sidex;
-		if (v->ray->rayx >= 0)
-			v->ray->side_hit = 1;
+		WALLDIST = cos(RAY_ANGLE - PLAYDIR) * SIDEX;
+		if (RAYX >= 0)
+			SIDE_HIT = 1;
 		else
-			v->ray->side_hit = 3;
-		v->ray->finaldist = v->ray->sidex;
+			SIDE_HIT = 3;
+		RAY_FINAL = SIDEX;
 	}
 	else
 	{
-		v->ray->walldist = cos(v->ray->angle - v->ray->playdir) * v->ray->sidey;
-		if (v->ray->rayy > 0)
-			v->ray->side_hit = 2;
+		WALLDIST = cos(RAY_ANGLE - PLAYDIR) * SIDEY;
+		if (RAYY > 0)
+			SIDE_HIT = 2;
 		else
-			v->ray->side_hit = 0;
-		v->ray->finaldist = v->ray->sidey;
+			SIDE_HIT = 0;
+		RAY_FINAL = SIDEY;
 	}
 	return (1);
 }
 
 int		new_sidedist(t_vars *v, int side, int mapy, int mapx)
 {
-	if (v->map->map[mapy][mapx] == '2')
+	if (v->MAP[mapy][mapx] == '2')
 		sprite_data(v, side, mapy, mapx);
-	if (v->map->map[mapy][mapx] == '1')
+	if (v->MAP[mapy][mapx] == '1')
 		return ((wall_data(v, side) == 1));
 	if (side == 0)
-		v->ray->sidex += v->ray->deltax;
+		SIDEX += DELTAX;
 	else
-		v->ray->sidey += v->ray->deltay;
+		SIDEY += DELTAY;
 	return (0);
 }
 
@@ -284,18 +284,18 @@ void	find_hit(t_vars *v)
 	int		mapx;
 	int		mapy;
 
-	mapx = v->player->x;
-	mapy = v->player->y;
+	mapx = PLAYER_X;
+	mapy = PLAYER_Y;
 	while (1)
 	{
-		if (v->ray->sidex < v->ray->sidey)
+		if (SIDEX < SIDEY)
 		{
 			side = 0;
-			mapx += v->stepx;
+			mapx += STEP_X;
 		}
 		else
 		{
-			mapy += v->stepy;
+			mapy += STEP_Y;
 			side = 1;
 		}
 		if (new_sidedist(v, side, mapy, mapx) == 1)
@@ -308,26 +308,26 @@ void	find_side_delta(t_vars *v)
 	float	x;
 	float	y;
 
-	if (v->ray->playdir > (0.5 * M_PI) && v->ray->playdir < (1.5 * M_PI))
-		y = v->player->y - (int)v->player->y;
+	if (PLAYDIR > (0.5 * M_PI) && PLAYDIR < (1.5 * M_PI))
+		y = PLAYER_Y - (int)PLAYER_Y;
 	else
-		y = 1 - (v->player->y - (int)v->player->y);
-	if (v->ray->playdir > M_PI && v->ray->playdir < (M_PI * 2))
-		x = v->player->x - (int)v->player->x;
+		y = 1 - (PLAYER_Y - (int)PLAYER_Y);
+	if (PLAYDIR > M_PI && PLAYDIR < (M_PI * 2))
+		x = PLAYER_X - (int)PLAYER_X;
 	else
-		x = 1 - (v->player->x - (int)v->player->x);
-	v->ray->rayx = sin(v->ray->playdir);
-	v->ray->rayy = cos(v->ray->playdir);
-	v->ray->sidex = fabs(x / v->ray->rayx);
-	v->ray->sidey = fabs(y / v->ray->rayy);
-	v->ray->deltax = fabs(1 / v->ray->rayx);
-	v->ray->deltay = fabs(1 / v->ray->rayy);
-	if (v->ray->rayx < 0)
-		v->stepx = -1;
+		x = 1 - (PLAYER_X - (int)PLAYER_X);
+	RAYX = sin(PLAYDIR);
+	RAYY = cos(PLAYDIR);
+	SIDEX = fabs(x / RAYX);
+	SIDEY = fabs(y / RAYY);
+	DELTAX = fabs(1 / RAYX);
+	DELTAY = fabs(1 / RAYY);
+	if (RAYX < 0)
+		STEP_X = -1;
 	else
-		v->stepx = 1;
-	if (v->ray->rayy < 0)
-		v->stepy = -1;
+		STEP_X = 1;
+	if (RAYY < 0)
+		STEP_Y = -1;
 	else
-		v->stepy = 1;
+		STEP_Y = 1;
 }
