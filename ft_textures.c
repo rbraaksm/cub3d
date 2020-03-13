@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 11:16:33 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 11:39:36 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,5 @@ void	draw_wall(t_vars *v)
 		length--;
 		tex->y_tex -= y;
 	}
-	// if (v->ray->sprite == 1)
-	// 	draw_sprite(v);
 	draw_floor(v, tmpcount);
 }

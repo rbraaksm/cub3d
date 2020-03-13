@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 11:08:00 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 12:41:12 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ void	sprite_west(t_vars *v)
 
 float	calc_angle(t_vars *v)
 {
-	/* NORTH and SOUTH */
 	if (v->ray->sidey < v->ray->sidex)
 	{
 		if ((v->ray->playdir < M_PI && v->ray->playdir > (M_PI * 0.5)) ||
@@ -138,7 +137,6 @@ float	calc_angle(t_vars *v)
 	}
 	else
 	{
-		/* EAST and WEST */
 		if ((v->ray->playdir < M_PI && v->ray->playdir > (M_PI * 0.5)) ||
 			(v->ray->playdir < (M_PI * 2) && v->ray->playdir > (M_PI * 1.5)))
 			return (v->ray->playdir + (M_PI / 2));
@@ -151,7 +149,7 @@ int		sprite_data(t_vars *v, int side, int mapy, int mapx)
 {
 	if (side == 0)
 	{
-		v->ray->walldist = cos(v->ray->angle - v->ray->playdir) * v->ray->sidex;
+		// v->ray->walldist = cos(v->ray->angle - v->ray->playdir) * v->ray->sidex;
 		if (v->ray->rayx >= 0)
 			v->ray->sprite_hit = 1;
 		else
@@ -160,7 +158,7 @@ int		sprite_data(t_vars *v, int side, int mapy, int mapx)
 	}
 	else
 	{
-		v->ray->walldist = cos(v->ray->angle - v->ray->playdir) * v->ray->sidey;
+		// v->ray->walldist = cos(v->ray->angle - v->ray->playdir) * v->ray->sidey;
 		if (v->ray->rayy > 0)
 			v->ray->sprite_hit = 2;
 		else
@@ -171,8 +169,8 @@ int		sprite_data(t_vars *v, int side, int mapy, int mapx)
     /* middelpunt tile */
 	v->s->middle_x = (float)mapx + 0.5;
 	v->s->middle_y = (float)mapy + 0.5;
-	if (v->z < 1)
-		my_mlx_pixel_put(v, v->s->middle_x * v->tile_w, v->s->middle_y * v->tile_h, 0xff0000);
+	// if (v->z < 1)
+	// 	my_mlx_pixel_put(v, v->s->middle_x * v->tile_w, v->s->middle_y * v->tile_h, 0xff0000);
 
 	/* X- Y-as hits */
 	v->s->x_hit = v->player->x + (v->ray->finaldist * v->ray->rayx);
@@ -238,7 +236,11 @@ int		sprite_data(t_vars *v, int side, int mapy, int mapx)
 		v->s->perc = 0;
 		v->s->finaldist = 0;
 	}
-	v->s->perc = fabs((v->s->x_hit - v->s->start) / fabs(v->s->active_angle));
+	if (v->ray->sprite_hit == 0 || v->ray->sprite_hit == 2)
+		v->s->perc = fabs((v->s->x_hit - v->s->start) / fabs(v->s->active_angle));
+	else
+		v->s->perc = fabs((v->s->y_hit - v->s->start) / fabs(v->s->active_angle));
+	
 	if (v->s->perc > 1 || v->s->perc < 0)
 		return (0);
 	v->s->finaldist = fabs(sqrt(pow(v->s->middle_x - v->player->x, 2) + pow(v->s->middle_y - v->player->y, 2)));
@@ -266,9 +268,6 @@ int		wall_data(t_vars *v, int side)
 			v->ray->side_hit = 0;
 		v->ray->finaldist = v->ray->sidey;
 	}
-	// draw_wall(v);
-	// if (v->ray->sprite == 1)
-	// 	draw_sprite(v);
 	return (1);
 }
 
