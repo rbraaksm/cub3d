@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:33:27 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/09 13:51:02 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 14:03:47 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		make_string(char **argv, t_flags *d)
 	int		fd;
 	int		ret;
 
-	d->str = "";
+	STR = "";
 	ret = 1;
 	fd = open(argv[1], O_RDONLY);
 	while (ret > 0)
@@ -83,11 +83,11 @@ int		make_string(char **argv, t_flags *d)
 		buf[ret] = '\0';
 		if (ret == -1)
 		{
-			d->error = "NOT A VALID FILE\n";
+			ERROR = "NOT A VALID FILE\n";
 			return (0);
 		}
-		d->str = ft_strjoin((const char *)d->str, buf);
-		if (d->str == NULL)
+		STR = ft_strjoin((const char *)STR, buf);
+		if (STR == NULL)
 			return (0);
 	}
 	return (1);

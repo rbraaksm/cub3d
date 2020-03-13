@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 14:13:44 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/06 13:39:33 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 14:25:13 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void	printblock(t_vars *v, int row, int column)
 		x = column * v->tile_w;
 		while (x < ((column * v->tile_w) + v->tile_w))
 		{
-			if (v->map->map[row][column] == '1')
+			if (v->MAP[row][column] == '1')
 				my_mlx_pixel_put(v, x, y, 0x8A2BE2);
-			else if (v->map->map[row][column] == '2')
+			else if (v->MAP[row][column] == '2')
 				my_mlx_pixel_put(v, x, y, 0x00FF7F);
 			x++;
 		}
@@ -53,11 +53,11 @@ void	make_grid(t_vars *v)
 		c = 0;
 		while (c < v->map->column)
 		{
-			if (v->map->map[r][c] == '1' || v->map->map[r][c] == '2')
+			if (v->MAP[r][c] == '1' || v->MAP[r][c] == '2')
 				printblock(v, r, c);
-			if (v->map->map[r][c] == 'N')
+			if (v->MAP[r][c] == 'N')
 			{
-				v->player->y = r  + 0.5;
+				v->player->y = r + 0.5;
 				v->player->x = c + 0.5;
 			}
 			c++;

@@ -6,13 +6,14 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 10:23:01 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 13:27:20 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 # define BUFFER_SIZE 128
+# include "definitions.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/25 11:43:32 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 14:22:44 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	make_strmap(t_map *map, char *strmap)
 				statici++;
 			else
 			{
-				map->map[i][index] = strmap[statici];
+				MAP[i][index] = strmap[statici];
 				index++;
 				statici++;
 			}
 		}
-		map->map[i][index] = '\0';
+		MAP[i][index] = '\0';
 		statici++;
 		i++;
 	}
@@ -93,7 +93,7 @@ int		make_map(t_flags *d, t_map *map, char *strmap)
 	index = 0;
 	find_row(strmap, map);
 	find_column(map, strmap);
-	map->map = (char **)malloc(sizeof(char*) * (map->row + 1));
+	MAP = (char **)malloc(sizeof(char*) * (map->row + 1));
 	if (map->row < 2)
 		return (0);
 	while (irow < map->row)
@@ -106,7 +106,7 @@ int		make_map(t_flags *d, t_map *map, char *strmap)
 				mapi++;
 		}
 		i++;
-		map->map[irow] = malloc(sizeof(char *) * (mapi + 1));
+		MAP[irow] = malloc(sizeof(char *) * (mapi + 1));
 		irow++;
 	}
 	make_strmap(map, strmap);
@@ -120,9 +120,9 @@ int		find_start(t_flags *d)
 	int		index;
 
 	index = 0;
-	while (d->str[index] != '\0')
+	while (STR[index] != '\0')
 	{
-		if (d->str[index] == '\n' && d->str[index + 1] == '1')
+		if (STR[index] == '\n' && STR[index + 1] == '1')
 			return (index + 1);
 		index++;
 	}
@@ -152,14 +152,14 @@ int		fill_grid(t_flags *d, t_map *map)
 	start = find_start(d);
 	if (start == 0)
 		return (0);
-	end = find_end(d->str, start);
+	end = find_end(STR, start);
 	strmap = malloc(sizeof(char *) * ((end - start) + 1));
 	if (strmap == NULL)
 		return (0);
 	index = 0;
 	while (index < (end - start + 1))
 	{
-		strmap[index] = d->str[index + start];
+		strmap[index] = STR[index + start];
 		index++;
 	}
 	strmap[index] = '\0';

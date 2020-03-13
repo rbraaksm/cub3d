@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/09 13:11:06 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 14:04:14 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,24 @@ int		fill_mapindex(t_flags *d)
 	int		index;
 
 	index = 0;
-	while (d->str[index] != '\0')
+	while (STR[index] != '\0')
 	{
-		if (d->str[index] == 'R')
-			d->r = (char **)ft_strdupchr(&(d->str)[index + 1], '\n');
-		if (d->str[index] == 'N' && d->str[index + 1] == 'O')
-			d->no = ft_strdupchr(&(d->str)[index + 2], '\n');
-		if (d->str[index] == 'S' && d->str[index + 1] == 'O')
-			d->so = ft_strdupchr(&(d->str)[index + 2], '\n');
-		if (d->str[index] == 'W' && d->str[index + 1] == 'E')
-			d->we = ft_strdupchr(&(d->str)[index + 2], '\n');
-		if (d->str[index] == 'E' && d->str[index + 1] == 'A')
-			d->ea = ft_strdupchr(&(d->str)[index + 2], '\n');
-		if (d->str[index] == 'S' && d->str[index + 1] != 'O' && !d->s)
-			d->s = ft_strdupchr(&(d->str)[index + 2], '\n');
-		if (d->str[index] == 'F')
-			d->f = (char **)ft_strdupchr(&(d->str)[index + 1], '\n');
-		if (d->str[index] == 'C')
-			d->c = (char **)ft_strdupchr(&(d->str)[index + 1], '\n');
+		if (STR[index] == 'R')
+			RES = (char **)ft_strdupchr(&(STR)[index + 1], '\n');
+		if (STR[index] == 'N' && STR[index + 1] == 'O')
+			NORTH = ft_strdupchr(&(STR)[index + 2], '\n');
+		if (STR[index] == 'S' && STR[index + 1] == 'O')
+			SOUTH = ft_strdupchr(&(STR)[index + 2], '\n');
+		if (STR[index] == 'W' && STR[index + 1] == 'E')
+			WEST = ft_strdupchr(&(STR)[index + 2], '\n');
+		if (STR[index] == 'E' && STR[index + 1] == 'A')
+			EAST = ft_strdupchr(&(STR)[index + 2], '\n');
+		if (STR[index] == 'S' && STR[index + 1] != 'O' && !d->s)
+			SPRITE = ft_strdupchr(&(STR)[index + 2], '\n');
+		if (STR[index] == 'F')
+			FSTR = (char **)ft_strdupchr(&(STR)[index + 1], '\n');
+		if (STR[index] == 'C')
+			CSTR = (char **)ft_strdupchr(&(STR)[index + 1], '\n');
 		index++;
 	}
 	return (1);

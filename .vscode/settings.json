@@ -8,6 +8,7 @@
 		"vector": "c",
 		"type_traits": "c",
 		"mlx.h": "c",
-		"ostream": "c"
+		"ostream": "c",
+		"definitions.h": "c"
 	}
 }

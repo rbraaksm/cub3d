@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 11:46:27 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 14:58:51 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 	float	y;
 
 	v->i = 0;
-	v->z = 0;
+	v->z = 1;
 	ft_cleanview(v);
 	make_grid(v);
 	v->ray->playdir += rot;
@@ -153,7 +153,7 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 		v->ray->sprite = 0;
 		x = v->player->x * v->tile_w;
 		y = v->player->y * v->tile_h;
-		while (my_mlx_pixel_putwall(v, x, y, color) == 1 && v->z < 1)
+		while (my_mlx_pixel_putwall(v, x, y, color) == 1)
 		{
 			x += sin(v->ray->playdir);
 			y += cos(v->ray->playdir);

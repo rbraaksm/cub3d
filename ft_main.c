@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/10 08:43:27 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 13:57:40 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int		check_input(int argc, char **argv, t_flags *d)
 
 	if (argc < 2)
 	{
-		d->error = "ERROR: NEED ONE MORE AGRUMENT\n";
+		ERROR = "ERROR: NEED ONE MORE AGRUMENT\n";
 		return (0);
 	}
-	d->error = "ERROR: IT'S NOT A .CUB FILE\n";
+	ERROR = "ERROR: IT'S NOT A .CUB FILE\n";
 	i = ft_strlen(argv[1]);
 	if (argv[1][i - 1] != 'b')
 		return (0);
@@ -32,9 +32,8 @@ int		check_input(int argc, char **argv, t_flags *d)
 		return (0);
 	if (argv[1][i - 4] != '.')
 		return (0);
-	d->error = NULL;
+	ERROR = NULL;
 	return (1);
-	
 }
 
 int		check_map(char **argv, t_flags *d, t_color *color, t_map *map)
@@ -49,7 +48,6 @@ int		check_map(char **argv, t_flags *d, t_color *color, t_map *map)
 		return (0);
 	return (1);
 }
-
 
 int		main(int argc, char **argv)
 {
