@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/12 14:11:50 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 11:16:33 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	draw_wall(t_vars *v)
 	tmpcount = count;
 	draw_roof(v, count);
 	tex->x_tex = (float)tex->width * get_perc(v);
-	tex->y_tex = tex->height;
+	tex->y_tex = tex->height - 1;
 	y = (float)tex->height / (float)length;
 	while (length > 0)
 	{
@@ -91,7 +91,7 @@ void	draw_wall(t_vars *v)
 		length--;
 		tex->y_tex -= y;
 	}
-	if (v->ray->sprite == 1)
-		draw_sprite(v);
+	// if (v->ray->sprite == 1)
+	// 	draw_sprite(v);
 	draw_floor(v, tmpcount);
 }

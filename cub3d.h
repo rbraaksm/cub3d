@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/12 13:49:55 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/13 10:23:01 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,11 +196,17 @@ void				player(t_vars *vars, float move, unsigned int color);
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
 void				ft_view(t_vars *vars, float rot, unsigned int color);
-void				ft_find_sidedelta(t_vars *v);
+void				draw(t_vars *v);
 void				draw_wall(t_vars *v);
 void				draw_sprite(t_vars *v);
 
 void				print(t_vars *v);
+
+/* NEW */
+
+void				find_side_delta(t_vars *v);
+void				find_hit(t_vars *v);
+
 
 int					mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y,
 					int color);
