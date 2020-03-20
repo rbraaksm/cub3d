@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 13:57:40 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/20 11:27:53 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		check_input(int argc, char **argv, t_flags *d)
 	if (argv[1][i - 4] != '.')
 		return (0);
 	ERROR = NULL;
+	// write(1, ERROR, ft_strlen(ERROR) + 1);make
 	return (1);
 }
 

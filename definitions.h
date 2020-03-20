@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/13 13:23:06 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 17:55:54 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/19 12:42:04 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@
 # define STEP_Y v->stepy
 # define TILE_W v->tile_w
 # define TILE_H v->tile_h
+# define SPRITE_I v->index
 
 #endif
