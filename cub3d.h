@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 17:15:53 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/20 18:07:04 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,8 @@ typedef struct		s_sprite
 	float			y_angle_incr;
 	float			schuin;
 	float			start;
-	float			finaldist;
-	float			perc;
+	float			finaldist[200];
+	float			perc[200];
 }					t_sprite;
 
 typedef struct		s_vars
@@ -166,6 +166,7 @@ typedef struct		s_vars
 	int				stepy;
 	int				i;
 	int				z;
+	int				index;
 	t_sprite		*s;
 	t_ray			*ray;
 	t_player		*player;
@@ -199,7 +200,7 @@ void				ft_findwall(t_vars *vars);
 void				ft_view(t_vars *vars, float rot, unsigned int color);
 void				draw(t_vars *v);
 void				draw_wall(t_vars *v);
-void				draw_sprite(t_vars *v);
+void				draw_sprite(t_vars *v, t_tex *tex);
 
 void				print(t_vars *v);
 
