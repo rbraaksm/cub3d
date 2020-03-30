@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/20 18:15:54 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/30 11:45:08 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	sprite_north(t_vars *v)
 		}
 	}
 	START = MIDDLE_X - (fabs(X_ANGLE) / 2);
-	v->s->active_angle = X_ANGLE;
 }
 
 void	sprite_east(t_vars *v)
@@ -120,10 +119,10 @@ int		sprite_data(t_vars *v, int side, int mapy, int mapx)
 	MIDDLE_Y = (float)mapy + 0.5;
 	X_HIT = PLAYER_X + (RAY_FINAL * RAYX);
 	Y_HIT = PLAYER_Y + (RAY_FINAL * RAYY);
-	if (SPRITE_HIT == 1 || SPRITE_HIT == 3)
+	// if (SPRITE_HIT == 1 || SPRITE_HIT == 3)
 		SPRITE_ANGLE = PLAYDIR + (M_PI / 2);
-	else
-		SPRITE_ANGLE = PLAYDIR - (M_PI / 2);
+	// else
+	// 	SPRITE_ANGLE = PLAYDIR - (M_PI / 2);
 	X_ANGLE = sin(SPRITE_ANGLE);
 	Y_ANGLE = cos(SPRITE_ANGLE);
 	if (SIDEY < SIDEX)
@@ -175,6 +174,7 @@ int		sprite_data(t_vars *v, int side, int mapy, int mapx)
 	{
 		PERC[SPRITE_I] = 1 - ((X_HIT - START) / fabs(X_ANGLE));
 		SPRITE_FINAL[SPRITE_I] = fabs(sqrt(pow(MIDDLE_X - PLAYER_X, 2) + pow(MIDDLE_Y - PLAYER_Y, 2)));
+
 	}
 	else if (SPRITE_HIT == 1)
 	{
@@ -186,7 +186,7 @@ int		sprite_data(t_vars *v, int side, int mapy, int mapx)
 		PERC[SPRITE_I] = 1 - ((Y_HIT - START) / fabs(Y_ANGLE));
 		SPRITE_FINAL[SPRITE_I] = fabs(sqrt(pow(MIDDLE_Y - PLAYER_Y, 2) + pow(MIDDLE_X - PLAYER_X, 2)));
 	}
-
+	SPRITE_FINAL[SPRITE_I] *= cos(fabs(RAY_ANGLE - PLAYDIR));
 	if (PERC[SPRITE_I] > 1 || PERC[SPRITE_I] < 0)
 		return (0);
 	HAS_SPRITE = 1;
@@ -208,7 +208,7 @@ int		wall_data(t_vars *v, int side)
 	else
 	{
 		WALLDIST = cos(RAY_ANGLE - PLAYDIR) * SIDEY;
-		if (RAYY >= 0)
+		if (RAYY > 0)
 			SIDE_HIT = 2;
 		else
 			SIDE_HIT = 0;

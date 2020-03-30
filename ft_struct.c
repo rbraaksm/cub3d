@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/04 09:29:23 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/20 13:15:56 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/30 10:19:33 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ void	struct_info(t_vars *v)
 	v->ray->sprite_hit = 10;
 	v->ray->sprite = 0;
 	SPRITE_I = 0;
+	v->g->active_img = 2;
 }

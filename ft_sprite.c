@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/04 08:06:55 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/20 18:16:06 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/30 11:15:13 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	draw_sprite(t_vars *v, t_tex *tex)
 
 	while ((SPRITE_I - 1) > 0)
 	{
-		length = (v->RESY / SPRITE_FINAL[SPRITE_I - 1]);
+		length = (v->RESY / SPRITE_FINAL[SPRITE_I - 1]) + 2;
 		count = (length / 2) + (v->RESY / 2);
 		tex->x_tex = (float)tex->width * PERC[SPRITE_I - 1];
 		tex->y_tex = tex->height - 1;

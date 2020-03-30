@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/20 18:13:47 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/30 11:39:57 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,6 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 	float	y;
 
 	v->i = 0;
-	v->z = 0;
 	tex = v->textures->sprite;
 	ft_cleanview(v);
 	make_grid(v);
@@ -150,6 +149,7 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 	check_dir(v);
 	RAY_ANGLE = PLAYDIR;
 	make_grid2(v);
+	v->ray->opp = 1;
 	while (v->i < v->RESX)
 	{
 		raydistance(v);
@@ -169,18 +169,17 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 		v->i++;
 	}
 	PLAYDIR = RAY_ANGLE;
-	// v->ray->opp = 1;
 	// if (v->g->active_img == 1)
 	// {
 		mlx_put_image_to_window(v->g->mlx, v->g->win, v->g->img1, 0, 0);
-			mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
+	// 		mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
 	// 	v->g->addr = mlx_get_data_addr(v->g->img2, &v->g->bits_per_pixel, &v->g->line_length, &v->g->endian);
 	// 	v->g->active_img = 2;
 	// }
 	// else
 	// {
 	// 	mlx_put_image_to_window(v->g->mlx, v->g->win, v->g->img2, 0, 0);
-	// 		// mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
+	// 		mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
 	// 	v->g->addr = mlx_get_data_addr(v->g->img1, &v->g->bits_per_pixel, &v->g->line_length, &v->g->endian);
 	// 	v->g->active_img = 1;
 	// }

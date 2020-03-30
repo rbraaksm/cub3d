@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 14:04:14 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/03/24 15:53:14 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@ char	*ft_strdupchr(const char *s1, char c)
 	i = 0;
 	i2 = 0;
 	x = 0;
+
+	// printf("char: %c\n", s1[1]);
 	while (s1[i2] == ' ')
 		i2++;
+	// printf("i2: %d\n", i2);
 	while (s1[i + i2] != c)
 		i++;
+	// printf("i: %d\n", i);
 	newstr = malloc(sizeof(char *) * (i + 1));
 	if (!newstr)
 		return (NULL);
@@ -35,6 +39,7 @@ char	*ft_strdupchr(const char *s1, char c)
 		x++;
 	}
 	newstr[x + i2] = '\0';
+		// printf("%s\n", newstr);
 	return (newstr);
 }
 
