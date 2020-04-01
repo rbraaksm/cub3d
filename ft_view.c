@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/30 11:39:57 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/01 10:59:29 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,11 @@ void	ft_cleanview(t_vars *v)
 	{
 		x = v->player->x * v->tile_w;
 		y = v->player->y * v->tile_h;
-		while (my_mlx_pixel_putwall(v, x, y, 0x000000) == 1)
-		{
-			x += sin(PLAYDIR);
-			y += cos(PLAYDIR);
-		}
+		// while (my_mlx_pixel_putwall(v, x, y, 0x000000) == 1)
+		// {
+		// 	x += sin(PLAYDIR);
+		// 	y += cos(PLAYDIR);
+		// }
 		raydistance(v);
 		i++;
 	}
@@ -142,6 +142,7 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 	float	y;
 
 	v->i = 0;
+	color = 0;
 	tex = v->textures->sprite;
 	ft_cleanview(v);
 	make_grid(v);
@@ -156,11 +157,11 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 		HAS_SPRITE = 0;
 		x = v->player->x * v->tile_w;
 		y = v->player->y * v->tile_h;
-		while (my_mlx_pixel_putwall(v, x, y, color) == 1)
-		{
-			x += sin(PLAYDIR);
-			y += cos(PLAYDIR);
-		}
+		// while (my_mlx_pixel_putwall(v, x, y, color) == 1)
+		// {
+		// 	x += sin(PLAYDIR);
+		// 	y += cos(PLAYDIR);
+		// }
 		find_side_delta(v);
 		find_hit(v);
 		draw_wall(v);
@@ -172,7 +173,7 @@ void	ft_view(t_vars *v, float rot, unsigned int color)
 	// if (v->g->active_img == 1)
 	// {
 		mlx_put_image_to_window(v->g->mlx, v->g->win, v->g->img1, 0, 0);
-	// 		mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
+			// mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
 	// 	v->g->addr = mlx_get_data_addr(v->g->img2, &v->g->bits_per_pixel, &v->g->line_length, &v->g->endian);
 	// 	v->g->active_img = 2;
 	// }
