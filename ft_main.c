@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/30 10:19:21 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/01 17:59:11 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,10 @@ int		check_input(int argc, char **argv, t_flags *d)
 	if (argv[1][i - 4] != '.')
 		return (0);
 	ERROR = NULL;
-	// write(1, ERROR, ft_strlen(ERROR) + 1);make
 	return (1);
 }
 
-int		check_map(char **argv, t_flags *d, t_color *color, t_map *map)
+int		check_map(char **argv, t_flags *d, t_color *color)
 {
 	if (make_string(argv, d) == 0)
 		return (0);
@@ -45,7 +44,7 @@ int		check_map(char **argv, t_flags *d, t_color *color, t_map *map)
 		return (0);
 	if (ft_result_colors(d, color) == 0)
 		return (0);
-	if (fill_grid(d, map) == 0)
+	if (fill_grid(d) == 0)
 		return (0);
 	return (1);
 }
@@ -54,12 +53,11 @@ int		main(int argc, char **argv)
 {
 	t_flags	d;
 	t_color	color;
-	t_map	map;
 
 	if (check_input(argc, argv, &d) == 0)
 		return (write(1, d.error, ft_strlen(d.error) + 1));
-	if (check_map(argv, &d, &color, &map) == 0)
+	if (check_map(argv, &d, &color) == 0)
 		return (write(1, d.error, ft_strlen(d.error) + 1));
-	window(&d, &color, &map);
+	window(&d, &color);
 	return (0);
 }

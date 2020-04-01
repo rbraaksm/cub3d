@@ -6,164 +6,111 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 14:22:44 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/01 17:58:09 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	make_strmap(t_map *map, char *strmap)
+int		set_location(t_flags *d, int column, char c)
 {
-	int		i;
-	int		index;
-	int		statici;
-
-	i = 0;
-	statici = 0;
-	index = 0;
-	while (i < map->row)
+	printf("test\n");
+	if (PLAY_X == 0 && PLAY_Y == 0)
 	{
-		index = 0;
-		while (strmap[statici] != '\n' && strmap[statici] != '\0')
-		{
-			if (strmap[statici] == ' ')
-				statici++;
-			else
-			{
-				MAP[i][index] = strmap[statici];
-				index++;
-				statici++;
-			}
-		}
-		MAP[i][index] = '\0';
-		statici++;
-		i++;
+		PLAY_X = column + 0.5;
+		PLAY_Y = ROW_I + 0.5;
+		POS = c;
 	}
-}
-
-void	find_row(char *strmap, t_map *map)
-{
-	int		i;
-
-	map->row = 1;
-	i = 0;
-	while (strmap[i] != '\0')
+	else
 	{
-		i++;
-		if (strmap[i] == '\n')
-			map->row++;
-	}
-}
-
-void	find_column(t_map *map, char *strmap)
-{
-	int		tmp;
-	int		i;
-
-	i = 0;
-	tmp = 0;
-	map->column = 0;
-	while (strmap[i] != '\0')
-	{
-		if (strmap[i] == '\n')
-		{
-			if (tmp < map->column)
-			{
-				tmp = map->column;
-			}
-			map->column = 0;
-			i++;
-		}
-		i++;
-		if (strmap[i] != ' ')
-			map->column++;
-	}
-	map->column = tmp;
-}
-
-int		make_map(t_flags *d, t_map *map, char *strmap)
-{
-	int		i;
-	int		irow;
-	int		index;
-	int		mapi;
-
-	i = 0;
-	irow = 0;
-	index = 0;
-	find_row(strmap, map);
-	find_column(map, strmap);
-	MAP = (char **)malloc(sizeof(char*) * (map->row + 1));
-	if (map->row < 2)
+		ERROR = "TO MANY PLAYERS IN THE MAP\n";
 		return (0);
-	while (irow < map->row)
-	{
-		mapi = 0;
-		while (strmap[i] != '\n' && strmap[i] != '\0')
-		{
-			i++;
-			if (strmap[i] != ' ')
-				mapi++;
-		}
-		i++;
-		MAP[irow] = malloc(sizeof(char *) * (mapi + 1));
-		irow++;
 	}
-	make_strmap(map, strmap);
-	if (check_grid(d, map) == 0)
-		return (0);
 	return (1);
+
 }
 
-int		find_start(t_flags *d)
+int		ft_strchr(t_flags *d, char c, int column)
 {
-	int		index;
+	char	*s1;
+	int		i;
 
-	index = 0;
-	while (STR[index] != '\0')
+	s1 = " 012NWSE";
+	i = 0;
+	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
+		if (set_location(d, column, c) == 0)
+			return (0);
+	while (s1[i] != '\0')
 	{
-		if (STR[index] == '\n' && STR[index + 1] == '1')
-			return (index + 1);
-		index++;
+		if (s1[i] == c)
+			return (1);
+		i++;
 	}
 	return (0);
 }
 
-int		find_end(char *str, int start)
+int		fill_row(t_flags *d, int column, int start)
 {
-	while (str[start] != '\0')
+	int	i;
+
+	i = 0;
+	MAP[ROW_I] = (char *)malloc(sizeof(char *) * (column + 1));
+	if (MAP[ROW_I] == NULL)
+		return (0);
+	while (i < column)
 	{
-		if (str[start] == '\n' && (str[start + 1] == '\n'
-		|| str[start + 1] == '\0'))
-			return (start);
-		start++;
+		if (ft_strchr(d, STR[start + i], i) == 1)
+			MAP[ROW_I][i] = STR[start + i];
+		else
+			return (0);
+		i++;
 	}
-	return (start);
+	MAP[ROW_I][i] = '\0';
+	return (1);
 }
 
-int		fill_grid(t_flags *d, t_map *map)
+int		find_start(t_flags *d, int end)
 {
-	char	*strmap;
-	int		index;
+	ROW_C = 1;
+	while (STR[end] == '1' || STR[end] == '2' || STR[end] == ' ' ||
+			STR[end] == '0' || STR[end] == '\n' || STR[end] == 'N' ||
+			STR[end] == 'E' || STR[end] == 'S' || STR[end] == 'W')
+	{
+		if (STR[end] == '\n' && STR[end - 1] == '\n')
+			break ;
+		if (STR[end] == '\n')
+			ROW_C++;
+			end--;
+	}
+	while (STR[end] != '\n')
+		end++;
+	return (end + 1);
+}
+
+int		fill_grid(t_flags *d)
+{
 	int		start;
 	int		end;
+	int		c;
 
-	index = 0;
-	start = find_start(d);
-	if (start == 0)
+	ROW_I = 0;
+	PLAY_X = 0;
+	PLAY_Y = 0;
+	end = ft_strlen(STR) - 1;
+	start = find_start(d, end);
+	MAP = (char **)malloc(sizeof(char *) * (ROW_C));
+	if (MAP == NULL)
 		return (0);
-	end = find_end(STR, start);
-	strmap = malloc(sizeof(char *) * ((end - start) + 1));
-	if (strmap == NULL)
-		return (0);
-	index = 0;
-	while (index < (end - start + 1))
+	while (ROW_I < ROW_C)
 	{
-		strmap[index] = STR[index + start];
-		index++;
+		c = 0;
+		while (STR[c + start] != '\n' && STR[c + start] != '\0')
+			c++;
+		if (fill_row(d, c, start) == 0)
+			return (0);
+		start = start + c + 1;
+		ROW_I++;
 	}
-	strmap[index] = '\0';
-	if (make_map(d, map, strmap) == 0)
-		return (0);
+	printf("POSITION: %c\n", POS);
 	return (1);
 }

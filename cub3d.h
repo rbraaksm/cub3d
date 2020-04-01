@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/20 18:13:11 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/01 17:26:42 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ typedef struct		s_color
 
 typedef struct		s_struct
 {
+	char			**map;
+	int				row_count;
+	int				row_i;
+	char			position;
+	float			play_x;
+	float			play_y;
 	char			**r;
 	int				resx;
 	int				resy;
@@ -49,15 +55,6 @@ typedef struct		s_struct
 	char			*error;
 }					t_flags;
 
-typedef struct		s_map
-{
-	char			**map;
-	int				row;
-	int				column;
-	int				posx;
-	int				posy;
-	char			pos;
-}					t_map;
 
 typedef struct		s_game
 {
@@ -171,7 +168,6 @@ typedef struct		s_vars
 	t_ray			*ray;
 	t_player		*player;
 	t_texture		*textures;
-	t_map			*map;
 	t_flags			*d;
 	t_color			color;
 	t_game			*g;
@@ -180,8 +176,8 @@ typedef struct		s_vars
 int					make_string(char **argv, t_flags *data);
 int					fill_mapindex(t_flags *data);
 int					ft_result_colors(t_flags *data, t_color *color);
-int					fill_grid(t_flags *data, t_map *map);
-int					check_grid(t_flags *data, t_map *map);
+int					fill_grid(t_flags *data);
+int					check_grid(t_flags *data);
 
 /* check index */
 char				*ft_strdup(const char *s1);
@@ -191,7 +187,7 @@ int					ft_atoi(const char *str);
 
 /* window */
 
-void				window(t_flags *data, t_color *color, t_map *map);
+void				window(t_flags *data, t_color *color);
 void				struct_info(t_vars *v);
 void				ft_make_2d(t_vars *vars);
 void				player(t_vars *vars, float move, unsigned int color);

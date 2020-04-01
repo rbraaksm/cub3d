@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/13 13:23:06 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/19 12:42:04 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/01 17:27:39 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@
 # define FSTR d->f
 # define CSTR d->c
 # define STR d->str
-
-/* MAP STRUCT */
-# define MAP map->map
+# define MAP d->map
+# define POS d->position
+# define PLAY_X d->play_x
+# define PLAY_Y d->play_y
+# define ROW_I d->row_i
+# define ROW_C d->row_count
 
 /* RAY STRUCT */
 # define PLAYDIR v->ray->playdir

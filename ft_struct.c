@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/04 09:29:23 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/30 10:19:33 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/01 17:49:05 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,14 @@ void	struct_info(t_vars *v)
 	v->textures->s_tex = texture_info(v, v->d->so);
 	v->textures->w_tex = texture_info(v, v->d->we);
 	v->textures->sprite = texture_info(v, v->d->s);
-	if (v->map->pos == 'N')
-		v->ray->playdir = M_PI;
-	else if (v->map->pos == 'E')
-		v->ray->playdir = M_PI * 0.5;
-	else if (v->map->pos == 'S')
-		v->ray->playdir = 0;
-	else if (v->map->pos == 'W')
+	// if (v->POS == 'N')
+	// 	v->ray->playdir = M_PI;
+	// else if (v->POS == 'E')
+	// 	v->ray->playdir = M_PI * 0.5;
+	// else if (v->POS == 'S')
+	// 	v->ray->playdir = 0;
+	// else if (v->POS == 'W')
 		v->ray->playdir = M_PI * 1.5;
-	v->tile_w = v->d->resx / v->map->column;
-	v->tile_h = v->d->resy / v->map->row;
 	v->ray->raydist = 0;
 	v->ray->opp = 1;
 	v->player->move_f = 0;

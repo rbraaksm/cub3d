@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/24 17:35:12 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/01 11:53:26 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		keypress(int keycode, t_vars *v)
 	return (0);
 }
 
-void	get_info(t_vars *v, t_flags *d, t_color *color, t_map *map)
+void	get_info(t_vars *v, t_flags *d, t_color *color)
 {
 	t_texture	*textures;
 	t_player	*player;
@@ -95,7 +95,6 @@ void	get_info(t_vars *v, t_flags *d, t_color *color, t_map *map)
 		return ;
 	v->s = s;
 	v->g = g;
-	v->map = map;
 	v->d = d;
 	v->color = *color;
 	v->player = player;
@@ -117,13 +116,13 @@ int		make_img(t_vars *v)
 	return (1);
 }
 
-void	window(t_flags *d, t_color *color, t_map *map)
+void	window(t_flags *d, t_color *color)
 {
 	t_vars	v;
 	int		check;
 
 	check = 0;
-	get_info(&v, d, color, map);
+	get_info(&v, d, color);
 	v.mlx = mlx_init();
 	v.g->mlx = mlx_init();
 	if (check == 0)
