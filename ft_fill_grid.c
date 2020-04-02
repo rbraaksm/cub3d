@@ -6,19 +6,18 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/01 17:58:09 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/02 15:37:44 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		set_location(t_flags *d, int column, char c)
+int		set_location(t_flags *d, int row, int column, char c)
 {
-	printf("test\n");
 	if (PLAY_X == 0 && PLAY_Y == 0)
 	{
 		PLAY_X = column + 0.5;
-		PLAY_Y = ROW_I + 0.5;
+		PLAY_Y = row + 0.5;
 		POS = c;
 	}
 	else
@@ -30,15 +29,15 @@ int		set_location(t_flags *d, int column, char c)
 
 }
 
-int		ft_strchr(t_flags *d, char c, int column)
+int		ft_strchr(t_flags *d, char c, int row, int column)
 {
 	char	*s1;
 	int		i;
 
-	s1 = " 012NWSE";
+	s1 = "012NWSE";
 	i = 0;
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
-		if (set_location(d, column, c) == 0)
+		if (set_location(d, row, column, c) == 0)
 			return (0);
 	while (s1[i] != '\0')
 	{
@@ -54,33 +53,46 @@ int		fill_row(t_flags *d, int column, int start)
 	int	i;
 
 	i = 0;
-	MAP[ROW_I] = (char *)malloc(sizeof(char *) * (column + 1));
+	MAP[ROW_I] = (char *)malloc(sizeof(char *) * (COLUMN + 1));
 	if (MAP[ROW_I] == NULL)
 		return (0);
-	while (i < column)
+	while (i < COLUMN)
 	{
-		if (ft_strchr(d, STR[start + i], i) == 1)
-			MAP[ROW_I][i] = STR[start + i];
-		else
-			return (0);
+		MAP[ROW_I][i] = ' ';
 		i++;
 	}
 	MAP[ROW_I][i] = '\0';
+	i = 0;
+	while (i < column)
+	{
+		MAP[ROW_I][i] = STR[start + i];
+		i++;
+	}
 	return (1);
 }
 
 int		find_start(t_flags *d, int end)
 {
+	int	c;
+
+	c = 0;
+	COLUMN = 0;
 	ROW_C = 1;
 	while (STR[end] == '1' || STR[end] == '2' || STR[end] == ' ' ||
 			STR[end] == '0' || STR[end] == '\n' || STR[end] == 'N' ||
 			STR[end] == 'E' || STR[end] == 'S' || STR[end] == 'W')
 	{
+		c++;
 		if (STR[end] == '\n' && STR[end - 1] == '\n')
 			break ;
 		if (STR[end] == '\n')
+		{
+			if (c > COLUMN)
+				COLUMN = c;
 			ROW_C++;
-			end--;
+			c = 0;
+		}
+		end--;
 	}
 	while (STR[end] != '\n')
 		end++;
@@ -111,6 +123,5 @@ int		fill_grid(t_flags *d)
 		start = start + c + 1;
 		ROW_I++;
 	}
-	printf("POSITION: %c\n", POS);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/30 14:13:44 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/01 17:21:53 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/02 15:23:56 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ void	ft_make_2d(t_vars *v)
 	PLAYER_X = v->PLAY_X;
 	PLAYER_Y = v->PLAY_Y;
 	player(v, 0, 0xffffff);
-	mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
+	// mlx_put_image_to_window(v->mlx, v->win, v->mapimg, 0, 0);
 }

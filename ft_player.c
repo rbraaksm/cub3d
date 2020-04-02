@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 15:47:58 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/01 11:34:22 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/02 15:38:57 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ void	player(t_vars *v, float move, unsigned int color)
 	float		x;
 	float		y;
 
+	x = 0;
+	y = 0;
 	if (MOVE_LEFT == 1 || MOVE_RIGHT == 1)
 	{
 		x = move * cos(PLAYDIR);
 		y = move * sin(PLAYDIR);
 	}
-	else
+	else if (MOVE_FORWARD == 1 || MOVE_BACKWARDS)
 	{
 		x = -(move * sin(PLAYDIR));
 		y = move * cos(PLAYDIR);

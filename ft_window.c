@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/01 11:53:26 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/02 15:23:51 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int		keyrelease(int keycode, t_vars *v)
 
 int		keypress(int keycode, t_vars *v)
 {
-	// printf("[keycode] %d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_window(v->g->mlx, v->g->win);

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/01 17:59:11 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/02 15:19:43 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int		check_map(char **argv, t_flags *d, t_color *color)
 		return (0);
 	if (fill_grid(d) == 0)
 		return (0);
+	if (check_grid(d) == 0)
+		return (0);
 	return (1);
 }
 
@@ -55,9 +57,9 @@ int		main(int argc, char **argv)
 	t_color	color;
 
 	if (check_input(argc, argv, &d) == 0)
-		return (write(1, d.error, ft_strlen(d.error) + 1));
+		return (write(1, d.error, ft_strlen(d.error)));
 	if (check_map(argv, &d, &color) == 0)
-		return (write(1, d.error, ft_strlen(d.error) + 1));
+		return (write(1, d.error, ft_strlen(d.error)));
 	window(&d, &color);
 	return (0);
 }

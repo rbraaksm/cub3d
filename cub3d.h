@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/01 17:26:42 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/02 15:36:32 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct		s_color
 typedef struct		s_struct
 {
 	char			**map;
+	int				column;
 	int				row_count;
 	int				row_i;
 	char			position;
@@ -178,6 +179,7 @@ int					fill_mapindex(t_flags *data);
 int					ft_result_colors(t_flags *data, t_color *color);
 int					fill_grid(t_flags *data);
 int					check_grid(t_flags *data);
+int					ft_strchr(t_flags *d, char c, int row, int column);
 
 /* check index */
 char				*ft_strdup(const char *s1);

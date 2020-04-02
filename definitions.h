@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/13 13:23:06 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/01 17:27:39 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/02 15:11:31 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define PLAY_Y d->play_y
 # define ROW_I d->row_i
 # define ROW_C d->row_count
+# define COLUMN d->column
 
 /* RAY STRUCT */
 # define PLAYDIR v->ray->playdir
@@ -65,6 +66,8 @@
 # define PLAYER_Y v->player->y
 # define MOVE_LEFT v->player->move_l
 # define MOVE_RIGHT v->player->move_r
+# define MOVE_FORWARD v->player->move_f
+# define MOVE_BACKWARDS v->player->move_b
 
 /* SPRITE STRUCT */
 # define MIDDLE_X v->s->middle_x
