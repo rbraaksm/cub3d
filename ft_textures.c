@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/21 09:26:43 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/06 12:29:27 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	draw_roof(t_vars *v, int count)
 	index = 0;
 	while (index < count)
 	{
-		my_mlx_pixel_put2(v, v->i, index, v->color.ceiling);
+		my_mlx_pixel_put2(v, v->i, index, v->d->ceiling);
 		index++;
 	}
 }
@@ -32,7 +32,7 @@ void	draw_floor(t_vars *v, int count)
 	index = v->RESY;
 	while (index > count)
 	{
-		my_mlx_pixel_put2(v, v->i, index, v->color.floor);
+		my_mlx_pixel_put2(v, v->i, index, v->d->floor);
 		index--;
 	}
 }

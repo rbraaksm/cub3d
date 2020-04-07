@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/07 15:47:58 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/02 15:38:57 by rbraaksm      ########   odam.nl         */
+/*   Created: 2020/02/07 15:47:58 by rbraaksm      #+#    #+#                 */
+/*   Updated: 2020/04/07 15:10:51 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_step(t_vars *v, float x, float y)
 	return (0);
 }
 
-void	player(t_vars *v, float move, unsigned int color)
+void	player(t_vars *v, float move)
 {
 	float		x;
 	float		y;
@@ -39,12 +39,10 @@ void	player(t_vars *v, float move, unsigned int color)
 		x = -(move * sin(PLAYDIR));
 		y = move * cos(PLAYDIR);
 	}
-	color = 0xff0000;
 	if (check_step(v, x, y) == 0)
 	{
-		ft_view(v, 0, 0x000000);
 		PLAYER_X += x;
 		PLAYER_Y -= y;
-		ft_view(v, 0, 0x87CEFA);
+		ft_view(v, 0);
 	}
 }

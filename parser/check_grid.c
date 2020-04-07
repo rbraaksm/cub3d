@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_check_grid.c                                    :+:    :+:            */
+/*   check_grid.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/02 16:02:50 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/06 12:25:38 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 static int  first_line(t_flags *d)
 {
@@ -52,7 +52,7 @@ static int  middle_lines_2(t_flags *d, int y, int i)
 		else
 			return (0);
 	}
-   printf("Y: %d is correct\n", y);
+//    printf("Y: %d is correct\n", y);
     ERROR = "";
 	return (1);
 }

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/04 09:29:23 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/02 15:14:27 by rbraaksm      ########   odam.nl         */
+/*   Created: 2020/03/04 09:29:23 by rbraaksm      #+#    #+#                 */
+/*   Updated: 2020/04/07 14:21:34 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_tex	*texture_info(t_vars *v, char *path)
 	if (tex->img == 0)
 		return (0);
 	tex->addr = mlx_get_data_addr(tex->img, &tex->bits_per_pixel, &tex->line_length, &tex->endian);
-	tex->win = v->g->win;
+	tex->win = v->win;
 	tex->width = width_img;
 	tex->height = height_img;
 	return (tex);
@@ -40,6 +40,11 @@ void	struct_info(t_vars *v)
 	v->textures->s_tex = texture_info(v, v->d->so);
 	v->textures->w_tex = texture_info(v, v->d->we);
 	v->textures->sprite = texture_info(v, v->d->s);
+	free(v->NORTH);
+	free(v->SOUTH);
+	free(v->EAST);
+	free(v->WEST);
+	free(v->SPRITE);
 	if (v->POS == 'N')
 		v->ray->playdir = M_PI;
 	else if (v->POS == 'E')
@@ -56,10 +61,10 @@ void	struct_info(t_vars *v)
 	v->player->move_r = 0;
 	v->player->rotate_r = 0;
 	v->player->rotate_l = 0;
-	v->g->active_img = 1;
+	v->active_img = 1;
 	v->ray->side_hit = 10;
 	v->ray->sprite_hit = 10;
 	v->ray->sprite = 0;
 	SPRITE_I = 0;
-	v->g->active_img = 2;
+	v->active_img = 2;
 }

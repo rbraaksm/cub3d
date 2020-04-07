@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/10 13:54:30 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/02 15:36:32 by rbraaksm      ########   odam.nl         */
+/*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
+/*   Updated: 2020/04/07 15:06:27 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,12 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
-
-typedef struct		s_color
-{
-	unsigned long	floor;
-	int				fred;
-	int				fgreen;
-	int				fblue;
-	unsigned long	ceiling;
-	int				cred;
-	int				cgreen;
-	int				cblue;
-}					t_color;
+# include <mlx.h>
 
 typedef struct		s_struct
 {
+	int				save;
+	int				check;
 	char			**map;
 	int				column;
 	int				row_count;
@@ -50,26 +41,33 @@ typedef struct		s_struct
 	char			*we;
 	char			*ea;
 	char			*s;
+	unsigned long	floor;
+	int				fred;
+	int				fgreen;
+	int				fblue;
+	unsigned long	ceiling;
+	int				cred;
+	int				cgreen;
+	int				cblue;
 	char			**f;
 	char			**c;
 	char			*str;
 	char			*error;
 }					t_flags;
 
-
-typedef struct		s_game
-{
-	void			*mlx;
-	void			*win;
-	void			*img1;
-	void			*img2;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-	int				active_img;
-	void			*new_img;
-}					t_game;
+// typedef struct		s_game
+// {
+// 	void			*mlx;
+// 	void			*win;
+// 	void			*img1;
+// 	void			*img2;
+// 	char			*addr;
+// 	int				bits_per_pixel;
+// 	int				line_length;
+// 	int				endian;
+// 	int				active_img;
+// 	void			*new_img;
+// }					t_game;
 
 typedef struct		s_tex
 {
@@ -153,54 +151,65 @@ typedef struct		s_vars
 {
 	void			*mlx;
 	void			*win;
-	void			*mapimg;
+	void			*img1;
+	void			*img2;
 	char			*addr;
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
+	int				active_img;
+	void			*new_img;
 	float			tile_h;
 	float			tile_w;
 	int				stepx;
 	int				stepy;
 	int				i;
-	int				z;
 	int				index;
+	int				screen_x;
+	int				screen_y;
 	t_sprite		*s;
 	t_ray			*ray;
 	t_player		*player;
 	t_texture		*textures;
 	t_flags			*d;
-	t_color			color;
-	t_game			*g;
+	// t_game			*g;
 }					t_vars;
 
+int					check_input(int argc, char **argv, t_flags *d);
 int					make_string(char **argv, t_flags *data);
-int					fill_mapindex(t_flags *data);
-int					ft_result_colors(t_flags *data, t_color *color);
+int					fill_parser(t_flags *data);
+void    			north(t_flags *d, const char *s1, char c);
+void    			east(t_flags *d, const char *s1, char c);
+void    			south(t_flags *d, const char *s1, char c);
+void    			west(t_flags *d, const char *s1, char c);
+void    			sprite(t_flags *d, const char *s1, char c);
+void				resolution(t_flags *d, char *str);
+void				data_floor(t_flags *d, char *str);
+void				data_ceiling(t_flags *d, char *str);
 int					fill_grid(t_flags *data);
 int					check_grid(t_flags *data);
 int					ft_strchr(t_flags *d, char c, int row, int column);
 
 /* check index */
-char				*ft_strdup(const char *s1);
+// char				*ft_strdup(const char *s1);
 int					ft_strlen(const char *str);
-char				**ft_split(char const *s, char c);
 int					ft_atoi(const char *str);
 
 /* window */
 
-void				window(t_flags *data, t_color *color);
+void				window(t_flags *data);
 void				struct_info(t_vars *v);
 void				ft_make_2d(t_vars *vars);
-void				player(t_vars *vars, float move, unsigned int color);
+void				bmp(t_vars *v);
+void				player(t_vars *vars, float move);
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
-void				ft_view(t_vars *vars, float rot, unsigned int color);
+void				ft_view(t_vars *vars, float rot);
 void				draw(t_vars *v);
 void				draw_wall(t_vars *v);
-void				draw_sprite(t_vars *v, t_tex *tex);
+void				draw_sprite(t_vars *v);
 
-void				print(t_vars *v);
+void				print(t_flags *d);
 
 /* NEW */
 
@@ -213,5 +222,6 @@ int					mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y,
 void				my_mlx_pixel_put2(t_vars *v, int x, int y, int color);
 int					my_mlx_pixel_putwall(t_vars *v, int x, int y, int color);
 void				my_image_put(t_vars *v, t_tex *tex, int x, int y);
-void				my_sprite_put(t_vars *v, t_tex *tex, int x, int y);
+void				my_sprite_put(t_vars *v, int x, int y);
+t_tex				*texture_info(t_vars *v, char *path);
 #endif

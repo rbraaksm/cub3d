@@ -6,11 +6,11 @@
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 15:11:54 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/02/25 14:27:34 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/06 15:05:38 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
 int				ft_isdigit(int c)
 {
@@ -59,3 +59,4 @@ int				ft_atoi(const char *str)
 	result = result * sign;
 	return (result);
 }
+

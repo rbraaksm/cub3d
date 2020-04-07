@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/13 13:23:06 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/02 15:11:31 by rbraaksm      ########   odam.nl         */
+/*   Created: 2020/03/13 13:23:06 by rbraaksm      #+#    #+#                 */
+/*   Updated: 2020/04/07 10:46:40 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@
 # define DEFINTIONS_H
 
 /* COLOR STRUCT */
-# define FLOOR color->floor
-# define FRED color->fred
-# define FGREEN color->fgreen
-# define FBLUE color->fblue
-# define CEILING color->ceiling
-# define CRED color->cred
-# define CGREEN color->cgreen
-# define CBLUE color->cblue
+# define FLOOR d->floor
+# define FRED d->fred
+# define FGREEN d->fgreen
+# define FBLUE d->fblue
+# define CEILING d->ceiling
+# define CRED d->cred
+# define CGREEN d->cgreen
+# define CBLUE d->cblue
 
 /* FLAGS STRUCT */
+# define CHECK d->check
 # define ERROR d->error
 # define RESX d->resx
 # define RESY d->resy

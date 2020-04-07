@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_fill_grid.c                                     :+:    :+:            */
+/*   make_map.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/02 15:37:44 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/02 16:09:50 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int		set_location(t_flags *d, int row, int column, char c)
 {
