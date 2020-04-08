@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/07 15:06:27 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/08 16:14:15 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "definitions.h"
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
@@ -54,20 +53,6 @@ typedef struct		s_struct
 	char			*str;
 	char			*error;
 }					t_flags;
-
-// typedef struct		s_game
-// {
-// 	void			*mlx;
-// 	void			*win;
-// 	void			*img1;
-// 	void			*img2;
-// 	char			*addr;
-// 	int				bits_per_pixel;
-// 	int				line_length;
-// 	int				endian;
-// 	int				active_img;
-// 	void			*new_img;
-// }					t_game;
 
 typedef struct		s_tex
 {
@@ -172,35 +157,33 @@ typedef struct		s_vars
 	t_player		*player;
 	t_texture		*textures;
 	t_flags			*d;
-	// t_game			*g;
 }					t_vars;
 
 int					check_input(int argc, char **argv, t_flags *d);
 int					make_string(char **argv, t_flags *data);
 int					fill_parser(t_flags *data);
-void    			north(t_flags *d, const char *s1, char c);
-void    			east(t_flags *d, const char *s1, char c);
-void    			south(t_flags *d, const char *s1, char c);
-void    			west(t_flags *d, const char *s1, char c);
-void    			sprite(t_flags *d, const char *s1, char c);
+void				north(t_flags *d, const char *s1, char c);
+void				east(t_flags *d, const char *s1, char c);
+void				south(t_flags *d, const char *s1, char c);
+void				west(t_flags *d, const char *s1, char c);
+void				sprite(t_flags *d, const char *s1, char c);
 void				resolution(t_flags *d, char *str);
 void				data_floor(t_flags *d, char *str);
 void				data_ceiling(t_flags *d, char *str);
 int					fill_grid(t_flags *data);
 int					check_grid(t_flags *data);
 int					ft_strchr(t_flags *d, char c, int row, int column);
-
-/* check index */
-// char				*ft_strdup(const char *s1);
+int					error_check(t_flags *d, char *str);
 int					ft_strlen(const char *str);
 int					ft_atoi(const char *str);
-
-/* window */
-
 void				window(t_flags *data);
+int					action(t_vars *v);
+int					keyrelease(int keycode, t_vars *v);
+int					keypress(int keycode, t_vars *v);
+void				start_game(t_vars *v);
+int					exit_game(t_vars *v);
 void				struct_info(t_vars *v);
-void				ft_make_2d(t_vars *vars);
-void				bmp(t_vars *v);
+void				screenshot(t_vars *v);
 void				player(t_vars *vars, float move);
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
@@ -208,20 +191,19 @@ void				ft_view(t_vars *vars, float rot);
 void				draw(t_vars *v);
 void				draw_wall(t_vars *v);
 void				draw_sprite(t_vars *v);
-
-void				print(t_flags *d);
-
-/* NEW */
-
+void				west_texture(t_vars *v, char *path, t_tex *w_tex);
+void				south_texture(t_vars *v, char *path, t_tex *s_tex);
+void				east_texture(t_vars *v, char *path, t_tex *e_tex);
+void				north_texture(t_vars *v, char *path, t_tex *n_tex);
+void				sprite_texture(t_vars *v, char *path, t_tex *sprite);
 void				find_side_delta(t_vars *v);
 void				find_hit(t_vars *v);
-
-
-int					mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y,
-					int color);
+int					sprite_data(t_vars *v, int side, int mapy, int mapx);
+void				sprite_north(t_vars *v);
+void				sprite_east(t_vars *v);
+void				sprite_south(t_vars *v);
+void				sprite_west(t_vars *v);
 void				my_mlx_pixel_put2(t_vars *v, int x, int y, int color);
-int					my_mlx_pixel_putwall(t_vars *v, int x, int y, int color);
 void				my_image_put(t_vars *v, t_tex *tex, int x, int y);
 void				my_sprite_put(t_vars *v, int x, int y);
-t_tex				*texture_info(t_vars *v, char *path);
 #endif

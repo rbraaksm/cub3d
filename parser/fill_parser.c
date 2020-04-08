@@ -5,42 +5,25 @@
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/06 15:48:40 by rbraaksm      ########   odam.nl         */
+/*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
+/*   Updated: 2020/04/08 16:47:15 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		error_check(t_flags *d, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (ERROR[i] != '\0')
-	{
-		if (ERROR[i] != str[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	find_values(t_flags *d)
+static void	find_values(t_flags *d)
 {
 	int	index;
+	int	check;
 
 	index = 0;
-	SOUTH = NULL;
-	SPRITE = NULL;
-	NORTH = NULL;
-	EAST = NULL;
-	WEST = NULL;
+	check = 0;
 	while (STR[index] != '\0' && error_check(d, "") == 1)
 	{
 		if (STR[index] == 'R')
 			resolution(d, &(STR)[index + 1]);
-		else if (STR[index] == 'N' && STR[index + 1] == 'O' && NORTH == NULL)
+		else if (STR[index] == 'N' && STR[index + 1] == 'O' && !NORTH)
 			north(d, &(STR)[index], '\n');
 		else if (STR[index] == 'S' && STR[index + 1] == 'O' && !SOUTH)
 			south(d, &(STR[index]), '\n');
@@ -58,7 +41,7 @@ void	find_values(t_flags *d)
 	}
 }
 
-void	colors(t_flags *d)
+static void	colors(t_flags *d)
 {
 	CEILING = CEILING + CBLUE % 16;
 	CEILING = CEILING + CBLUE / 16 * 16;
@@ -74,9 +57,8 @@ void	colors(t_flags *d)
 	FLOOR = FLOOR + FRED / 16 * pow(16, 5);
 }
 
-int		fill_parser(t_flags *d)
+static void	set_values(t_flags *d)
 {
-
 	CHECK = 0;
 	RESX = 0;
 	RESY = 0;
@@ -89,6 +71,16 @@ int		fill_parser(t_flags *d)
 	CEILING = 0;
 	FLOOR = 0;
 	ERROR = "";
+	NORTH = NULL;
+	EAST = NULL;
+	SOUTH = NULL;
+	WEST = NULL;
+	SPRITE = NULL;
+}
+
+int			fill_parser(t_flags *d)
+{
+	set_values(d);
 	find_values(d);
 	if (CHECK != 42424242)
 		return (0);

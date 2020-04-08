@@ -6,11 +6,10 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/06 17:00:04 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/08 16:11:23 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minilibx/mlx.h"
 #include "cub3d.h"
 
 int		check_map(char **argv, t_flags *d)

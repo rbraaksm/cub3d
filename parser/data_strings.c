@@ -5,14 +5,14 @@
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/04/06 10:37:22 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/06 15:47:22 by rbraaksm      ########   odam.nl         */
+/*   Created: 2020/04/06 10:37:22 by rbraaksm      #+#    #+#                 */
+/*   Updated: 2020/04/08 14:35:26 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void    north(t_flags *d, const char *s1, char c)
+void	north(t_flags *d, const char *s1, char c)
 {
 	int		len;
 	int		i;
@@ -39,7 +39,7 @@ void    north(t_flags *d, const char *s1, char c)
 	CHECK += 2;
 }
 
-void    east(t_flags *d, const char *s1, char c)
+void	east(t_flags *d, const char *s1, char c)
 {
 	int		len;
 	int		i;
@@ -66,7 +66,7 @@ void    east(t_flags *d, const char *s1, char c)
 	CHECK += 40;
 }
 
-void    south(t_flags *d, const char *s1, char c)
+void	south(t_flags *d, const char *s1, char c)
 {
 	int		len;
 	int		i;
@@ -93,7 +93,7 @@ void    south(t_flags *d, const char *s1, char c)
 	CHECK += 200;
 }
 
-void    west(t_flags *d, const char *s1, char c)
+void	west(t_flags *d, const char *s1, char c)
 {
 	int		len;
 	int		i;
@@ -120,7 +120,7 @@ void    west(t_flags *d, const char *s1, char c)
 	CHECK += 4000;
 }
 
-void    sprite(t_flags *d, const char *s1, char c)
+void	sprite(t_flags *d, const char *s1, char c)
 {
 	int		len;
 	int		i;

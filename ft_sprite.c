@@ -6,11 +6,10 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/04 08:06:55 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/07 15:05:21 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/08 16:12:02 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minilibx/mlx.h"
 #include "cub3d.h"
 
 void	draw_sprite(t_vars *v)
@@ -23,7 +22,8 @@ void	draw_sprite(t_vars *v)
 	{
 		length = (v->RESY / SPRITE_FINAL[SPRITE_I - 1]);
 		count = (length / 2) + (v->RESY / 2);
-		v->textures->sprite->x_tex = (float)v->textures->sprite->width * PERC[SPRITE_I - 1];
+		v->textures->sprite->x_tex = (float)v->textures->sprite->width *
+		PERC[SPRITE_I - 1];
 		v->textures->sprite->y_tex = v->textures->sprite->height - 1;
 		y = (float)v->textures->sprite->height / (float)length;
 		while (length > 0)

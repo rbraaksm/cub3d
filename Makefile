@@ -6,7 +6,7 @@
 #    By: rbraaksm <rbraaksm@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/22 14:09:57 by rbraaksm      #+#    #+#                  #
-#    Updated: 2020/04/07 12:17:11 by rbraaksm      ########   odam.nl          #
+#    Updated: 2020/04/08 15:58:10 by rbraaksm      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,16 +22,18 @@ SRCS =	ft_main.c \
 		parser/check_grid.c \
 		parser/tools/ft_atoi.c \
 		ft_window.c \
-		ft_map2d.c \
+		keypress.c \
+		start_exit_game.c \
 		ft_view.c \
 		ft_player.c \
 		ft_find_sidedelta.c \
 		ft_textures.c \
 		ft_sprite.c \
 		ft_draw.c \
-		ft_struct.c \
-		bmp.c \
-		print.c \
+		screenshot.c \
+		texture_data.c \
+		sprite_data.c \
+		sprite_hit.c \
 
 LIB = $(SRCS:%.c=%.o)
 

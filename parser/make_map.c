@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/16 17:36:02 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/02 16:09:50 by rbraaksm      ########   odam.nl         */
+/*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
+/*   Updated: 2020/04/08 15:00:49 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		set_location(t_flags *d, int row, int column, char c)
 		return (0);
 	}
 	return (1);
-
 }
 
 int		ft_strchr(t_flags *d, char c, int row, int column)

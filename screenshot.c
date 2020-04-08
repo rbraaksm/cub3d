@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bmp.c                                              :+:    :+:            */
+/*   screenshot.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/07 11:28:24 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/07 14:45:35 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/08 16:13:08 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minilibx/mlx.h"
 #include "cub3d.h"
 
-void    header_bmp(t_vars *v, int fd)
+void	header_bmp(t_vars *v, int fd)
 {
-    unsigned int    size;
-    unsigned int    first_pix;
+	unsigned int	size;
+	unsigned int	first_pix;
 
-    first_pix = 54;
-    size = v->RESY * v->RESX * 4 + 54;
-    write(fd, "BM", 2);
+	first_pix = 54;
+	size = v->RESY * v->RESX * 4 + 54;
+	write(fd, "BM", 2);
 	write(fd, &size, 4);
 	write(fd, "\0\0\0\0", 4);
 	write(fd, &first_pix, 4);
 }
 
-void    header_dip_bmp(t_vars *v, int fd)
+void	header_dip_bmp(t_vars *v, int fd)
 {
-    unsigned int	headersize;
+	unsigned int	headersize;
 	unsigned short	plain;
 	unsigned short	bits_per_pixel;
 
@@ -47,9 +46,9 @@ void    header_dip_bmp(t_vars *v, int fd)
 	}
 }
 
-void    write_pixels(t_vars *v, int fd)
+void	write_pixels(t_vars *v, int fd)
 {
-    int x;
+	int x;
 	int line_length;
 
 	line_length = 0;
@@ -70,17 +69,17 @@ void    write_pixels(t_vars *v, int fd)
 	}
 }
 
-void    bmp(t_vars *v)
+void	screenshot(t_vars *v)
 {
-    int    fd;
+	int	fd;
 
-	fd = open ("screenshot.bmp", O_TRUNC | O_WRONLY | O_CREAT, 0777);
-    if (fd < 0)
-    {
-        write(1, "Open failed\n", 12);
-        return ;
-    }
-    header_bmp(v, fd);
-    header_dip_bmp(v, fd);
-    write_pixels(v, fd);
+	fd = open("screenshot.bmp", O_TRUNC | O_WRONLY | O_CREAT, 0777);
+	if (fd < 0)
+	{
+		write(1, "Open failed\n", 12);
+		return ;
+	}
+	header_bmp(v, fd);
+	header_dip_bmp(v, fd);
+	write_pixels(v, fd);
 }

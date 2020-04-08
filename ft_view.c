@@ -6,11 +6,10 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/07 15:13:15 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/08 16:12:31 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minilibx/mlx.h"
 #include "cub3d.h"
 
 void	raydistance(t_vars *v)
@@ -44,6 +43,7 @@ void	ft_view(t_vars *v, float rot)
 	{
 		raydistance(v);
 		HAS_SPRITE = 0;
+		check_dir(v);
 		find_side_delta(v);
 		find_hit(v);
 		draw_wall(v);

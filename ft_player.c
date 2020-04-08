@@ -6,12 +6,11 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/07 15:47:58 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/07 15:10:51 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/08 16:11:41 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "./minilibx/mlx.h"
 
 static int	check_step(t_vars *v, float x, float y)
 {
@@ -22,7 +21,7 @@ static int	check_step(t_vars *v, float x, float y)
 	return (0);
 }
 
-void	player(t_vars *v, float move)
+void		player(t_vars *v, float move)
 {
 	float		x;
 	float		y;

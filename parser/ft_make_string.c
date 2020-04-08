@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/16 17:33:27 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/02 16:10:14 by rbraaksm      ########   odam.nl         */
+/*   Created: 2020/01/16 17:33:27 by rbraaksm      #+#    #+#                 */
+/*   Updated: 2020/04/08 14:58:27 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,24 +71,28 @@ char	*ft_strjoin(char const *s1, char const *s2)
 int		make_string(char **argv, t_flags *d)
 {
 	char	buf[BUFFER_SIZE + 1];
+	char	*tmp;
 	int		fd;
 	int		ret;
 
-	STR = "";
+	ERROR = "NOT A VALID FILE/FILE DESCRIPTOR\n";
+	STR = malloc(sizeof(char *) * 1);
 	ret = 1;
 	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (0);
 	while (ret > 0)
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
-		buf[ret] = '\0';
 		if (ret == -1)
-		{
-			ERROR = "NOT A VALID FILE\n";
 			return (0);
-		}
+		buf[ret] = '\0';
+		tmp = STR;
 		STR = ft_strjoin((const char *)STR, buf);
+		free(tmp);
 		if (STR == NULL)
 			return (0);
 	}
+	ERROR = "";
 	return (1);
 }

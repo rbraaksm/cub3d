@@ -5,12 +5,11 @@
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/25 13:26:26 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/06 12:29:27 by rbraaksm      ########   odam.nl         */
+/*   Created: 2020/02/25 13:26:26 by rbraaksm      #+#    #+#                 */
+/*   Updated: 2020/04/08 16:12:08 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minilibx/mlx.h"
 #include "cub3d.h"
 
 void	draw_roof(t_vars *v, int count)
@@ -54,18 +53,14 @@ float	get_perc(t_vars *v)
 
 t_tex	*find_texture(t_vars *v)
 {
-	t_tex	*textures;
-
-	textures = NULL;
 	if (SIDE_HIT == 0)
-		textures = v->textures->n_tex;
+		return (v->textures->n_tex);
 	else if (SIDE_HIT == 1)
-		textures = v->textures->e_tex;
+		return (v->textures->e_tex);
 	else if (SIDE_HIT == 2)
-		textures = v->textures->s_tex;
-	else if (SIDE_HIT == 3)
-		textures = v->textures->w_tex;
-	return (textures);
+		return (v->textures->s_tex);
+	else
+		return (v->textures->w_tex);
 }
 
 void	draw_wall(t_vars *v)

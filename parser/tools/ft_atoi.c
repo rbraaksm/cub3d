@@ -5,14 +5,28 @@
 /*                                                     +:+                    */
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/30 15:11:54 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/04/06 15:05:38 by rbraaksm      ########   odam.nl         */
+/*   Created: 2019/10/30 15:11:54 by rbraaksm      #+#    #+#                 */
+/*   Updated: 2020/04/08 15:22:21 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int				ft_isdigit(int c)
+int				error_check(t_flags *d, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (ERROR[i] != '\0')
+	{
+		if (ERROR[i] != str[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static int		ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -59,4 +73,3 @@ int				ft_atoi(const char *str)
 	result = result * sign;
 	return (result);
 }
-
