@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:33:27 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 14:58:27 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/13 12:29:35 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		make_string(char **argv, t_flags *d)
 	int		ret;
 
 	ERROR = "NOT A VALID FILE/FILE DESCRIPTOR\n";
-	STR = malloc(sizeof(char *) * 1);
+	STR = ft_strdup("");
 	ret = 1;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)

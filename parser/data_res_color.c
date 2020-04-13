@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:00:25 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 16:46:15 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/13 13:09:25 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,16 @@ static int	between(char *str, int *index)
 	return (1);
 }
 
-void		data_ceiling(t_flags *d, char *str)
+void		data_ceiling(t_flags *d, char *str, int *index)
 {
 	int i;
 
 	i = 0;
 	ERROR = "CEILING COLOR ISN'T CORRECT\n";
+	while (str[i] != '\n')
+		i++;
+	*index = *index + i + 2;
+	i = 0;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
@@ -51,12 +55,16 @@ void		data_ceiling(t_flags *d, char *str)
 	ERROR = "";
 }
 
-void		data_floor(t_flags *d, char *str)
+void		data_floor(t_flags *d, char *str, int *index)
 {
 	int	i;
 
 	i = 0;
 	ERROR = "FLOOR COLOR ISN'T CORRECT\n";
+	while (str[i] != '\n')
+		i++;
+	*index = *index + i + 2;
+	i = 0;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
@@ -74,12 +82,16 @@ void		data_floor(t_flags *d, char *str)
 	ERROR = "";
 }
 
-void		resolution(t_flags *d, char *str)
+void		resolution(t_flags *d, char *str, int *index)
 {
 	int i;
 
 	i = 0;
 	ERROR = "RESOLUTION IS NOT CORRECT\n";
+	while (str[i] != '\n')
+		i++;
+	*index = *index + i + 2;
+	i = 0;
 	RESX = ft_atoi(str);
 	if (RESX < 0 || RESX > 100000)
 		return ;

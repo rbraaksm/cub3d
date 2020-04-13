@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 10:37:22 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 14:35:26 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/13 12:49:43 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	north(t_flags *d, const char *s1, char c)
+void	north(t_flags *d, const char *s1, char c, int *index)
 {
 	int		len;
 	int		i;
@@ -24,6 +24,7 @@ void	north(t_flags *d, const char *s1, char c)
 		i++;
 	while (s1[i + len] != c)
 		len++;
+	*index = *index + i + len + 1;
 	NORTH = (char *)malloc(sizeof(*s1) * (len + 1));
 	if (!NORTH)
 		return ;
@@ -39,7 +40,7 @@ void	north(t_flags *d, const char *s1, char c)
 	CHECK += 2;
 }
 
-void	east(t_flags *d, const char *s1, char c)
+void	east(t_flags *d, const char *s1, char c, int *index)
 {
 	int		len;
 	int		i;
@@ -51,6 +52,7 @@ void	east(t_flags *d, const char *s1, char c)
 		i++;
 	while (s1[i + len] != c)
 		len++;
+	*index = *index + i + len + 1;
 	EAST = (char *)malloc(sizeof(*s1) * (len + 1));
 	if (!EAST)
 		return ;
@@ -66,7 +68,7 @@ void	east(t_flags *d, const char *s1, char c)
 	CHECK += 40;
 }
 
-void	south(t_flags *d, const char *s1, char c)
+void	south(t_flags *d, const char *s1, char c, int *index)
 {
 	int		len;
 	int		i;
@@ -78,6 +80,7 @@ void	south(t_flags *d, const char *s1, char c)
 		i++;
 	while (s1[i + len] != c)
 		len++;
+	*index = *index + i + len + 1;
 	SOUTH = (char *)malloc(sizeof(*s1) * (len + 1));
 	if (!SOUTH)
 		return ;
@@ -93,7 +96,7 @@ void	south(t_flags *d, const char *s1, char c)
 	CHECK += 200;
 }
 
-void	west(t_flags *d, const char *s1, char c)
+void	west(t_flags *d, const char *s1, char c, int *index)
 {
 	int		len;
 	int		i;
@@ -105,6 +108,7 @@ void	west(t_flags *d, const char *s1, char c)
 		i++;
 	while (s1[i + len] != c)
 		len++;
+	*index = *index + i + len + 1;
 	WEST = (char *)malloc(sizeof(*s1) * (len + 1));
 	if (!WEST)
 		return ;
@@ -120,7 +124,7 @@ void	west(t_flags *d, const char *s1, char c)
 	CHECK += 4000;
 }
 
-void	sprite(t_flags *d, const char *s1, char c)
+void	sprite(t_flags *d, const char *s1, char c, int *index)
 {
 	int		len;
 	int		i;
@@ -132,6 +136,7 @@ void	sprite(t_flags *d, const char *s1, char c)
 		i++;
 	while (s1[i + len] != c)
 		len++;
+	*index = *index + i + len + 1;
 	SPRITE = (char *)malloc(sizeof(*s1) * (len + 1));
 	if (!SPRITE)
 		return ;

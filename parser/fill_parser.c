@@ -6,38 +6,50 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 16:47:15 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/13 17:28:15 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+static void	check_str(t_flags *d, int *i)
+{
+	if (STR[*i] == ' ' || STR[*i] == '1' || STR[*i] == '2' ||
+		STR[*i] == '0' || STR[*i] == '\n')
+		*i = *i + 1;
+	else if ((STR[*i] == 'N' || STR[*i] == 'E' || STR[*i] == 'S' ||
+			STR[*i] == 'W') && (STR[*i + 1] != '1' || STR[*i + 1] != '2' ||
+			STR[*i + 1] != '0'))
+		ERROR = "INDEX ISN'T CORRECT\n";
+	else
+		ERROR = "INDEX ISN'T CORRECT\n";
+}
+
 static void	find_values(t_flags *d)
 {
 	int	index;
-	int	check;
 
 	index = 0;
-	check = 0;
 	while (STR[index] != '\0' && error_check(d, "") == 1)
 	{
 		if (STR[index] == 'R')
-			resolution(d, &(STR)[index + 1]);
+			resolution(d, &(STR)[index + 1], &index);
 		else if (STR[index] == 'N' && STR[index + 1] == 'O' && !NORTH)
-			north(d, &(STR)[index], '\n');
+			north(d, &(STR)[index], '\n', &index);
 		else if (STR[index] == 'S' && STR[index + 1] == 'O' && !SOUTH)
-			south(d, &(STR[index]), '\n');
+			south(d, &(STR[index]), '\n', &index);
 		else if (STR[index] == 'W' && STR[index + 1] == 'E' && !WEST)
-			west(d, &(STR)[index], '\n');
+			west(d, &(STR)[index], '\n', &index);
 		else if (STR[index] == 'E' && STR[index + 1] == 'A' && !EAST)
-			east(d, &(STR)[index], '\n');
+			east(d, &(STR)[index], '\n', &index);
 		else if (STR[index] == 'S' && STR[index + 1] != 'O' && !SPRITE)
-			sprite(d, &(STR)[index], '\n');
+			sprite(d, &(STR)[index], '\n', &index);
 		else if (STR[index] == 'F')
-			data_floor(d, &(STR)[index + 1]);
+			data_floor(d, &(STR)[index + 1], &index);
 		else if (STR[index] == 'C')
-			data_ceiling(d, &(STR)[index + 1]);
-		index++;
+			data_ceiling(d, &(STR)[index + 1], &index);
+		else
+			check_str(d, &index);
 	}
 }
 

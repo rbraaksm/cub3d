@@ -6,11 +6,12 @@
 #    By: rbraaksm <rbraaksm@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/22 14:09:57 by rbraaksm      #+#    #+#                  #
-#    Updated: 2020/04/08 15:58:10 by rbraaksm      ########   odam.nl          #
+#    Updated: 2020/04/13 18:09:08 by rbraaksm      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME	= cub3D
+MLX		= libmlx.dylib
 
 SRCS =	ft_main.c \
 		parser/check_input.c \
@@ -35,15 +36,23 @@ SRCS =	ft_main.c \
 		sprite_data.c \
 		sprite_hit.c \
 
-LIB = $(SRCS:%.c=%.o)
+LIB		= $(SRCS:%.c=%.o)
 
-CC = gcc -Wall -Wextra -Werror -I minilibx -L minilibx -lmlx -framework OpenGL -framework AppKit
+CC = gcc -O3 -Wall -Werror -Wextra -std=gnu99 -I minilibx -L minilibx -lmlx -framework OpenGL -framework AppKit -g -o
 
-$(NAME):
-	$(CC) $(SRCS)
+all: $(NAME)
+
+$(MLX):
+	make -C minilibx
+	cp -r minilibx/$(MLX) .
+
+$(NAME): $(MLX)
+		$(CC) $(NAME) $(SRCS)
 
 clean:
 	/bin/rm -f $(LIB)
+	/bin/rm -f $(MLX)
+	/bin/rm -f screenshot.bmp
 
 fclean: clean
 	/bin/rm -f $(NAME)

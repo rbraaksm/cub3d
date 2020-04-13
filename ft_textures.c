@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 16:12:08 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/13 21:06:09 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,20 @@ void	draw_wall(t_vars *v)
 		tex->y_tex -= y;
 	}
 	draw_floor(v, tmpcount);
+
+	// float	length;
+	// float	count;
+	// float	tmpcount;
+
+	// length = ((1 / WALLDIST) * v->RESY);
+	// count = (length / 2) + (v->RESY / 2);
+	// tmpcount = count;
+	// draw_roof(v, count);
+	// while (length > 0)
+	// {
+	// 	my_mlx_pixel_put2(v, v->i, count, 0x555555);
+	// 	count--;
+	// 	length--;
+	// }
+	// draw_floor(v, tmpcount);
 }

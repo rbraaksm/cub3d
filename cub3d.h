@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 16:14:15 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/13 21:19:14 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ typedef struct		s_player
 	int				move_r;
 	int				rotate_l;
 	int				rotate_r;
+	float			crab;
+	float			walk;
+	float			look;
 }					t_player;
 
 typedef struct		s_ray
@@ -143,7 +146,6 @@ typedef struct		s_vars
 	int				line_length;
 	int				endian;
 	int				active_img;
-	void			*new_img;
 	float			tile_h;
 	float			tile_w;
 	int				stepx;
@@ -162,14 +164,14 @@ typedef struct		s_vars
 int					check_input(int argc, char **argv, t_flags *d);
 int					make_string(char **argv, t_flags *data);
 int					fill_parser(t_flags *data);
-void				north(t_flags *d, const char *s1, char c);
-void				east(t_flags *d, const char *s1, char c);
-void				south(t_flags *d, const char *s1, char c);
-void				west(t_flags *d, const char *s1, char c);
-void				sprite(t_flags *d, const char *s1, char c);
-void				resolution(t_flags *d, char *str);
-void				data_floor(t_flags *d, char *str);
-void				data_ceiling(t_flags *d, char *str);
+void				north(t_flags *d, const char *s1, char c, int *index);
+void				east(t_flags *d, const char *s1, char c, int *index);
+void				south(t_flags *d, const char *s1, char c, int *index);
+void				west(t_flags *d, const char *s1, char c, int *index);
+void				sprite(t_flags *d, const char *s1, char c, int *index);
+void				resolution(t_flags *d, char *str, int *index);
+void				data_floor(t_flags *d, char *str, int *index);
+void				data_ceiling(t_flags *d, char *str, int *index);
 int					fill_grid(t_flags *data);
 int					check_grid(t_flags *data);
 int					ft_strchr(t_flags *d, char c, int row, int column);
@@ -185,9 +187,11 @@ int					exit_game(t_vars *v);
 void				struct_info(t_vars *v);
 void				screenshot(t_vars *v);
 void				player(t_vars *vars, float move);
+// void				player(t_vars *vars, float move), char c;
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
-void				ft_view(t_vars *vars, float rot);
+// void				ft_view(t_vars *vars, float rot);
+void				ft_view2(t_vars *vars);
 void				draw(t_vars *v);
 void				draw_wall(t_vars *v);
 void				draw_sprite(t_vars *v);

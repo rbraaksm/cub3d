@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 16:12:43 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/13 21:05:38 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	struct_values(t_vars *v)
 	v->player->move_r = 0;
 	v->player->rotate_r = 0;
 	v->player->rotate_l = 0;
+	v->active_img = 1;
 	SPRITE_I = 0;
 	start_game(v);
 }

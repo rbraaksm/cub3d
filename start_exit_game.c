@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:11:53 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 16:20:04 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/13 21:32:20 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int		exit_game(t_vars *v)
 	int	i;
 
 	i = 0;
-	if (!v->win)
-		mlx_destroy_window(v->mlx, v->win);
+	mlx_destroy_window(v->mlx, v->win);
 	while (v->MAP[i])
 	{
 		free(v->MAP[i]);
 		i++;
 	}
+	free(v->STR);
 	write(1, "\n-----> Thanks for playing <-----\n\n", 35);
 	exit(0);
 	return (1);

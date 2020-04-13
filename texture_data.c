@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/07 16:46:57 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 16:14:00 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/13 21:31:32 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	west_texture(t_vars *v, char *path, t_tex *w_tex)
 	int		height_img;
 
 	w_tex->mlx = mlx_init();
-	w_tex->img = mlx_png_file_to_image(w_tex->mlx,
+	w_tex->img = mlx_xpm_file_to_image(w_tex->mlx,
 	path, &width_img, &height_img);
 	if (w_tex->img == 0)
 		return ;
@@ -37,7 +37,7 @@ void	south_texture(t_vars *v, char *path, t_tex *s_tex)
 	int		height_img;
 
 	s_tex->mlx = mlx_init();
-	s_tex->img = mlx_png_file_to_image(s_tex->mlx,
+	s_tex->img = mlx_xpm_file_to_image(s_tex->mlx,
 	path, &width_img, &height_img);
 	if (s_tex->img == 0)
 		return ;
@@ -56,7 +56,7 @@ void	east_texture(t_vars *v, char *path, t_tex *e_tex)
 	int		height_img;
 
 	e_tex->mlx = mlx_init();
-	e_tex->img = mlx_png_file_to_image(e_tex->mlx, path,
+	e_tex->img = mlx_xpm_file_to_image(e_tex->mlx, path,
 	&width_img, &height_img);
 	if (e_tex->img == 0)
 		return ;
@@ -75,7 +75,7 @@ void	north_texture(t_vars *v, char *path, t_tex *n_tex)
 	int		height_img;
 
 	n_tex->mlx = mlx_init();
-	n_tex->img = mlx_png_file_to_image(n_tex->mlx, path,
+	n_tex->img = mlx_xpm_file_to_image(n_tex->mlx, path,
 	&width_img, &height_img);
 	if (n_tex->img == 0)
 		return ;
@@ -94,7 +94,7 @@ void	sprite_texture(t_vars *v, char *path, t_tex *sprite)
 	int		height_img;
 
 	sprite->mlx = mlx_init();
-	sprite->img = mlx_png_file_to_image(sprite->mlx, path,
+	sprite->img = mlx_xpm_file_to_image(sprite->mlx, path,
 	&width_img, &height_img);
 	if (sprite->img == 0)
 		return ;
