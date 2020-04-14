@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:37:15 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 16:13:28 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/14 13:32:10 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 void	sprite_values(t_vars *v, int mapx, int mapy)
 {
-	MIDDLE_X = (float)mapx + 0.5;
-	MIDDLE_Y = (float)mapy + 0.5;
-	X_HIT = PLAYER_X + (RAY_FINAL * RAYX);
-	Y_HIT = PLAYER_Y + (RAY_FINAL * RAYY);
-	SPRITE_ANGLE = PLAYDIR + (M_PI / 2);
-	X_ANGLE = sin(SPRITE_ANGLE);
-	Y_ANGLE = cos(SPRITE_ANGLE);
-	if (SIDEY < SIDEX)
+	v->s->middle_x = (float)mapx + 0.5;
+	v->s->middle_y = (float)mapy + 0.5;
+	v->s->x_hit = v->player->x + (v->ray->finaldist * v->ray->rayx);
+	v->s->y_hit = v->player->y + (v->ray->finaldist * v->ray->rayy);
+	v->s->angle = v->ray->playdir + (M_PI / 2);
+	v->s->x_angle = sin(v->s->angle);
+	v->s->y_angle = cos(v->s->angle);
+	if (v->ray->sidey < v->ray->sidex)
 	{
-		SCHUIN = 0.5 / cos(SPRITE_ANGLE);
-		Y_HIT_ANGLE = Y_HIT;
-		if (PLAYDIR > (M_PI * 0.5) && PLAYDIR < (M_PI * 1.5))
-			X_HIT_ANGLE = MIDDLE_X + (SCHUIN * X_ANGLE);
+		v->s->schuin = 0.5 / cos(v->s->angle);
+		v->s->y_hit_angle = v->s->y_hit;
+		if (v->ray->playdir > (M_PI * 0.5) && v->ray->playdir < (M_PI * 1.5))
+			v->s->x_hit_angle = v->s->middle_x + (v->s->schuin * v->s->x_angle);
 		else
-			X_HIT_ANGLE = MIDDLE_X - (SCHUIN * X_ANGLE);
+			v->s->x_hit_angle = v->s->middle_x - (v->s->schuin * v->s->x_angle);
 	}
 	else
 	{
-		SCHUIN = 0.5 / sin(SPRITE_ANGLE);
-		X_HIT_ANGLE = X_HIT;
-		if (PLAYDIR < M_PI && PLAYDIR > 0)
-			Y_HIT_ANGLE = MIDDLE_Y - (SCHUIN * Y_ANGLE);
+		v->s->schuin = 0.5 / sin(v->s->angle);
+		v->s->x_hit_angle = v->s->x_hit;
+		if (v->ray->playdir < M_PI && v->ray->playdir > 0)
+			v->s->y_hit_angle = v->s->middle_y - (v->s->schuin * v->s->y_angle);
 		else
-			Y_HIT_ANGLE = MIDDLE_Y + (SCHUIN * Y_ANGLE);
+			v->s->y_hit_angle = v->s->middle_y + (v->s->schuin * v->s->y_angle);
 	}
 }
 
@@ -45,19 +45,19 @@ void	sprite_hit(t_vars *v, int side)
 {
 	if (side == 0)
 	{
-		if (RAYX >= 0)
-			SPRITE_HIT = 1;
+		if (v->ray->rayx >= 0)
+			v->ray->sprite_hit = 1;
 		else
-			SPRITE_HIT = 3;
-		RAY_FINAL = SIDEX;
+			v->ray->sprite_hit = 3;
+		v->ray->finaldist = v->ray->sidex;
 	}
 	else
 	{
-		if (RAYY >= 0)
-			SPRITE_HIT = 2;
+		if (v->ray->rayy >= 0)
+			v->ray->sprite_hit = 2;
 		else
-			SPRITE_HIT = 0;
-		RAY_FINAL = SIDEY;
+			v->ray->sprite_hit = 0;
+		v->ray->finaldist = v->ray->sidey;
 	}
 }
 
@@ -65,22 +65,22 @@ int		sprite_data(t_vars *v, int side, int mapy, int mapx)
 {
 	sprite_hit(v, side);
 	sprite_values(v, mapx, mapy);
-	X_INCR = (X_ANGLE / Y_ANGLE) * 0.001;
-	X_ANGLE_INCR = (RAYX / RAYY) * 0.001;
-	Y_INCR = (Y_ANGLE / X_ANGLE) * 0.001;
-	Y_ANGLE_INCR = (RAYY / RAYX) * 0.001;
-	if (SPRITE_HIT == 0)
+	v->s->x_incr = (v->s->x_angle / v->s->y_angle) * 0.001;
+	v->s->x_angle_incr = (v->ray->rayx / v->ray->rayy) * 0.001;
+	v->s->y_incr = (v->s->y_angle / v->s->x_angle) * 0.001;
+	v->s->y_angle_incr = (v->ray->rayy / v->ray->rayx) * 0.001;
+	if (v->ray->sprite_hit == 0)
 		sprite_north(v);
-	else if (SPRITE_HIT == 1)
+	else if (v->ray->sprite_hit == 1)
 		sprite_east(v);
-	else if (SPRITE_HIT == 2)
+	else if (v->ray->sprite_hit == 2)
 		sprite_south(v);
-	else if (SPRITE_HIT == 3)
+	else if (v->ray->sprite_hit == 3)
 		sprite_west(v);
-	SPRITE_FINAL[SPRITE_I] *= cos(fabs(RAY_ANGLE - PLAYDIR));
-	if (PERC[SPRITE_I] > 1 || PERC[SPRITE_I] < 0)
+	v->s->finaldist[v->index] *= cos(fabs(v->ray->angle - v->ray->playdir));
+	if (v->s->perc[v->index] > 1 || v->s->perc[v->index] < 0)
 		return (0);
-	HAS_SPRITE = 1;
-	SPRITE_I++;
+	v->ray->sprite = 1;
+	v->index++;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/13 21:06:25 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/14 13:25:58 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,35 @@ int		wall_data(t_vars *v, int side)
 {
 	if (side == 0)
 	{
-		WALLDIST = cos(RAY_ANGLE - PLAYDIR) * SIDEX;
-		if (RAYX >= 0)
-			SIDE_HIT = 1;
+		v->ray->walldist = cos(v->ray->angle - v->ray->playdir) * v->ray->sidex;
+		if (v->ray->rayx >= 0)
+			v->ray->side_hit = 1;
 		else
-			SIDE_HIT = 3;
-		RAY_FINAL = SIDEX;
+			v->ray->side_hit = 3;
+		v->ray->finaldist = v->ray->sidex;
 	}
 	else
 	{
-		WALLDIST = cos(RAY_ANGLE - PLAYDIR) * SIDEY;
-		if (RAYY > 0)
-			SIDE_HIT = 2;
+		v->ray->walldist = cos(v->ray->angle - v->ray->playdir) * v->ray->sidey;
+		if (v->ray->rayy > 0)
+			v->ray->side_hit = 2;
 		else
-			SIDE_HIT = 0;
-		RAY_FINAL = SIDEY;
+			v->ray->side_hit = 0;
+		v->ray->finaldist = v->ray->sidey;
 	}
 	return (1);
 }
 
 int		new_sidedist(t_vars *v, int side, int mapy, int mapx)
 {
-	if (v->MAP[mapy][mapx] == '2')
+	if (v->d->map[mapy][mapx] == '2')
 		sprite_data(v, side, mapy, mapx);
-	else if (v->MAP[mapy][mapx] == '1')
+	else if (v->d->map[mapy][mapx] == '1')
 		return ((wall_data(v, side) == 1));
 	if (side == 0)
-		SIDEX += DELTAX;
+		v->ray->sidex += v->ray->deltax;
 	else
-		SIDEY += DELTAY;
+		v->ray->sidey += v->ray->deltay;
 	return (0);
 }
 
@@ -54,18 +54,18 @@ void	find_hit(t_vars *v)
 	int		mapx;
 	int		mapy;
 
-	mapx = PLAYER_X;
-	mapy = PLAYER_Y;
+	mapx = v->player->x;
+	mapy = v->player->y;
 	while (1)
 	{
-		if (SIDEX < SIDEY)
+		if (v->ray->sidex < v->ray->sidey)
 		{
 			side = 0;
-			mapx += STEP_X;
+			mapx += v->stepx;
 		}
 		else
 		{
-			mapy += STEP_Y;
+			mapy += v->stepy;
 			side = 1;
 		}
 		if (new_sidedist(v, side, mapy, mapx) == 1)
@@ -78,26 +78,26 @@ void	find_side_delta(t_vars *v)
 	float	x;
 	float	y;
 
-	if (PLAYDIR > (0.5 * M_PI) && PLAYDIR < (1.5 * M_PI))
-		y = PLAYER_Y - (int)PLAYER_Y;
+	if (v->ray->playdir > (0.5 * M_PI) && v->ray->playdir < (1.5 * M_PI))
+		y = v->player->y - (int)v->player->y;
 	else
-		y = 1 - (PLAYER_Y - (int)PLAYER_Y);
-	if (PLAYDIR > M_PI && PLAYDIR < (M_PI * 2))
-		x = PLAYER_X - (int)PLAYER_X;
+		y = 1 - (v->player->y - (int)v->player->y);
+	if (v->ray->playdir > M_PI && v->ray->playdir < (M_PI * 2))
+		x = v->player->x - (int)v->player->x;
 	else
-		x = 1 - (PLAYER_X - (int)PLAYER_X);
-	RAYX = sin(PLAYDIR);
-	RAYY = cos(PLAYDIR);
-	SIDEX = fabs(x / RAYX);
-	SIDEY = fabs(y / RAYY);
-	DELTAX = fabs(1 / RAYX);
-	DELTAY = fabs(1 / RAYY);
-	if (RAYX < 0)
-		STEP_X = -1;
+		x = 1 - (v->player->x - (int)v->player->x);
+	v->ray->rayx = sin(v->ray->playdir);
+	v->ray->rayy = cos(v->ray->playdir);
+	v->ray->sidex = fabs(x / v->ray->rayx);
+	v->ray->sidey = fabs(y / v->ray->rayy);
+	v->ray->deltax = fabs(1 / v->ray->rayx);
+	v->ray->deltay = fabs(1 / v->ray->rayy);
+	if (v->ray->rayx < 0)
+		v->stepx = -1;
 	else
-		STEP_X = 1;
-	if (RAYY < 0)
-		STEP_Y = -1;
+		v->stepx = 1;
+	if (v->ray->rayy < 0)
+		v->stepy = -1;
 	else
-		STEP_Y = 1;
+		v->stepy = 1;
 }

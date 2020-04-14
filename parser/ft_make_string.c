@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:33:27 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/13 12:29:35 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/14 12:44:46 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int		make_string(char **argv, t_flags *d)
 	int		fd;
 	int		ret;
 
-	ERROR = "NOT A VALID FILE/FILE DESCRIPTOR\n";
-	STR = ft_strdup("");
+	d->error = "ERROR: NOT A VALID FILE/FILE DESCRIPTOR\n";
+	d->str = ft_strdup("");
 	ret = 1;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
@@ -87,12 +87,12 @@ int		make_string(char **argv, t_flags *d)
 		if (ret == -1)
 			return (0);
 		buf[ret] = '\0';
-		tmp = STR;
-		STR = ft_strjoin((const char *)STR, buf);
+		tmp = d->str;
+		d->str = ft_strjoin((const char *)d->str, buf);
 		free(tmp);
-		if (STR == NULL)
+		if (d->str == NULL)
 			return (0);
 	}
-	ERROR = "";
+	d->error = "";
 	return (1);
 }

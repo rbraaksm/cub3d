@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/07 16:46:57 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/13 21:31:32 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/14 13:24:06 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	west_texture(t_vars *v, char *path, t_tex *w_tex)
 	w_tex->width = width_img;
 	w_tex->height = height_img;
 	v->textures->w_tex = w_tex;
-	free(v->WEST);
+	free(v->d->we);
 }
 
 void	south_texture(t_vars *v, char *path, t_tex *s_tex)
@@ -47,7 +47,7 @@ void	south_texture(t_vars *v, char *path, t_tex *s_tex)
 	s_tex->width = width_img;
 	s_tex->height = height_img;
 	v->textures->s_tex = s_tex;
-	free(v->SOUTH);
+	free(v->d->so);
 }
 
 void	east_texture(t_vars *v, char *path, t_tex *e_tex)
@@ -66,7 +66,7 @@ void	east_texture(t_vars *v, char *path, t_tex *e_tex)
 	e_tex->width = width_img;
 	e_tex->height = height_img;
 	v->textures->e_tex = e_tex;
-	free(v->EAST);
+	free(v->d->ea);
 }
 
 void	north_texture(t_vars *v, char *path, t_tex *n_tex)
@@ -85,7 +85,7 @@ void	north_texture(t_vars *v, char *path, t_tex *n_tex)
 	n_tex->width = width_img;
 	n_tex->height = height_img;
 	v->textures->n_tex = n_tex;
-	free(v->NORTH);
+	free(v->d->no);
 }
 
 void	sprite_texture(t_vars *v, char *path, t_tex *sprite)
@@ -104,5 +104,5 @@ void	sprite_texture(t_vars *v, char *path, t_tex *sprite)
 	sprite->width = width_img;
 	sprite->height = height_img;
 	v->textures->sprite = sprite;
-	free(v->SPRITE);
+	free(v->d->s);
 }

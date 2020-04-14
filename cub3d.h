@@ -6,20 +6,19 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/13 21:19:14 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/14 13:52:37 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# define BUFFER_SIZE 128
-# include "definitions.h"
+# define BUFFER_SIZE 30
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-# include <stdio.h>
 # include <mlx.h>
+# include <stdio.h>
 
 typedef struct		s_struct
 {
@@ -82,12 +81,6 @@ typedef struct		s_player
 {
 	float			y;
 	float			x;
-	int				move_f;
-	int				move_b;
-	int				move_l;
-	int				move_r;
-	int				rotate_l;
-	int				rotate_r;
 	float			crab;
 	float			walk;
 	float			look;
@@ -146,8 +139,6 @@ typedef struct		s_vars
 	int				line_length;
 	int				endian;
 	int				active_img;
-	float			tile_h;
-	float			tile_w;
 	int				stepx;
 	int				stepy;
 	int				i;
@@ -186,12 +177,12 @@ void				start_game(t_vars *v);
 int					exit_game(t_vars *v);
 void				struct_info(t_vars *v);
 void				screenshot(t_vars *v);
-void				player(t_vars *vars, float move);
-// void				player(t_vars *vars, float move), char c;
+void				rotate_player(t_vars *v, float rot);
+void				move_player(t_vars *v, float move);
+void				crab_player(t_vars *v, float move);
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
-// void				ft_view(t_vars *vars, float rot);
-void				ft_view2(t_vars *vars);
+void				ft_view(t_vars *vars);
 void				draw(t_vars *v);
 void				draw_wall(t_vars *v);
 void				draw_sprite(t_vars *v);

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/13 18:54:50 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/14 14:01:25 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ int		main(int argc, char **argv)
 	if (check_map(argv, &d) == 0)
 		return (write(1, d.error, ft_strlen(d.error)));
 	window(&d);
-	// while (1)
-	// {
-
-	// }
+	printf("test\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 15:11:54 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 15:22:21 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/14 13:29:05 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int				error_check(t_flags *d, char *str)
 	int	i;
 
 	i = 0;
-	while (ERROR[i] != '\0')
+	while (d->error[i] != '\0')
 	{
-		if (ERROR[i] != str[i])
+		if (d->error[i] != str[i])
 			return (0);
 		i++;
 	}

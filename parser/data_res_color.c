@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:00:25 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/13 13:09:25 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/14 12:35:33 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ static int	between(char *str, int *index)
 	i = *index;
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
+	while (str[i] == ' ')
+		i++;
 	if (str[i] != ',')
 		return (0);
 	i++;
+	while (str[i] == ' ')
+		i++;
 	if (str[i] < '0' || str[i] > '9')
 		return (0);
 	*index = i;
@@ -33,7 +37,7 @@ void		data_ceiling(t_flags *d, char *str, int *index)
 	int i;
 
 	i = 0;
-	ERROR = "CEILING COLOR ISN'T CORRECT\n";
+	d->error = "ERROR: CEILING COLOR ISN'T CORRECT\n";
 	while (str[i] != '\n')
 		i++;
 	*index = *index + i + 2;
@@ -42,17 +46,17 @@ void		data_ceiling(t_flags *d, char *str, int *index)
 		i++;
 	if (str[i] < '0' || str[i] > '9')
 		return ;
-	CRED = ft_atoi(&str[i]);
+	d->cred = ft_atoi(&str[i]);
 	if (between(str, &i) == 0)
 		return ;
-	CGREEN = ft_atoi(&str[i]);
+	d->cgreen = ft_atoi(&str[i]);
 	if (between(str, &i) == 0)
 		return ;
-	CBLUE = ft_atoi(&str[i]);
-	if (CRED > 255 || CGREEN > 255 || CBLUE < 0 || CBLUE > 255)
+	d->cblue = ft_atoi(&str[i]);
+	if (d->cred > 255 || d->cgreen > 255 || d->cblue < 0 || d->cblue > 255)
 		return ;
-	CHECK += 2000000;
-	ERROR = "";
+	d->check += 2000000;
+	d->error = "";
 }
 
 void		data_floor(t_flags *d, char *str, int *index)
@@ -60,7 +64,7 @@ void		data_floor(t_flags *d, char *str, int *index)
 	int	i;
 
 	i = 0;
-	ERROR = "FLOOR COLOR ISN'T CORRECT\n";
+	d->error = "ERROR: FLOOR COLOR ISN'T CORRECT\n";
 	while (str[i] != '\n')
 		i++;
 	*index = *index + i + 2;
@@ -69,17 +73,17 @@ void		data_floor(t_flags *d, char *str, int *index)
 		i++;
 	if (str[i] < '0' || str[i] > '9')
 		return ;
-	FRED = ft_atoi(&str[i]);
+	d->fred = ft_atoi(&str[i]);
 	if (between(str, &i) == 0)
 		return ;
-	FGREEN = ft_atoi(&str[i]);
+	d->fgreen = ft_atoi(&str[i]);
 	if (between(str, &i) == 0)
 		return ;
-	FBLUE = ft_atoi(&str[i]);
-	if (FRED > 255 || FGREEN > 255 || FBLUE < 0 || FBLUE > 255)
+	d->fblue = ft_atoi(&str[i]);
+	if (d->fred > 255 || d->fgreen > 255 || d->fblue < 0 || d->fblue > 255)
 		return ;
-	CHECK += 400000;
-	ERROR = "";
+	d->check += 400000;
+	d->error = "";
 }
 
 void		resolution(t_flags *d, char *str, int *index)
@@ -87,25 +91,25 @@ void		resolution(t_flags *d, char *str, int *index)
 	int i;
 
 	i = 0;
-	ERROR = "RESOLUTION IS NOT CORRECT\n";
+	d->error = "ERROR: RESOLUTION IS NOT CORRECT\n";
 	while (str[i] != '\n')
 		i++;
 	*index = *index + i + 2;
 	i = 0;
-	RESX = ft_atoi(str);
-	if (RESX < 0 || RESX > 100000)
-		return ;
+	d->resx = ft_atoi(str);
 	while (str[i] == ' ')
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
-	RESY = ft_atoi(&str[i]);
-	if (RESY < 0 || RESY < 0)
+	d->resy = ft_atoi(&str[i]);
+	if (d->resy < 0 || d->resx < 0)
 		return ;
-	if (RESX < 25)
-		RESX = 25;
-	if (RESY < 25)
-		RESY = 25;
-	CHECK += 40000000;
-	ERROR = "";
+	if (d->resx < 25 || d->resy < 25)
+		write(1, "PLEASE KEEP RESOLUTION ABOVE 25\n", 32);
+	if (d->resx < 25)
+		d->resx = 25;
+	if (d->resy < 25)
+		d->resy = 25;
+	d->check += 40000000;
+	d->error = "";
 }

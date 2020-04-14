@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/13 21:26:03 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/14 13:27:24 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,62 +37,39 @@ void	raydistance(t_vars *v)
 	if (v->ray->raydist == 0)
 	{
 		v->ray->adjust = 1 / atan(M_PI / 6);
-		v->ray->raydist = (v->ray->opp / (float)v->RESX) * 2;
+		v->ray->raydist = (v->ray->opp / (float)v->d->resx) * 2;
 		return ;
 	}
 	v->ray->opp -= v->ray->raydist;
-	PLAYDIR = RAY_ANGLE + atan(v->ray->opp / v->ray->adjust);
+	v->ray->playdir = v->ray->angle + atan(v->ray->opp / v->ray->adjust);
 }
 
 void	check_dir(t_vars *v)
 {
-	if (PLAYDIR < 0)
-		PLAYDIR += (2 * M_PI);
-	if (PLAYDIR > (2 * M_PI))
-		PLAYDIR -= (2 * M_PI);
+	if (v->ray->playdir < 0)
+		v->ray->playdir += (2 * M_PI);
+	if (v->ray->playdir > (2 * M_PI))
+		v->ray->playdir -= (2 * M_PI);
 }
 
-// void	ft_view(t_vars *v, float rot)
-// {
-// 	v->i = 0;
-// 	PLAYDIR += rot;
-// 	check_dir(v);
-// 	RAY_ANGLE = PLAYDIR;
-// 	v->ray->opp = 1;
-// 	while (v->i < v->RESX)
-// 	{
-// 		raydistance(v);
-// 		HAS_SPRITE = 0;
-// 		check_dir(v);
-// 		find_side_delta(v);
-// 		find_hit(v);
-// 		draw_wall(v);
-// 		if (SPRITE_I > 0)
-// 			draw_sprite(v);
-// 		v->i++;
-// 	}
-// 	PLAYDIR = RAY_ANGLE;
-// 	put_img_2_win(v);
-// }
-
-void	ft_view2(t_vars *v)
+void	ft_view(t_vars *v)
 {
 	v->i = 0;
 	check_dir(v);
-	RAY_ANGLE = PLAYDIR;
+	v->ray->angle = v->ray->playdir;
 	v->ray->opp = 1;
-	while (v->i < v->RESX)
+	while (v->i < v->d->resx)
 	{
 		raydistance(v);
-		HAS_SPRITE = 0;
+		v->ray->sprite = 0;
 		check_dir(v);
 		find_side_delta(v);
 		find_hit(v);
 		draw_wall(v);
-		if (SPRITE_I > 0)
+		if (v->index > 0)
 			draw_sprite(v);
 		v->i++;
 	}
-	PLAYDIR = RAY_ANGLE;
+	v->ray->playdir = v->ray->angle;
 	put_img_2_win(v);
 }

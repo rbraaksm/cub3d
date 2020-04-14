@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 10:37:22 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/13 12:49:43 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/14 13:42:18 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@ void	north(t_flags *d, const char *s1, char c, int *index)
 
 	i = 2;
 	len = 0;
-	while (s1[i] == ' ')
+	while (s1[i] == 32 || (s1[i] > 8 && s1[i] < 14))
 		i++;
 	while (s1[i + len] != c)
 		len++;
 	*index = *index + i + len + 1;
-	NORTH = (char *)malloc(sizeof(*s1) * (len + 1));
-	if (!NORTH)
+	d->no = (char *)malloc(sizeof(*s1) * (len + 1));
+	if (!d->no)
 		return ;
 	x = i;
 	i = 0;
 	while (i < len)
 	{
-		NORTH[i] = s1[x];
+		d->no[i] = s1[x];
 		i++;
 		x++;
 	}
-	NORTH[i] = '\0';
-	CHECK += 2;
+	d->no[i] = '\0';
+	d->check += 2;
 }
 
 void	east(t_flags *d, const char *s1, char c, int *index)
@@ -48,24 +48,24 @@ void	east(t_flags *d, const char *s1, char c, int *index)
 
 	i = 2;
 	len = 0;
-	while (s1[i] == ' ')
+	while (s1[i] == 32 || (s1[i] > 8 && s1[i] < 14))
 		i++;
 	while (s1[i + len] != c)
 		len++;
 	*index = *index + i + len + 1;
-	EAST = (char *)malloc(sizeof(*s1) * (len + 1));
-	if (!EAST)
+	d->ea = (char *)malloc(sizeof(*s1) * (len + 1));
+	if (!d->ea)
 		return ;
 	x = i;
 	i = 0;
 	while (i < len)
 	{
-		EAST[i] = s1[x];
+		d->ea[i] = s1[x];
 		i++;
 		x++;
 	}
-	EAST[i] = '\0';
-	CHECK += 40;
+	d->ea[i] = '\0';
+	d->check += 40;
 }
 
 void	south(t_flags *d, const char *s1, char c, int *index)
@@ -76,24 +76,24 @@ void	south(t_flags *d, const char *s1, char c, int *index)
 
 	i = 2;
 	len = 0;
-	while (s1[i] == ' ')
+	while (s1[i] == 32 || (s1[i] > 8 && s1[i] < 14))
 		i++;
 	while (s1[i + len] != c)
 		len++;
 	*index = *index + i + len + 1;
-	SOUTH = (char *)malloc(sizeof(*s1) * (len + 1));
-	if (!SOUTH)
+	d->so = (char *)malloc(sizeof(*s1) * (len + 1));
+	if (!d->so)
 		return ;
 	x = i;
 	i = 0;
 	while (i < len)
 	{
-		SOUTH[i] = s1[x];
+		d->so[i] = s1[x];
 		i++;
 		x++;
 	}
-	SOUTH[i] = '\0';
-	CHECK += 200;
+	d->so[i] = '\0';
+	d->check += 200;
 }
 
 void	west(t_flags *d, const char *s1, char c, int *index)
@@ -104,24 +104,24 @@ void	west(t_flags *d, const char *s1, char c, int *index)
 
 	i = 2;
 	len = 0;
-	while (s1[i] == ' ')
+	while (s1[i] == 32 || (s1[i] > 8 && s1[i] < 14))
 		i++;
 	while (s1[i + len] != c)
 		len++;
 	*index = *index + i + len + 1;
-	WEST = (char *)malloc(sizeof(*s1) * (len + 1));
-	if (!WEST)
+	d->we = (char *)malloc(sizeof(*s1) * (len + 1));
+	if (!d->we)
 		return ;
 	x = i;
 	i = 0;
 	while (i < len)
 	{
-		WEST[i] = s1[x];
+		d->we[i] = s1[x];
 		i++;
 		x++;
 	}
-	WEST[i] = '\0';
-	CHECK += 4000;
+	d->we[i] = '\0';
+	d->check += 4000;
 }
 
 void	sprite(t_flags *d, const char *s1, char c, int *index)
@@ -132,22 +132,22 @@ void	sprite(t_flags *d, const char *s1, char c, int *index)
 
 	i = 1;
 	len = 0;
-	while (s1[i] == ' ')
+	while (s1[i] == 32 || (s1[i] > 8 && s1[i] < 14))
 		i++;
 	while (s1[i + len] != c)
 		len++;
 	*index = *index + i + len + 1;
-	SPRITE = (char *)malloc(sizeof(*s1) * (len + 1));
-	if (!SPRITE)
+	d->s = (char *)malloc(sizeof(*s1) * (len + 1));
+	if (!d->s)
 		return ;
 	x = i;
 	i = 0;
 	while (i < len)
 	{
-		SPRITE[i] = s1[x];
+		d->s[i] = s1[x];
 		i++;
 		x++;
 	}
-	SPRITE[i] = '\0';
-	CHECK += 20000;
+	d->s[i] = '\0';
+	d->check += 20000;
 }

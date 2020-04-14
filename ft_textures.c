@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/13 21:06:09 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/14 13:25:20 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_floor(t_vars *v, int count)
 {
 	int				index;
 
-	index = v->RESY;
+	index = v->d->resy;
 	while (index > count)
 	{
 		my_mlx_pixel_put2(v, v->i, index, v->d->floor);
@@ -42,9 +42,9 @@ float	get_perc(t_vars *v)
 	float	y_cord;
 	float	perc;
 
-	x_cord = PLAYER_X + RAY_FINAL * RAYX;
-	y_cord = PLAYER_Y + RAY_FINAL * RAYY;
-	if (SIDE_HIT == 0 || SIDE_HIT == 2)
+	x_cord = v->player->x + v->ray->finaldist * v->ray->rayx;
+	y_cord = v->player->y + v->ray->finaldist * v->ray->rayy;
+	if (v->ray->side_hit == 0 || v->ray->side_hit == 2)
 		perc = x_cord - (int)x_cord;
 	else
 		perc = y_cord - (int)y_cord;
@@ -53,11 +53,11 @@ float	get_perc(t_vars *v)
 
 t_tex	*find_texture(t_vars *v)
 {
-	if (SIDE_HIT == 0)
+	if (v->ray->side_hit == 0)
 		return (v->textures->n_tex);
-	else if (SIDE_HIT == 1)
+	else if (v->ray->side_hit == 1)
 		return (v->textures->e_tex);
-	else if (SIDE_HIT == 2)
+	else if (v->ray->side_hit == 2)
 		return (v->textures->s_tex);
 	else
 		return (v->textures->w_tex);
@@ -72,8 +72,8 @@ void	draw_wall(t_vars *v)
 	float	y;
 
 	tex = find_texture(v);
-	length = ((1 / WALLDIST) * v->RESY);
-	count = (length / 2) + (v->RESY / 2);
+	length = ((1 / v->ray->walldist) * v->d->resy);
+	count = (length / 2) + (v->d->resy / 2);
 	tmpcount = count;
 	draw_roof(v, count);
 	tex->x_tex = (float)tex->width * get_perc(v);
@@ -87,20 +87,4 @@ void	draw_wall(t_vars *v)
 		tex->y_tex -= y;
 	}
 	draw_floor(v, tmpcount);
-
-	// float	length;
-	// float	count;
-	// float	tmpcount;
-
-	// length = ((1 / WALLDIST) * v->RESY);
-	// count = (length / 2) + (v->RESY / 2);
-	// tmpcount = count;
-	// draw_roof(v, count);
-	// while (length > 0)
-	// {
-	// 	my_mlx_pixel_put2(v, v->i, count, 0x555555);
-	// 	count--;
-	// 	length--;
-	// }
-	// draw_floor(v, tmpcount);
 }

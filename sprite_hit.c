@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:56:50 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 16:13:33 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/14 13:31:36 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,96 +14,98 @@
 
 void	sprite_north(t_vars *v)
 {
-	if (X_ANGLE_INCR > 0)
+	if (v->s->x_angle_incr > 0)
 	{
-		while (X_HIT > X_HIT_ANGLE)
+		while (v->s->x_hit > v->s->x_hit_angle)
 		{
-			X_HIT -= X_ANGLE_INCR;
-			X_HIT_ANGLE -= X_INCR;
+			v->s->x_hit -= v->s->x_angle_incr;
+			v->s->x_hit_angle -= v->s->x_incr;
 		}
 	}
 	else
 	{
-		while (X_HIT < X_HIT_ANGLE)
+		while (v->s->x_hit < v->s->x_hit_angle)
 		{
-			X_HIT -= X_ANGLE_INCR;
-			X_HIT_ANGLE -= X_INCR;
+			v->s->x_hit -= v->s->x_angle_incr;
+			v->s->x_hit_angle -= v->s->x_incr;
 		}
 	}
-	START = MIDDLE_X - (fabs(X_ANGLE) / 2);
-	PERC[SPRITE_I] = (X_HIT - START) / fabs(X_ANGLE);
-	SPRITE_FINAL[SPRITE_I] = fabs(sqrt(pow(MIDDLE_X - PLAYER_X, 2) +
-	pow(MIDDLE_Y - PLAYER_Y, 2)));
+	v->s->start = v->s->middle_x - (fabs(v->s->x_angle) / 2);
+	v->s->perc[v->index] = (v->s->x_hit - v->s->start) / fabs(v->s->x_angle);
+	v->s->finaldist[v->index] = fabs(sqrt(pow(v->s->middle_x - v->player->x, 2)
+	+ pow(v->s->middle_y - v->player->y, 2)));
 }
 
 void	sprite_east(t_vars *v)
 {
-	if (X_ANGLE_INCR < 0)
+	if (v->s->x_angle_incr < 0)
 	{
-		while (Y_HIT > Y_HIT_ANGLE)
+		while (v->s->y_hit > v->s->y_hit_angle)
 		{
-			Y_HIT += Y_ANGLE_INCR;
-			Y_HIT_ANGLE += Y_INCR;
+			v->s->y_hit += v->s->y_angle_incr;
+			v->s->y_hit_angle += v->s->y_incr;
 		}
 	}
 	else
 	{
-		while (Y_HIT < Y_HIT_ANGLE)
+		while (v->s->y_hit < v->s->y_hit_angle)
 		{
-			Y_HIT += Y_ANGLE_INCR;
-			Y_HIT_ANGLE += Y_INCR;
+			v->s->y_hit += v->s->y_angle_incr;
+			v->s->y_hit_angle += v->s->y_incr;
 		}
 	}
-	START = MIDDLE_Y - (fabs(Y_ANGLE) / 2);
-	PERC[SPRITE_I] = ((Y_HIT - START) / fabs(Y_ANGLE));
-	SPRITE_FINAL[SPRITE_I] = fabs(sqrt(pow(MIDDLE_Y - PLAYER_Y, 2) +
-	pow(MIDDLE_X - PLAYER_X, 2)));
+	v->s->start = v->s->middle_y - (fabs(v->s->y_angle) / 2);
+	v->s->perc[v->index] = ((v->s->y_hit - v->s->start) / fabs(v->s->y_angle));
+	v->s->finaldist[v->index] = fabs(sqrt(pow(v->s->middle_y - v->player->y, 2)
+	+ pow(v->s->middle_x - v->player->x, 2)));
 }
 
 void	sprite_south(t_vars *v)
 {
-	if (X_ANGLE_INCR > 0)
+	if (v->s->x_angle_incr > 0)
 	{
-		while (X_HIT < X_HIT_ANGLE)
+		while (v->s->x_hit < v->s->x_hit_angle)
 		{
-			X_HIT += X_ANGLE_INCR;
-			X_HIT_ANGLE += X_INCR;
+			v->s->x_hit += v->s->x_angle_incr;
+			v->s->x_hit_angle += v->s->x_incr;
 		}
 	}
 	else
 	{
-		while (X_HIT > X_HIT_ANGLE)
+		while (v->s->x_hit > v->s->x_hit_angle)
 		{
-			X_HIT += X_ANGLE_INCR;
-			X_HIT_ANGLE += X_INCR;
+			v->s->x_hit += v->s->x_angle_incr;
+			v->s->x_hit_angle += v->s->x_incr;
 		}
 	}
-	START = MIDDLE_X - (fabs(X_ANGLE) / 2);
-	PERC[SPRITE_I] = 1 - ((X_HIT - START) / fabs(X_ANGLE));
-	SPRITE_FINAL[SPRITE_I] = fabs(sqrt(pow(MIDDLE_X - PLAYER_X, 2) +
-	pow(MIDDLE_Y - PLAYER_Y, 2)));
+	v->s->start = v->s->middle_x - (fabs(v->s->x_angle) / 2);
+	v->s->perc[v->index] = 1 - ((v->s->x_hit - v->s->start) /
+	fabs(v->s->x_angle));
+	v->s->finaldist[v->index] = fabs(sqrt(pow(v->s->middle_x - v->player->x, 2)
+	+ pow(v->s->middle_y - v->player->y, 2)));
 }
 
 void	sprite_west(t_vars *v)
 {
-	if (X_ANGLE_INCR < 0)
+	if (v->s->x_angle_incr < 0)
 	{
-		while (Y_HIT < Y_HIT_ANGLE)
+		while (v->s->y_hit < v->s->y_hit_angle)
 		{
-			Y_HIT -= Y_ANGLE_INCR;
-			Y_HIT_ANGLE -= Y_INCR;
+			v->s->y_hit -= v->s->y_angle_incr;
+			v->s->y_hit_angle -= v->s->y_incr;
 		}
 	}
 	else
 	{
-		while (Y_HIT > Y_HIT_ANGLE)
+		while (v->s->y_hit > v->s->y_hit_angle)
 		{
-			Y_HIT -= Y_ANGLE_INCR;
-			Y_HIT_ANGLE -= Y_INCR;
+			v->s->y_hit -= v->s->y_angle_incr;
+			v->s->y_hit_angle -= v->s->y_incr;
 		}
 	}
-	START = MIDDLE_Y - (fabs(Y_ANGLE) / 2);
-	PERC[SPRITE_I] = 1 - ((Y_HIT - START) / fabs(Y_ANGLE));
-	SPRITE_FINAL[SPRITE_I] = fabs(sqrt(pow(MIDDLE_Y - PLAYER_Y, 2) +
-	pow(MIDDLE_X - PLAYER_X, 2)));
+	v->s->start = v->s->middle_y - (fabs(v->s->y_angle) / 2);
+	v->s->perc[v->index] = 1 - ((v->s->y_hit - v->s->start) /
+	fabs(v->s->y_angle));
+	v->s->finaldist[v->index] = fabs(sqrt(pow(v->s->middle_y - v->player->y, 2)
+	+ pow(v->s->middle_x - v->player->x, 2)));
 }
