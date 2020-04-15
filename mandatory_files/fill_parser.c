@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:18:15 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:50:15 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static void	colors(t_flags *d)
 static void	set_values(t_flags *d)
 {
 	d->check = 0;
-	d->resx = 0;
-	d->resy = 0;
+	d->resx = -1;
+	d->resy = -1;
 	d->fred = -1;
 	d->fgreen = -1;
 	d->fblue = -1;

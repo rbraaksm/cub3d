@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:17:29 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 22:08:06 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	first_lines(t_flags *d, int *y)
 			i = 0;
 		}
 	}
-	while (i < ft_strlen(d->map[0]))
+	while (i < ft_strlen(d->map[*y]))
 	{
 		if (d->map[*y][i] == '1')
 			i++;
@@ -76,6 +76,7 @@ static int	middle_lines(t_flags *d, int y)
 
 	i = 0;
 	d->error = "ERROR: MAP ISN'T CORRECT\n";
+	printf("%2d: %s\n", y, d->map[y]);
 	while (d->map[y][i] == ' ')
 		i++;
 	if (d->map[y][i] == '\0' && middle_lines_2(d, y, 0) == 0)
@@ -125,10 +126,10 @@ int			check_grid(t_flags *d)
 		if (i == 0)
 			if (first_lines(d, &i) == 0)
 				return (0);
-		if (i < d->row_count - 1)
+		if (i > 0 && i < d->row_count - 1)
 			if (middle_lines(d, i) == 0)
 				return (0);
-		if (i == d->row_count - 1)
+		if (i == d->row_count)
 			if (last_line(d, i) == 0)
 				return (0);
 		i++;

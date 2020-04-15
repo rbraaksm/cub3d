@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:18:34 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 22:07:45 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		check_str(t_flags *d)
 	while (d->str[i] != '\0')
 	{
 		if (d->str[i] != '0' && d->str[i] != '1' && d->str[i] != '2' &&
-				d->str[i] != '\n' && d->str[i] != ' ' && d->str[i] != 'N' &&
+				d->str[i] != '\n' && d->str[i] != 32 && d->str[i] != 'N' &&
 				d->str[i] != 'E' && d->str[i] != 'S' && d->str[i] != 'W')
 			return (0);
 		c++;

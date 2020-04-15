@@ -6,15 +6,15 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:00:34 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:21:35 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		draw_roof(t_vars *v, int count)
+static void		draw_floor_ceiling(t_vars *v, int count)
 {
-	int				index;
+	int	index;
 
 	index = 0;
 	while (index < count)
@@ -22,12 +22,6 @@ static void		draw_roof(t_vars *v, int count)
 		my_mlx_pixel_put(v, v->i, index, v->d->ceiling);
 		index++;
 	}
-}
-
-static void		draw_floor(t_vars *v, int count)
-{
-	int				index;
-
 	index = v->d->resy;
 	while (index > count)
 	{
@@ -75,7 +69,7 @@ void			draw_wall(t_vars *v)
 	length = ((1 / v->ray->walldist) * v->d->resy);
 	count = (length / 2) + (v->d->resy / 2);
 	tmpcount = count;
-	draw_roof(v, count);
+	draw_floor_ceiling(v, count);
 	tex->x_tex = (float)tex->width * get_perc(v);
 	tex->y_tex = tex->height - 1;
 	y = (float)tex->height / (float)length;
@@ -86,7 +80,6 @@ void			draw_wall(t_vars *v)
 		length--;
 		tex->y_tex -= y;
 	}
-	draw_floor(v, tmpcount);
 }
 
 void			draw_sprite(t_vars *v)
