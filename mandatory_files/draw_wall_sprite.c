@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_textures.c                                      :+:    :+:            */
+/*   draw_wall_sprite.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 12:19:51 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:00:34 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_roof(t_vars *v, int count)
+static void		draw_roof(t_vars *v, int count)
 {
 	int				index;
 
 	index = 0;
 	while (index < count)
 	{
-		my_mlx_pixel_put2(v, v->i, index, v->d->ceiling);
+		my_mlx_pixel_put(v, v->i, index, v->d->ceiling);
 		index++;
 	}
 }
 
-void	draw_floor(t_vars *v, int count)
+static void		draw_floor(t_vars *v, int count)
 {
 	int				index;
 
 	index = v->d->resy;
 	while (index > count)
 	{
-		my_mlx_pixel_put2(v, v->i, index, v->d->floor);
+		my_mlx_pixel_put(v, v->i, index, v->d->floor);
 		index--;
 	}
 }
 
-float	get_perc(t_vars *v)
+static float	get_perc(t_vars *v)
 {
 	float	x_cord;
 	float	y_cord;
@@ -51,7 +51,7 @@ float	get_perc(t_vars *v)
 	return (perc);
 }
 
-t_tex	*find_texture(t_vars *v)
+static t_tex	*find_texture(t_vars *v)
 {
 	if (v->ray->side_hit == 0)
 		return (v->textures->n_tex);
@@ -63,7 +63,7 @@ t_tex	*find_texture(t_vars *v)
 		return (v->textures->w_tex);
 }
 
-void	draw_wall(t_vars *v)
+void			draw_wall(t_vars *v)
 {
 	t_tex	*tex;
 	float	length;
@@ -87,4 +87,29 @@ void	draw_wall(t_vars *v)
 		tex->y_tex -= y;
 	}
 	draw_floor(v, tmpcount);
+}
+
+void			draw_sprite(t_vars *v)
+{
+	float	length;
+	float	count;
+	float	y;
+
+	while ((v->index - 1) > 0)
+	{
+		length = (v->d->resy / v->s->finaldist[v->index - 1]);
+		count = (length / 2) + (v->d->resy / 2);
+		v->textures->sprite->x_tex = (float)v->textures->sprite->width *
+		v->s->perc[v->index - 1];
+		v->textures->sprite->y_tex = v->textures->sprite->height - 1;
+		y = (float)v->textures->sprite->height / (float)length;
+		while (length > 0)
+		{
+			my_sprite_put(v, v->i, count);
+			count--;
+			length--;
+			v->textures->sprite->y_tex -= y;
+		}
+		v->index--;
+	}
 }

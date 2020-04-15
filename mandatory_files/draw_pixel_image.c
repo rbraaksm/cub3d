@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_draw.c                                          :+:    :+:            */
+/*   draw_pixel_image.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 08:46:24 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/08 16:10:49 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:18:04 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	my_image_put(t_vars *v, t_tex *tex, int x, int y)
 	*(unsigned int*)dst = *(unsigned int*)src;
 }
 
-void	my_mlx_pixel_put2(t_vars *v, int x, int y, int color)
+void	my_mlx_pixel_put(t_vars *v, int x, int y, int color)
 {
 	char	*dst;
 
@@ -48,5 +48,25 @@ void	my_mlx_pixel_put2(t_vars *v, int x, int y, int color)
 	{
 		dst = v->addr + (y * v->line_length + x * (v->bits_per_pixel / 8));
 		*(unsigned int*)dst = color;
+	}
+}
+
+void	put_img_2_win(t_vars *v)
+{
+	if (v->d->save == 1)
+		v->active_img = 2;
+	if (v->active_img == 1)
+	{
+		mlx_put_image_to_window(v->mlx, v->win, v->img1, 0, 0);
+		v->addr = mlx_get_data_addr(v->img2, &v->bits_per_pixel,
+		&v->line_length, &v->endian);
+		v->active_img = 2;
+	}
+	else
+	{
+		mlx_put_image_to_window(v->mlx, v->win, v->img2, 0, 0);
+		v->addr = mlx_get_data_addr(v->img1, &v->bits_per_pixel,
+		&v->line_length, &v->endian);
+		v->active_img = 1;
 	}
 }

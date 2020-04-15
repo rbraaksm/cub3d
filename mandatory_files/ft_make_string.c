@@ -6,11 +6,11 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:33:27 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/14 12:44:46 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:18:24 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 int		ft_strlen(const char *str)
 {

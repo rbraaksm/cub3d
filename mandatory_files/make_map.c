@@ -6,46 +6,11 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 16:49:00 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:18:34 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
-
-int		set_location(t_flags *d, int row, int column, char c)
-{
-	if (d->play_x == 0 && d->play_y == 0)
-	{
-		d->play_x = column + 0.5;
-		d->play_y = row + 0.5;
-		d->position = c;
-	}
-	else
-	{
-		d->error = "ERROR: TO MANY PLAYERS IN THE MAP\n";
-		return (0);
-	}
-	return (1);
-}
-
-int		ft_strchr(t_flags *d, char c, int row, int column)
-{
-	char	*s1;
-	int		i;
-
-	s1 = "012NWSE";
-	i = 0;
-	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
-		if (set_location(d, row, column, c) == 0)
-			return (0);
-	while (s1[i] != '\0')
-	{
-		if (s1[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
+#include "cub3d.h"
 
 int		fill_row(t_flags *d, int column, int start)
 {

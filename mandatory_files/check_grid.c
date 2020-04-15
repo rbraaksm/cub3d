@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 15:09:47 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:17:29 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
-static int	first_line(t_flags *d, int *y)
+static int	first_lines(t_flags *d, int *y)
 {
 	int	i;
 
@@ -123,7 +123,7 @@ int			check_grid(t_flags *d)
 	while (i < d->row_count)
 	{
 		if (i == 0)
-			if (first_line(d, &i) == 0)
+			if (first_lines(d, &i) == 0)
 				return (0);
 		if (i < d->row_count - 1)
 			if (middle_lines(d, i) == 0)

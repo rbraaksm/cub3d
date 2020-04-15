@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_atoi.c                                          :+:    :+:            */
+/*   utils.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 15:11:54 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/14 13:29:05 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:18:45 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "cub3d.h"
 
 int				error_check(t_flags *d, char *str)
 {
@@ -24,14 +24,6 @@ int				error_check(t_flags *d, char *str)
 		i++;
 	}
 	return (1);
-}
-
-static int		ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
 }
 
 static long int	check(const char *str, int i, unsigned long int res, int sign)
@@ -62,9 +54,9 @@ int				ft_atoi(const char *str)
 		return (0);
 	while (str[i] != '\0' && (str[i] == 32 || (str[i] > 8 && str[i] < 14)))
 		i++;
-	if (str[i] == '+' && ft_isdigit(str[i + 1]))
+	if (str[i] == '+' && str[i + 1] >= '0' && str[i + 1] <= '9')
 		i++;
-	if (str[i] == '-' && ft_isdigit(str[i + 1]))
+	if (str[i] == '-' && str[i + 1] >= '0' && str[i + 1] <= '9')
 	{
 		sign = -1;
 		i++;
@@ -72,4 +64,39 @@ int				ft_atoi(const char *str)
 	result = check(str, i, result, sign);
 	result = result * sign;
 	return (result);
+}
+
+int				set_location(t_flags *d, int row, int column, char c)
+{
+	if (d->play_x == 0 && d->play_y == 0)
+	{
+		d->play_x = column + 0.5;
+		d->play_y = row + 0.5;
+		d->position = c;
+	}
+	else
+	{
+		d->error = "ERROR: TO MANY PLAYERS IN THE MAP\n";
+		return (0);
+	}
+	return (1);
+}
+
+int				ft_strchr(t_flags *d, char c, int row, int column)
+{
+	char	*s1;
+	int		i;
+
+	s1 = "012NWSE";
+	i = 0;
+	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
+		if (set_location(d, row, column, c) == 0)
+			return (0);
+	while (s1[i] != '\0')
+	{
+		if (s1[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }

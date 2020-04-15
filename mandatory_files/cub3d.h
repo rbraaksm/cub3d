@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 18:03:41 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:12:02 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,8 @@ void				sprite_north(t_vars *v);
 void				sprite_east(t_vars *v);
 void				sprite_south(t_vars *v);
 void				sprite_west(t_vars *v);
-void				my_mlx_pixel_put2(t_vars *v, int x, int y, int color);
+void				put_img_2_win(t_vars *v);
+void				my_mlx_pixel_put(t_vars *v, int x, int y, int color);
 void				my_image_put(t_vars *v, t_tex *tex, int x, int y);
 void				my_sprite_put(t_vars *v, int x, int y);
 #endif

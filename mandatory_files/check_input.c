@@ -6,11 +6,11 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 09:57:00 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/14 12:31:51 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:17:41 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 static int	ft_strcmp(char *arg, char *s1, t_flags *d, char c)
 {

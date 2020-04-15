@@ -6,11 +6,11 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 10:37:22 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 16:45:05 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:17:59 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 static void	check(t_flags *d, char c)
 {
