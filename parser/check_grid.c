@@ -6,24 +6,33 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/14 13:28:39 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 15:09:47 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int	first_line(t_flags *d)
+static int	first_line(t_flags *d, int *y)
 {
 	int	i;
 
 	i = 0;
 	d->error = "ERROR: FIRST LINE ISN'T CORRECT\n";
+	while (d->map[*y][i] == ' ')
+	{
+		i++;
+		if (d->map[*y][i] == '\0')
+		{
+			*y = *y + 1;
+			i = 0;
+		}
+	}
 	while (i < ft_strlen(d->map[0]))
 	{
-		if (d->map[0][i] == '1')
+		if (d->map[*y][i] == '1')
 			i++;
-		else if (d->map[0][i] == ' ' && (d->map[1][i] == ' ' ||
-		d->map[1][i] == '1'))
+		else if (d->map[*y][i] == ' ' && (d->map[*y + 1][i] == ' ' ||
+		d->map[*y + 1][i] == '1'))
 			i++;
 		else
 			return (0);
@@ -69,10 +78,13 @@ static int	middle_lines(t_flags *d, int y)
 	d->error = "ERROR: MAP ISN'T CORRECT\n";
 	while (d->map[y][i] == ' ')
 		i++;
+	if (d->map[y][i] == '\0' && middle_lines_2(d, y, 0) == 0)
+		return (0);
+	else if (d->map[y][i] == '\0')
+		return (1);
 	if (d->map[y][i] != '1')
 		return (0);
-	i = 0;
-	if (middle_lines_2(d, y, i) == 0)
+	if (middle_lines_2(d, y, 0) == 0)
 		return (0);
 	i = ft_strlen(d->map[y]) - 1;
 	while (d->map[y][i] == ' ')
@@ -111,9 +123,9 @@ int			check_grid(t_flags *d)
 	while (i < d->row_count)
 	{
 		if (i == 0)
-			if (first_line(d) == 0)
+			if (first_line(d, &i) == 0)
 				return (0);
-		if (i > 0 && i < d->row_count - 1)
+		if (i < d->row_count - 1)
 			if (middle_lines(d, i) == 0)
 				return (0);
 		if (i == d->row_count - 1)

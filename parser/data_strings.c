@@ -6,148 +6,61 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 10:37:22 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/14 13:42:18 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 12:35:54 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	north(t_flags *d, const char *s1, char c, int *index)
+static void	check(t_flags *d, char c)
 {
-	int		len;
-	int		i;
-	int		x;
-
-	i = 2;
-	len = 0;
-	while (s1[i] == 32 || (s1[i] > 8 && s1[i] < 14))
-		i++;
-	while (s1[i + len] != c)
-		len++;
-	*index = *index + i + len + 1;
-	d->no = (char *)malloc(sizeof(*s1) * (len + 1));
-	if (!d->no)
-		return ;
-	x = i;
-	i = 0;
-	while (i < len)
-	{
-		d->no[i] = s1[x];
-		i++;
-		x++;
-	}
-	d->no[i] = '\0';
-	d->check += 2;
+	if (c == 'N')
+		d->check += 2;
+	else if (c == 'E')
+		d->check += 40;
+	else if (c == 'S')
+		d->check += 200;
+	else if (c == 'W')
+		d->check += 4000;
+	else if (c == 'O')
+		d->check += 20000;
 }
 
-void	east(t_flags *d, const char *s1, char c, int *index)
+static char	*fill(char *str, char *s1, int x, int len)
 {
-	int		len;
-	int		i;
-	int		x;
+	int	i;
 
-	i = 2;
-	len = 0;
-	while (s1[i] == 32 || (s1[i] > 8 && s1[i] < 14))
-		i++;
-	while (s1[i + len] != c)
-		len++;
-	*index = *index + i + len + 1;
-	d->ea = (char *)malloc(sizeof(*s1) * (len + 1));
-	if (!d->ea)
-		return ;
-	x = i;
 	i = 0;
 	while (i < len)
 	{
-		d->ea[i] = s1[x];
+		str[i] = s1[x];
 		i++;
 		x++;
 	}
-	d->ea[i] = '\0';
-	d->check += 40;
+	str[i] = '\0';
+	return (str);
 }
 
-void	south(t_flags *d, const char *s1, char c, int *index)
+char		*path(t_flags *d, char *s1, char c)
 {
+	char	*str;
 	int		len;
 	int		i;
-	int		x;
 
 	i = 2;
+	if (c == 'O')
+		i = 1;
 	len = 0;
-	while (s1[i] == 32 || (s1[i] > 8 && s1[i] < 14))
+	while (s1[i] == 32 || (s1[i] == 9 || s1[i] == '.' ||
+		s1[i] == '/'))
 		i++;
-	while (s1[i + len] != c)
+	while (s1[i + len] != '\n')
 		len++;
-	*index = *index + i + len + 1;
-	d->so = (char *)malloc(sizeof(*s1) * (len + 1));
-	if (!d->so)
-		return ;
-	x = i;
-	i = 0;
-	while (i < len)
-	{
-		d->so[i] = s1[x];
-		i++;
-		x++;
-	}
-	d->so[i] = '\0';
-	d->check += 200;
-}
-
-void	west(t_flags *d, const char *s1, char c, int *index)
-{
-	int		len;
-	int		i;
-	int		x;
-
-	i = 2;
-	len = 0;
-	while (s1[i] == 32 || (s1[i] > 8 && s1[i] < 14))
-		i++;
-	while (s1[i + len] != c)
-		len++;
-	*index = *index + i + len + 1;
-	d->we = (char *)malloc(sizeof(*s1) * (len + 1));
-	if (!d->we)
-		return ;
-	x = i;
-	i = 0;
-	while (i < len)
-	{
-		d->we[i] = s1[x];
-		i++;
-		x++;
-	}
-	d->we[i] = '\0';
-	d->check += 4000;
-}
-
-void	sprite(t_flags *d, const char *s1, char c, int *index)
-{
-	int		len;
-	int		i;
-	int		x;
-
-	i = 1;
-	len = 0;
-	while (s1[i] == 32 || (s1[i] > 8 && s1[i] < 14))
-		i++;
-	while (s1[i + len] != c)
-		len++;
-	*index = *index + i + len + 1;
-	d->s = (char *)malloc(sizeof(*s1) * (len + 1));
-	if (!d->s)
-		return ;
-	x = i;
-	i = 0;
-	while (i < len)
-	{
-		d->s[i] = s1[x];
-		i++;
-		x++;
-	}
-	d->s[i] = '\0';
-	d->check += 20000;
+	d->i = d->i + i + len + 1;
+	str = (char *)malloc(sizeof(*s1) * (len + 1));
+	if (!str)
+		return (NULL);
+	str = fill(str, s1, i, len);
+	check(d, c);
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/14 13:28:05 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 14:42:07 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,45 +70,46 @@ int		fill_row(t_flags *d, int column, int start)
 	return (1);
 }
 
-int		find_start(t_flags *d, int end)
+int		check_str(t_flags *d)
 {
+	int	i;
 	int	c;
 
+	i = d->start;
 	c = 0;
 	d->column = 0;
 	d->row_count = 1;
-	while (d->str[end] == '1' || d->str[end] == '2' || d->str[end] == ' ' ||
-			d->str[end] == '0' || d->str[end] == '\n' || d->str[end] == 'N' ||
-			d->str[end] == 'E' || d->str[end] == 'S' || d->str[end] == 'W')
+	d->error = "WRONG CHARACTER\n";
+	while (d->str[i] != '\0')
 	{
+		if (d->str[i] != '0' && d->str[i] != '1' && d->str[i] != '2' &&
+				d->str[i] != '\n' && d->str[i] != ' ' && d->str[i] != 'N' &&
+				d->str[i] != 'E' && d->str[i] != 'S' && d->str[i] != 'W')
+			return (0);
 		c++;
-		if (d->str[end] == '\n' && d->str[end - 1] == '\n')
-			break ;
-		if (d->str[end] == '\n')
+		if (d->str[i] == '\n')
 		{
 			if (c > d->column)
 				d->column = c;
 			d->row_count++;
 			c = 0;
 		}
-		end--;
+		i++;
 	}
-	while (d->str[end] != '\n')
-		end++;
-	return (end + 1);
+	return (1);
 }
 
 int		fill_grid(t_flags *d)
 {
 	int		start;
-	int		end;
 	int		c;
 
 	d->row_i = 0;
 	d->play_x = 0;
 	d->play_y = 0;
-	end = ft_strlen(d->str) - 1;
-	start = find_start(d, end);
+	if (check_str(d) == 0)
+		return (0);
+	start = d->start;
 	d->map = (char **)malloc(sizeof(char *) * (d->row_count));
 	if (d->map == NULL)
 		return (0);
@@ -122,6 +123,12 @@ int		fill_grid(t_flags *d)
 		start = start + c + 1;
 		d->row_i++;
 	}
+	// int i = 0;
+	// while (i < d->row_count)
+	// {
+	// printf("STR: %s\n", d->map[i]);
+	// 	i++;
+	// }
 	free(d->str);
 	return (1);
 }

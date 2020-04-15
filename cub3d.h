@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/14 13:52:37 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 10:49:05 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 typedef struct		s_struct
 {
+	int				i;
+	int				start;
 	int				save;
 	int				check;
 	char			**map;
@@ -155,14 +157,10 @@ typedef struct		s_vars
 int					check_input(int argc, char **argv, t_flags *d);
 int					make_string(char **argv, t_flags *data);
 int					fill_parser(t_flags *data);
-void				north(t_flags *d, const char *s1, char c, int *index);
-void				east(t_flags *d, const char *s1, char c, int *index);
-void				south(t_flags *d, const char *s1, char c, int *index);
-void				west(t_flags *d, const char *s1, char c, int *index);
-void				sprite(t_flags *d, const char *s1, char c, int *index);
-void				resolution(t_flags *d, char *str, int *index);
-void				data_floor(t_flags *d, char *str, int *index);
-void				data_ceiling(t_flags *d, char *str, int *index);
+char				*path(t_flags *d, char *s1, char c);
+void				resolution(t_flags *d, char *str);
+void				data_floor(t_flags *d, char *str);
+void				data_ceiling(t_flags *d, char *str);
 int					fill_grid(t_flags *data);
 int					check_grid(t_flags *data);
 int					ft_strchr(t_flags *d, char c, int row, int column);

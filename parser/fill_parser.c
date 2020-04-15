@@ -6,51 +6,49 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/14 13:27:50 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 12:14:01 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	check_str(t_flags *d, int *i)
+static void	check_str(t_flags *d)
 {
-	if (d->str[*i] == ' ' || d->str[*i] == '1' || d->str[*i] == '2' ||
-		d->str[*i] == '0' || d->str[*i] == '\n')
-		*i = *i + 1;
-	else if ((d->str[*i] == 'N' || d->str[*i] == 'E' || d->str[*i] == 'S' ||
-			d->str[*i] == 'W') && (d->str[*i + 1] != '1' ||
-			d->str[*i + 1] != '2' || d->str[*i + 1] != '0'))
-		d->error = "ERROR: INDEX ISN'T CORRECT\n";
+	if (d->check != 42424242 && (d->str[d->i] == 32 || (d->str[d->i] > 8 && d->str[d->i] < 14)))
+			d->i = d->i + 1;
 	else
 		d->error = "ERROR: INDEX ISN'T CORRECT\n";
+	// else if ((d->str[d->i] == 'N' || d->str[d->i] == 'E' || d->str[d->i] == 'S' ||
+	// 		d->str[d->i] == 'W') && (d->str[d->i + 1] != '1' ||
+	// 		d->str[d->i + 1] != '2' || d->str[d->i + 1] != '0'))
+	// 	d->error = "ERROR: INDEX ISN'T CORRECT\n";
 }
 
 static void	find_values(t_flags *d)
 {
-	int	index;
-
-	index = 0;
-	while (d->str[index] != '\0' && error_check(d, "") == 1)
+	d->i = 0;
+	while (d->str[d->i] != '\0' && error_check(d, "") == 1 && d->check < 42424242)
 	{
-		if (d->str[index] == 'R')
-			resolution(d, &(d->str)[index + 1], &index);
-		else if (d->str[index] == 'N' && d->str[index + 1] == 'O' && !d->no)
-			north(d, &(d->str)[index], '\n', &index);
-		else if (d->str[index] == 'S' && d->str[index + 1] == 'O' && !d->so)
-			south(d, &(d->str[index]), '\n', &index);
-		else if (d->str[index] == 'W' && d->str[index + 1] == 'E' && !d->we)
-			west(d, &(d->str)[index], '\n', &index);
-		else if (d->str[index] == 'E' && d->str[index + 1] == 'A' && !d->we)
-			east(d, &(d->str)[index], '\n', &index);
-		else if (d->str[index] == 'S' && d->str[index + 1] != 'O' && !d->s)
-			sprite(d, &(d->str)[index], '\n', &index);
-		else if (d->str[index] == 'F')
-			data_floor(d, &(d->str)[index + 1], &index);
-		else if (d->str[index] == 'C')
-			data_ceiling(d, &(d->str)[index + 1], &index);
+		if (d->str[d->i] == 'R')
+			resolution(d, &(d->str)[d->i + 1]);
+		else if (d->str[d->i] == 'N' && d->str[d->i + 1] == 'O' && !d->no)
+			d->no = path(d, &(d->str)[d->i], 'N');
+		else if (d->str[d->i] == 'S' && d->str[d->i + 1] == 'O' && !d->so)
+			d->so = path(d, &(d->str)[d->i], 'S');
+		else if (d->str[d->i] == 'W' && d->str[d->i + 1] == 'E' && !d->we)
+			d->we = path(d, &(d->str)[d->i], 'W');
+		else if (d->str[d->i] == 'E' && d->str[d->i + 1] == 'A' && !d->ea)
+			d->ea = path(d, &(d->str)[d->i], 'E');
+		else if (d->str[d->i] == 'S' && d->str[d->i + 1] != 'O' && !d->s)
+			d->s = path(d, &(d->str)[d->i], 'O');
+		else if (d->str[d->i] == 'F')
+			data_floor(d, &(d->str)[d->i + 1]);
+		else if (d->str[d->i] == 'C')
+			data_ceiling(d, &(d->str)[d->i + 1]);
 		else
-			check_str(d, &index);
+			check_str(d);
 	}
+	d->start = d->i;
 }
 
 static void	colors(t_flags *d)
