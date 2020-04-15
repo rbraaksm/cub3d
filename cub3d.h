@@ -6,13 +6,14 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 10:49:05 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 16:48:00 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 # define BUFFER_SIZE 30
+# define CHECK 42424242
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -167,6 +168,7 @@ int					ft_strchr(t_flags *d, char c, int row, int column);
 int					error_check(t_flags *d, char *str);
 int					ft_strlen(const char *str);
 int					ft_atoi(const char *str);
+int					free_function(t_flags *d, int i);
 void				window(t_flags *data);
 int					action(t_vars *v);
 int					keyrelease(int keycode, t_vars *v);

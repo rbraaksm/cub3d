@@ -6,11 +6,29 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 16:30:38 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 16:49:40 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int		free_function(t_flags *d, int i)
+{
+	if (d->check >= 2)
+		free(d->no);
+	if (d->check >= 40)
+		free(d->ea);
+	if (d->check >= 200)
+		free(d->s);
+	if (d->check >= 4000)
+		free(d->we);
+	if (d->check >= 20000)
+		free(d->s);
+	if (i == 6)
+		free(d->str);
+	d->error = "ERROR: MALLOC FAIL\n";
+	return (0);
+}
 
 int		check_map(char **argv, t_flags *d)
 {

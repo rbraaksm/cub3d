@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 12:14:01 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 16:48:20 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,17 @@
 
 static void	check_str(t_flags *d)
 {
-	if (d->check != 42424242 && (d->str[d->i] == 32 || (d->str[d->i] > 8 && d->str[d->i] < 14)))
-			d->i = d->i + 1;
+	if (d->check != CHECK && (d->str[d->i] == 32 || (d->str[d->i] > 8 &&
+		d->str[d->i] < 14)))
+		d->i = d->i + 1;
 	else
 		d->error = "ERROR: INDEX ISN'T CORRECT\n";
-	// else if ((d->str[d->i] == 'N' || d->str[d->i] == 'E' || d->str[d->i] == 'S' ||
-	// 		d->str[d->i] == 'W') && (d->str[d->i + 1] != '1' ||
-	// 		d->str[d->i + 1] != '2' || d->str[d->i + 1] != '0'))
-	// 	d->error = "ERROR: INDEX ISN'T CORRECT\n";
 }
 
 static void	find_values(t_flags *d)
 {
 	d->i = 0;
-	while (d->str[d->i] != '\0' && error_check(d, "") == 1 && d->check < 42424242)
+	while (d->str[d->i] != '\0' && error_check(d, "") == 1 && d->check < CHECK)
 	{
 		if (d->str[d->i] == 'R')
 			resolution(d, &(d->str)[d->i + 1]);
@@ -92,8 +89,8 @@ int			fill_parser(t_flags *d)
 {
 	set_values(d);
 	find_values(d);
-	if (d->check != 42424242)
-		return (0);
+	if (d->check != CHECK)
+		return (free_function(d, 0));
 	colors(d);
 	return (1);
 }

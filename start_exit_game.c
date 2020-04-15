@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:11:53 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 12:23:02 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 16:56:01 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	make_img(t_vars *v)
 void	start_game(t_vars *v)
 {
 	make_img(v);
+	ft_view(v);
 	if (v->d->save == 1)
 	{
 		screenshot(v);

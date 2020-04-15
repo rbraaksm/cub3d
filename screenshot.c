@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/07 11:28:24 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 12:23:11 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 16:55:34 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	screenshot(t_vars *v)
 {
 	int	fd;
 
-	ft_view(v);
 	fd = open("screenshot.bmp", O_TRUNC | O_WRONLY | O_CREAT, 0777);
 	if (fd < 0)
 	{

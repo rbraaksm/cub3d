@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 10:37:22 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 12:35:54 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 16:45:05 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char		*path(t_flags *d, char *s1, char c)
 	int		len;
 	int		i;
 
+	d->error = "ERROR: INDEX ISN'T CORRECT\n";
 	i = 2;
 	if (c == 'O')
 		i = 1;
@@ -62,5 +63,6 @@ char		*path(t_flags *d, char *s1, char c)
 		return (NULL);
 	str = fill(str, s1, i, len);
 	check(d, c);
+	d->error = "";
 	return (str);
 }

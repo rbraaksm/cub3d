@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 12:21:26 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 16:55:02 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	put_img_2_win(t_vars *v)
 {
-	if (v->d->save == 1)
-		v->active_img = 2;
-	if (v->active_img == 1)
-	{
+	// if (v->d->save == 1)
+	// 	v->active_img = 2;
+	// if (v->active_img == 1)
+	// {
 		mlx_put_image_to_window(v->mlx, v->win, v->img1, 0, 0);
-		v->addr = mlx_get_data_addr(v->img2, &v->bits_per_pixel,
-		&v->line_length, &v->endian);
-		v->active_img = 2;
-	}
-	else
-	{
-		mlx_put_image_to_window(v->mlx, v->win, v->img2, 0, 0);
-		v->addr = mlx_get_data_addr(v->img1, &v->bits_per_pixel,
-		&v->line_length, &v->endian);
-		v->active_img = 1;
-	}
+	// 	v->addr = mlx_get_data_addr(v->img2, &v->bits_per_pixel,
+	// 	&v->line_length, &v->endian);
+	// 	v->active_img = 2;
+	// }
+	// else
+	// {
+	// 	mlx_put_image_to_window(v->mlx, v->win, v->img2, 0, 0);
+	// 	v->addr = mlx_get_data_addr(v->img1, &v->bits_per_pixel,
+	// 	&v->line_length, &v->endian);
+	// 	v->active_img = 1;
+	// }
 }
 
 void	raydistance(t_vars *v)

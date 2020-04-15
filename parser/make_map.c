@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 14:42:07 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 16:49:00 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		fill_row(t_flags *d, int column, int start)
 	i = 0;
 	d->map[d->row_i] = (char *)malloc(sizeof(char *) * (d->column + 1));
 	if (d->map[d->row_i] == NULL)
-		return (0);
+		return (free_function(d, 0));
 	while (i < d->column)
 	{
 		d->map[d->row_i][i] = ' ';
@@ -112,7 +112,7 @@ int		fill_grid(t_flags *d)
 	start = d->start;
 	d->map = (char **)malloc(sizeof(char *) * (d->row_count));
 	if (d->map == NULL)
-		return (0);
+		return (free_function(d, 6));
 	while (d->row_i < d->row_count)
 	{
 		c = 0;
@@ -123,12 +123,6 @@ int		fill_grid(t_flags *d)
 		start = start + c + 1;
 		d->row_i++;
 	}
-	// int i = 0;
-	// while (i < d->row_count)
-	// {
-	// printf("STR: %s\n", d->map[i]);
-	// 	i++;
-	// }
 	free(d->str);
 	return (1);
 }
