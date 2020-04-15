@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 16:48:00 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 18:03:41 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ typedef struct		s_vars
 	int				index;
 	int				screen_x;
 	int				screen_y;
+	int				check;
 	t_sprite		*s;
 	t_ray			*ray;
 	t_player		*player;
@@ -186,11 +187,11 @@ void				ft_view(t_vars *vars);
 void				draw(t_vars *v);
 void				draw_wall(t_vars *v);
 void				draw_sprite(t_vars *v);
-void				west_texture(t_vars *v, char *path, t_tex *w_tex);
-void				south_texture(t_vars *v, char *path, t_tex *s_tex);
-void				east_texture(t_vars *v, char *path, t_tex *e_tex);
-void				north_texture(t_vars *v, char *path, t_tex *n_tex);
-void				sprite_texture(t_vars *v, char *path, t_tex *sprite);
+int					west_texture(t_vars *v, char *path, t_tex *w_tex);
+int					south_texture(t_vars *v, char *path, t_tex *s_tex);
+int					east_texture(t_vars *v, char *path, t_tex *e_tex);
+int					north_texture(t_vars *v, char *path, t_tex *n_tex);
+int					sprite_texture(t_vars *v, char *path, t_tex *sprite);
 void				find_side_delta(t_vars *v);
 void				find_hit(t_vars *v);
 int					sprite_data(t_vars *v, int side, int mapy, int mapx);

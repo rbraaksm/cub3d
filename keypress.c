@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:04:08 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/14 11:08:12 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 18:11:13 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,21 @@ int		keyrelease(int keycode, t_vars *v)
 int		keypress(int keycode, t_vars *v)
 {
 	if (keycode == 53)
+	{
+		mlx_destroy_window(v->mlx, v->win);
 		exit_game(v);
+	}
 	if (keycode == 0)
-		v->player->crab = 0.05;
+		v->player->crab = -0.063;
 	else if (keycode == 2)
-		v->player->crab = -0.05;
+		v->player->crab = 0.063;
 	else if (keycode == 1)
-		v->player->walk = -0.05;
+		v->player->walk = -0.063;
 	else if (keycode == 13)
-		v->player->walk = 0.05;
+		v->player->walk = 0.063;
 	else if (keycode == 123)
-		v->player->look = 0.03;
-	else if (keycode == 124)
 		v->player->look = -0.03;
+	else if (keycode == 124)
+		v->player->look = 0.03;
 	return (0);
 }

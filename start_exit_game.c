@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:11:53 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 16:56:01 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/15 17:57:20 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int		exit_game(t_vars *v)
 	int	i;
 
 	i = 0;
-	mlx_destroy_window(v->mlx, v->win);
 	while (i < v->d->row_count)
 	{
 		free(v->d->map[i]);
 		i++;
 	}
+	free(v->d->map);
 	write(1, "\n-----> Thanks for playing <-----\n\n", 35);
 	exit(0);
 	return (1);
@@ -44,6 +44,7 @@ void	start_game(t_vars *v)
 	ft_view(v);
 	if (v->d->save == 1)
 	{
+		mlx_destroy_window(v->mlx, v->win);
 		screenshot(v);
 		exit_game(v);
 	}
