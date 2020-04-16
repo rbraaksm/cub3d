@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/14 13:25:58 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 11:24:57 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		wall_data(t_vars *v, int side)
+static int	wall_data(t_vars *v, int side)
 {
 	if (side == 0)
 	{
@@ -35,7 +35,7 @@ int		wall_data(t_vars *v, int side)
 	return (1);
 }
 
-int		new_sidedist(t_vars *v, int side, int mapy, int mapx)
+static int	new_sidedist(t_vars *v, int side, int mapy, int mapx)
 {
 	if (v->d->map[mapy][mapx] == '2')
 		sprite_data(v, side, mapy, mapx);
@@ -48,7 +48,7 @@ int		new_sidedist(t_vars *v, int side, int mapy, int mapx)
 	return (0);
 }
 
-void	find_hit(t_vars *v)
+void		find_hit(t_vars *v)
 {
 	int		side;
 	int		mapx;
@@ -73,7 +73,7 @@ void	find_hit(t_vars *v)
 	}
 }
 
-void	find_side_delta(t_vars *v)
+void		find_side_delta(t_vars *v)
 {
 	float	x;
 	float	y;

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:00:25 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:17:55 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 10:45:17 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void		data_floor(t_flags *d, char *str)
 	d->error = "";
 }
 
-int			check_resolution(t_flags *d, char *str, int *index, char c)
+static int	check_resolution(t_flags *d, char *str, int *index, char c)
 {
 	if (str[*index] < '0' || str[*index] > '9')
 		return (0);

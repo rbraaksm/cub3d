@@ -6,7 +6,7 @@
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 15:11:54 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:18:45 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 10:59:31 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int				ft_atoi(const char *str)
 	return (result);
 }
 
-int				set_location(t_flags *d, int row, int column, char c)
+static int		set_location(t_flags *d, int row, int column, char c)
 {
 	if (d->play_x == 0 && d->play_y == 0)
 	{
@@ -87,6 +87,7 @@ int				ft_strchr(t_flags *d, char c, int row, int column)
 	char	*s1;
 	int		i;
 
+	d->error = "ERROR: WRONG CHARACTER\n";
 	s1 = "012NWSE";
 	i = 0;
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')

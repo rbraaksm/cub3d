@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:33:27 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:18:24 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 10:47:12 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		ft_strlen(const char *str)
+int			ft_strlen(const char *str)
 {
 	int	len;
 
@@ -22,7 +22,7 @@ int		ft_strlen(const char *str)
 	return (len);
 }
 
-char	*ft_strdup(const char *s1)
+static char	*ft_strdup(const char *s1)
 {
 	char	*pstr;
 	int		len;
@@ -41,7 +41,7 @@ char	*ft_strdup(const char *s1)
 	return (pstr);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char		*new;
 	int			index;
@@ -68,7 +68,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (new);
 }
 
-int		make_string(char **argv, t_flags *d)
+int			make_string(char **argv, t_flags *d)
 {
 	char	buf[BUFFER_SIZE + 1];
 	char	*tmp;

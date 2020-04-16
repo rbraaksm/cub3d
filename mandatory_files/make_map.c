@@ -6,20 +6,20 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 22:07:45 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 11:26:00 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		fill_row(t_flags *d, int column, int start)
+static int	fill_row(t_flags *d, int column, int start)
 {
 	int	i;
 
 	i = 0;
 	d->map[d->row_i] = (char *)malloc(sizeof(char *) * (d->column + 1));
 	if (d->map[d->row_i] == NULL)
-		return (free_function(d, 0));
+		return (free_function(d, 7));
 	while (i < d->column)
 	{
 		d->map[d->row_i][i] = ' ';
@@ -35,7 +35,7 @@ int		fill_row(t_flags *d, int column, int start)
 	return (1);
 }
 
-int		check_str(t_flags *d)
+static int	find_column_row(t_flags *d)
 {
 	int	i;
 	int	c;
@@ -44,13 +44,8 @@ int		check_str(t_flags *d)
 	c = 0;
 	d->column = 0;
 	d->row_count = 1;
-	d->error = "WRONG CHARACTER\n";
 	while (d->str[i] != '\0')
 	{
-		if (d->str[i] != '0' && d->str[i] != '1' && d->str[i] != '2' &&
-				d->str[i] != '\n' && d->str[i] != 32 && d->str[i] != 'N' &&
-				d->str[i] != 'E' && d->str[i] != 'S' && d->str[i] != 'W')
-			return (0);
 		c++;
 		if (d->str[i] == '\n')
 		{
@@ -64,7 +59,7 @@ int		check_str(t_flags *d)
 	return (1);
 }
 
-int		fill_grid(t_flags *d)
+int			fill_grid(t_flags *d)
 {
 	int		start;
 	int		c;
@@ -72,7 +67,7 @@ int		fill_grid(t_flags *d)
 	d->row_i = 0;
 	d->play_x = 0;
 	d->play_y = 0;
-	if (check_str(d) == 0)
+	if (find_column_row(d) == 0)
 		return (0);
 	start = d->start;
 	d->map = (char **)malloc(sizeof(char *) * (d->row_count));

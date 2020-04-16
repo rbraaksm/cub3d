@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:11:53 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 17:57:20 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 15:04:43 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		exit_game(t_vars *v)
+int			exit_game(t_vars *v)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ int		exit_game(t_vars *v)
 	return (1);
 }
 
-void	make_img(t_vars *v)
+static void	make_img(t_vars *v)
 {
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, v->d->resx, v->d->resy, "CUB3D");
@@ -38,10 +38,10 @@ void	make_img(t_vars *v)
 	&v->line_length, &v->endian);
 }
 
-void	start_game(t_vars *v)
+void		start_game(t_vars *v)
 {
 	make_img(v);
-	ft_view(v);
+	rays(v);
 	if (v->d->save == 1)
 	{
 		mlx_destroy_window(v->mlx, v->win);

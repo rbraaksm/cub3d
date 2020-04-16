@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 18:05:51 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 11:18:29 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	struct_values(t_vars *v)
+static void	struct_values(t_vars *v)
 {
 	if (v->d->position == 'N')
 		v->ray->playdir = M_PI;
@@ -25,13 +25,12 @@ void	struct_values(t_vars *v)
 	v->ray->adjust = 1 / atan(M_PI / 6);
 	v->player->x = v->d->play_x;
 	v->player->y = v->d->play_y;
-	v->ray->raydist = 0;
 	v->active_img = 1;
 	v->index = 0;
 	start_game(v);
 }
 
-void	get_info(t_vars *v)
+void		get_info(t_vars *v)
 {
 	t_tex	n_tex;
 	t_tex	e_tex;
@@ -57,7 +56,7 @@ void	get_info(t_vars *v)
 	struct_values(v);
 }
 
-void	window(t_flags *d)
+void		window(t_flags *d)
 {
 	t_vars		v;
 	t_texture	textures;

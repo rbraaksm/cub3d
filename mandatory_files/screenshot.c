@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/07 11:28:24 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 16:55:34 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 10:56:00 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	header_bmp(t_vars *v, int fd)
+static void	header_bmp(t_vars *v, int fd)
 {
 	unsigned int	size;
 	unsigned int	first_pix;
@@ -25,7 +25,7 @@ void	header_bmp(t_vars *v, int fd)
 	write(fd, &first_pix, 4);
 }
 
-void	header_dip_bmp(t_vars *v, int fd)
+static void	header_dip_bmp(t_vars *v, int fd)
 {
 	unsigned int	headersize;
 	unsigned short	plain;
@@ -46,7 +46,7 @@ void	header_dip_bmp(t_vars *v, int fd)
 	}
 }
 
-void	write_pixels(t_vars *v, int fd)
+static void	write_pixels(t_vars *v, int fd)
 {
 	int x;
 	int line_length;
@@ -69,7 +69,7 @@ void	write_pixels(t_vars *v, int fd)
 	}
 }
 
-void	screenshot(t_vars *v)
+void		screenshot(t_vars *v)
 {
 	int	fd;
 

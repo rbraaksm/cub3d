@@ -6,34 +6,34 @@
 #    By: rbraaksm <rbraaksm@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/22 14:09:57 by rbraaksm      #+#    #+#                  #
-#    Updated: 2020/04/15 21:16:13 by rbraaksm      ########   odam.nl          #
+#    Updated: 2020/04/16 15:07:20 by rbraaksm      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3D
 MLX		= libmlx.dylib
 
-SRCS =	ft_main.c \
+SRCS =	cub3d.c \
 		check_input.c \
-		ft_make_string.c \
+		read_cubfile.c \
 		fill_parser.c \
 		data_strings.c \
 		data_res_color.c \
 		make_map.c \
-		check_grid.c \
+		check_map.c \
 		utils.c \
-		ft_window.c \
+		window.c \
 		keypress.c \
 		start_exit_game.c \
-		ft_view.c \
-		ft_player.c \
-		ft_find_sidedelta.c \
+		rays.c \
+		player.c \
+		side_delta.c \
 		draw_wall_sprite.c \
 		draw_pixel_image.c \
 		screenshot.c \
 		texture_data.c \
-		sprite_data.c \
-		sprite_hit.c \
+		sprite.c \
+		sprite_sidehit.c \
 
 LIB		=	$(SRCS:%.c=%.o)
 SRCS2	=	$(addprefix mandatory_files/,$(SRCS))
@@ -51,11 +51,13 @@ $(NAME):	$(MLX)
 			$(CC) $(NAME) $(SRCS2)
 
 clean:
-	# make -C minilibx clean
-	/bin/rm -f $(LIB)
-	/bin/rm -f $(NAME) $(MLX)
+	make -C minilibx clean
 	/bin/rm -f screenshot.bmp
 
 fclean: clean
+		/bin/rm -f $(LIB)
+		/bin/rm -f $(NAME)
+		/bin/rm -f $(MLX)
+
 
 re: fclean all

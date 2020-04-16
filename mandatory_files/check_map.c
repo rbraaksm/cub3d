@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   check_grid.c                                       :+:    :+:            */
+/*   check_map.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 22:08:06 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 11:19:50 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ static int	middle_lines(t_flags *d, int y)
 
 	i = 0;
 	d->error = "ERROR: MAP ISN'T CORRECT\n";
-	printf("%2d: %s\n", y, d->map[y]);
 	while (d->map[y][i] == ' ')
 		i++;
 	if (d->map[y][i] == '\0' && middle_lines_2(d, y, 0) == 0)
@@ -116,7 +115,7 @@ static int	last_line(t_flags *d, int y)
 	return (1);
 }
 
-int			check_grid(t_flags *d)
+int			check_map(t_flags *d)
 {
 	int	i;
 

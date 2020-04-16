@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:04:08 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 18:11:13 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 15:05:10 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		action(t_vars *v)
 	rotate_player(v, v->player->look);
 	move_player(v, v->player->walk);
 	crab_player(v, v->player->crab);
-	ft_view(v);
+	rays(v);
 	return (0);
 }
 
@@ -46,16 +46,16 @@ int		keypress(int keycode, t_vars *v)
 		exit_game(v);
 	}
 	if (keycode == 0)
-		v->player->crab = -0.063;
-	else if (keycode == 2)
 		v->player->crab = 0.063;
+	else if (keycode == 2)
+		v->player->crab = -0.063;
 	else if (keycode == 1)
 		v->player->walk = -0.063;
 	else if (keycode == 13)
 		v->player->walk = 0.063;
 	else if (keycode == 123)
-		v->player->look = -0.03;
-	else if (keycode == 124)
 		v->player->look = 0.03;
+	else if (keycode == 124)
+		v->player->look = -0.03;
 	return (0);
 }

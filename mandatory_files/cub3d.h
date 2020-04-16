@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:12:02 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 15:04:19 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
-# include <stdio.h>
 
 typedef struct		s_struct
 {
@@ -99,9 +98,7 @@ typedef struct		s_ray
 	float			deltax;
 	float			sidey;
 	float			deltay;
-	float			raydist;
 	float			finaldist;
-	float			opp;
 	float			adjust;
 	float			walldist;
 	int				side_hit;
@@ -164,7 +161,7 @@ void				resolution(t_flags *d, char *str);
 void				data_floor(t_flags *d, char *str);
 void				data_ceiling(t_flags *d, char *str);
 int					fill_grid(t_flags *data);
-int					check_grid(t_flags *data);
+int					check_map(t_flags *data);
 int					ft_strchr(t_flags *d, char c, int row, int column);
 int					error_check(t_flags *d, char *str);
 int					ft_strlen(const char *str);
@@ -183,7 +180,7 @@ void				move_player(t_vars *v, float move);
 void				crab_player(t_vars *v, float move);
 void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void				ft_findwall(t_vars *vars);
-void				ft_view(t_vars *vars);
+void				rays(t_vars *vars);
 void				draw(t_vars *v);
 void				draw_wall(t_vars *v);
 void				draw_sprite(t_vars *v);
@@ -199,7 +196,6 @@ void				sprite_north(t_vars *v);
 void				sprite_east(t_vars *v);
 void				sprite_south(t_vars *v);
 void				sprite_west(t_vars *v);
-void				put_img_2_win(t_vars *v);
 void				my_mlx_pixel_put(t_vars *v, int x, int y, int color);
 void				my_image_put(t_vars *v, t_tex *tex, int x, int y);
 void				my_sprite_put(t_vars *v, int x, int y);
