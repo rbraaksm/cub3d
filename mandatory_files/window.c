@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/17 13:02:18 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/17 18:44:58 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	struct_values(t_vars *v)
 	v->ray->adjust = 1 / atan(M_PI / 6);
 	v->player->x = v->d->play_x;
 	v->player->y = v->d->play_y;
-	v->active_img = 2;
+	v->active_img = 1;
 	v->index = 0;
 	start_game(v);
 }
@@ -38,6 +38,7 @@ void		get_info(t_vars *v)
 	t_tex	w_tex;
 	t_tex	sprite;
 
+	v->check = 0;
 	v->check += north_texture(v, v->d->no, &n_tex);
 	v->check += east_texture(v, v->d->ea, &e_tex);
 	v->check += south_texture(v, v->d->so, &s_tex);

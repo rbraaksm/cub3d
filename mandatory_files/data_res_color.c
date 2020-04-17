@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:00:25 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/17 13:33:47 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/17 18:42:07 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,9 @@ static int	check_resolution(t_data *d, char *str, int *index, char c)
 		*index = *index + 1;
 	if (str[*index] != '\n')
 		return (0);
-	if (d->resx < 25 || d->resy < 25)
-		write(1, "PLEASE KEEP RESOLUTION ABOVE 25\n", 32);
+	if (d->resx < 25 || d->resy < 25 ||
+		d->resx > 16385 || d->resy > 16385)
+		write(1, "PLEASE KEEP RESOLUTION ABOVE 25 AND LOWER THAN 16385\n", 53);
 	if (d->resx < 25)
 		d->resx = 25;
 	if (d->resy < 25)
@@ -125,12 +126,12 @@ void		resolution(t_data *d, char *str)
 {
 	int i;
 
-	i = 0;
+	i = 1;
 	d->error = "ERROR: RESOLUTION IS NOT CORRECT\n";
-	while (str[d->i] != '\n')
-		d->i++;
-	d->i += 2;
-	i = 0;
+	while (str[i] != '\n')
+		i++;
+	d->i = d->i + i;
+	i = 1;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
@@ -141,6 +142,10 @@ void		resolution(t_data *d, char *str)
 	d->resy = ft_atoi(&str[i]);
 	if (check_resolution(d, str, &i, 'E') == 0)
 		return ;
+	if (d->resx > 16385)
+		d->resx = 16384;
+	if (d->resy > 16385)
+		d->resy = 16384;
 	d->check += 40000000;
 	d->error = "";
 }

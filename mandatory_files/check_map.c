@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 16:32:39 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/17 17:59:16 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	first_lines(t_data *d, int *y)
 	int	i;
 
 	i = 0;
-	d->error = "ERROR: FIRST LINE ISN'T CORRECT\n";
 	while (d->map[*y][i] == ' ')
 	{
 		i++;
@@ -37,7 +36,6 @@ static int	first_lines(t_data *d, int *y)
 		else
 			return (0);
 	}
-	d->error = "";
 	return (1);
 }
 
@@ -66,7 +64,6 @@ static int	middle_lines_2(t_data *d, int y, int i)
 		else
 			return (0);
 	}
-	d->error = "";
 	return (1);
 }
 
@@ -75,7 +72,6 @@ static int	middle_lines(t_data *d, int y)
 	int i;
 
 	i = 0;
-	d->error = "ERROR: MAP ISN'T CORRECT\n";
 	while (d->map[y][i] == ' ')
 		i++;
 	if (d->map[y][i] == '\0' && middle_lines_2(d, y, 0) == 0)
@@ -91,7 +87,6 @@ static int	middle_lines(t_data *d, int y)
 		i--;
 	if (d->map[y][i] != '1')
 		return (0);
-	d->error = "";
 	return (1);
 }
 
@@ -100,7 +95,6 @@ static int	last_line(t_data *d, int y)
 	int	x;
 
 	x = 0;
-	d->error = "ERROR: LAST LINE ISN'T CORRECT\n";
 	while (d->map[y][x] != '\0')
 	{
 		if (d->map[y][x] == '1')
@@ -111,7 +105,6 @@ static int	last_line(t_data *d, int y)
 		else
 			return (0);
 	}
-	d->error = "";
 	return (1);
 }
 
@@ -120,6 +113,7 @@ int			check_map(t_data *d)
 	int	i;
 
 	i = 0;
+	d->error = "ERROR: WRONG CHARACTER IN MAP\n";
 	while (i < d->row_count)
 	{
 		if (i == 0)
@@ -138,5 +132,6 @@ int			check_map(t_data *d)
 		d->error = "ERROR: NO PLAYER IN THE MAP\n";
 		return (0);
 	}
+	d->error = "";
 	return (1);
 }

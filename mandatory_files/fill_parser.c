@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/17 13:39:04 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/17 17:52:28 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	check_str(t_data *d)
 {
-	if (d->check != CHECK && (d->str[d->i] == 32 || (d->str[d->i] > 8 &&
-		d->str[d->i] < 14)))
+	if (d->check != CHECK && (d->str[d->i] == 32 ||
+		(d->str[d->i] > 8 && d->str[d->i] < 14)))
 		d->i = d->i + 1;
 	else
 		d->error = "ERROR: INDEX ISN'T CORRECT\n";
@@ -27,7 +27,7 @@ static void	find_values(t_data *d)
 	while (d->str[d->i] != '\0' && error_check(d, "") == 1 && d->check < CHECK)
 	{
 		if (d->str[d->i] == 'R' && d->resx == -1)
-			resolution(d, &(d->str)[d->i + 1]);
+			resolution(d, &(d->str)[d->i]);
 		else if (d->str[d->i] == 'N' && d->str[d->i + 1] == 'O' && !d->no)
 			d->no = path(d, &(d->str)[d->i], 'N');
 		else if (d->str[d->i] == 'S' && d->str[d->i + 1] == 'O' && !d->so)

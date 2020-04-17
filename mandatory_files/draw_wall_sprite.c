@@ -6,12 +6,11 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/17 13:16:19 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/17 17:48:17 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 
 static void		draw_floor_ceiling(t_vars *v, int count)
 {
@@ -68,8 +67,8 @@ void			draw_wall(t_vars *v)
 
 	y = 0;
 	tex = find_texture(v);
-	if (v->ray->walldist <= 0.01)
-		v->ray->walldist = 0.01;
+	if (v->ray->walldist <= 0.2)
+		v->ray->walldist = 0.2;
 	length = ((1 / v->ray->walldist) * v->d->resy);
 	count = (length / 2) + (v->d->resy / 2);
 	tmpcount = count;
