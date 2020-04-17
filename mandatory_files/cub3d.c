@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 16:33:21 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/17 11:52:34 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int			free_function(t_data *d, int i)
 	}
 	if (i == 7)
 		free(d->map);
-	d->error = "ERROR: MALLOC FAIL\n";
 	return (0);
 }
 

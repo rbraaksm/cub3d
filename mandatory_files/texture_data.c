@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/07 16:46:57 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 18:02:32 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/17 12:01:10 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	west_texture(t_vars *v, char *path, t_tex *w_tex)
 
 	w_tex->mlx = mlx_init();
 	if (!mlx_xpm_file_to_image(w_tex->mlx, path, &width_img, &height_img))
+	{
+		write(1, "Invalid west path\n", 18);
 		exit_game(v);
+	}
 	w_tex->img = mlx_xpm_file_to_image(w_tex->mlx,
 	path, &width_img, &height_img);
 	if (w_tex->img == 0)
@@ -41,7 +44,10 @@ int	south_texture(t_vars *v, char *path, t_tex *s_tex)
 
 	s_tex->mlx = mlx_init();
 	if (!mlx_xpm_file_to_image(s_tex->mlx, path, &width_img, &height_img))
+	{
+		write(1, "Invalid south path\n", 19);
 		exit_game(v);
+	}
 	s_tex->img = mlx_xpm_file_to_image(s_tex->mlx,
 	path, &width_img, &height_img);
 	if (s_tex->img == 0)
@@ -63,7 +69,10 @@ int	east_texture(t_vars *v, char *path, t_tex *e_tex)
 
 	e_tex->mlx = mlx_init();
 	if (!mlx_xpm_file_to_image(e_tex->mlx, path, &width_img, &height_img))
+	{
+		write(1, "Invalid east path\n", 18);
 		exit_game(v);
+	}
 	e_tex->img = mlx_xpm_file_to_image(e_tex->mlx, path,
 	&width_img, &height_img);
 	if (e_tex->img == 0)
@@ -85,7 +94,10 @@ int	north_texture(t_vars *v, char *path, t_tex *n_tex)
 
 	n_tex->mlx = mlx_init();
 	if (!mlx_xpm_file_to_image(n_tex->mlx, path, &width_img, &height_img))
+	{
+		write(1, "Invalid north path\n", 18);
 		exit_game(v);
+	}
 	n_tex->img = mlx_xpm_file_to_image(n_tex->mlx, path,
 	&width_img, &height_img);
 	if (n_tex->img == 0)
@@ -107,7 +119,10 @@ int	sprite_texture(t_vars *v, char *path, t_tex *sprite)
 
 	sprite->mlx = mlx_init();
 	if (!mlx_xpm_file_to_image(sprite->mlx, path, &width_img, &height_img))
+	{
+		write(1, "Invalid sprite path\n", 20);
 		exit_game(v);
+	}
 	sprite->img = mlx_xpm_file_to_image(sprite->mlx, path,
 	&width_img, &height_img);
 	if (sprite->img == 0)

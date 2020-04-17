@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/17 10:11:45 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/17 11:32:03 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
+# include <stdio.h>
 
 typedef struct		s_struct
 {
@@ -153,14 +154,14 @@ typedef struct		s_vars
 }					t_vars;
 
 int					check_input(int argc, char **argv, t_data *d);
-int					make_string(char **argv, t_data * d);
-int					fill_parser(t_data * d);
+int					make_string(char **argv, t_data *d);
+int					fill_parser(t_data *d);
 char				*path(t_data *d, char *s1, char c);
 void				resolution(t_data *d, char *str);
 void				data_floor(t_data *d, char *str);
 void				data_ceiling(t_data *d, char *str);
-int					fill_grid(t_data * d);
-int					check_map(t_data * d);
+int					fill_grid(t_data *d);
+int					check_map(t_data *d);
 int					ft_strchr(t_data *d, char c, int row, int column);
 int					error_check(t_data *d, char *str);
 int					ft_strlen(const char *str);

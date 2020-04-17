@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:11:53 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 15:04:43 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/17 12:13:56 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			exit_game(t_vars *v)
 		i++;
 	}
 	free(v->d->map);
-	write(1, "\n-----> Thanks for playing <-----\n\n", 35);
+	write(1, "Game closed\n", 12);
 	exit(0);
 	return (1);
 }
@@ -48,6 +48,13 @@ void		start_game(t_vars *v)
 		screenshot(v);
 		exit_game(v);
 	}
+	v->screen_x = 0;
+	v->screen_y = 0;
+	mlx_get_screen_size(v->mlx, &v->screen_x, &v->screen_y);
+	if (v->d->resx > v->screen_x && v->d->save != 1)
+		v->d->resx = v->screen_x;
+	if (v->d->resy > v->screen_y && v->d->save != 1)
+		v->d->resy = v->screen_y;
 	mlx_hook(v->win, 2, 1L << 0, keypress, v);
 	mlx_hook(v->win, 3, 1L << 1, keyrelease, v);
 	mlx_hook(v->win, 17, 1L << 17, exit_game, v);

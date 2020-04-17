@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 14:51:26 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/17 11:20:57 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void			draw_wall(t_vars *v)
 	float	y;
 
 	tex = find_texture(v);
+	if (v->ray->walldist <= 0.01)
+		v->ray->walldist = 0.01;
 	length = ((1 / v->ray->walldist) * v->d->resy);
 	count = (length / 2) + (v->d->resy / 2);
 	tmpcount = count;

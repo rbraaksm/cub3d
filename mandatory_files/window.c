@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/17 10:39:01 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/17 12:13:49 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,6 @@ void		get_info(t_vars *v)
 	t_tex	w_tex;
 	t_tex	sprite;
 
-	v->screen_x = 0;
-	v->screen_y = 0;
-	v->check = 0;
-	mlx_get_screen_size(v->mlx, &v->screen_x, &v->screen_y);
-	if (v->d->resx > v->screen_x && v->d->save != 1)
-		v->d->resx = v->screen_x;
-	if (v->d->resy > v->screen_y && v->d->save != 1)
-		v->d->resy = v->screen_y;
 	v->check += north_texture(v, v->d->no, &n_tex);
 	v->check += east_texture(v, v->d->ea, &e_tex);
 	v->check += south_texture(v, v->d->so, &s_tex);
