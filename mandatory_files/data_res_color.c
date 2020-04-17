@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:00:25 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 10:45:17 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 16:30:44 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	color_between_end(char *str, int *index, char c)
 	return (1);
 }
 
-void		data_ceiling(t_flags *d, char *str)
+void		data_ceiling(t_data *d, char *str)
 {
 	int i;
 
@@ -65,7 +65,7 @@ void		data_ceiling(t_flags *d, char *str)
 	d->error = "";
 }
 
-void		data_floor(t_flags *d, char *str)
+void		data_floor(t_data *d, char *str)
 {
 	int	i;
 
@@ -94,7 +94,7 @@ void		data_floor(t_flags *d, char *str)
 	d->error = "";
 }
 
-static int	check_resolution(t_flags *d, char *str, int *index, char c)
+static int	check_resolution(t_data *d, char *str, int *index, char c)
 {
 	if (str[*index] < '0' || str[*index] > '9')
 		return (0);
@@ -121,7 +121,7 @@ static int	check_resolution(t_flags *d, char *str, int *index, char c)
 	return (1);
 }
 
-void		resolution(t_flags *d, char *str)
+void		resolution(t_data *d, char *str)
 {
 	int i;
 

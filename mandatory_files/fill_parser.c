@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:50:15 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 16:31:09 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	check_str(t_flags *d)
+static void	check_str(t_data *d)
 {
 	if (d->check != CHECK && (d->str[d->i] == 32 || (d->str[d->i] > 8 &&
 		d->str[d->i] < 14)))
@@ -21,7 +21,7 @@ static void	check_str(t_flags *d)
 		d->error = "ERROR: INDEX ISN'T CORRECT\n";
 }
 
-static void	find_values(t_flags *d)
+static void	find_values(t_data *d)
 {
 	d->i = 0;
 	while (d->str[d->i] != '\0' && error_check(d, "") == 1 && d->check < CHECK)
@@ -48,7 +48,7 @@ static void	find_values(t_flags *d)
 	d->start = d->i;
 }
 
-static void	colors(t_flags *d)
+static void	colors(t_data *d)
 {
 	d->ceiling = d->ceiling + d->cblue % 16;
 	d->ceiling = d->ceiling + d->cblue / 16 * 16;
@@ -64,7 +64,7 @@ static void	colors(t_flags *d)
 	d->floor = d->floor + d->fred / 16 * pow(16, 5);
 }
 
-static void	set_values(t_flags *d)
+static void	set_values(t_data *d)
 {
 	d->check = 0;
 	d->resx = -1;
@@ -85,7 +85,7 @@ static void	set_values(t_flags *d)
 	d->s = NULL;
 }
 
-int			fill_parser(t_flags *d)
+int			fill_parser(t_data *d)
 {
 	set_values(d);
 	find_values(d);

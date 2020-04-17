@@ -6,13 +6,13 @@
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 15:11:54 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 10:59:31 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 16:32:02 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int				error_check(t_flags *d, char *str)
+int				error_check(t_data *d, char *str)
 {
 	int	i;
 
@@ -66,7 +66,7 @@ int				ft_atoi(const char *str)
 	return (result);
 }
 
-static int		set_location(t_flags *d, int row, int column, char c)
+static int		set_location(t_data *d, int row, int column, char c)
 {
 	if (d->play_x == 0 && d->play_y == 0)
 	{
@@ -82,7 +82,7 @@ static int		set_location(t_flags *d, int row, int column, char c)
 	return (1);
 }
 
-int				ft_strchr(t_flags *d, char c, int row, int column)
+int				ft_strchr(t_data *d, char c, int row, int column)
 {
 	char	*s1;
 	int		i;

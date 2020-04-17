@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 10:37:22 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:17:59 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 16:30:52 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	check(t_flags *d, char c)
+static void	check(t_data *d, char c)
 {
 	if (c == 'N')
 		d->check += 2;
@@ -41,7 +41,7 @@ static char	*fill(char *str, char *s1, int x, int len)
 	return (str);
 }
 
-char		*path(t_flags *d, char *s1, char c)
+char		*path(t_data *d, char *s1, char c)
 {
 	char	*str;
 	int		len;

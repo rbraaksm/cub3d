@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_main.c                                          :+:    :+:            */
+/*   cub3d.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 11:27:17 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 16:33:21 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int			free_function(t_flags *d, int i)
+int			free_function(t_data *d, int i)
 {
 	if (d->check >= 2)
 		free(d->no);
@@ -37,7 +37,7 @@ int			free_function(t_flags *d, int i)
 	return (0);
 }
 
-static int	check_cubfile(char **argv, t_flags *d)
+static int	check_cubfile(char **argv, t_data *d)
 {
 	if (make_string(argv, d) == 0)
 		return (0);
@@ -52,12 +52,14 @@ static int	check_cubfile(char **argv, t_flags *d)
 
 int			main(int argc, char **argv)
 {
-	t_flags	d;
+	t_vars	v;
+	t_data	d;
 
+	v.d = &d;
 	if (check_input(argc, argv, &d) == 0)
 		return (write(1, d.error, ft_strlen(d.error)));
 	if (check_cubfile(argv, &d) == 0)
 		return (write(1, d.error, ft_strlen(d.error)));
-	window(&d);
+	window(&v);
 	return (0);
 }

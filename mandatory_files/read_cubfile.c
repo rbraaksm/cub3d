@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_make_string.c                                   :+:    :+:            */
+/*   read_cubfile.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:33:27 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 10:47:12 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 16:31:31 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	*ft_strjoin(char const *s1, char const *s2)
 	return (new);
 }
 
-int			make_string(char **argv, t_flags *d)
+int			make_string(char **argv, t_data *d)
 {
 	char	buf[BUFFER_SIZE + 1];
 	char	*tmp;

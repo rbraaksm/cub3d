@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 09:57:00 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:17:41 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 16:32:47 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	ft_strcmp(char *arg, char *s1, t_flags *d, char c)
+static int	ft_strcmp(char *arg, char *s1, t_data *d, char c)
 {
 	int i;
 	int	i2;
@@ -41,7 +41,7 @@ static int	ft_strcmp(char *arg, char *s1, t_flags *d, char c)
 	return (1);
 }
 
-int			check_input(int argc, char **argv, t_flags *d)
+int			check_input(int argc, char **argv, t_data *d)
 {
 	if (argc < 2)
 	{

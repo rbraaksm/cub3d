@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 11:19:50 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 16:32:39 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	first_lines(t_flags *d, int *y)
+static int	first_lines(t_data *d, int *y)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ static int	first_lines(t_flags *d, int *y)
 	return (1);
 }
 
-static int	middle_lines_2(t_flags *d, int y, int i)
+static int	middle_lines_2(t_data *d, int y, int i)
 {
 	while (i < ft_strlen(d->map[y]))
 	{
@@ -70,7 +70,7 @@ static int	middle_lines_2(t_flags *d, int y, int i)
 	return (1);
 }
 
-static int	middle_lines(t_flags *d, int y)
+static int	middle_lines(t_data *d, int y)
 {
 	int i;
 
@@ -95,7 +95,7 @@ static int	middle_lines(t_flags *d, int y)
 	return (1);
 }
 
-static int	last_line(t_flags *d, int y)
+static int	last_line(t_data *d, int y)
 {
 	int	x;
 
@@ -115,7 +115,7 @@ static int	last_line(t_flags *d, int y)
 	return (1);
 }
 
-int			check_map(t_flags *d)
+int			check_map(t_data *d)
 {
 	int	i;
 

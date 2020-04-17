@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 11:26:00 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/16 16:31:20 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	fill_row(t_flags *d, int column, int start)
+static int	fill_row(t_data *d, int column, int start)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ static int	fill_row(t_flags *d, int column, int start)
 	return (1);
 }
 
-static int	find_column_row(t_flags *d)
+static int	find_column_row(t_data *d)
 {
 	int	i;
 	int	c;
@@ -59,7 +59,7 @@ static int	find_column_row(t_flags *d)
 	return (1);
 }
 
-int			fill_grid(t_flags *d)
+int			fill_grid(t_data *d)
 {
 	int		start;
 	int		c;
