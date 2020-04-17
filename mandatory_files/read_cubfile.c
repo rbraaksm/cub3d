@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_make_string.c                                   :+:    :+:            */
+/*   read_cubfile.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/16 17:33:27 by rbraaksm       #+#    #+#                */
-/*   Updated: 2020/03/13 14:03:47 by rbraaksm      ########   odam.nl         */
+/*   Created: 2020/01/16 17:33:27 by rbraaksm      #+#    #+#                 */
+/*   Updated: 2020/04/16 16:31:31 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		ft_strlen(const char *str)
+int			ft_strlen(const char *str)
 {
 	int	len;
 
@@ -22,7 +22,7 @@ int		ft_strlen(const char *str)
 	return (len);
 }
 
-char	*ft_strdup(const char *s1)
+static char	*ft_strdup(const char *s1)
 {
 	char	*pstr;
 	int		len;
@@ -41,7 +41,7 @@ char	*ft_strdup(const char *s1)
 	return (pstr);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char		*new;
 	int			index;
@@ -68,27 +68,31 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (new);
 }
 
-int		make_string(char **argv, t_flags *d)
+int			make_string(char **argv, t_data *d)
 {
 	char	buf[BUFFER_SIZE + 1];
+	char	*tmp;
 	int		fd;
 	int		ret;
 
-	STR = "";
+	d->error = "ERROR: NOT A VALID FILE/FILE DESCRIPTOR\n";
+	d->str = ft_strdup("");
 	ret = 1;
 	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (0);
 	while (ret > 0)
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
-		buf[ret] = '\0';
 		if (ret == -1)
-		{
-			ERROR = "NOT A VALID FILE\n";
 			return (0);
-		}
-		STR = ft_strjoin((const char *)STR, buf);
-		if (STR == NULL)
+		buf[ret] = '\0';
+		tmp = d->str;
+		d->str = ft_strjoin((const char *)d->str, buf);
+		free(tmp);
+		if (d->str == NULL)
 			return (0);
 	}
+	d->error = "";
 	return (1);
 }

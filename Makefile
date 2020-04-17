@@ -5,43 +5,59 @@
 #                                                      +:+                     #
 #    By: rbraaksm <rbraaksm@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2020/01/22 14:09:57 by rbraaksm       #+#    #+#                 #
-#    Updated: 2020/03/13 14:24:01 by rbraaksm      ########   odam.nl          #
+#    Created: 2020/01/22 14:09:57 by rbraaksm      #+#    #+#                  #
+#    Updated: 2020/04/16 15:07:20 by rbraaksm      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME	= cub3D
+MLX		= libmlx.dylib
 
-SRCS =	ft_main.c \
-		ft_make_string.c \
-		ft_mapindex.c \
-		ft_result_colors.c \
-		ft_atoi.c \
-		ft_split.c \
-		ft_fill_grid.c \
-		ft_check_grid.c \
-		ft_window.c \
-		ft_map2d.c \
-		ft_view.c \
-		ft_player.c \
-		ft_find_sidedelta.c \
-		ft_textures.c \
-		ft_sprite.c \
-		ft_draw.c \
-		ft_struct.c \
-		print.c \
+SRCS =	cub3d.c \
+		check_input.c \
+		read_cubfile.c \
+		fill_parser.c \
+		data_strings.c \
+		data_res_color.c \
+		make_map.c \
+		check_map.c \
+		utils.c \
+		window.c \
+		keypress.c \
+		start_exit_game.c \
+		rays.c \
+		player.c \
+		side_delta.c \
+		draw_wall_sprite.c \
+		draw_pixel_image.c \
+		screenshot.c \
+		texture_data.c \
+		sprite.c \
+		sprite_sidehit.c \
 
-LIB = $(SRCS:%.c=%.o)
+LIB		=	$(SRCS:%.c=%.o)
+SRCS2	=	$(addprefix mandatory_files/,$(SRCS))
 
-CC = gcc -Wall -Wextra -Werror -I minilibx -L minilibx -lmlx -framework OpenGL -framework AppKit
+CC = gcc -O3 -Wall -Werror -Wextra -std=gnu99 -I minilibx -L minilibx -lmlx \
+	-framework OpenGL -framework AppKit -g -o
 
-$(NAME):
-	$(CC) $(SRCS)
+all: $(NAME)
+
+$(MLX):
+	make -C minilibx
+	cp -r minilibx/$(MLX) .
+
+$(NAME):	$(MLX)
+			$(CC) $(NAME) $(SRCS2)
 
 clean:
-	/bin/rm -f $(LIB)
+	make -C minilibx clean
+	/bin/rm -f screenshot.bmp
 
 fclean: clean
-	/bin/rm -f $(NAME)
+		/bin/rm -f $(LIB)
+		/bin/rm -f $(NAME)
+		/bin/rm -f $(MLX)
+
 
 re: fclean all
