@@ -6,11 +6,12 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/17 17:48:17 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/18 14:52:47 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <stdio.h>
 
 static void		draw_floor_ceiling(t_vars *v, int count)
 {
@@ -105,6 +106,8 @@ void			draw_sprite(t_vars *v)
 			count--;
 			length--;
 			v->textures->sprite->y_tex -= y;
+			if (v->textures->sprite->y_tex < 0)
+				v->textures->sprite->y_tex = 0;
 		}
 		v->index--;
 	}
