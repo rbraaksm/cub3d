@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/18 14:52:47 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/18 16:34:39 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,26 +88,29 @@ void			draw_wall(t_vars *v)
 
 void			draw_sprite(t_vars *v)
 {
-	float	length;
-	float	count;
+	float	height;
+	float	end;
+	float	start;
+	float	dest;
 	float	y;
+	float	x;
 
 	while ((v->index - 1) > 0)
 	{
-		length = (v->d->resy / v->s->finaldist[v->index - 1]);
-		count = (length / 2) + (v->d->resy / 2);
+		height = (v->d->resy / v->s->finaldist[v->index - 1]);
+		end = (height / 2) + (v->d->resy / 2);
+		start = -height / 2 + v->d->resy / 2;
+		dest = start;
 		v->textures->sprite->x_tex = (float)v->textures->sprite->width *
 		v->s->perc[v->index - 1];
 		v->textures->sprite->y_tex = v->textures->sprite->height - 1;
-		y = (float)v->textures->sprite->height / (float)length;
-		while (length > 0)
+		x = v->textures->sprite->x_tex;
+		while (dest < end)
 		{
-			my_sprite_put(v, v->i, count);
-			count--;
-			length--;
+			y = fabs(((float)dest - start) / height) * v->textures->sprite->height;
+			my_sprite_put(v, x, y, dest);
+			dest++;
 			v->textures->sprite->y_tex -= y;
-			if (v->textures->sprite->y_tex < 0)
-				v->textures->sprite->y_tex = 0;
 		}
 		v->index--;
 	}
