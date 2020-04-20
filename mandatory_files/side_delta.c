@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/20 13:37:17 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/20 17:01:29 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,29 @@
 
 static int	wall_data(t_vars *v, int side)
 {
-	if (side == 0)
+	if (side == 1)
 	{
-		v->ray->walldist = cos(v->ray->angle - v->ray->playdir) * v->ray->sidex;
-		if (v->ray->rayx >= 0)
-			v->ray->side_hit = 1;
+		v->tex = 0;
+		v->ray->walldist = v->ray->sidey * cos(fabs(v->ray->angle - v->ray->playdir));
+		if (v->ray->rayx < 0)
+			v->perc_x = v->player->x - fabs(v->ray->rayx * v->ray->sidey);
 		else
-			v->ray->side_hit = 3;
-		v->ray->finaldist = v->ray->sidex;
+			v->perc_x = v->player->x + fabs(v->ray->rayx * v->ray->sidey);
+		if (v->ray->rayy < 0)
+			v->tex = 1;
 	}
 	else
 	{
-		v->ray->walldist = cos(v->ray->angle - v->ray->playdir) * v->ray->sidey;
-		if (v->ray->rayy > 0)
-			v->ray->side_hit = 2;
+		v->tex = 2;
+		v->ray->walldist = v->ray->sidex * cos(fabs(v->ray->angle - v->ray->playdir));
+		if (v->ray->rayy < 0)
+			v->perc_x = v->player->y - fabs(v->ray->rayy * v->ray->sidex);
 		else
-			v->ray->side_hit = 0;
-		v->ray->finaldist = v->ray->sidey;
+			v->perc_x = v->player->y + fabs(v->ray->rayy * v->ray->sidex);
+		if (v->ray->rayx < 0)
+			v->tex = 3;
 	}
+	v->perc_x -= (int)v->perc_x;
 	return (1);
 }
 

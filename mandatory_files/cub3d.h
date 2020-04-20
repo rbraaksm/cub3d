@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/20 13:53:52 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/20 17:03:14 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,26 @@ typedef struct		s_vars
 {
 	void			*mlx;
 	void			*win;
+	void			*no_mlx;
+	void			*ea_mlx;
+	void			*so_mlx;
+	void			*we_mlx;
+	void			*sp_mlx;
+	void			*no_img;
+	void			*ea_img;
+	void			*so_img;
+	void			*we_img;
+	void			*sp_img;
+	char			*add[5];
+	int				bits[5];
+	int				ll[5];
+	int				en[5];
+	int				ih[5];
+	int				iw[5];
 	void			*img1;
 	void			*img2;
 	char			*addr;
+	int				tex;
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
@@ -155,15 +172,9 @@ typedef struct		s_vars
 	int				dest_y;
 	float			perc_x;
 	float			perc_y;
-	void			*mlx_tex5;
-	void			*it5;
-	char			*s_tex;
-	char			*addt;
-	int				bppt;
-	int				llt;
-	int				et;
-	int				ih;
-	int				iw;
+	// void			*mlx_tex5;
+	// void			*it5;
+	// char			*addt;
 	t_sprite		s[200];
 	t_ray			*ray;
 	t_player		*player;
@@ -215,7 +226,8 @@ void				sprite_east(t_vars *v);
 void				sprite_south(t_vars *v);
 void				sprite_west(t_vars *v);
 void				my_mlx_pixel_put(t_vars *v, int x, int y, int color);
-void				my_image_put(t_vars *v, t_tex *tex, int x, int y);
+// void				my_image_put(t_vars *v);
+void				my_image_put(t_vars *v, int x, int y);
 // void				my_sprite_put(t_vars *v, int x, int y, float dest);
 void				my_mlx_pixel_put_sprite(t_vars *v, int x, int y);
 #endif
