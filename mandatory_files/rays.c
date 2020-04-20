@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/19 16:08:54 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/20 13:42:04 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void		rays(t_vars *v)
 		draw_wall(v);
 		if (v->index > 0)
 			draw_sprite(v);
+		// v->index = 0;
 		start += incr;
 		v->i--;
 	}

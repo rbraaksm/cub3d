@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:11:53 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/17 18:42:45 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/20 13:59:55 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ static void	make_img(t_vars *v)
 	v->img2 = mlx_new_image(v->mlx, v->d->resx, v->d->resy);
 	v->addr = mlx_get_data_addr(v->img1, &v->bits_per_pixel,
 	&v->line_length, &v->endian);
+	v->mlx_tex5 = mlx_init();
+	v->it5 = mlx_xpm_file_to_image(v->mlx_tex5, v->d->s, &v->iw, &v->ih);
+	v->addt = mlx_get_data_addr(v->it5, &v->bppt, &v->llt, &v->et);
 }
 
 static void	resolution_check(t_vars *v)

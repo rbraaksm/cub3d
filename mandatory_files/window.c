@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/19 16:02:27 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/20 14:01:24 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void		get_info(t_vars *v)
 	t_tex	e_tex;
 	t_tex	s_tex;
 	t_tex	w_tex;
-	t_tex	sprite;
+	// t_tex	sprite;
 
 	v->check = 0;
 	v->check += north_texture(v, v->d->no, &n_tex);
 	v->check += east_texture(v, v->d->ea, &e_tex);
 	v->check += south_texture(v, v->d->so, &s_tex);
 	v->check += west_texture(v, v->d->we, &w_tex);
-	v->check += sprite_texture(v, v->d->s, &sprite);
-	if (v->check != 5)
-		exit_game(v);
+	// v->check += sprite_texture(v, v->d->s, &sprite);
+	// if (v->check != 5)
+	// 	exit_game(v);
 	struct_values(v);
 }
 
@@ -54,11 +54,9 @@ void		window(t_vars *v)
 	t_texture	textures;
 	t_player	player;
 	t_ray		ray;
-	// t_sprite	s;
 
 	v->textures = &textures;
 	v->player = &player;
 	v->ray = &ray;
-	// v->s = s;
 	get_info(v);
 }

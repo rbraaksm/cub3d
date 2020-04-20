@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/20 09:40:16 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/20 13:53:52 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,15 @@ typedef struct		s_vars
 	int				dest_y;
 	float			perc_x;
 	float			perc_y;
+	void			*mlx_tex5;
+	void			*it5;
+	char			*s_tex;
+	char			*addt;
+	int				bppt;
+	int				llt;
+	int				et;
+	int				ih;
+	int				iw;
 	t_sprite		s[200];
 	t_ray			*ray;
 	t_player		*player;
