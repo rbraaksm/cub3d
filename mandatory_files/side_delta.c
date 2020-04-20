@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_find_sidedelta.c                                :+:    :+:            */
+/*   side_delta.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 11:24:57 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/19 16:03:55 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	new_sidedist(t_vars *v, int side, int mapy, int mapx)
 {
 	if (v->d->map[mapy][mapx] == '2')
 		sprite_data(v, side, mapy, mapx);
-	else if (v->d->map[mapy][mapx] == '1')
+	if (v->d->map[mapy][mapx] == '1')
 		return ((wall_data(v, side) == 1));
 	if (side == 0)
 		v->ray->sidex += v->ray->deltax;

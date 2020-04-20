@@ -1,86 +1,172 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sprite_data.c                                      :+:    :+:            */
+/*   sprite.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:37:15 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/14 13:32:10 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/20 09:40:40 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	sprite_values(t_vars *v, int mapx, int mapy)
+void	sprite_side_1_up_right(t_vars *v)
 {
-	v->s->middle_x = (float)mapx + 0.5;
-	v->s->middle_y = (float)mapy + 0.5;
-	v->s->x_hit = v->player->x + (v->ray->finaldist * v->ray->rayx);
-	v->s->y_hit = v->player->y + (v->ray->finaldist * v->ray->rayy);
-	v->s->angle = v->ray->playdir + (M_PI / 2);
-	v->s->x_angle = sin(v->s->angle);
-	v->s->y_angle = cos(v->s->angle);
-	if (v->ray->sidey < v->ray->sidex)
-	{
-		v->s->schuin = 0.5 / cos(v->s->angle);
-		v->s->y_hit_angle = v->s->y_hit;
-		if (v->ray->playdir > (M_PI * 0.5) && v->ray->playdir < (M_PI * 1.5))
-			v->s->x_hit_angle = v->s->middle_x + (v->s->schuin * v->s->x_angle);
-		else
-			v->s->x_hit_angle = v->s->middle_x - (v->s->schuin * v->s->x_angle);
-	}
-	else
-	{
-		v->s->schuin = 0.5 / sin(v->s->angle);
-		v->s->x_hit_angle = v->s->x_hit;
-		if (v->ray->playdir < M_PI && v->ray->playdir > 0)
-			v->s->y_hit_angle = v->s->middle_y - (v->s->schuin * v->s->y_angle);
-		else
-			v->s->y_hit_angle = v->s->middle_y + (v->s->schuin * v->s->y_angle);
-	}
+	float i;
+
+	v->s[v->index].all_x = v->s[v->index].cen_x + 0.5 * tan(v->s[v->index].angle);
+	i = (v->s[v->index].all_x - v->s[v->index].hitx) /
+	(v->s[v->index].incr_ray + v->s[v->index].incr_spr);
+	v->s[v->index].hity -= i * 0.001;
+	v->s[v->index].hitx += i * v->s[v->index].incr_ray;
+	v->s[v->index].end_sprx = v->s[v->index].cen_x + fabs(v->s[v->index].dirx / 2);
+	v->s[v->index].x = 1 - fabs((v->s[v->index].hitx - v->s[v->index].end_sprx)
+	/ v->s[v->index].dirx);
 }
 
-void	sprite_hit(t_vars *v, int side)
+void	sprite_side_0_up_right(t_vars *v)
 {
-	if (side == 0)
-	{
-		if (v->ray->rayx >= 0)
-			v->ray->sprite_hit = 1;
-		else
-			v->ray->sprite_hit = 3;
-		v->ray->finaldist = v->ray->sidex;
-	}
-	else
-	{
-		if (v->ray->rayy >= 0)
-			v->ray->sprite_hit = 2;
-		else
-			v->ray->sprite_hit = 0;
-		v->ray->finaldist = v->ray->sidey;
-	}
+	float i;
+
+	v->s[v->index].all_y = v->s[v->index].cen_y - 0.5 / tan(v->s[v->index].angle);
+	i = (-v->s[v->index].all_y + v->s[v->index].hity) / (v->s[v->index].incr_spr +
+	v->s[v->index].incr_ray);
+	v->s[v->index].hitx += i * 0.001;
+	v->s[v->index].hity -= i * v->s[v->index].incr_spr;
+	v->s[v->index].end_spry = v->s[v->index].cen_y - fabs(v->s[v->index].diry / 2);
+	v->s[v->index].x = fabs((v->s[v->index].hity - v->s[v->index].end_spry) /
+	v->s[v->index].diry);
+}
+
+void	sprite_side_1_up_left(t_vars *v)
+{
+	float i;
+
+	v->s[v->index].all_x = v->s[v->index].cen_x + 0.5 * tan(v->s[v->index].angle);
+	i = (-v->s[v->index].all_x + v->s[v->index].hitx) / (v->s[v->index].incr_ray +
+	v->s[v->index].incr_spr);
+	v->s[v->index].hity -= i * 0.001;
+	v->s[v->index].hitx -= i * v->s[v->index].incr_ray;
+	v->s[v->index].end_sprx = v->s[v->index].cen_x - fabs(v->s[v->index].dirx / 2);
+	v->s[v->index].x = fabs((v->s[v->index].hitx - v->s[v->index].end_sprx) /
+	v->s[v->index].dirx);
+}
+
+void	sprite_side_0_down_right(t_vars *v)
+{
+	float i;
+
+	v->s[v->index].all_y = v->s[v->index].cen_y + 0.5 / tan(v->s[v->index].angle);
+	i = (v->s[v->index].all_y - v->s[v->index].hity) / (v->s[v->index].incr_spr +
+	v->s[v->index].incr_ray);
+	v->s[v->index].hitx -= i * 0.001;
+	v->s[v->index].hity += i * v->s[v->index].incr_spr;
+	v->s[v->index].end_spry = v->s[v->index].cen_y + fabs(v->s[v->index].diry / 2);
+	v->s[v->index].x = fabs((v->s[v->index].hity - v->s[v->index].end_spry) /
+	v->s[v->index].diry);
+}
+
+void	sprite_side_1_down_right(t_vars *v)
+{
+	float i;
+
+	v->s[v->index].all_x = v->s[v->index].cen_x - 0.5 * tan(v->s[v->index].angle);
+	i = (-v->s[v->index].all_x + v->s[v->index].hitx) / (v->s[v->index].incr_ray +
+	v->s[v->index].incr_spr);
+	v->s[v->index].hity += i * 0.001;
+	v->s[v->index].hitx -= i * v->s[v->index].incr_ray;
+	v->s[v->index].end_sprx = v->s[v->index].cen_x - fabs(v->s[v->index].dirx / 2);
+	v->s[v->index].x = 1 - fabs((v->s[v->index].hitx - v->s[v->index].end_sprx) /
+	v->s[v->index].dirx);
+}
+
+void	sprite_side_0_up_left(t_vars *v)
+{
+	float i;
+
+	v->s[v->index].all_y = v->s[v->index].cen_y + 0.5 / tan(v->s[v->index].angle);
+	i = (-v->s[v->index].all_y + v->s[v->index].hity) / (v->s[v->index].incr_spr +
+	v->s[v->index].incr_ray);
+	v->s[v->index].hitx -= i * 0.001;
+	v->s[v->index].hity -= i * v->s[v->index].incr_spr;
+	v->s[v->index].end_spry = v->s[v->index].cen_y - fabs(v->s[v->index].diry / 2);
+	v->s[v->index].x = 1 - fabs((v->s[v->index].hity - v->s[v->index].end_spry) /
+	v->s[v->index].diry);
+}
+
+void	sprite_side_1_down_left(t_vars *v)
+{
+	float i;
+
+	v->s[v->index].all_x = v->s[v->index].cen_x - 0.5 * tan(v->s[v->index].angle);
+	i = (v->s[v->index].all_x - v->s[v->index].hitx) / (v->s[v->index].incr_ray +
+	v->s[v->index].incr_spr);
+	v->s[v->index].hity += i * 0.001;
+	v->s[v->index].hitx += i * v->s[v->index].incr_ray;
+	v->s[v->index].end_sprx = v->s[v->index].cen_x + fabs(v->s[v->index].dirx / 2);
+	v->s[v->index].x = fabs((v->s[v->index].hitx - v->s[v->index].end_sprx) /
+	v->s[v->index].dirx);
+}
+
+void	sprite_side_0_down_left(t_vars *v)
+{
+	float i;
+
+	v->s[v->index].all_y = v->s[v->index].cen_y - 0.5 / tan(v->s[v->index].angle);
+	i = (v->s[v->index].all_y - v->s[v->index].hity) / (v->s[v->index].incr_spr +
+	v->s[v->index].incr_ray);
+	v->s[v->index].hitx += i * 0.001;
+	v->s[v->index].hity += i * v->s[v->index].incr_spr;
+	v->s[v->index].end_spry = v->s[v->index].cen_y + fabs(v->s[v->index].diry / 2);
+	v->s[v->index].x = 1 - fabs((v->s[v->index].hity - v->s[v->index].end_spry) /
+	v->s[v->index].diry);
 }
 
 int		sprite_data(t_vars *v, int side, int mapy, int mapx)
 {
-	sprite_hit(v, side);
-	sprite_values(v, mapx, mapy);
-	v->s->x_incr = (v->s->x_angle / v->s->y_angle) * 0.001;
-	v->s->x_angle_incr = (v->ray->rayx / v->ray->rayy) * 0.001;
-	v->s->y_incr = (v->s->y_angle / v->s->x_angle) * 0.001;
-	v->s->y_angle_incr = (v->ray->rayy / v->ray->rayx) * 0.001;
-	if (v->ray->sprite_hit == 0)
-		sprite_north(v);
-	else if (v->ray->sprite_hit == 1)
-		sprite_east(v);
-	else if (v->ray->sprite_hit == 2)
-		sprite_south(v);
-	else if (v->ray->sprite_hit == 3)
-		sprite_west(v);
-	v->s->finaldist[v->index] *= cos(fabs(v->ray->angle - v->ray->playdir));
-	if (v->s->perc[v->index] > 1 || v->s->perc[v->index] < 0)
-		return (0);
-	v->ray->sprite = 1;
 	v->index++;
+	if (side == 0)
+	{
+		v->s[v->index].hity = v->ray->sidex * v->ray->rayy + v->player->y;
+		v->s[v->index].hitx = v->ray->sidex * v->ray->rayx + v->player->x;
+	}
+	else
+	{
+		v->s[v->index].hity = v->ray->sidey * v->ray->rayy + v->player->y;
+		v->s[v->index].hitx = v->ray->sidey * v->ray->rayx + v->player->x;
+	}
+	v->s[v->index].angle = v->ray->playdir - M_PI / 2;
+	if (v->s[v->index].angle < 0)
+		v->s[v->index].angle += M_PI * 2;
+	v->s[v->index].cen_x = mapx + 0.5;
+	v->s[v->index].cen_y = mapy + 0.5;
+	v->s[v->index].dirx = sin(v->s[v->index].angle);
+	v->s[v->index].diry = cos(v->s[v->index].angle);
+	v->s[v->index].incr_spr = fabs(v->s[v->index].dirx / v->s[v->index].diry * 0.001);
+	v->s[v->index].incr_ray = fabs(v->ray->rayx / v->ray->rayy * 0.001);
+	if (side == 0)
+	{
+		if (v->ray->rayy > 0 && v->ray->rayx < 0)
+			sprite_side_0_down_right(v);
+		if (v->ray->rayy > 0 && v->ray->rayx > 0)
+			sprite_side_0_down_left(v);
+		if (v->ray->rayy < 0 && v->ray->rayx > 0)
+			sprite_side_0_up_right(v);
+		if (v->ray->rayy < 0 && v->ray->rayx < 0)
+			sprite_side_0_up_left(v);
+	}
+	else
+	{
+		if (v->ray->rayy > 0 && v->ray->rayx < 0)
+			sprite_side_1_down_right(v);
+		if (v->ray->rayy > 0 && v->ray->rayx > 0)
+			sprite_side_1_down_left(v);
+		if (v->ray->rayy < 0 && v->ray->rayx > 0)
+			sprite_side_1_up_right(v);
+		if (v->ray->rayy < 0 && v->ray->rayx < 0)
+			sprite_side_1_up_left(v);
+	}
 	return (1);
 }

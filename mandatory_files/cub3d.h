@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/18 16:34:53 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/20 09:40:16 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,24 +108,27 @@ typedef struct		s_ray
 
 typedef struct		s_sprite
 {
-	float			middle_x;
-	float			middle_y;
-	float			x_hit;
-	float			y_hit;
-	float			angle;
 	float			active_angle;
-	float			x_angle;
-	float			y_angle;
-	float			x_hit_angle;
-	float			y_hit_angle;
-	float			x_incr;
-	float			y_incr;
-	float			x_angle_incr;
-	float			y_angle_incr;
-	float			schuin;
-	float			start;
-	float			finaldist[200];
-	float			perc[200];
+	float		x;
+	float		dist;
+	float		angle;
+	int			ray;
+	int			side;
+	float		hitx;
+	float		hity;
+	float		cen_x;
+	float		cen_y;
+	float		all_x;
+	float		all_y;
+	float		steps_to_allign;
+	float		diry;
+	float		dirx;
+	float		incr_spr;
+	float		incr_ray;
+	float		end_spry;
+	float		end_sprx;
+	float		ray_dirx;
+	float		ray_diry;
 }					t_sprite;
 
 typedef struct		s_vars
@@ -146,7 +149,13 @@ typedef struct		s_vars
 	int				screen_x;
 	int				screen_y;
 	int				check;
-	t_sprite		*s;
+	float			height;
+	float			start;
+	float			end;
+	int				dest_y;
+	float			perc_x;
+	float			perc_y;
+	t_sprite		s[200];
 	t_ray			*ray;
 	t_player		*player;
 	t_texture		*textures;
@@ -198,5 +207,6 @@ void				sprite_south(t_vars *v);
 void				sprite_west(t_vars *v);
 void				my_mlx_pixel_put(t_vars *v, int x, int y, int color);
 void				my_image_put(t_vars *v, t_tex *tex, int x, int y);
-void				my_sprite_put(t_vars *v, int x, int y, float dest);
+// void				my_sprite_put(t_vars *v, int x, int y, float dest);
+void				my_mlx_pixel_put_sprite(t_vars *v, int x, int y);
 #endif

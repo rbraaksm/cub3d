@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/18 16:34:39 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/20 09:33:35 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,29 +88,24 @@ void			draw_wall(t_vars *v)
 
 void			draw_sprite(t_vars *v)
 {
-	float	height;
-	float	end;
-	float	start;
-	float	dest;
-	float	y;
 	float	x;
+	float	y;
 
-	while ((v->index - 1) > 0)
+	while (v->index > 0)
 	{
-		height = (v->d->resy / v->s->finaldist[v->index - 1]);
-		end = (height / 2) + (v->d->resy / 2);
-		start = -height / 2 + v->d->resy / 2;
-		dest = start;
-		v->textures->sprite->x_tex = (float)v->textures->sprite->width *
-		v->s->perc[v->index - 1];
-		v->textures->sprite->y_tex = v->textures->sprite->height - 1;
-		x = v->textures->sprite->x_tex;
-		while (dest < end)
+		v->s[v->index].dist = fabs(sqrt(pow(v->player->y - v->s[v->index].cen_y, 2) +
+		pow(v->player->x - v->s[v->index].cen_x, 2)) * cos(fabs(v->ray->angle - v->ray->playdir)));
+		v->height = (float)v->d->resy / v->s[v->index].dist;
+		v->end = v->height / 2 + v->d->resy / 2;
+		v->start = -v->height / 2 + v->d->resy / 2;
+		v->dest_y = v->start;
+		x = v->s[v->index].x * v->textures->sprite->width;
+		while (v->dest_y < v->end)
 		{
-			y = fabs(((float)dest - start) / height) * v->textures->sprite->height;
-			my_sprite_put(v, x, y, dest);
-			dest++;
-			v->textures->sprite->y_tex -= y;
+			v->perc_y = fabs(((float)v->dest_y - v->start) / v->height);
+			y = v->perc_y * v->textures->sprite->height;
+			my_mlx_pixel_put_sprite(v, x, y);
+			v->dest_y++;
 		}
 		v->index--;
 	}

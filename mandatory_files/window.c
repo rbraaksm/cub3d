@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:52:39 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/17 18:44:58 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/19 16:02:27 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void		window(t_vars *v)
 	t_texture	textures;
 	t_player	player;
 	t_ray		ray;
-	t_sprite	s;
+	// t_sprite	s;
 
 	v->textures = &textures;
 	v->player = &player;
 	v->ray = &ray;
-	v->s = &s;
+	// v->s = s;
 	get_info(v);
 }
