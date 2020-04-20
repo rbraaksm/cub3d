@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/20 13:42:04 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/20 18:26:53 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static void	put_2_window(t_vars *v)
 
 void		check_dir(t_vars *v)
 {
-	if (v->ray->playdir < 0)
-		v->ray->playdir += (2 * M_PI);
-	if (v->ray->playdir > (2 * M_PI))
-		v->ray->playdir -= (2 * M_PI);
+	if (v->ray.playdir < 0)
+		v->ray.playdir += (2 * M_PI);
+	if (v->ray.playdir > (2 * M_PI))
+		v->ray.playdir -= (2 * M_PI);
 }
 
 void		rays(t_vars *v)
@@ -48,21 +48,20 @@ void		rays(t_vars *v)
 	start = -1;
 	incr = 2.0 / v->d->resx;
 	v->i = v->d->resx;
-	v->ray->angle = v->ray->playdir;
+	v->ray.angle = v->ray.playdir;
 	while (v->i >= 0)
 	{
-		v->ray->playdir = v->ray->angle + atan(start / v->ray->adjust);
-		v->ray->sprite = 0;
+		v->ray.playdir = v->ray.angle + atan(start / v->ray.adjust);
+		v->ray.sprite = 0;
 		check_dir(v);
 		find_side_delta(v);
 		find_hit(v);
 		draw_wall(v);
 		if (v->index > 0)
 			draw_sprite(v);
-		// v->index = 0;
 		start += incr;
 		v->i--;
 	}
-	v->ray->playdir = v->ray->angle;
+	v->ray.playdir = v->ray.angle;
 	put_2_window(v);
 }

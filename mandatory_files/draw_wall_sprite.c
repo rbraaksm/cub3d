@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/20 17:02:58 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/20 18:25:53 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,17 @@ void			draw_wall(t_vars *v)
 	float	length;
 	float	count;
 	float	tmpcount;
-	// float	y;
 
-	length = ((1 / v->ray->walldist) * v->d->resy);
+	length = ((1 / v->ray.walldist) * v->d->resy);
 	count = (length / 2) + (v->d->resy / 2);
 	tmpcount = count;
 	draw_floor_ceiling(v, count);
-	// v->tex = find_texture(v);
-	if (v->ray->walldist <= 0.2)
-		v->ray->walldist = 0.2;
-	v->height = v->d->resy / v->ray->walldist;
+	if (v->ray.walldist <= 0.2)
+		v->ray.walldist = 0.2;
+	v->height = v->d->resy / v->ray.walldist;
 	v->end = v->height / 2 + v->d->resy / 2;
 	v->start = -v->height / 2 + v->d->resy / 2;
 	v->dest_y = v->start;
-	// v->perc_x = (float)v->iw[v->ray->side_hit] * get_perc(v);
 	while (v->dest_y < v->end)
 	{
 		x = v->perc_x * v->iw[v->tex];
@@ -60,16 +57,6 @@ void			draw_wall(t_vars *v)
 		v->dest_y++;
 		v->perc_y = (v->dest_y - v->start) / v->height;
 	}
-
-	// tex->y_tex = tex->height - 1;
-	// y = (float)tex->height / (float)length;
-	// while (length > 0)
-	// {
-	// 	my_image_put(v, tex, v->i, count);
-	// 	count--;
-	// 	length--;
-	// 	tex->y_tex -= y;
-	// }
 }
 
 void			draw_sprite(t_vars *v)
@@ -79,8 +66,8 @@ void			draw_sprite(t_vars *v)
 
 	while (v->index > 0)
 	{
-		v->s[v->index].dist = fabs(sqrt(pow(v->player->y - v->s[v->index].cen_y, 2) +
-		pow(v->player->x - v->s[v->index].cen_x, 2)) * cos(fabs(v->ray->angle - v->ray->playdir)));
+		v->s[v->index].dist = fabs(sqrt(pow(v->player.y - v->s[v->index].cen_y, 2) +
+		pow(v->player.x - v->s[v->index].cen_x, 2)) * cos(fabs(v->ray.angle - v->ray.playdir)));
 		v->height = (float)v->d->resy / v->s[v->index].dist;
 		v->end = v->height / 2 + v->d->resy / 2;
 		v->start = -v->height / 2 + v->d->resy / 2;

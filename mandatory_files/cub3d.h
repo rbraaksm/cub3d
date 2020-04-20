@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/20 17:03:14 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/20 18:24:37 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define CUB3D_H
 # define BUFFER_SIZE 30
 # define CHECK 42424242
+# define XPM mlx_xpm_file_to_image
+# define ADDR mlx_get_data_addr
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -54,30 +56,6 @@ typedef struct		s_struct
 	char			*str;
 	char			*error;
 }					t_data;
-
-typedef struct		s_tex
-{
-	void			*mlx;
-	void			*win;
-	void			*img;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-	int				width;
-	int				height;
-	float			x_tex;
-	float			y_tex;
-}					t_tex;
-
-typedef struct		s_textures
-{
-	t_tex			*n_tex;
-	t_tex			*e_tex;
-	t_tex			*s_tex;
-	t_tex			*w_tex;
-	t_tex			*sprite;
-}					t_texture;
 
 typedef struct		s_player
 {
@@ -172,13 +150,9 @@ typedef struct		s_vars
 	int				dest_y;
 	float			perc_x;
 	float			perc_y;
-	// void			*mlx_tex5;
-	// void			*it5;
-	// char			*addt;
 	t_sprite		s[200];
-	t_ray			*ray;
-	t_player		*player;
-	t_texture		*textures;
+	t_ray			ray;
+	t_player		player;
 	t_data			*d;
 }					t_vars;
 
@@ -201,7 +175,7 @@ int					action(t_vars *v);
 int					keyrelease(int keycode, t_vars *v);
 int					keypress(int keycode, t_vars *v);
 void				start_game(t_vars *v);
-int					exit_game(t_vars *v);
+int					exit_game(t_vars *v, int x);
 void				struct_info(t_vars *v);
 void				screenshot(t_vars *v);
 void				rotate_player(t_vars *v, float rot);
@@ -213,11 +187,6 @@ void				rays(t_vars *vars);
 void				draw(t_vars *v);
 void				draw_wall(t_vars *v);
 void				draw_sprite(t_vars *v);
-int					west_texture(t_vars *v, char *path, t_tex *w_tex);
-int					south_texture(t_vars *v, char *path, t_tex *s_tex);
-int					east_texture(t_vars *v, char *path, t_tex *e_tex);
-int					north_texture(t_vars *v, char *path, t_tex *n_tex);
-int					sprite_texture(t_vars *v, char *path, t_tex *sprite);
 void				find_side_delta(t_vars *v);
 void				find_hit(t_vars *v);
 int					sprite_data(t_vars *v, int side, int mapy, int mapx);
