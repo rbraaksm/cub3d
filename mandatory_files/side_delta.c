@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/18 14:40:17 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 14:37:00 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/21 16:15:33 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static int	wall_data(t_vars *v, int side)
 
 static int	new_sidedist(t_vars *v, int side, int mapy, int mapx)
 {
-	if (v->d->map[mapy][mapx] == '2')
+	if (v->map[mapy][mapx] == '2')
 		sprite(v, side, mapy, mapx);
-	if (v->d->map[mapy][mapx] == '1')
+	if (v->map[mapy][mapx] == '1')
 		return ((wall_data(v, side) == 1));
 	if (side == 0)
 		v->ray.sidex += v->ray.deltax;

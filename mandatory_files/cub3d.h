@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 14:58:07 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/21 18:51:51 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,41 +22,6 @@
 # include <math.h>
 # include <mlx.h>
 # include <stdio.h>
-
-typedef struct		s_struct
-{
-	int				i;
-	int				start;
-	int				save;
-	int				check;
-	char			**map;
-	int				column;
-	int				row_count;
-	int				row_i;
-	char			position;
-	float			play_x;
-	float			play_y;
-	int				resx;
-	int				resy;
-	char			*no;
-	char			*so;
-	char			*we;
-	char			*ea;
-	char			*s;
-	unsigned long	floor;
-	int				fred;
-	int				fgreen;
-	int				fblue;
-	unsigned long	ceiling;
-	int				cred;
-	int				cgreen;
-	int				cblue;
-	char			**f;
-	char			**c;
-	char			*str;
-	char			*error;
-}					t_data;
-
 
 typedef struct		s_player
 {
@@ -105,6 +70,31 @@ typedef struct		s_sprite
 
 typedef struct		s_vars
 {
+	int				i;
+	float			start;
+	int				save;
+	int				check;
+	char			**map;
+	int				column;
+	int				row_count;
+	int				row_i;
+	int				resx;
+	int				resy;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	char			*sp;
+	unsigned long	floor;
+	int				fred;
+	int				fgreen;
+	int				fblue;
+	unsigned long	ceiling;
+	int				cred;
+	int				cgreen;
+	int				cblue;
+	char			*str;
+	char			*error;
 	void			*mlx;
 	void			*win;
 	void			*no_mlx;
@@ -132,7 +122,6 @@ typedef struct		s_vars
 	int				screen_x;
 	int				screen_y;
 	float			height;
-	float			start;
 	float			end;
 	int				dest_y;
 	float			perc_x;
@@ -140,23 +129,22 @@ typedef struct		s_vars
 	t_sprite		s[200];
 	t_ray			ray;
 	t_player		player;
-	t_data			*d;
 }					t_vars;
 
-int					check_input(int argc, char **argv, t_data *d);
-int					make_string(char **argv, t_data *d);
-int					fill_parser(t_data *d);
-char				*path(t_data *d, char *s1, char c);
-void				resolution(t_data *d, char *str);
-void				data_floor(t_data *d, char *str);
-void				data_ceiling(t_data *d, char *str);
-int					fill_grid(t_data *d);
-int					check_map(t_data *d);
-int					ft_strchr(t_data *d, char c, int row, int column);
-int					error_check(t_data *d, char *str);
+int					check_input(int argc, char **argv, t_vars *v);
+int					make_string(char **argv, t_vars *v);
+int					fill_parser(t_vars *v);
+char				*path(t_vars *v, char *s1, char c);
+void				resolution(t_vars *v, char *str);
+void				data_floor(t_vars *v, char *str);
+void				data_ceiling(t_vars *v, char *str);
+int					fill_grid(t_vars *v);
+int					check_map(t_vars *v);
+int					ft_strchr(t_vars *v, char c, int row, int column);
+int					error_check(t_vars *v, char *str);
 int					ft_strlen(const char *str);
 int					ft_atoi(const char *str);
-int					free_function(t_data *d, int i);
+int					free_function(t_vars *v, int i);
 void				window(t_vars *v);
 int					action(t_vars *v);
 int					keyrelease(int keycode, t_vars *v);

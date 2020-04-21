@@ -6,20 +6,20 @@
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 15:11:54 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 16:32:02 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/21 17:11:21 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int				error_check(t_data *d, char *str)
+int				error_check(t_vars *v, char *str)
 {
 	int	i;
 
 	i = 0;
-	while (d->error[i] != '\0')
+	while (v->error[i] != '\0')
 	{
-		if (d->error[i] != str[i])
+		if (v->error[i] != str[i])
 			return (0);
 		i++;
 	}
@@ -66,32 +66,39 @@ int				ft_atoi(const char *str)
 	return (result);
 }
 
-static int		set_location(t_data *d, int row, int column, char c)
+static int		set_location(t_vars *v, int row, int column, char c)
 {
-	if (d->play_x == 0 && d->play_y == 0)
+	if (v->player.x == 0 && v->player.y == 0)
 	{
-		d->play_x = column + 0.5;
-		d->play_y = row + 0.5;
-		d->position = c;
+		v->player.x = column + 0.5;
+		v->player.y = row + 0.5;
+		if (c == 'N')
+			v->ray.playdir = M_PI;
+		else if (c == 'E')
+			v->ray.playdir = M_PI * 0.5;
+		else if (c == 'S')
+			v->ray.playdir = 0;
+		else if (c == 'W')
+			v->ray.playdir = M_PI * 1.5;
 	}
 	else
 	{
-		d->error = "ERROR: TO MANY PLAYERS IN THE MAP\n";
+		v->error = "ERROR: TO MANY PLAYERS IN THE MAP\n";
 		return (0);
 	}
 	return (1);
 }
 
-int				ft_strchr(t_data *d, char c, int row, int column)
+int				ft_strchr(t_vars *v, char c, int row, int column)
 {
 	char	*s1;
 	int		i;
 
-	d->error = "ERROR: WRONG CHARACTER\n";
+	v->error = "ERROR: WRONG CHARACTER\n";
 	s1 = "012NWSE";
 	i = 0;
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
-		if (set_location(d, row, column, c) == 0)
+		if (set_location(v, row, column, c) == 0)
 			return (0);
 	while (s1[i] != '\0')
 	{

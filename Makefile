@@ -6,7 +6,7 @@
 #    By: rbraaksm <rbraaksm@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/22 14:09:57 by rbraaksm      #+#    #+#                  #
-#    Updated: 2020/04/21 10:59:01 by rbraaksm      ########   odam.nl          #
+#    Updated: 2020/04/21 18:31:08 by rbraaksm      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRCS =	cub3d.c \
 		draw_pixel_image.c \
 		screenshot.c \
 		sprite.c \
-		sprite_sidehit.c \
 
 LIB		=	$(SRCS:%.c=%.o)
 SRCS2	=	$(addprefix mandatory_files/,$(SRCS))

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/07 11:28:24 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 14:56:26 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/21 15:49:58 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	header_bmp(t_vars *v, int fd)
 	unsigned int	first_pix;
 
 	first_pix = 54;
-	size = v->d->resy * v->d->resx * 4 + 54;
+	size = v->resy * v->resx * 4 + 54;
 	write(fd, "BM", 2);
 	write(fd, &size, 4);
 	write(fd, "\0\0\0\0", 4);
@@ -35,8 +35,8 @@ static void	header_dip_bmp(t_vars *v, int fd)
 	plain = 1;
 	bits_per_pixel = 32;
 	write(fd, &headersize, 4);
-	write(fd, &v->d->resx, 4);
-	write(fd, &v->d->resy, 4);
+	write(fd, &v->resx, 4);
+	write(fd, &v->resy, 4);
 	write(fd, &plain, 2);
 	write(fd, &bits_per_pixel, 2);
 	while (plain <= 24)
@@ -52,20 +52,20 @@ static void	write_pixels(t_vars *v, int fd)
 	int line_length;
 
 	line_length = 0;
-	if (v->d->resx % 64 != 0)
+	if (v->resx % 64 != 0)
 		line_length = 1;
-	line_length = (line_length + (v->d->resx / 64)) * 256;
+	line_length = (line_length + (v->resx / 64)) * 256;
 	x = 0;
-	v->d->resy -= 1;
-	while (v->d->resy >= 0)
+	v->resy -= 1;
+	while (v->resy >= 0)
 	{
-		while (x < v->d->resx)
+		while (x < v->resx)
 		{
-			write(fd, &v->add[v->d->resy * line_length + x * 4], 4);
+			write(fd, &v->add[v->resy * line_length + x * 4], 4);
 			x++;
 		}
 		x = 0;
-		v->d->resy--;
+		v->resy--;
 	}
 }
 

@@ -6,13 +6,13 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 09:57:00 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/16 16:32:47 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/21 15:45:07 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	ft_strcmp(char *arg, char *s1, t_data *d, char c)
+static int	ft_strcmp(char *arg, char *s1, t_vars *v, char c)
 {
 	int i;
 	int	i2;
@@ -30,9 +30,9 @@ static int	ft_strcmp(char *arg, char *s1, t_data *d, char c)
 		if (arg[i] != s1[i2])
 		{
 			if (c == 'C')
-				d->error = "ERROR: IT'S NOT A .CUB FILE\n";
+				v->error = "ERROR: IT'S NOT A .CUB FILE\n";
 			else if (c == 'S')
-				d->error = "ERROR: DID YOU MEAN --SAVE?\n";
+				v->error = "ERROR: DID YOU MEAN --SAVE?\n";
 			return (0);
 		}
 		i--;
@@ -41,18 +41,18 @@ static int	ft_strcmp(char *arg, char *s1, t_data *d, char c)
 	return (1);
 }
 
-int			check_input(int argc, char **argv, t_data *d)
+int			check_input(int argc, char **argv, t_vars *v)
 {
 	if (argc < 2)
 	{
-		d->error = "ERROR: MISSING FILE OR NEED ONE OR MORE AGRUMENT(S)\n";
+		v->error = "ERROR: MISSING FILE OR NEED ONE OR MORE AGRUMENT(S)\n";
 		return (0);
 	}
-	if (ft_strcmp(argv[1], ".cub", d, 'C') == 0)
+	if (ft_strcmp(argv[1], ".cub", v, 'C') == 0)
 		return (0);
-	if (argc == 3 && ft_strcmp(argv[2], "--save", d, 'S') == 0)
+	if (argc == 3 && ft_strcmp(argv[2], "--save", v, 'S') == 0)
 		return (0);
 	if (argc == 3)
-		d->save = 1;
+		v->save = 1;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 14:55:17 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/21 17:12:20 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	put_2_window(t_vars *v)
 {
-	if (v->d->save == 1)
+	if (v->save == 1)
 		v->img = 5;
 	if (v->img == 5)
 	{
@@ -42,8 +42,8 @@ void		rays(t_vars *v)
 	float	incr;
 
 	start = -1;
-	incr = 2.0 / v->d->resx;
-	v->x = v->d->resx;
+	incr = 2.0 / v->resx;
+	v->x = v->resx;
 	v->ray.angle = v->ray.playdir;
 	while (v->x >= 0)
 	{

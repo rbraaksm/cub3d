@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:00:25 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/17 18:42:07 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/21 15:46:36 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,65 +36,65 @@ static int	color_between_end(char *str, int *index, char c)
 	return (1);
 }
 
-void		data_ceiling(t_data *d, char *str)
+void		data_ceiling(t_vars *v, char *str)
 {
 	int i;
 
 	i = 0;
-	d->error = "ERROR: CEILING COLOR ISN'T CORRECT\n";
+	v->error = "ERROR: CEILING COLOR ISN'T CORRECT\n";
 	while (str[i] != '\n')
 		i++;
-	d->i = d->i + i + 2;
+	v->i = v->i + i + 2;
 	i = 0;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
 		return ;
-	d->cred = ft_atoi(&str[i]);
+	v->cred = ft_atoi(&str[i]);
 	if (color_between_end(str, &i, 'B') == 0)
 		return ;
-	d->cgreen = ft_atoi(&str[i]);
+	v->cgreen = ft_atoi(&str[i]);
 	if (color_between_end(str, &i, 'B') == 0)
 		return ;
-	d->cblue = ft_atoi(&str[i]);
-	if (d->cred > 255 || d->cgreen > 255 || d->cblue < 0 || d->cblue > 255)
+	v->cblue = ft_atoi(&str[i]);
+	if (v->cred > 255 || v->cgreen > 255 || v->cblue < 0 || v->cblue > 255)
 		return ;
 	if (color_between_end(str, &i, 'E') == 0)
 		return ;
-	d->check += 2000000;
-	d->error = "";
+	v->check += 2000000;
+	v->error = "";
 }
 
-void		data_floor(t_data *d, char *str)
+void		data_floor(t_vars *v, char *str)
 {
 	int	i;
 
 	i = 0;
-	d->error = "ERROR: FLOOR COLOR ISN'T CORRECT\n";
+	v->error = "ERROR: FLOOR COLOR ISN'T CORRECT\n";
 	while (str[i] != '\n')
 		i++;
-	d->i = d->i + i + 2;
+	v->i = v->i + i + 2;
 	i = 0;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
 		return ;
-	d->fred = ft_atoi(&str[i]);
+	v->fred = ft_atoi(&str[i]);
 	if (color_between_end(str, &i, 'B') == 0)
 		return ;
-	d->fgreen = ft_atoi(&str[i]);
+	v->fgreen = ft_atoi(&str[i]);
 	if (color_between_end(str, &i, 'B') == 0)
 		return ;
-	d->fblue = ft_atoi(&str[i]);
-	if (d->fred > 255 || d->fgreen > 255 || d->fblue < 0 || d->fblue > 255)
+	v->fblue = ft_atoi(&str[i]);
+	if (v->fred > 255 || v->fgreen > 255 || v->fblue < 0 || v->fblue > 255)
 		return ;
 	if (color_between_end(str, &i, 'E') == 0)
 		return ;
-	d->check += 400000;
-	d->error = "";
+	v->check += 400000;
+	v->error = "";
 }
 
-static int	check_resolution(t_data *d, char *str, int *index, char c)
+static int	check_resolution(t_vars *v, char *str, int *index, char c)
 {
 	if (str[*index] < '0' || str[*index] > '9')
 		return (0);
@@ -112,40 +112,40 @@ static int	check_resolution(t_data *d, char *str, int *index, char c)
 		*index = *index + 1;
 	if (str[*index] != '\n')
 		return (0);
-	if (d->resx < 25 || d->resy < 25 ||
-		d->resx > 16385 || d->resy > 16385)
+	if (v->resx < 25 || v->resy < 25 ||
+		v->resx > 16385 || v->resy > 16385)
 		write(1, "PLEASE KEEP RESOLUTION ABOVE 25 AND LOWER THAN 16385\n", 53);
-	if (d->resx < 25)
-		d->resx = 25;
-	if (d->resy < 25)
-		d->resy = 25;
+	if (v->resx < 25)
+		v->resx = 25;
+	if (v->resy < 25)
+		v->resy = 25;
 	return (1);
 }
 
-void		resolution(t_data *d, char *str)
+void		resolution(t_vars *v, char *str)
 {
 	int i;
 
 	i = 1;
-	d->error = "ERROR: RESOLUTION IS NOT CORRECT\n";
+	v->error = "ERROR: RESOLUTION IS NOT CORRECT\n";
 	while (str[i] != '\n')
 		i++;
-	d->i = d->i + i;
+	v->i = v->i + i;
 	i = 1;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
 		return ;
-	d->resx = ft_atoi(&str[i]);
-	if (check_resolution(d, str, &i, 'B') == 0)
+	v->resx = ft_atoi(&str[i]);
+	if (check_resolution(v, str, &i, 'B') == 0)
 		return ;
-	d->resy = ft_atoi(&str[i]);
-	if (check_resolution(d, str, &i, 'E') == 0)
+	v->resy = ft_atoi(&str[i]);
+	if (check_resolution(v, str, &i, 'E') == 0)
 		return ;
-	if (d->resx > 16385)
-		d->resx = 16384;
-	if (d->resy > 16385)
-		d->resy = 16384;
-	d->check += 40000000;
-	d->error = "";
+	if (v->resx > 16385)
+		v->resx = 16384;
+	if (v->resy > 16385)
+		v->resy = 16384;
+	v->check += 40000000;
+	v->error = "";
 }

@@ -6,61 +6,89 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 10:58:18 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/21 18:56:55 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int			free_function(t_data *d, int i)
+int			free_function(t_vars *v, int i)
 {
-	if (d->check >= 2)
-		free(d->no);
-	if (d->check >= 40)
-		free(d->ea);
-	if (d->check >= 200)
-		free(d->s);
-	if (d->check >= 4000)
-		free(d->we);
-	if (d->check >= 20000)
-		free(d->s);
+	if (v->check >= 2)
+		free(v->no);
+	if (v->check >= 40)
+		free(v->ea);
+	if (v->check >= 200)
+		free(v->s);
+	if (v->check >= 4000)
+		free(v->we);
+	if (v->check >= 20000)
+		free(v->sp);
 	if (i == 6 || i == 7)
-		free(d->str);
-	if (d->row_i == 0)
+		free(v->str);
+	if (v->row_i == 0)
 		return (0);
-	while (d->row_i > 0)
+	while (v->row_i > 0)
 	{
-		free(d->map[d->row_i]);
-		d->row_i--;
+		free(v->map[v->row_i]);
+		v->row_i--;
 	}
 	if (i == 7)
-		free(d->map);
+		free(v->map);
 	return (0);
 }
 
-static int	check_cubfile(char **argv, t_data *d)
+static int	check_cubfile(char **argv, t_vars *v)
 {
-	if (make_string(argv, d) == 0)
+	if (make_string(argv, v) == 0)
 		return (0);
-	if (fill_parser(d) == 0)
+	if (fill_parser(v) == 0)
 		return (0);
-	if (fill_grid(d) == 0)
+	if (fill_grid(v) == 0)
 		return (0);
-	if (check_map(d) == 0)
+	if (check_map(v) == 0)
 		return (0);
 	return (1);
+}
+
+static void	struct_data(t_vars *v)
+{
+	v->player.x = 0;
+	v->player.y = 0;
+	v->ray.adjust = 1 / atan(M_PI / 6);
+	v->img = 5;
+	v->si = 0;
+	v->player.walk = 0;
+	v->player.crab = 0;
+	v->row_i = 0;
+	v->check = 0;
+	v->resx = -1;
+	v->resy = -1;
+	v->fred = -1;
+	v->fgreen = -1;
+	v->fblue = -1;
+	v->cred = -1;
+	v->cgreen = -1;
+	v->cblue = -1;
+	v->ceiling = 0;
+	v->floor = 0;
+	v->error = "";
+	v->no = NULL;
+	v->ea = NULL;
+	v->so = NULL;
+	v->we = NULL;
+	v->sp = NULL;
 }
 
 int			main(int argc, char **argv)
 {
 	t_vars	v;
-	t_data	d;
 
-	v.d = &d;
-	if (check_input(argc, argv, &d) == 0)
-		return (write(1, d.error, ft_strlen(d.error)));
-	if (check_cubfile(argv, &d) == 0)
-		return (write(1, d.error, ft_strlen(d.error)));
+	struct_data(&v);
+	if (check_input(argc, argv, &v) == 0)
+		return (write(1, v.error, ft_strlen(v.error)));
+	if (check_cubfile(argv, &v) == 0)
+		return (write(1, v.error, ft_strlen(v.error)));
 	start_game(&v);
 	return (0);
 }
