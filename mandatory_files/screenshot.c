@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/07 11:28:24 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/17 18:15:30 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/21 14:56:26 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	write_pixels(t_vars *v, int fd)
 	{
 		while (x < v->d->resx)
 		{
-			write(fd, &v->addr[v->d->resy * line_length + x * 4], 4);
+			write(fd, &v->add[v->d->resy * line_length + x * 4], 4);
 			x++;
 		}
 		x = 0;

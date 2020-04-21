@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:50:42 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/17 13:38:38 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/21 10:58:18 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ int			main(int argc, char **argv)
 		return (write(1, d.error, ft_strlen(d.error)));
 	if (check_cubfile(argv, &d) == 0)
 		return (write(1, d.error, ft_strlen(d.error)));
-	window(&v);
+	start_game(&v);
 	return (0);
 }

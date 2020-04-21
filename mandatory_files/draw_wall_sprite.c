@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 13:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/18 16:34:39 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/21 14:55:09 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,98 +20,66 @@ static void		draw_floor_ceiling(t_vars *v, int count)
 	index = 0;
 	while (index < count)
 	{
-		my_mlx_pixel_put(v, v->i, index, v->d->ceiling);
+		my_mlx_pixel_put(v, v->x, index, v->d->ceiling);
 		index++;
 	}
 	index = v->d->resy;
 	while (index > count)
 	{
-		my_mlx_pixel_put(v, v->i, index, v->d->floor);
+		my_mlx_pixel_put(v, v->x, index, v->d->floor);
 		index--;
 	}
 }
 
-static float	get_perc(t_vars *v)
-{
-	float	x_cord;
-	float	y_cord;
-	float	perc;
-
-	x_cord = v->player->x + v->ray->finaldist * v->ray->rayx;
-	y_cord = v->player->y + v->ray->finaldist * v->ray->rayy;
-	if (v->ray->side_hit == 0 || v->ray->side_hit == 2)
-		perc = x_cord - (int)x_cord;
-	else
-		perc = y_cord - (int)y_cord;
-	return (perc);
-}
-
-static t_tex	*find_texture(t_vars *v)
-{
-	if (v->ray->side_hit == 0)
-		return (v->textures->n_tex);
-	else if (v->ray->side_hit == 1)
-		return (v->textures->e_tex);
-	else if (v->ray->side_hit == 2)
-		return (v->textures->s_tex);
-	else
-		return (v->textures->w_tex);
-}
-
 void			draw_wall(t_vars *v)
 {
-	t_tex	*tex;
+	int		x;
+	int		y;
 	float	length;
 	float	count;
 	float	tmpcount;
-	float	y;
 
-	y = 0;
-	tex = find_texture(v);
-	if (v->ray->walldist <= 0.2)
-		v->ray->walldist = 0.2;
-	length = ((1 / v->ray->walldist) * v->d->resy);
+	length = ((1 / v->ray.walldist) * v->d->resy);
 	count = (length / 2) + (v->d->resy / 2);
 	tmpcount = count;
 	draw_floor_ceiling(v, count);
-	tex->x_tex = (float)tex->width * get_perc(v);
-	tex->y_tex = tex->height - 1;
-	y = (float)tex->height / (float)length;
-	while (length > 0)
+	if (v->ray.walldist <= 0.2)
+		v->ray.walldist = 0.2;
+	v->height = v->d->resy / v->ray.walldist;
+	v->end = v->height / 2 + v->d->resy / 2;
+	v->start = -v->height / 2 + v->d->resy / 2;
+	v->dest_y = v->start;
+	while (v->dest_y < v->end)
 	{
-		my_image_put(v, tex, v->i, count);
-		count--;
-		length--;
-		tex->y_tex -= y;
+		x = v->perc_x * v->img_width[v->tex];
+		y = v->perc_y * v->img_height[v->tex];
+		my_image_put(v, x, y);
+		v->dest_y++;
+		v->perc_y = (v->dest_y - v->start) / v->height;
 	}
 }
 
 void			draw_sprite(t_vars *v)
 {
-	float	height;
-	float	end;
-	float	start;
-	float	dest;
-	float	y;
 	float	x;
+	float	y;
 
-	while ((v->index - 1) > 0)
+	while (v->si > 0)
 	{
-		height = (v->d->resy / v->s->finaldist[v->index - 1]);
-		end = (height / 2) + (v->d->resy / 2);
-		start = -height / 2 + v->d->resy / 2;
-		dest = start;
-		v->textures->sprite->x_tex = (float)v->textures->sprite->width *
-		v->s->perc[v->index - 1];
-		v->textures->sprite->y_tex = v->textures->sprite->height - 1;
-		x = v->textures->sprite->x_tex;
-		while (dest < end)
+		v->s[v->si].dist = fabs(sqrt(pow(v->player.y - v->s[v->si].y, 2) +
+		pow(v->player.x - v->s[v->si].x, 2)) * cos(fabs(v->ray.angle - v->ray.playdir)));
+		v->height = (float)v->d->resy / v->s[v->si].dist;
+		v->end = v->height / 2 + v->d->resy / 2;
+		v->start = -v->height / 2 + v->d->resy / 2;
+		v->dest_y = v->start;
+		x = v->s[v->si].perc * v->img_width[4];
+		while (v->dest_y < v->end)
 		{
-			y = fabs(((float)dest - start) / height) * v->textures->sprite->height;
-			my_sprite_put(v, x, y, dest);
-			dest++;
-			v->textures->sprite->y_tex -= y;
+			v->perc_y = fabs(((float)v->dest_y - v->start) / v->height);
+			y = v->perc_y * v->img_height[4];
+			my_mlx_pixel_put_sprite(v, x, y);
+			v->dest_y++;
 		}
-		v->index--;
+		v->si--;
 	}
 }

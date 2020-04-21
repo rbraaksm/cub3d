@@ -6,7 +6,7 @@
 #    By: rbraaksm <rbraaksm@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/22 14:09:57 by rbraaksm      #+#    #+#                  #
-#    Updated: 2020/04/16 15:07:20 by rbraaksm      ########   odam.nl          #
+#    Updated: 2020/04/21 10:59:01 by rbraaksm      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ SRCS =	cub3d.c \
 		make_map.c \
 		check_map.c \
 		utils.c \
-		window.c \
 		keypress.c \
 		start_exit_game.c \
 		rays.c \
@@ -31,7 +30,6 @@ SRCS =	cub3d.c \
 		draw_wall_sprite.c \
 		draw_pixel_image.c \
 		screenshot.c \
-		texture_data.c \
 		sprite.c \
 		sprite_sidehit.c \
 

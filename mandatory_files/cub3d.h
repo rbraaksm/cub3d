@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/18 16:34:53 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/21 14:58:07 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define CUB3D_H
 # define BUFFER_SIZE 30
 # define CHECK 42424242
+# define XPM mlx_xpm_file_to_image
+# define ADDR mlx_get_data_addr
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -55,29 +57,6 @@ typedef struct		s_struct
 	char			*error;
 }					t_data;
 
-typedef struct		s_tex
-{
-	void			*mlx;
-	void			*win;
-	void			*img;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-	int				width;
-	int				height;
-	float			x_tex;
-	float			y_tex;
-}					t_tex;
-
-typedef struct		s_textures
-{
-	t_tex			*n_tex;
-	t_tex			*e_tex;
-	t_tex			*s_tex;
-	t_tex			*w_tex;
-	t_tex			*sprite;
-}					t_texture;
 
 typedef struct		s_player
 {
@@ -108,48 +87,59 @@ typedef struct		s_ray
 
 typedef struct		s_sprite
 {
-	float			middle_x;
-	float			middle_y;
+	float			x;
+	float			y;
 	float			x_hit;
 	float			y_hit;
+	float			perc;
+	float			dist;
 	float			angle;
-	float			active_angle;
-	float			x_angle;
-	float			y_angle;
-	float			x_hit_angle;
-	float			y_hit_angle;
+	int				ray;
+	float			ydir;
+	float			xdir;
 	float			x_incr;
 	float			y_incr;
-	float			x_angle_incr;
-	float			y_angle_incr;
-	float			schuin;
+	float			all;
 	float			start;
-	float			finaldist[200];
-	float			perc[200];
 }					t_sprite;
 
 typedef struct		s_vars
 {
 	void			*mlx;
 	void			*win;
+	void			*no_mlx;
+	void			*ea_mlx;
+	void			*so_mlx;
+	void			*we_mlx;
+	void			*sp_mlx;
+	void			*no_img;
+	void			*ea_img;
+	void			*so_img;
+	void			*we_img;
+	void			*sp_img;
+	char			*add[7];
+	int				bits[6];
+	int				ll[6];
+	int				en[6];
+	int				img_height[5];
+	int				img_width[5];
 	void			*img1;
 	void			*img2;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-	int				active_img;
-	int				stepx;
-	int				stepy;
-	int				i;
-	int				index;
+	int				img;
+	int				tex;
+	int				x;
+	int				si;
 	int				screen_x;
 	int				screen_y;
-	int				check;
-	t_sprite		*s;
-	t_ray			*ray;
-	t_player		*player;
-	t_texture		*textures;
+	float			height;
+	float			start;
+	float			end;
+	int				dest_y;
+	float			perc_x;
+	float			perc_y;
+	t_sprite		s[200];
+	t_ray			ray;
+	t_player		player;
 	t_data			*d;
 }					t_vars;
 
@@ -184,19 +174,14 @@ void				rays(t_vars *vars);
 void				draw(t_vars *v);
 void				draw_wall(t_vars *v);
 void				draw_sprite(t_vars *v);
-int					west_texture(t_vars *v, char *path, t_tex *w_tex);
-int					south_texture(t_vars *v, char *path, t_tex *s_tex);
-int					east_texture(t_vars *v, char *path, t_tex *e_tex);
-int					north_texture(t_vars *v, char *path, t_tex *n_tex);
-int					sprite_texture(t_vars *v, char *path, t_tex *sprite);
 void				find_side_delta(t_vars *v);
-void				find_hit(t_vars *v);
-int					sprite_data(t_vars *v, int side, int mapy, int mapx);
+void				find_hit(t_vars *v, int stepx, int stepy);
+int					sprite(t_vars *v, int side, int mapy, int mapx);
 void				sprite_north(t_vars *v);
 void				sprite_east(t_vars *v);
 void				sprite_south(t_vars *v);
 void				sprite_west(t_vars *v);
 void				my_mlx_pixel_put(t_vars *v, int x, int y, int color);
-void				my_image_put(t_vars *v, t_tex *tex, int x, int y);
-void				my_sprite_put(t_vars *v, int x, int y, float dest);
+void				my_image_put(t_vars *v, int x, int y);
+void				my_mlx_pixel_put_sprite(t_vars *v, int x, int y);
 #endif
