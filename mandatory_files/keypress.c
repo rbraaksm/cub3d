@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:04:08 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/22 17:02:23 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 17:14:20 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	rotate_player(t_vars *v, float rot)
 		v->ray.playdir -= (2 * M_PI);
 }
 
-static void	crab_player(t_vars *v)
+static void	player(t_vars *v)
 {
 	float temp_x;
 	float temp_y;
@@ -48,16 +48,15 @@ static void	crab_player(t_vars *v)
 	}
 }
 
-int		action(t_vars *v)
+int			action(t_vars *v)
 {
 	rotate_player(v, v->player.look);
-	// move_player(v, v->player.walk);
-	crab_player(v);
+	player(v);
 	rays(v);
 	return (0);
 }
 
-int		keyrelease(int keycode, t_vars *v)
+int			keyrelease(int keycode, t_vars *v)
 {
 	if (keycode == 0)
 		v->player.crab = 0;
@@ -74,7 +73,7 @@ int		keyrelease(int keycode, t_vars *v)
 	return (0);
 }
 
-int		keypress(int keycode, t_vars *v)
+int			keypress(int keycode, t_vars *v)
 {
 	if (keycode == 53)
 	{

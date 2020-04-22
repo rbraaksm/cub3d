@@ -6,7 +6,7 @@
 #    By: rbraaksm <rbraaksm@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/22 14:09:57 by rbraaksm      #+#    #+#                  #
-#    Updated: 2020/04/22 09:40:26 by rbraaksm      ########   odam.nl          #
+#    Updated: 2020/04/22 17:11:45 by rbraaksm      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ SRCS =	cub3d.c \
 		game_start.c \
 		game_exit.c \
 		rays.c \
-		player.c \
 		side_delta.c \
 		draw_wall_sprite.c \
 		draw_pixel_image.c \
