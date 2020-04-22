@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/22 10:27:47 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 17:33:26 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static int	middle_lines_2(t_vars *v, int y, int i)
 			i++;
 		else if (v->map[y][i] == ' ')
 		{
+			v->error = "ERROR\nMAP ISN'T CORRECT\n";
 			if (i < ft_strlen(v->map[y - 1]) &&
 				!(v->map[y - 1][i] == ' ' || v->map[y - 1][i] == '1'))
 				return (0);
@@ -113,7 +114,7 @@ int			check_map(t_vars *v)
 	int	i;
 
 	i = 0;
-	v->error = "ERROR\nWRONG CHARACTER IN MAP\n";
+	v->error = "ERROR\nMAP ISN'T CORRECT\n";
 	while (i < v->row_count)
 	{
 		if (i == 0)
