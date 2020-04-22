@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   start_exit_game.c                                  :+:    :+:            */
+/*   game_start.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:11:53 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 18:44:44 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 13:27:47 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int			exit_game(t_vars *v)
-{
-	int	i;
-
-	i = 0;
-	while (i < v->row_count)
-	{
-		free(v->map[i]);
-		i++;
-	}
-	free(v->map);
-	write(1, "Game closed\n", 12);
-	exit(0);
-	return (1);
-}
 
 static void	img(t_vars *v)
 {
@@ -103,7 +87,6 @@ void		start_game(t_vars *v)
 	rays(v);
 	if (v->save == 1)
 	{
-		mlx_destroy_window(v->mlx, v->win);
 		screenshot(v);
 		exit_game(v);
 	}

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 09:57:00 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 15:45:07 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 09:47:07 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	ft_strcmp(char *arg, char *s1, t_vars *v, char c)
 		if (arg[i] != s1[i2])
 		{
 			if (c == 'C')
-				v->error = "ERROR: IT'S NOT A .CUB FILE\n";
+				v->error = "ERROR\nIT'S NOT A .CUB FILE\n";
 			else if (c == 'S')
-				v->error = "ERROR: DID YOU MEAN --SAVE?\n";
+				v->error = "ERROR\nDID YOU MEAN --SAVE?\n";
 			return (0);
 		}
 		i--;
@@ -43,9 +43,9 @@ static int	ft_strcmp(char *arg, char *s1, t_vars *v, char c)
 
 int			check_input(int argc, char **argv, t_vars *v)
 {
-	if (argc < 2)
+	if (argc < 2 || argc > 3)
 	{
-		v->error = "ERROR: MISSING FILE OR NEED ONE OR MORE AGRUMENT(S)\n";
+		v->error = "ERROR\nCHECK ARGUMENTS\n";
 		return (0);
 	}
 	if (ft_strcmp(argv[1], ".cub", v, 'C') == 0)

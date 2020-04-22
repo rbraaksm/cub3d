@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:37:15 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 16:18:26 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 14:15:54 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	north_sprite(t_vars *v)
 	{
 		v->s[v->si].y_hit += ((-v->s[v->si].all + v->s[v->si].x_hit) /
 		(v->s[v->si].y_incr + v->s[v->si].x_incr) * 0.001);
-		v->s[v->si].x_hit -=  ((-v->s[v->si].all + v->s[v->si].x_hit) /
+		v->s[v->si].x_hit -= ((-v->s[v->si].all + v->s[v->si].x_hit) /
 		(v->s[v->si].y_incr + v->s[v->si].x_incr) * v->s[v->si].y_incr);
 		v->s[v->si].start = v->s[v->si].x - fabs(v->s[v->si].xdir / 2);
 		v->s[v->si].perc = 1 - fabs((v->s[v->si].x_hit - v->s[v->si].start) /

@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:20:09 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 16:05:48 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 10:27:47 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int			check_map(t_vars *v)
 	int	i;
 
 	i = 0;
-	v->error = "ERROR: WRONG CHARACTER IN MAP\n";
+	v->error = "ERROR\nWRONG CHARACTER IN MAP\n";
 	while (i < v->row_count)
 	{
 		if (i == 0)
@@ -129,7 +129,7 @@ int			check_map(t_vars *v)
 	}
 	if (v->player.x == 0 || v->player.y == 0)
 	{
-		v->error = "ERROR: NO PLAYER IN THE MAP\n";
+		v->error = "ERROR\nNO PLAYER IN THE MAP\n";
 		return (0);
 	}
 	v->error = "";

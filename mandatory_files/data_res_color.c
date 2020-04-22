@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:00:25 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 15:46:36 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 12:46:02 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		data_ceiling(t_vars *v, char *str)
 	int i;
 
 	i = 0;
-	v->error = "ERROR: CEILING COLOR ISN'T CORRECT\n";
+	v->error = "ERROR\nCEILING COLOR ISN'T CORRECT\n";
 	while (str[i] != '\n')
 		i++;
 	v->i = v->i + i + 2;
@@ -70,7 +70,7 @@ void		data_floor(t_vars *v, char *str)
 	int	i;
 
 	i = 0;
-	v->error = "ERROR: FLOOR COLOR ISN'T CORRECT\n";
+	v->error = "ERROR\nFLOOR COLOR ISN'T CORRECT\n";
 	while (str[i] != '\n')
 		i++;
 	v->i = v->i + i + 2;
@@ -127,7 +127,7 @@ void		resolution(t_vars *v, char *str)
 	int i;
 
 	i = 1;
-	v->error = "ERROR: RESOLUTION IS NOT CORRECT\n";
+	v->error = "ERROR\nRESOLUTION IS NOT CORRECT\n";
 	while (str[i] != '\n')
 		i++;
 	v->i = v->i + i;

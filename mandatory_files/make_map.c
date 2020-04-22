@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 18:55:04 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 14:14:11 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static int	fill_row(t_vars *v, int column, int start)
 	i = 0;
 	v->map[v->row_i] = (char *)malloc(sizeof(char *) * (v->column + 1));
 	if (v->map[v->row_i] == NULL)
-		return (free_function(v, 7));
+	{
+		v->row_i--;
+		return (0);
+	}
 	while (i < v->column)
 	{
 		v->map[v->row_i][i] = ' ';
@@ -35,15 +38,13 @@ static int	fill_row(t_vars *v, int column, int start)
 	return (1);
 }
 
-static int	find_column_row(t_vars *v)
+static void	find_column_row(t_vars *v)
 {
 	int	i;
 	int	c;
 
 	i = v->start;
 	c = 0;
-	v->column = 0;
-	v->row_count = 1;
 	while (v->str[i] != '\0')
 	{
 		c++;
@@ -56,7 +57,6 @@ static int	find_column_row(t_vars *v)
 		}
 		i++;
 	}
-	return (1);
 }
 
 int			fill_grid(t_vars *v)
@@ -64,12 +64,11 @@ int			fill_grid(t_vars *v)
 	int		start;
 	int		c;
 
-	if (find_column_row(v) == 0)
-		return (0);
+	find_column_row(v);
 	start = v->start;
 	v->map = (char **)malloc(sizeof(char *) * (v->row_count));
 	if (v->map == NULL)
-		return (free_function(v, 6));
+		return (0);
 	while (v->row_i < v->row_count)
 	{
 		c = 0;
@@ -81,5 +80,6 @@ int			fill_grid(t_vars *v)
 		v->row_i++;
 	}
 	free(v->str);
+	v->str = NULL;
 	return (1);
 }

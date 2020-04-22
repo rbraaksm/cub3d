@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 10:37:22 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 15:53:33 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 10:12:12 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char		*path(t_vars *v, char *s1, char c)
 	int		len;
 	int		i;
 
-	v->error = "ERROR: INDEX ISN'T CORRECT\n";
 	i = 2;
 	len = 0;
 	while (s1[i] == 32 || (s1[i] == 9 || s1[i] == '.' ||

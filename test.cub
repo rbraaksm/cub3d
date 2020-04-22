@@ -4,7 +4,7 @@
 R 600 600
 F 255,204,0196
 
-NO ./textures/bluestone.xpm
+NO textures/bluestone.xpm
 SO		textures/wood.xpm
 C 0,150   , 	200
 EA./textures/eagle.xpm

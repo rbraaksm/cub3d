@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:33:27 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 15:49:48 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 13:13:13 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,17 @@ int			make_string(char **argv, t_vars *v)
 {
 	char	buf[BUFFER_SIZE + 1];
 	char	*tmp;
-	int		fd;
 	int		ret;
 
-	v->error = "ERROR: NOT A VALID FILE/FILE DESCRIPTOR\n";
+	v->error = "ERROR\nNOT A VALID FILE/FILE DESCRIPTOR\n";
 	v->str = ft_strdup("");
 	ret = 1;
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
+	v->fd = open(argv[1], O_RDONLY);
+	if (v->fd < 0)
 		return (0);
 	while (ret > 0)
 	{
-		ret = read(fd, buf, BUFFER_SIZE);
+		ret = read(v->fd, buf, BUFFER_SIZE);
 		if (ret == -1)
 			return (0);
 		buf[ret] = '\0';

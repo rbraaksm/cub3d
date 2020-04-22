@@ -6,7 +6,7 @@
 /*   By: rbraaksm <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 15:11:54 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 17:11:21 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 12:49:36 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int		set_location(t_vars *v, int row, int column, char c)
 	}
 	else
 	{
-		v->error = "ERROR: TO MANY PLAYERS IN THE MAP\n";
+		v->error = "ERROR\nTO MANY PLAYERS IN THE MAP\n";
 		return (0);
 	}
 	return (1);
@@ -94,7 +94,7 @@ int				ft_strchr(t_vars *v, char c, int row, int column)
 	char	*s1;
 	int		i;
 
-	v->error = "ERROR: WRONG CHARACTER\n";
+	v->error = "ERROR\nWRONG CHARACTER\n";
 	s1 = "012NWSE";
 	i = 0;
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')

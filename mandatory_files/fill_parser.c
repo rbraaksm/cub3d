@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 18:52:56 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 12:55:02 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ static void	check_str(t_vars *v)
 		(v->str[v->i] > 8 && v->str[v->i] < 14)))
 		v->i = v->i + 1;
 	else
-		v->error = "ERROR: INDEX ISN'T CORRECT\n";
+		v->error = "ERROR\nINDEX ISN'T CORRECT\n";
 }
 
 static void	find_values(t_vars *v)
 {
-	v->i = 0;
 	while (v->str[v->i] != '\0' && error_check(v, "") == 1 && v->check < CHECK)
 	{
 		if (v->str[v->i] == 'R' && v->resx == -1)
@@ -68,7 +67,7 @@ int			fill_parser(t_vars *v)
 {
 	find_values(v);
 	if (v->check != CHECK)
-		return (free_function(v, 0));
+		return (0);
 	colors(v);
 	return (1);
 }

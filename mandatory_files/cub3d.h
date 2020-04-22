@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 18:51:51 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 14:23:50 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
-# include <stdio.h>
 
 typedef struct		s_player
 {
@@ -42,12 +41,8 @@ typedef struct		s_ray
 	float			deltax;
 	float			sidey;
 	float			deltay;
-	float			finaldist;
 	float			adjust;
-	float			walldist;
-	int				side_hit;
-	int				sprite;
-	int				sprite_hit;
+	float			dist;
 }					t_ray;
 
 typedef struct		s_sprite
@@ -70,6 +65,7 @@ typedef struct		s_sprite
 
 typedef struct		s_vars
 {
+	int				fd;
 	int				i;
 	float			start;
 	int				save;
@@ -121,11 +117,15 @@ typedef struct		s_vars
 	int				si;
 	int				screen_x;
 	int				screen_y;
+	int				stepx;
+	int				stepy;
 	float			height;
+	float			c;
+	float			f;
+	int				middle;
 	float			end;
-	int				dest_y;
-	float			perc_x;
-	float			perc_y;
+	float			xperc;
+	float			yperc;
 	t_sprite		s[200];
 	t_ray			ray;
 	t_player		player;
@@ -144,31 +144,20 @@ int					ft_strchr(t_vars *v, char c, int row, int column);
 int					error_check(t_vars *v, char *str);
 int					ft_strlen(const char *str);
 int					ft_atoi(const char *str);
-int					free_function(t_vars *v, int i);
-void				window(t_vars *v);
+int					free_function(t_vars *v);
 int					action(t_vars *v);
 int					keyrelease(int keycode, t_vars *v);
 int					keypress(int keycode, t_vars *v);
 void				start_game(t_vars *v);
 int					exit_game(t_vars *v);
-void				struct_info(t_vars *v);
 void				screenshot(t_vars *v);
 void				rotate_player(t_vars *v, float rot);
 void				move_player(t_vars *v, float move);
 void				crab_player(t_vars *v, float move);
-void				my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
-void				ft_findwall(t_vars *vars);
 void				rays(t_vars *vars);
-void				draw(t_vars *v);
 void				draw_wall(t_vars *v);
-void				draw_sprite(t_vars *v);
 void				find_side_delta(t_vars *v);
-void				find_hit(t_vars *v, int stepx, int stepy);
 int					sprite(t_vars *v, int side, int mapy, int mapx);
-void				sprite_north(t_vars *v);
-void				sprite_east(t_vars *v);
-void				sprite_south(t_vars *v);
-void				sprite_west(t_vars *v);
 void				my_mlx_pixel_put(t_vars *v, int x, int y, int color);
 void				my_image_put(t_vars *v, int x, int y);
 void				my_mlx_pixel_put_sprite(t_vars *v, int x, int y);
