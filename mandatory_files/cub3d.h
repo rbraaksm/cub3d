@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/22 14:23:50 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/22 17:02:02 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,9 +151,9 @@ int					keypress(int keycode, t_vars *v);
 void				start_game(t_vars *v);
 int					exit_game(t_vars *v);
 void				screenshot(t_vars *v);
-void				rotate_player(t_vars *v, float rot);
-void				move_player(t_vars *v, float move);
-void				crab_player(t_vars *v, float move);
+// void				rotate_player(t_vars *v, float rot);
+// void				move_player(t_vars *v, float move);
+// void				crab_player(t_vars *v, float move);
 void				rays(t_vars *vars);
 void				draw_wall(t_vars *v);
 void				find_side_delta(t_vars *v);
