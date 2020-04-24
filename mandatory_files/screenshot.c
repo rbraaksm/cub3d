@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/07 11:28:24 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/21 15:49:58 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/23 15:28:14 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	header_dip_bmp(t_vars *v, int fd)
 	}
 }
 
-static void	write_pixels(t_vars *v, int fd)
+static void	write_pixels(t_vars *v, int fd, char *add)
 {
 	int x;
 	int line_length;
@@ -61,7 +61,7 @@ static void	write_pixels(t_vars *v, int fd)
 	{
 		while (x < v->resx)
 		{
-			write(fd, &v->add[v->resy * line_length + x * 4], 4);
+			write(fd, &add[v->resy * line_length + x * 4], 4);
 			x++;
 		}
 		x = 0;
@@ -69,7 +69,7 @@ static void	write_pixels(t_vars *v, int fd)
 	}
 }
 
-void		screenshot(t_vars *v)
+void		screenshot(t_vars *v, char *add)
 {
 	int	fd;
 
@@ -81,5 +81,6 @@ void		screenshot(t_vars *v)
 	}
 	header_bmp(v, fd);
 	header_dip_bmp(v, fd);
-	write_pixels(v, fd);
+	write_pixels(v, fd, add);
+	close(fd);
 }

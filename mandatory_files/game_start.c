@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/08 15:11:53 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/22 13:27:47 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/23 15:23:17 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void		start_game(t_vars *v)
 	rays(v);
 	if (v->save == 1)
 	{
-		screenshot(v);
+		screenshot(v, v->add[5]);
 		exit_game(v);
 	}
 	resolution_check(v);

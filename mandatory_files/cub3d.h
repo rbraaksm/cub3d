@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 13:54:30 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/22 17:15:17 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/24 10:44:57 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-# include <mlx.h>
+# include "./minilibx/mlx.h"
 
 typedef struct		s_player
 {
@@ -150,7 +150,7 @@ int					keyrelease(int keycode, t_vars *v);
 int					keypress(int keycode, t_vars *v);
 void				start_game(t_vars *v);
 int					exit_game(t_vars *v);
-void				screenshot(t_vars *v);
+void				screenshot(t_vars *v, char *add);
 void				rays(t_vars *vars);
 void				draw_wall(t_vars *v);
 void				find_side_delta(t_vars *v);

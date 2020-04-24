@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/22 14:07:56 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/23 15:21:48 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static void	put_2_window(t_vars *v)
 {
-	if (v->save == 1)
-		v->img = 5;
 	if (v->img == 5)
 	{
 		mlx_put_image_to_window(v->mlx, v->win, v->img1, 0, 0);
