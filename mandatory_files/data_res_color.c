@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:00:25 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/22 12:46:02 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/29 16:27:19 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,8 @@ static int	check_resolution(t_vars *v, char *str, int *index, char c)
 		*index = *index + 1;
 	if (str[*index] != '\n')
 		return (0);
-	if (v->resx < 25 || v->resy < 25 ||
-		v->resx > 16385 || v->resy > 16385)
-		write(1, "PLEASE KEEP RESOLUTION ABOVE 25 AND LOWER THAN 16385\n", 53);
-	if (v->resx < 25)
-		v->resx = 25;
-	if (v->resy < 25)
-		v->resy = 25;
+	if (v->resx > 16384 || v->resy > 16384 || v->resx == 0 || v->resy == 0)
+		return (0);
 	return (1);
 }
 
@@ -142,10 +137,6 @@ void		resolution(t_vars *v, char *str)
 	v->resy = ft_atoi(&str[i]);
 	if (check_resolution(v, str, &i, 'E') == 0)
 		return ;
-	if (v->resx > 16385)
-		v->resx = 16384;
-	if (v->resy > 16385)
-		v->resy = 16384;
 	v->check += 40000000;
 	v->error = "";
 }

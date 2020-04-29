@@ -1,7 +1,7 @@
 
 
 
-R 800 800
+R 10 16384
 F 255,204,196
 NO textures/bluestone.xpm
 SO		textures/wood.xpm

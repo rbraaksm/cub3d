@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 12:26:26 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/23 15:21:48 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/29 16:11:44 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void	draw_sprite(t_vars *v)
 		while (v->middle < v->end)
 		{
 			v->yperc = fabs(((float)v->middle - v->start) / v->height);
+			if (v->yperc >= 1)
+				v->yperc = 0.9999999;
 			y = v->yperc * v->img_height[4];
 			my_mlx_pixel_put_sprite(v, x, y);
 			v->middle++;
