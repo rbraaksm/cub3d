@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:36:02 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/22 12:55:02 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/30 12:18:36 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static void	find_values(t_vars *v)
 			v->ea = path(v, &(v->str)[v->i], 'E');
 		else if (v->str[v->i] == 'S' && v->str[v->i + 1] != 'O' && !v->sp)
 			v->sp = path(v, &(v->str)[v->i], 'O');
-		else if (v->str[v->i] == 'F')
+		else if (v->str[v->i] == 'F' && v->fred == -1)
 			data_floor(v, &(v->str)[v->i + 1]);
-		else if (v->str[v->i] == 'C')
+		else if (v->str[v->i] == 'C' && v->cred == -1)
 			data_ceiling(v, &(v->str)[v->i + 1]);
 		else
 			check_str(v);

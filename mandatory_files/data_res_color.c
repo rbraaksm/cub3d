@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:00:25 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/29 16:27:19 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/30 12:21:25 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	color_between_end(char *str, int *index, char c)
 		return (0);
 	return (1);
 }
-
+git 
 void		data_ceiling(t_vars *v, char *str)
 {
 	int i;
@@ -114,6 +114,10 @@ static int	check_resolution(t_vars *v, char *str, int *index, char c)
 		return (0);
 	if (v->resx > 16384 || v->resy > 16384 || v->resx == 0 || v->resy == 0)
 		return (0);
+	if (v->resx < 25 || v->resy < 25)
+		write(1, "KEEP THE RESOLUTION ABOVE 25\n", 30);
+	v->resx < 25 ? v->resx = 25 : 0;
+	v->resy < 25 ? v->resy = 25 : 0;
 	return (1);
 }
 

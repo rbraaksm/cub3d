@@ -1,11 +1,12 @@
 
 
 
-R 10 16384
+R 10 10
+F 255,204,196
 F 255,204,196
 NO textures/bluestone.xpm
 SO		textures/wood.xpm
-C 0,150 , 	200   
+C 0,150 , 	200
 EA./textures/eagle.xpm
 WE./textures/wall_4.xpm
 S	./textures/sprite_2.xpm
@@ -181,3 +182,5 @@ S	./textures/sprite_2.xpm
        1222221
        1222221
         11111
+
+

@@ -6,7 +6,7 @@
 #    By: rbraaksm <rbraaksm@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/22 14:09:57 by rbraaksm      #+#    #+#                  #
-#    Updated: 2020/04/24 11:13:20 by rbraaksm      ########   odam.nl          #
+#    Updated: 2020/04/30 12:00:18 by rbraaksm      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ LIB		=	$(SRCS:%.c=%.o)
 SRCS2	=	$(addprefix mandatory_files/,$(SRCS))
 
 CC = gcc -O3 -Wall -Werror -Wextra -std=gnu99 -I minilibx -L minilibx -lmlx \
-	-framework OpenGL -framework AppKit -g -o
+	-framework OpenGL -framework AppKit -o
 
 all: $(NAME)
 
@@ -49,7 +49,6 @@ $(NAME):	$(MLX)
 
 clean:
 	make -C minilibx clean
-	/bin/rm -rf cub3D.dSYM
 	/bin/rm -f screenshot.bmp
 
 fclean: clean

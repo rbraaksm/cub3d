@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/07 11:28:24 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/23 15:28:14 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/04/30 12:14:51 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,11 @@ void		screenshot(t_vars *v, char *add)
 		write(1, "Open failed\n", 12);
 		return ;
 	}
+	if (v->resx > 1500 || v->resy > 1500)
+		write(1, "It wil take a while, grab a coffee\n", 36);
 	header_bmp(v, fd);
 	header_dip_bmp(v, fd);
 	write_pixels(v, fd, add);
+	write(1, "BMP file has been created\n", 27);
 	close(fd);
 }
