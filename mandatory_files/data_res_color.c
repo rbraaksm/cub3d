@@ -6,7 +6,7 @@
 /*   By: rbraaksm <rbraaksm@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:00:25 by rbraaksm      #+#    #+#                 */
-/*   Updated: 2020/04/30 12:21:25 by rbraaksm      ########   odam.nl         */
+/*   Updated: 2020/05/01 17:18:45 by rbraaksm      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	color_between_end(char *str, int *index, char c)
 		return (0);
 	return (1);
 }
-git 
+
 void		data_ceiling(t_vars *v, char *str)
 {
 	int i;
